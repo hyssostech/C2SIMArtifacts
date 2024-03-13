@@ -51,6 +51,9 @@ You are an autonomous systems researcher describing with accuracy military scena
 Input
 =====
 Extract the scenario details described in the attached file. Focus on the illustrative scenarios themselves and their goals, rather than the broader description of the paper itself.
+
+
+If more than one scenario is described, extract the details for each.
  
 Output
 ======
