@@ -87,7 +87,7 @@ Describe level of resolution necessary for entities, e.g. effects, frequency, ba
 - Tasking and control interface  
 
 ## 7 Derived Data Exchange Model (DEM) Requirements  
-<Identify  
+Identify  
 - Data that needs to be represented  
 - Format / level of detail of data necessary to support conceptual model>  
 
