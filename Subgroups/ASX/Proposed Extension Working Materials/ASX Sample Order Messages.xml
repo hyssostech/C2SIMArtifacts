@@ -783,4 +783,99 @@
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
+ <Worksheet ss:Name="Fire Support Order">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="10" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(armed UGV UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">hasAuthorizationHeader</Data></Cell>
+    <Cell><Data ss:Type="String">AuthorizationHeader</Data></Cell>
+    <Cell><Data ss:Type="String">(issuer credentials)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - authorization is modeled (C2SIM)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM / ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Engage Task</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell><Data ss:Type="String">TaskActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">Engage / Attack</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] confirm an engage/attack TaskActionCode value exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasAffectedEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(target UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">Target via hasAffectedEntity - partial</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasDesiredEffectCode</Data></Cell>
+    <Cell><Data ss:Type="String">DesiredEffectCode</Data></Cell>
+    <Cell><Data ss:Type="String">Destroy / Suppress</Data></Cell>
+    <Cell><Data ss:Type="String">Works - DesiredEffectCode exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasRuleOfEngagement</Data></Cell>
+    <Cell><Data ss:Type="String">RuleOfEngagement</Data></Cell>
+    <Cell><Data ss:Type="String">(ROE)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - ROE exists (LOX)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">hasWeaponROECode</Data></Cell>
+    <Cell><Data ss:Type="String">WeaponRuleOfEngagementCode</Data></Cell>
+    <Cell><Data ss:Type="String">(weapon ROE)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - weapon ROE exists (LOX)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(armed UGV)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">autonomy vs engagement</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">may engage without human approval?</Data></Cell>
+    <Cell><Data ss:Type="String">[!] W1: nothing links autonomy level (FullAuto/Teleop) to permission for a lethal action; ROE constrains what/when, not whether the AUTONOMOUS system may act unsupervised</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">weapon / munition</Data></Cell>
+    <Cell><Data ss:Type="String">Equipment / Payload</Data></Cell>
+    <Cell><Data ss:Type="String">(armament)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">machine gun / ATGM</Data></Cell>
+    <Cell><Data ss:Type="String">[!] W2: weapon/munition not typed (ConceptMapping Payload = Armiture/Ammunition; absent from OWL)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>

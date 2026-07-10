@@ -33,6 +33,9 @@ the workbooks by their owner.
 - [Swarm-Walk.md](./Swarm-Walk.md) - swarm detection report + coordination
   order; exercises P7 (a swarm can't be tasked/report as modeled) and shows
   membership/command already exist in base C2SIM (P8 narrowed; Z1/Z2 residuals).
+- [FireSupport-Walk.md](./FireSupport-Walk.md) - armed engagement + BDA;
+  opens the task/effect axis and surfaces W1 (no link between autonomy level and
+  authority to take a lethal action). ROE and authorization already exist.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.

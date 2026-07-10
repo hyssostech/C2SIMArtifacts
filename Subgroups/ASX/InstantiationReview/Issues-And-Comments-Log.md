@@ -72,6 +72,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | INSTANTIATED | Non-video sensors not covered | Walked in `NonVideoSensors-Walk.md`; 3 report tabs added to the `.xml` (CBRN / EW Emitter / GPR Mine). Surfaced Y1-Y5 (section 6c). **[deck]** |
 | C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
+| C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Fire Support walked in `FireSupport-Walk.md`; `Fire Support Order` + `BDA Report` tabs added. Surfaced W1-W3 (section 6e). Remaining task/effect scenarios (logistics, engineering, route-clearance-neutralize, USV rescue, companion) still open. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
@@ -116,6 +117,19 @@ Partially covered (checked): collective entity type (`CollectiveEntity`),
 membership/command (`hasSubordinate`/`hasSuperior`/`hasCommandRelation`),
 reporting linkage (`hasReportingEntity`) - all conditional on fixing P7.
 
+## 6e. Fire Support / task-effect walk findings (from FireSupport-Walk.md)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| W1 | HIGH | OPEN | No link between autonomy level and engagement authority | ROE (`RuleOfEngagement`, `WeaponRuleOfEngagementCode` - LOX) and `AuthorizationHeader` (C2SIM) exist, but nothing states whether an autonomous system at a given autonomy level may take a lethal action without a human in/on the loop. The central ASX policy gap. **[deck]** |
+| W2 | MED | OPEN | Weapon/munition not typed | ConceptMapping Payload = Armiture/Ammunition; absent from OWL. Ties to D3/P2. |
+| W3 | MED | OPEN | No effect-achieved / BDA ReportContent | `TaskStatus` reports the task ran, not whether the target was destroyed. |
+
+Partially covered (checked, NOT gaps): rules of engagement, order
+authorization, desired effect (`DesiredEffectCode`), target designation
+(`hasAffectedEntity`). The engagement machinery mostly exists - the missing
+piece is autonomy-to-permission.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -141,6 +155,10 @@ reporting linkage (`hasReportingEntity`) - all conditional on fixing P7.
 - **Q-J** After fixing P7, add the small swarm residuals: network/comms
   parameters, a leader role, report aggregation (Z1), and member lifecycle
   (Z2). Membership/command reuse base `hasSubordinate`/`hasCommandRelation`.
+- **Q-K [deck]** Model engagement authority as a function of autonomy level -
+  may a system at this autonomy level take this (lethal) action without a human
+  in/on the loop? ROE and authorization already exist; this link does not.
+  (Resolves W1.)
 
 ## Change log
 
@@ -166,3 +184,8 @@ reporting linkage (`hasReportingEntity`) - all conditional on fixing P7.
   (Report) and added `Swarm Coordination` (Order). Added section 6d (Z1/Z2),
   decision Q-J; updated C5. Grounding narrowed P8 - membership/command already
   exist in base C2SIM (`hasSubordinate`/`hasCommandRelation`).
+- 2026-07-10: Walked Fire Support (`FireSupport-Walk.md`) - opens the task/effect
+  axis; added `Fire Support Order` + `BDA Report` tabs. Added section 6e (W1-W3),
+  decision Q-K, coverage C6; deck gained a Fire Support slide and split decisions
+  into 2 slides. Grounding narrowed the finding: ROE + authorization already
+  exist (LOX/C2SIM); the real gap (W1) is the autonomy-to-engagement link.

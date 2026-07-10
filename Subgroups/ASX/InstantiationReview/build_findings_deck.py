@@ -208,7 +208,7 @@ bullets(s, [
  {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
  {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
  {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
- {"text":"8 of 10 MUTT scenarios have no instantiations."},
+ {"text":"Task/effect scenarios: Fire Support walked (autonomous engagement); logistics, engineering, rescue still open."},
 ], top=1.7, size=16.5, gap=12)
 footer(s)
 
@@ -226,19 +226,37 @@ bullets(s, [
 ], top=4.5, size=14, gap=9)
 footer(s)
 
-# ---------------- Decisions ----------------
-s = slide(); header(s, "Decisions for the sub-group")
+# ---------------- Fire Support / engagement authority ----------------
+s = slide(); header(s, "Fire Support: autonomous engagement authority", "The task/effect axis")
+rbox(s, 0.8, 1.95, 11.75, 1.6, "W1  -  No link between autonomy level and permission to engage\n\nThe standard can say WHAT effect, WHICH ROE, and WHO authorized the order - but not whether a FullAuto system may take a lethal action without a human in / on the loop.", RED, size=15)
+bullets(s, [
+ {"tag":"Checked - already exist (not gaps):","tagcolor":GREEN,"text":"rules of engagement (RuleOfEngagement, WeaponROECode - LOX), order authorization (AuthorizationHeader), desired effect (DesiredEffectCode), target (hasAffectedEntity)."},
+ {"tag":"Also gaps:","tagcolor":ORANGE,"text":"W2 weapon/munition not typed; W3 no battle-damage / effect-achieved report (TaskStatus = the task ran, not the target destroyed)."},
+ {"tag":"Decision (Q-K):","tagcolor":ACCENT,"text":"model engagement authority as a function of autonomy level - may this system take this action unsupervised?"},
+], top=3.8, size=14.5, gap=11)
+footer(s)
+
+# ---------------- Decisions 1: model structure ----------------
+s = slide(); header(s, "Decisions (1/2): model structure")
 bullets(s, [
  {"tag":"Q-A","tagcolor":ACCENT,"text":"UAV/robot typing: a role on the existing Platform tree, or a parallel Robot tree?"},
  {"tag":"Q-B","tagcolor":ACCENT,"text":"Swarm: derive from CollectiveEntity (ActorEntity) so it can be tasked."},
  {"tag":"Q-C","tagcolor":ACCENT,"text":"Sensor: entity, class, or attribute - choose one model and apply it everywhere."},
  {"tag":"Q-D","tagcolor":ACCENT,"text":"Autonomy: choose one normative vocabulary."},
- {"tag":"Q-E","tagcolor":ACCENT,"text":"Define inline entity definition for newly-observed entities in reports."},
- {"tag":"Q-F","tagcolor":ACCENT,"text":"MediaReference identity, and separate media-format from sensor-modality."},
- {"tag":"Q-G","tagcolor":ACCENT,"text":"Robot-to-robot coordination content type + issuing authority (from CASEVAC)."},
- {"tag":"Q-H","tagcolor":ACCENT,"text":"Rationale/explanation ReportContent - report why, not just what (from CASEVAC)."},
- {"tag":"Q-I","tagcolor":ACCENT,"text":"Media-independent sensor-reading (value+unit+modality) + complete SensorType taxonomy (non-video walk)."},
-], top=1.6, size=13, gap=8)
+], top=1.9, size=18, gap=18)
+footer(s)
+
+# ---------------- Decisions 2: new content ----------------
+s = slide(); header(s, "Decisions (2/2): new content types needed")
+bullets(s, [
+ {"tag":"Q-E","tagcolor":ACCENT,"text":"Inline entity definition for newly-observed entities in reports."},
+ {"tag":"Q-F","tagcolor":ACCENT,"text":"MediaReference identity; separate media-format from sensor-modality."},
+ {"tag":"Q-G","tagcolor":ACCENT,"text":"Robot-to-robot coordination content type + issuing authority (CASEVAC)."},
+ {"tag":"Q-H","tagcolor":ACCENT,"text":"Rationale/explanation ReportContent - report why, not just what (CASEVAC)."},
+ {"tag":"Q-I","tagcolor":ACCENT,"text":"Media-independent sensor-reading (value+unit+modality) + full SensorType taxonomy."},
+ {"tag":"Q-J","tagcolor":ACCENT,"text":"Swarm residuals: network params, leader role, aggregation, member lifecycle."},
+ {"tag":"Q-K","tagcolor":ACCENT,"text":"Engagement authority as a function of autonomy level (Fire Support)."},
+], top=1.7, size=15, gap=10)
 footer(s)
 
 # ---------------- Next steps ----------------
