@@ -15,7 +15,8 @@ Items marked **[deck]** are candidates for the findings presentation.
 |---|---|---|---|---|
 | S1 | HIGH | RESOLVED | Local clone was 52 commits behind origin/main | Fixed by pull on 2026-07-09; now level with origin (`021e715`). |
 | S2 | HIGH | OPEN | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** |
-| S3 | MED | IN PROGRESS | Workbooks are `.xlsx` (zipped XML), git cannot merge | Converting sample-message workbooks to diff-able SpreadsheetML 2003 `.xml` on branch `asx-diffable-spreadsheets`. |
+| S3 | MED | DONE (branch) | Workbooks are `.xlsx` (zipped XML), git cannot merge | All 3 sample-message workbooks converted to diff-able SpreadsheetML 2003 `.xml` (fidelity verified, 0 mismatches) and committed on branch `asx-diffable-spreadsheets`. NOTE: `.xml` and `.xlsx` now coexist - see S4. |
+| S4 | HIGH | OPEN | Dual source of truth: `.xml` (with my Init rows) and `.xlsx` diverge | Init contributions were applied to the `.xml` only, so the `.xml` and `.xlsx` Initialization workbooks now differ. Group must decide whether to adopt `.xml` as source of truth and retire `.xlsx`. **[deck]** |
 
 ## 2. Model drift: OWL vs Spreadsheet vs Deck
 
@@ -66,7 +67,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| C1 | HIGH | OPEN | Initialization entirely un-instantiated (0 of 3 named scenarios) | All Init sheets header-only. Being addressed by the Initialization walk. **[deck]** |
+| C1 | HIGH | PARTIAL | Initialization entirely un-instantiated (0 of 3 named scenarios) | Draft instantiations for all 3 named scenarios now applied to the `.xml` on branch (pending group review). **[deck]** |
 | C2 | HIGH | OPEN | CASEVAC (flagship contributed scenario) has no messages of any type | Needs M2M route hand-off, "explainable reasons" report, on-the-loop status - patterns not yet covered. **[deck]** |
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | OPEN | Non-video sensors not covered | CBRN/EW/jammer/GPR/thermal absent; SensorType enum incomplete for them. Ties to M5/D2. |
@@ -92,3 +93,6 @@ Items marked **[deck]** are candidates for the findings presentation.
 
 - 2026-07-09: Log created. Consolidated findings from OWL review, spreadsheet
   vs OWL drift analysis, sample-message inspection, and the Initialization walk.
+- 2026-07-10: Converted the 3 sample-message workbooks to diff-able `.xml`
+  (fidelity verified), applied the Initialization instantiations to the `.xml`,
+  generated the findings deck. Added S4 (dual source of truth); updated S3, C1.
