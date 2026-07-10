@@ -22,6 +22,13 @@ the workbooks by their owner.
   three Initialization scenarios Elizabeth named but left empty
   (`UAV with Video Init`, `UAV Patrol Initialization`, `Swarm Initialization`),
   mirroring her sheet columns, with the problems each one exposes.
+- [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
+  consolidated log of every issue/comment found, with severity and status;
+  the findings deck is generated from it.
+- `ASX-Instantiation-Findings.pptx` - findings presentation for the ASX
+  sub-group. Regenerate/edit it via `build_findings_deck.py` (the `.pptx` is a
+  zipped-XML binary git cannot merge, so the Python generator is the diff-able
+  source). Requires `python-pptx`.
 
 ## Source of truth
 
