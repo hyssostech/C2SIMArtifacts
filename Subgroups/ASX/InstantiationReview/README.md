@@ -40,6 +40,9 @@ the workbooks by their owner.
   and USV Rescue in one pass; shows the task/effect axis distills to two gaps
   (task verbs + payload/effector/weapon typing) with everything else already in
   the standard.
+- [RedundancyPass-Walk.md](./RedundancyPass-Walk.md) - confirmation pass over
+  route-clearance / companion / urban; mostly redundant, but extracts N1 (an
+  area cannot be the subject of a task or report).
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.

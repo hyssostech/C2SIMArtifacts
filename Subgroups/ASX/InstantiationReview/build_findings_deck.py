@@ -209,6 +209,7 @@ bullets(s, [
  {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
  {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
  {"text":"Task/effect scenarios: engagement, delivery, manipulation, rescue walked - the gap is consistent (task verbs + payload/effector typing)."},
+ {"text":"Redundancy pass (route-clearance, companion, urban): confirmed - plus one new finding, N1 (an area cannot be the subject of a task/report)."},
 ], top=1.7, size=16.5, gap=12)
 footer(s)
 
@@ -242,8 +243,9 @@ rbox(s, 0.8, 2.0, 5.75, 1.75, "1.  Task verbs\n\nNo vocabulary for what systems 
 rbox(s, 6.8, 2.0, 5.75, 1.75, "2.  Payload / effector / weapon typing\n\nCargo (L1), manipulator (E2), weapon (W2) are one gap: no typed thing carried or wielded.", NAVY, size=14)
 bullets(s, [
  {"tag":"Already there (checked):","tagcolor":GREEN,"text":"effects (DesiredEffectCode), targets (hasAffectedEntity), resources + quantities, ROE, authorization, and platform types (Vehicle / Aircraft / SurfaceVessel)."},
+ {"tag":"Also (N1):","tagcolor":ORANGE,"text":"an area cannot be the subject of a task or report - no hasAffectedArea, no area-state (cleared/contaminated). See Q-M."},
  {"tag":"Decision (Q-L):","tagcolor":ACCENT,"text":"define the task-verb vocabulary and the typed payload / effector / weapon - that is the whole axis."},
-], top=4.05, size=15, gap=12)
+], top=4.0, size=14, gap=9)
 footer(s)
 
 # ---------------- Decisions 1: model structure ----------------
@@ -267,7 +269,18 @@ bullets(s, [
  {"tag":"Q-J","tagcolor":ACCENT,"text":"Swarm residuals: network params, leader role, aggregation, member lifecycle."},
  {"tag":"Q-K","tagcolor":ACCENT,"text":"Engagement authority as a function of autonomy level (Fire Support)."},
  {"tag":"Q-L","tagcolor":ACCENT,"text":"Task-verb vocabulary (deliver, manipulate, recover) + typed payload/effector/weapon."},
-], top=1.65, size=14, gap=9)
+ {"tag":"Q-M","tagcolor":ACCENT,"text":"Let an area be the subject of a task/report (hasAffectedArea + area-state)."},
+], top=1.6, size=13.5, gap=8)
+footer(s)
+
+# ---------------- Proposed fixes (pending buy-in) ----------------
+s = slide(); header(s, "Proposed fixes", "Pending group buy-in - nothing applied to the model")
+bullets(s, [
+ {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"class typo CollecticeRoboticSystem -> Collective (O1); versionInfo Extrension -> Extension (O2); file CSIM_ASX -> C2SIM_ASX (O3); hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
+ {"tag":"Structural (decide first):","tagcolor":ORANGE,"text":"UAV/robot typing (Q-A); Swarm -> CollectiveEntity so it is taskable (Q-B); one sensor model (Q-C); one autonomy vocabulary (Q-D)."},
+ {"tag":"New content (design):","tagcolor":ACCENT,"text":"inline entity def (Q-E), MediaReference (Q-F), robot-to-robot (Q-G), rationale report (Q-H), sensor-reading (Q-I), swarm residuals (Q-J), engagement authority (Q-K), task verbs + payload (Q-L), area subject (Q-M)."},
+ {"text":"Nothing here is applied to the model - all items are proposals for group buy-in.","bold":True},
+], top=1.7, size=14, gap=13)
 footer(s)
 
 # ---------------- Next steps ----------------

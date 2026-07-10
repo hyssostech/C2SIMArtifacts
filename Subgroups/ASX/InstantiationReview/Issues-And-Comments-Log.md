@@ -147,6 +147,21 @@ Recurring shape of the whole task/effect axis: only two things are missing -
 one gap). Entity structure, addressing, effects, targets, resources, ROE, and
 authorization already exist. Distilled into decision Q-L.
 
+## 6g. Redundancy-pass findings (from RedundancyPass-Walk.md)
+
+Checked the three scenarios flagged as likely-redundant (route clearance,
+companion drones, urban combat). Mostly confirmed - but the pass found one new
+finding that the entity-centric walks missed.
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| N1 | MED | OPEN | Area as the subject of a task/report | `hasAffectedEntity` has no area counterpart (no `hasAffectedArea`), and there is no area-state (cleared/contaminated/mined). Areas exist (`TacticalArea`, `MapGraphic`) but cannot be tasked or have their state reported. Recurs in route-clearance, CBRN, urban. **[deck]** |
+| N2 | LOW | FOLDS INTO Q-L | Follow / escort / relay | Task verbs (Q-L) over existing `RelativeLocation` / `CommunicationNetwork`; only persistent-vs-one-shot task semantics is a nuance. |
+
+Confirmed redundant (no new finding): neutralize = engage (W), detection = Y,
+transport = L, clear = E, recon = Y, relay = CommunicationNetwork + verb. The
+"redundant" call held ~80%; N1 is the nugget that justified the pass.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -177,9 +192,14 @@ authorization already exist. Distilled into decision Q-L.
   in/on the loop? ROE and authorization already exist; this link does not.
   (Resolves W1.)
 - **Q-L [deck]** Define the task/effect vocabulary the axis needs: (a) task
-  verbs (deliver, dig/clear/emplace, recover/rescue, engage) and (b) typed
-  payload/effector/weapon (cargo, manipulator, munition). Effects, targets,
-  and resources already exist. (Resolves L1/L2/E1/E2/R2/W2.)
+  verbs (deliver, dig/clear/emplace, recover/rescue, engage, follow/escort/relay)
+  and (b) typed payload/effector/weapon (cargo, manipulator, munition). Effects,
+  targets, resources, `RelativeLocation`, and `CommunicationNetwork` already
+  exist. (Resolves L1/L2/E1/E2/R2/W2/N2.)
+- **Q-M [deck]** Allow an **area** to be the subject of a task and a report -
+  an `hasAffectedArea` counterpart to `hasAffectedEntity`, and an area-state
+  (cleared / contaminated / mined). Areas (`TacticalArea`, `MapGraphic`) exist;
+  tasking/reporting on them does not. (Resolves N1.)
 
 ## Change log
 
@@ -210,6 +230,10 @@ authorization already exist. Distilled into decision Q-L.
   decision Q-K, coverage C6; deck gained a Fire Support slide and split decisions
   into 2 slides. Grounding narrowed the finding: ROE + authorization already
   exist (LOX/C2SIM); the real gap (W1) is the autonomy-to-engagement link.
+- 2026-07-10: Redundancy pass over route-clearance / companion / urban
+  (`RedundancyPass-Walk.md`). Confirmed ~80% redundant; extracted N1 (area as
+  subject of task/report - new) and N2 (folds into Q-L). Added section 6g,
+  decision Q-M, and a `Route Clearance Order` tab demonstrating N1.
 - 2026-07-10: Batched Logistics + Engineering + USV Rescue
   (`TaskEffect-Batch-Walk.md`); added 4 tabs (Logistics Delivery Order,
   Engineering Task Order, USV Rescue Order, Delivery Confirmation Report). Added
