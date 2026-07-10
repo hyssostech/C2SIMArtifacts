@@ -1,0 +1,94 @@
+# ASX Review - Issues & Comments Log
+
+Running log of issues, defects, and comments found while reviewing the proposed
+ASX ontology elements against the scenarios and the sample-message
+instantiations. This is the working source; the planned findings PowerPoint is
+generated from it. Kept current as work proceeds.
+
+Severity: **BLOCKER** (stops a message being instantiated) / **HIGH** /
+**MED** / **LOW** / **TYPO**. Status: **OPEN** / **RESOLVED**.
+Items marked **[deck]** are candidates for the findings presentation.
+
+## 1. Repo sync & process
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| S1 | HIGH | RESOLVED | Local clone was 52 commits behind origin/main | Fixed by pull on 2026-07-09; now level with origin (`021e715`). |
+| S2 | HIGH | OPEN | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** |
+| S3 | MED | IN PROGRESS | Workbooks are `.xlsx` (zipped XML), git cannot merge | Converting sample-message workbooks to diff-able SpreadsheetML 2003 `.xml` on branch `asx-diffable-spreadsheets`. |
+
+## 2. Model drift: OWL vs Spreadsheet vs Deck
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| D1 | HIGH | OPEN | Autonomy vocabulary defined three incompatible ways | OWL individuals {Automated, FullAuto, ReCont, Teleop}; ConceptMapping `Control Mode` {Piloted, Unpiloted-Autonomous, Swarm}; `NavigationAutonomy` {FPV, Autonomous, RemoteControl}. Which is normative? **[deck]** |
+| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. Two ConceptMapping rows even disagree on values. **[deck]** |
+| D3 | HIGH | OPEN | Entire attribute layer missing from OWL | Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters exist in ConceptMapping but not in `CSIM_ASX.rdf` (0 datatype properties, 1 object property). **[deck]** |
+| D4 | MED | OPEN | Deck (June) proposes `Sensors subClassOf RobotPart`; OWL has `Sensor subClassOf ElectricDevice`, no RobotPart class | Slide 6 of 2026-06 status deck vs `CSIM_ASX.rdf`. Robotics-concept discussion not captured in model. |
+| D5 | LOW | OPEN | Deck frames robotics subclass axioms as an open question, but OWL already committed them | UAV/UGV subClassOf Robot etc. asked as "Do we want to add...?" in June yet present in Jan OWL. |
+
+## 3. OWL internal defects (`CSIM_ASX.rdf`)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| O1 | TYPO | OPEN | Class name misspelled `CollecticeRoboticSystem` (should be "Collective") | Line 44-45; `Swarm subClassOf` the misspelled class. Will propagate into instance data once messages exist. **[deck]** |
+| O2 | TYPO | OPEN | `versionInfo` says "Autonomous Systems Extrension" | Line 13. |
+| O3 | LOW | OPEN | File named `CSIM_ASX.rdf` (missing the "2") | Inconsistent with every other C2SIM artifact; expected `C2SIM_ASX.rdf`. |
+
+## 4. Sample-message instantiation defects
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| M1 | HIGH | OPEN | `actorReference` is `string` but must define a not-yet-known entity | Report Base Attributes note: "Observed Entity likely does not already exist... needs to be defined in the report." A string can't carry an entity definition. **[deck]** |
+| M2 | MED | OPEN | `MediaReference` identity triple-defined | repositoryReference(UUID) + reportReference(string) + url(string), note "String may be better." Unresolved. |
+| M3 | MED | OPEN | Same concept modeled two ways across two report sheets | media/analystComment placed on ActivityObservation/LocationObservation in one sheet vs. a new `SensorObservation` subclass in another. Which is normative? |
+| M4 | MED | OPEN | `SensorObservation subClassOf ActivityObservation` is questionable | A sensor location fix is a LocationObservation; sensor output is not inherently an activity. |
+| M5 | MED | OPEN | `MediaTypeEnum` conflates media format with sensor modality | Values Video/Audio/Image/Document, but note asks it to also cover "thermal scan" (a sensor type). Category error. **[deck]** |
+| M6 | MED | OPEN | Order task payload not modeled | "New Route Pattern" / "New Location" appear as bare rows with no type under the UAV Change Patrol Route Task. |
+| M7 | HIGH | OPEN | `hasStartTime` typed `UUIDBase` | Both Order sheets; `hasEndTime` is `TimeInstant`. Almost certainly a copy-paste error. **[deck]** |
+| M8 | LOW | OPEN | Namespace label drift | `C2SIM_ASX` (Order, Report Base) vs `ASX` (Video Detection Report) for the same model. |
+
+## 5. Initialization walk - entity-typing findings (headline)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| P1 | BLOCKER | OPEN | UAV typed twice, incompatibly: ASX `UAV subClassOf Robot subClassOf ActorEntity` vs SMX `Aircraft subClassOf Platform subClassOf ActorEntity` | Disjoint sibling trees. `Robot` orphans the drone from Platform machinery; `Aircraft` leaves ASX classes unused. **[deck]** |
+| P2 | BLOCKER | OPEN | Sensor: separately-declared entity, or attribute on platform? | Init must pick one; Report side only consumed sensor output. Ties to D2. **[deck]** |
+| P3 | HIGH | OPEN | `hasAutonomousRoleCode` has no attachment point on the entity | Defined in OWL, but no Init field and not on EntityDescriptor. |
+| P5 | HIGH | OPEN | Patrol route/area not modeled as an init object | Order references a route to change; nothing declares the baseline. Can host as MapGraphic. Gap on both Init and Order sides. Ties to M6. |
+| P6 | HIGH | OPEN | Three competing autonomy vocabularies at init time | Same as D1, surfaced concretely when declaring an entity. |
+| P7 | BLOCKER | OPEN | Swarm cannot be tasked as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity` (inert), but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. **[deck]** |
+| P8 | HIGH | OPEN | Swarm membership + leader have no property | ConceptMapping "Leader-Boolean, Network" has no OWL property; `hasSuperior` is the natural base hook. |
+| P9 | TYPO | OPEN | Misspelling O1 propagates into swarm instance data | Same root as O1. |
+| P10 | MED | OPEN | Heterogeneous (mixed UAV+UGV) swarm membership unconfirmed | MUTT-style mixed swarms; confirm members of different platform types can share one collective. |
+
+## 6. Coverage gaps (scenario x message type)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| C1 | HIGH | OPEN | Initialization entirely un-instantiated (0 of 3 named scenarios) | All Init sheets header-only. Being addressed by the Initialization walk. **[deck]** |
+| C2 | HIGH | OPEN | CASEVAC (flagship contributed scenario) has no messages of any type | Needs M2M route hand-off, "explainable reasons" report, on-the-loop status - patterns not yet covered. **[deck]** |
+| C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
+| C4 | MED | OPEN | Non-video sensors not covered | CBRN/EW/jammer/GPR/thermal absent; SensorType enum incomplete for them. Ties to M5/D2. |
+| C5 | LOW | OPEN | Swarm Detection report + swarm coordination order not done | Stubs only. |
+
+## 7. Open decisions for the sub-group (comments)
+
+- **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
+  subtree* rather than a parallel `Robot` class tree? (Resolves P1, D-tree split.)
+- **Q-B [deck]** Should `Swarm` derive from `CollectiveEntity` (ActorEntity)
+  instead of the device/artifact tree? (Resolves P7.)
+- **Q-C** Is a sensor a first-class Entity/Equipment, a class, or an attribute?
+  Pick one model and apply it in Init, Report, and ConceptMapping. (Resolves D2/P2.)
+- **Q-D** Choose one normative autonomy vocabulary and express the others as
+  derived/orthogonal. (Resolves D1/P6.)
+- **Q-E** Define an inline entity-definition mechanism for newly-observed
+  (uncooperative) entities so a report can introduce an entity it references.
+  (Resolves M1.)
+- **Q-F** Decide MediaReference identity (repository+report vs URL) and separate
+  media-format from sensor-modality. (Resolves M2/M5.)
+
+## Change log
+
+- 2026-07-09: Log created. Consolidated findings from OWL review, spreadsheet
+  vs OWL drift analysis, sample-message inspection, and the Initialization walk.
