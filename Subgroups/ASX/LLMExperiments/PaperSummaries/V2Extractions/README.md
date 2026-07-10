@@ -13,11 +13,18 @@ intent) kept separate from In-world objectives, grounded narrative/steps with
 Conceptual Model. Sources were read in full (verbatim text), not summarized by a
 third party.
 
-| File | Source | New domain covered |
+| File | Source | New domain / concept covered |
 | --- | --- | --- |
 | [SubT_Roucek2019.md](./SubT_Roucek2019.md) | Roucek et al. 2019, DARPA SubT (MESAS 2019) | Subterranean multi-robot exploration / SAR |
 | [CooperativeMCM_Ling2020.md](./CooperativeMCM_Ling2020.md) | Ling 2020, NPS thesis (DTIC AD1126497) | Undersea / maritime-surface mine countermeasures |
 | [Sustainment_MWI2026.md](./Sustainment_MWI2026.md) | Dibernardo 2026, Modern War Institute | Logistics / contested resupply (last tactical mile) |
+| [Explainability_Agrawal2021.md](./Explainability_Agrawal2021.md) | Agrawal, Cleland-Huang et al. 2021, arXiv:2109.02077 | Explainability / human-on-the-loop (validation hole #1) |
+| [CBRN_Muster2024.md](./CBRN_Muster2024.md) | Muster et al. 2024, UGV-CBRN, arXiv:2406.14385 | CBRN reconnaissance + manipulation (validation hole #2) |
+
+The last two were sourced against the ontology session's brief
+[`../../InstantiationReview/Documents-Needed.md`](../../InstantiationReview/Documents-Needed.md);
+the sourcing response is
+[`../../InstantiationReview/Documents-Found.md`](../../InstantiationReview/Documents-Found.md).
 
 Note on source type: the SubT and MCM sources are technical reports with fully
 specified scenarios. The MWI source is a professional-commentary article; its
