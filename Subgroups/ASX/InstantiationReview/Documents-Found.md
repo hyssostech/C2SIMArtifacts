@@ -9,6 +9,29 @@ decisions it grounds. Extractions use the locked v2.2 prompt and live in
 Status legend: **EXTRACTED** (record written) - **SOURCED** (verified source, not
 yet extracted) - **HUNTING** (no clean open-access vignette yet).
 
+## UPDATE - all nine requests now extracted
+
+All nine requests (plus the optional item, partially) now have v2.2 records in
+`../LLMExperiments/PaperSummaries/V2Extractions/`:
+
+| # | Request | Record | Fidelity |
+|---|---|---|---|
+| 1 | Explainability / on-the-loop | Explainability_Agrawal2021.md | strong |
+| 2 | CBRN reconnaissance | CBRN_Muster2024.md | strong |
+| 3 | EW sensing / attack | ElectronicWarfare_EmitterGeoloc.md | **composed / low** (no open vignette; replace if a real one is found) |
+| 4 | Persistent watch | PersistentWatch_MDARS.md | strong (DTIC MDARS) |
+| 5 | Counter-UAS / swarm | CounterUAS_CNAS2025.md | strong (TTX vignette) |
+| 6 | Human-machine teaming | MUMT_Remmersmann2015.md | strong (local BML paper) |
+| 7 | Humanitarian SAR | SAR_Kim2021.md | strong (open PMC) |
+| 8 | Formation / convoy geometry | FormationConvoy_Hu2020.md | strong geometry, **civilian domain** |
+| 9 | Combat-engineering / EOD | Engineering_RCBC2018.md | **reported-facts** (primary page blocked) |
+
+Two records carry fidelity caveats worth the ontology session's attention: **#3 EW**
+(composed from technical descriptions, not a situated vignette) and **#9 breach**
+(built from the RCBC demonstration's reported facts). Both are flagged in-file and
+are the first candidates to replace if better open-access sources surface. The
+sections below record the sourcing detail as originally written.
+
 ## Validation holes (top priority)
 
 ### 1. Explainability / human-on-the-loop - EXTRACTED

@@ -20,8 +20,19 @@ third party.
 | [Sustainment_MWI2026.md](./Sustainment_MWI2026.md) | Dibernardo 2026, Modern War Institute | Logistics / contested resupply (last tactical mile) |
 | [Explainability_Agrawal2021.md](./Explainability_Agrawal2021.md) | Agrawal, Cleland-Huang et al. 2021, arXiv:2109.02077 | Explainability / human-on-the-loop (validation hole #1) |
 | [CBRN_Muster2024.md](./CBRN_Muster2024.md) | Muster et al. 2024, UGV-CBRN, arXiv:2406.14385 | CBRN reconnaissance + manipulation (validation hole #2) |
+| [CounterUAS_CNAS2025.md](./CounterUAS_CNAS2025.md) | Pettyjohn & Campbell 2025, CNAS Countering the Swarm | Counter-UAS / swarm-vs-swarm (request #5) |
+| [MUMT_Remmersmann2015.md](./MUMT_Remmersmann2015.md) | Remmersmann et al. 2015, BML for Multi-Robot Systems | Human-machine teaming at C2/tasking level (request #6) |
+| [SAR_Kim2021.md](./SAR_Kim2021.md) | Kim et al. 2021, Sensors (PMC8537596) | Humanitarian SAR, non-combat (request #7) |
+| [FormationConvoy_Hu2020.md](./FormationConvoy_Hu2020.md) | Hu 2020, DOT/arXiv:2104.06507 | Formation/convoy geometry (request #8; civilian domain) |
+| [Engineering_RCBC2018.md](./Engineering_RCBC2018.md) | U.S. Army RCBC demonstration 2018 | Combat-engineering robotic breach (request #9) |
+| [PersistentWatch_MDARS.md](./PersistentWatch_MDARS.md) | MDARS overview, DTIC ADA422465 | Persistent surveillance / sentry (validation hole #4) |
+| [ElectronicWarfare_EmitterGeoloc.md](./ElectronicWarfare_EmitterGeoloc.md) | Composed (UAV emitter geolocation/jamming) | EW sensing/attack (validation hole #3; composed, low-fidelity) |
 
-The last two were sourced against the ontology session's brief
+Source-fidelity notes: `Engineering_RCBC2018` is built from reported facts (primary
+page access-blocked); `ElectronicWarfare_EmitterGeoloc` is composed from technical
+descriptions (no single open EW vignette was retrievable) - both flagged in-file.
+
+Records after CBRN were sourced against the ontology session's brief
 [`../../InstantiationReview/Documents-Needed.md`](../../InstantiationReview/Documents-Needed.md);
 the sourcing response is
 [`../../InstantiationReview/Documents-Found.md`](../../InstantiationReview/Documents-Found.md).
