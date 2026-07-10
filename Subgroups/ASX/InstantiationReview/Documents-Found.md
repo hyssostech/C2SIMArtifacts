@@ -18,19 +18,21 @@ All nine requests (plus the optional item, partially) now have v2.2 records in
 |---|---|---|---|
 | 1 | Explainability / on-the-loop | Explainability_Agrawal2021.md | strong |
 | 2 | CBRN reconnaissance | CBRN_Muster2024.md | strong |
-| 3 | EW sensing / attack | ElectronicWarfare_EmitterGeoloc.md | **composed / low** (no open vignette; replace if a real one is found) |
+| 3 | EW sensing / attack | ElectronicWarfare_EmitterGeoloc.md | strong (AFIT UAV emitter-geolocation flight experiment, DTIC AD1054177 + ADA444985) - upgraded from composed |
 | 4 | Persistent watch | PersistentWatch_MDARS.md | strong (DTIC MDARS) |
 | 5 | Counter-UAS / swarm | CounterUAS_CNAS2025.md | strong (TTX vignette) |
 | 6 | Human-machine teaming | MUMT_Remmersmann2015.md | strong (local BML paper) |
 | 7 | Humanitarian SAR | SAR_Kim2021.md | strong (open PMC) |
 | 8 | Formation / convoy geometry | FormationConvoy_Hu2020.md | strong geometry, **civilian domain** |
-| 9 | Combat-engineering / EOD | Engineering_RCBC2018.md | **reported-facts** (primary page blocked) |
+| 9 | Combat-engineering / EOD | Engineering_RCBC2018.md | multiply-corroborated open reporting (primary Maneuver Battle Lab report not open) - upgraded |
 
-Two records carry fidelity caveats worth the ontology session's attention: **#3 EW**
-(composed from technical descriptions, not a situated vignette) and **#9 breach**
-(built from the RCBC demonstration's reported facts). Both are flagged in-file and
-are the first candidates to replace if better open-access sources surface. The
-sections below record the sourcing detail as originally written.
+A follow-up "hunt harder" pass upgraded the two previously-caveated records: **#3 EW**
+is now a real extraction from a primary open-access UAV emitter-geolocation flight
+experiment (AFIT thesis, DTIC AD1054177) plus cooperative electronic attack
+(ADA444985); **#9 breach** is now built from multiply-corroborated open reporting of
+the RCBC/JWA-19 breach (units, obstacle composition, vehicle counts, timing), with
+the caveat that the primary Maneuver Battle Lab report is not openly available. The
+sections below record the original sourcing detail.
 
 ## Validation holes (top priority)
 

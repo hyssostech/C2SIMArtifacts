@@ -1,15 +1,19 @@
 # Scenario extracted from report (v2.2 prompt)
 
-U.S. Army, Robotic Complex Breach Concept (RCBC) demonstration, Grafenwoehr
-Training Area, 6 April 2018, and follow-on combined-arms robotic breach exercise,
-Yakima Training Center. Primary sources: army.mil article 203482 and DVIDS
-imagery.
+U.S. Army, Robotic Complex Breach Concept (RCBC): the Grafenwoehr demonstration
+(6 April 2018) and the follow-on combined-arms robotic breach at Joint Warfighting
+Assessment 2019 (JWA 19), Yakima Training Center, 2nd Battalion, 3rd Infantry
+Regiment (1st Brigade, 2nd Infantry Division SBCT); led by Fort Benning's
+Cross-Domain Maneuver Battle Lab, sponsored by Army Futures Command. Corroborated
+across army.mil (articles 203482, 218538, 221845), Breaking Defense, Defense News,
+and DVIDS JWA19 coverage.
 
-Source-fidelity caveat: the army.mil primary page was access-blocked at extraction
-time; this record is grounded in the specific reported facts (named units,
-platforms, and breach tasks) surfaced from that reporting, not the full primary
-text. Platform autonomy is reported as remote-control/teleoperation. Fields not
-in the reported facts are marked "Not specified in source" or "[inferred]".
+Source-fidelity note: this record is built from consistent, multiply-corroborated
+open reporting of the demonstrations (named units, platforms, obstacle
+composition, vehicle counts, and timing). The Maneuver Battle Lab compiled a
+final JWA 19 assessment report, but that primary report is not openly available;
+so step-level timings and internal metrics remain "Not specified in source".
+Platform autonomy is reported as remote-control / teleoperation.
 
 Sourced against `InstantiationReview/Documents-Needed.md` request #9 (combat-
 engineering / manipulation). Grounds E1 (effector/task verbs), E2 (effector
@@ -31,12 +35,15 @@ demonstration intent.)
 using remotely-controlled systems for the most dangerous tasks. An Automated
 Direct and Indirect Mortar provides suppression, an M58 Wolf smoke generator
 obscures the breach site, and a UK "Terrier" armored digger reduces the obstacle,
-in support of an M1 Abrams. In the follow-on Yakima exercise, a first Assault
-Breacher Vehicle (ABV) fires a mine-clearing line charge to clear a lane through a
+in support of an M1 Abrams. In the follow-on Yakima exercise (JWA 19), a
+combined force of 10 unmanned and 6 manned vehicles attacks an obstacle layered
+with a minefield, wire, and a deep anti-tank trench: a first Assault Breacher
+Vehicle (ABV) fires a mine-clearing line charge to clear a lane through the
 minefield and emplaces stakes marking where it is safe to drive, and a second ABV
-uses its blade to fill an anti-tank trench. The robotic and autonomous systems
-perform the intelligence, suppression, obscuration, and reduction tasks so that
-soldiers are not exposed at the point of breach.
+uses its blade to fill the trench. The robotic and autonomous systems perform the
+intelligence, suppression, obscuration, and reduction tasks so that soldiers are
+not exposed at the point of breach; the second breach run took about 30 minutes
+less than the first, roughly matching a manned operation's time.
 
 **In-world objectives:**
 - Breach a complex obstacle (minefield plus anti-tank trench) to open a lane for maneuver.
@@ -51,8 +58,9 @@ soldiers are not exposed at the point of breach.
 - Autonomy: reported as remotely controlled / teleoperated.
 
 **Measures of Performance:**
+- Breach time vs a manned operation (the JWA 19 second run took ~30 min less than the first, roughly matching manned timing).
 - [inferred] A cleared, marked, and proofed lane through the obstacle.
-- [inferred] Obstacle (minefield + trench) reduced.
+- [inferred] Obstacle (minefield + wire + trench) reduced.
 - [inferred] Soldiers kept out of the point of breach.
 
 **Scenario steps (SOSRA-style breach):**
@@ -64,11 +72,12 @@ soldiers are not exposed at the point of breach.
 6. Second ABV uses its blade to fill the anti-tank trench.
 7. The maneuver force (M1 Abrams) assaults through the cleared, marked lane.
 
-**Environment and constraints:** Complex obstacle (minefield plus anti-tank
-ditch); military training areas (Grafenwoehr, Germany; Yakima, WA). Execution
+**Environment and constraints:** Complex obstacle layered with a minefield, wire,
+and a deep anti-tank trench; military training areas (Grafenwoehr, Germany;
+Yakima, WA). Force at JWA 19: 10 unmanned and 6 manned vehicles. Execution
 context: field demonstration/experiment (remotely controlled systems). Rules of
-engagement: combat breach against an emplaced obstacle. Detailed timings, unit
-sizes, and comms: Not specified in source.
+engagement: combat breach against an emplaced obstacle. Internal metrics and
+step-level timings from the Maneuver Battle Lab report: Not specified in source.
 
 #### Conceptual model (ontology seed)
 - **Domain and scope:** Robotic combined-arms breach of a complex obstacle to open a maneuver lane.
@@ -95,6 +104,8 @@ sizes, and comms: Not specified in source.
   - Soldiers are removed from the point of breach (RAS perform the dangerous tasks).
   - Breach follows a suppress-obscure-reduce (SOSRA) sequence.
 
-**Grounding check:** Source-fidelity caveat (built from reported facts, primary
-page access-blocked); autonomy reported as teleoperation; three MoP items
-[inferred]; some environment details "Not specified in source".
+**Grounding check:** Built from multiply-corroborated open reporting (units,
+platforms, obstacle composition, vehicle counts, and breach-time comparison are
+consistent across sources); the primary Maneuver Battle Lab report is not open, so
+internal metrics/step-timings are "Not specified in source". Autonomy reported as
+teleoperation; three MoP items [inferred].

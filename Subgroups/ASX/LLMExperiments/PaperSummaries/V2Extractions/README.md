@@ -24,13 +24,16 @@ third party.
 | [MUMT_Remmersmann2015.md](./MUMT_Remmersmann2015.md) | Remmersmann et al. 2015, BML for Multi-Robot Systems | Human-machine teaming at C2/tasking level (request #6) |
 | [SAR_Kim2021.md](./SAR_Kim2021.md) | Kim et al. 2021, Sensors (PMC8537596) | Humanitarian SAR, non-combat (request #7) |
 | [FormationConvoy_Hu2020.md](./FormationConvoy_Hu2020.md) | Hu 2020, DOT/arXiv:2104.06507 | Formation/convoy geometry (request #8; civilian domain) |
-| [Engineering_RCBC2018.md](./Engineering_RCBC2018.md) | U.S. Army RCBC demonstration 2018 | Combat-engineering robotic breach (request #9) |
+| [Engineering_RCBC2018.md](./Engineering_RCBC2018.md) | U.S. Army RCBC / JWA 19 breach (multi-source) | Combat-engineering robotic breach (request #9) |
 | [PersistentWatch_MDARS.md](./PersistentWatch_MDARS.md) | MDARS overview, DTIC ADA422465 | Persistent surveillance / sentry (validation hole #4) |
-| [ElectronicWarfare_EmitterGeoloc.md](./ElectronicWarfare_EmitterGeoloc.md) | Composed (UAV emitter geolocation/jamming) | EW sensing/attack (validation hole #3; composed, low-fidelity) |
+| [ElectronicWarfare_EmitterGeoloc.md](./ElectronicWarfare_EmitterGeoloc.md) | AFIT thesis DTIC AD1054177 + ADA444985 | EW emitter geolocation + electronic attack (validation hole #3) |
 
-Source-fidelity notes: `Engineering_RCBC2018` is built from reported facts (primary
-page access-blocked); `ElectronicWarfare_EmitterGeoloc` is composed from technical
-descriptions (no single open EW vignette was retrievable) - both flagged in-file.
+Source-fidelity notes (after the "hunt harder" pass): `ElectronicWarfare_EmitterGeoloc`
+is now a real extraction from a primary open-access UAV emitter-geolocation flight
+experiment (AD1054177), with the electronic-attack side from ADA444985 - the earlier
+composed placeholder is gone. `Engineering_RCBC2018` is now built from multiply-
+corroborated open reporting of the RCBC/JWA-19 breach (the primary Maneuver Battle
+Lab report is not openly available). Both remain flagged in-file.
 
 Records after CBRN were sourced against the ontology session's brief
 [`../../InstantiationReview/Documents-Needed.md`](../../InstantiationReview/Documents-Needed.md);
