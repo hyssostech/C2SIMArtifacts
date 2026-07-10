@@ -14,6 +14,11 @@ any concurrent edit risks silently losing her work. Keeping this as separate
 Markdown avoids that collision; anything here that is useful can be folded into
 the workbooks by their owner.
 
+## Start here
+
+- [Group-Briefing.md](./Group-Briefing.md) - one-page bearings for the sub-group:
+  what this is, what was found, the ~22 decisions, and where the ball is now.
+
 ## Contents
 
 - [Message-Instantiation-Coverage.md](./Message-Instantiation-Coverage.md) -

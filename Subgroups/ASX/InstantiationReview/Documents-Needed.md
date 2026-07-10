@@ -143,3 +143,26 @@ Ordered by ontology leverage and how clearly the hole is confirmed.
 The first four (explainability, CBRN, EW, persistence) are the **validation
 holes** - highest priority, because they ground concepts the model already
 claims. The rest extend into domains the library has not yet seen.
+
+## UPDATE (2026-07-10) - all nine sourced; residual recommendation
+
+The scavenger session extracted all nine requests (see `Documents-Found.md` and
+`LLMExperiments/V2Extractions/`); the integration is in `ValidationEvidence-Walk.md`.
+On the three residual holes the sourcing session offered to chase, the modeling
+side's recommendation is:
+
+1. **Dedicated autonomous-CASEVAC coordination mission - YES, worth sourcing.**
+   The one gap that still matters: CASEVAC is the flagship *contributed* scenario
+   and its coordination/explainability thread (X1/X2/Q-G/Q-H) is heavily
+   instantiated but only *adjacently* grounded (via MUM-T + Explainability +
+   Sustainment). A real autonomous-CASEVAC mission would validate the
+   most-proposed content types directly.
+2. **Primary AAR for the robotic breach (#9) - skip / low priority.** CBRN already
+   grounds the manipulation family (E1/E2) with a real field mission.
+3. **Military formation source (#8) - optional.** `FormationConvoy_Hu` (civilian)
+   plus Langerwisch MOVE (military) already ground Q-U.
+
+Otherwise the sourcing effort is **essentially complete** - every proposed
+concept is now grounded in a real mission. The remaining work (the unbuilt
+OWL property/message layer and the ~22 open decisions Q-A..Q-V) is **not** a
+document problem; it is the modeling side's to resolve.
