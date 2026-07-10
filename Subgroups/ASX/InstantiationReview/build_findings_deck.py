@@ -8,7 +8,7 @@ from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
 NAVY   = RGBColor(0x1F,0x3A,0x5F)
 ACCENT = RGBColor(0x2E,0x86,0x9A)
 GRAY   = RGBColor(0x33,0x33,0x33)
-MGRAY  = RGBColor(0x66,0x6666 & 0xFF,0x66)
+MGRAY  = RGBColor(0x66,0x66,0x66)
 RED    = RGBColor(0xC0,0x39,0x2B)
 ORANGE = RGBColor(0xC8,0x7F,0x0A)
 GREEN  = RGBColor(0x2E,0x7D,0x32)
@@ -34,7 +34,6 @@ def set_run(r, text, size, color, bold=False, italic=False, font="Calibri"):
     r.font.bold = bold; r.font.italic = italic; r.font.name = font
 
 def header(s, title, kicker=None):
-    # accent rule
     ln = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.6), Inches(1.28), Inches(2.2), Pt(3))
     ln.fill.solid(); ln.fill.fore_color.rgb = ACCENT; ln.line.fill.background()
     tb, tf = box(s, 0.55, 0.45, 12.2, 0.9)
@@ -43,7 +42,8 @@ def header(s, title, kicker=None):
         tb2, tf2 = box(s, 0.6, 1.0, 12.0, 0.35)
         p2 = tf2.paragraphs[0]; set_run(p2.add_run(), kicker, 13, ACCENT, italic=True)
 
-def footer(s, n):
+def footer(s):
+    n = len(prs.slides._sldIdLst)
     tb, tf = box(s, 0.55, 7.02, 12.2, 0.35)
     p = tf.paragraphs[0]
     set_run(p.add_run(), "C2SIM ASX Sub-group   |   Hyssos   |   July 2026", 9, MGRAY)
@@ -100,28 +100,28 @@ set_run(p.add_run(), "C2SIM ASX Sub-group    -    Hyssos    -    July 2026", 13,
 accent = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(2.35), Inches(2.4), Pt(5))
 accent.fill.solid(); accent.fill.fore_color.rgb = ACCENT; accent.line.fill.background()
 
-# ---------------- Slide 2: Approach ----------------
+# ---------------- Approach ----------------
 s = slide(); header(s, "The method", "Building on the sample-message work")
 bullets(s, [
  {"text":"Walk each scenario and instantiate real Initialization / Order / Report messages using C2SIM + the proposed ASX elements."},
  {"text":"Where a proposed element cannot be instantiated cleanly, a concrete problem surfaces - that is the signal we want."},
- {"text":"This review focused on Initialization (which had zero worked examples) and cross-checked the OWL model against the spreadsheets."},
+ {"text":"This review focused on Initialization (which had zero worked examples) and the CASEVAC scenario, and cross-checked the OWL model against the spreadsheets."},
  {"text":"Findings are framed as decisions for the group, not as objections to the approach - the approach is working."},
 ], top=1.7, size=18, gap=14)
-footer(s, 2)
+footer(s)
 
-# ---------------- Slide 3: State of play ----------------
+# ---------------- State of play ----------------
 s = slide(); header(s, "Where the instantiation stands")
 bullets(s, [
  {"text":"4 worked instantiations so far: 2 Reports, 2 Orders, 0 Initialization.","bold":True},
  {"text":"Reports are the mature track (Video Detection Report); Orders are partial; every Initialization sheet is still a stub.","lvl":1},
  {"text":"Coverage is concentrated on a single UAV video-surveillance thread plus one UGV transport order.","lvl":1},
- {"text":"CASEVAC - the one human-authored contributed scenario - has no messages of any type yet.","bold":True},
+ {"text":"CASEVAC - the one human-authored contributed scenario - had no messages of any type (now walked in this review).","bold":True},
  {"text":"Initialization is the biggest hole and the highest-signal place to test the model (drafted in this review).","lvl":1},
 ], top=1.7, size=17, gap=12)
-footer(s, 3)
+footer(s)
 
-# ---------------- Slide 4: Two tracks out of sync ----------------
+# ---------------- Two tracks out of sync ----------------
 s = slide(); header(s, "Two tracks have drifted apart")
 rbox(s, 0.8, 1.9, 5.5, 1.5, "OWL model  (CSIM_ASX.rdf)\nlast updated  Jan 2026", NAVY, size=15)
 rbox(s, 7.0, 1.9, 5.5, 1.5, "Spreadsheets  (Concept Mapping,\nsample messages)  updated  Jun 2026", ACCENT, size=15)
@@ -132,9 +132,9 @@ bullets(s, [
  {"text":"Sensors are defined three different ways.","lvl":1},
  {"text":"The whole attribute layer (Payload, Mobility, VehicleType, ...) exists only in the spreadsheets, not the OWL.","lvl":1},
 ], top=3.8, size=16, gap=10)
-footer(s, 4)
+footer(s)
 
-# ---------------- Slide 5: 3 blockers ----------------
+# ---------------- 3 blockers ----------------
 s = slide(); header(s, "Instantiating one entity hits three blockers")
 rbox(s, 0.8, 2.0, 3.8, 2.2, "P1\nA UAV is typed two\nincompatible ways", RED, size=16)
 rbox(s, 4.85, 2.0, 3.8, 2.2, "P2\nA sensor has no\nagreed representation", RED, size=16)
@@ -142,15 +142,13 @@ rbox(s, 8.9, 2.0, 3.65, 2.2, "P7\nA swarm cannot be\ntasked as modeled", RED, si
 bullets(s, [
  {"text":"All three are entity-typing decisions - so Initialization, not Reports, is where the proposed model must be exercised and settled.","bold":True},
 ], top=4.7, size=17)
-footer(s, 5)
+footer(s)
 
-# ---------------- Slide 6: P1 diagram ----------------
+# ---------------- P1 diagram ----------------
 s = slide(); header(s, "P1  -  A UAV is typed twice", "BLOCKER")
 rbox(s, 5.2, 1.7, 3.0, 0.75, "ActorEntity", NAVY, size=14)
-# SMX branch
 rbox(s, 2.4, 3.0, 3.0, 0.75, "Platform  (SMX)", ACCENT, size=13)
 rbox(s, 2.4, 4.2, 3.0, 0.75, "Aircraft  (SMX)", ACCENT, size=13)
-# ASX branch
 rbox(s, 8.0, 3.0, 3.0, 0.75, "Robot  (ASX)", ORANGE, size=13)
 rbox(s, 8.0, 4.2, 3.0, 0.75, "UAV  (ASX)", ORANGE, size=13)
 arrow(s, 6.2, 2.45, 3.9, 3.0); arrow(s, 3.9, 3.75, 3.9, 4.2)
@@ -161,9 +159,9 @@ bullets(s, [
  {"text":"Type it as Aircraft -> the ASX Robot / UAV classes go unused.","lvl":1},
  {"tag":"Decision (Q-A):","tagcolor":ACCENT,"text":"make ASX autonomy a role/facet on the existing Platform subtree instead of a parallel Robot tree?"},
 ], top=5.05, size=14, gap=6)
-footer(s, 6)
+footer(s)
 
-# ---------------- Slide 7: P7 diagram ----------------
+# ---------------- P7 diagram ----------------
 s = slide(); header(s, "P7  -  A swarm cannot receive orders", "BLOCKER")
 rbox(s, 0.9, 2.0, 3.1, 0.7, "Swarm  (ASX)", ORANGE, size=13)
 rbox(s, 4.3, 2.0, 3.6, 0.7, "CollectiveRoboticSystem", ORANGE, size=12)
@@ -181,9 +179,9 @@ bullets(s, [
  {"text":"A swarm is exactly what orders are addressed to and what sends reports - it must be an ActorEntity."},
  {"tag":"Decision (Q-B):","tagcolor":ACCENT,"text":"derive Swarm from CollectiveEntity (already an ActorEntity) rather than from the device/artifact tree."},
 ], top=5.4, size=15, gap=8)
-footer(s, 7)
+footer(s)
 
-# ---------------- Slide 8: Model drift detail ----------------
+# ---------------- Model drift detail ----------------
 s = slide(); header(s, "The model lags the spreadsheets")
 bullets(s, [
  {"tag":"Autonomy - 3 vocabularies:","tagcolor":ORANGE,"text":"OWL {Automated, FullAuto, ReCont, Teleop}  vs  ControlMode {Piloted, Unpiloted-Autonomous, Swarm}  vs  NavigationAutonomy {FPV, Autonomous, RemoteControl}."},
@@ -191,9 +189,9 @@ bullets(s, [
  {"tag":"Missing from OWL:","tagcolor":ORANGE,"text":"Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, SwarmParameters. The OWL has 0 datatype properties."},
  {"tag":"Decisions (Q-C, Q-D):","tagcolor":ACCENT,"text":"pick one normative sensor model and one normative autonomy vocabulary; express the rest as derived."},
 ], top=1.8, size=15.5, gap=14)
-footer(s, 8)
+footer(s)
 
-# ---------------- Slide 9: Sample-message defects ----------------
+# ---------------- Sample-message defects ----------------
 s = slide(); header(s, "Defects in the existing instantiations")
 bullets(s, [
  {"tag":"M1 (HIGH):","tagcolor":ORANGE,"text":"actorReference is a string, but it must define an entity not yet in the database - no inline entity-definition mechanism exists for observed (uncooperative) entities."},
@@ -201,22 +199,33 @@ bullets(s, [
  {"tag":"M7 (HIGH):","tagcolor":ORANGE,"text":"hasStartTime is typed UUIDBase while hasEndTime is TimeInstant - almost certainly a copy/paste error."},
  {"tag":"Typos:","tagcolor":RED,"text":"class 'CollecticeRoboticSystem' (should be Collective) and versionInfo 'Extrension' - cheap to fix now, painful after messages exist."},
 ], top=1.8, size=15.5, gap=13)
-footer(s, 9)
+footer(s)
 
-# ---------------- Slide 10: Coverage gaps ----------------
+# ---------------- Coverage gaps ----------------
 s = slide(); header(s, "Biggest coverage gaps")
 bullets(s, [
  {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
- {"text":"CASEVAC needs message patterns none of the current examples cover:"},
- {"text":"machine-to-machine route hand-off (scout -> transport)","lvl":1},
- {"text":"'explainable reasons' report (why the route changed / mission could not complete)","lvl":1},
- {"text":"on-the-loop status and position updates","lvl":1},
+ {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
  {"text":"Non-video sensors (CBRN, EW/jammer, GPR, thermal): no reports; SensorType enum incomplete."},
  {"text":"8 of 10 MUTT scenarios have no instantiations."},
-], top=1.7, size=15.5, gap=8)
-footer(s, 10)
+], top=1.7, size=16.5, gap=12)
+footer(s)
 
-# ---------------- Slide 11: Decisions ----------------
+# ---------------- CASEVAC walk ----------------
+s = slide(); header(s, "CASEVAC walk: two gaps with no element", "The flagship contributed scenario")
+bullets(s, [
+ {"text":"Walked end-to-end: Initialization -> tasking Order -> robot-to-robot route hand-off -> status/threat Reports -> explainable-reasons Report."},
+], top=1.55, size=14, height=0.85)
+rbox(s, 0.8, 2.45, 5.75, 1.75, "X1  -  No robot-to-robot content\n\nScout cannot hand a verified safe Route to the transport UGV (envelope addressing exists; a content type does not)", RED, size=13)
+rbox(s, 6.8, 2.45, 5.75, 1.75, "X2  -  No rationale report\n\nSystems can report WHAT (TaskStatus) but not WHY a route changed or a mission failed", RED, size=13)
+bullets(s, [
+ {"tag":"Decision (Q-G):","tagcolor":ACCENT,"text":"define a robot-to-robot coordination content type (safe-route advertisement) and the issuing-authority model."},
+ {"tag":"Decision (Q-H):","tagcolor":ACCENT,"text":"add a rationale/explanation ReportContent so systems can report why, not just what."},
+ {"tag":"Checked:","tagcolor":GREEN,"text":"Route, phased planning (PlanBody/PlanPhase), and position reporting already exist - not gaps."},
+], top=4.5, size=14, gap=9)
+footer(s)
+
+# ---------------- Decisions ----------------
 s = slide(); header(s, "Decisions for the sub-group")
 bullets(s, [
  {"tag":"Q-A","tagcolor":ACCENT,"text":"UAV/robot typing: a role on the existing Platform tree, or a parallel Robot tree?"},
@@ -225,20 +234,22 @@ bullets(s, [
  {"tag":"Q-D","tagcolor":ACCENT,"text":"Autonomy: choose one normative vocabulary."},
  {"tag":"Q-E","tagcolor":ACCENT,"text":"Define inline entity definition for newly-observed entities in reports."},
  {"tag":"Q-F","tagcolor":ACCENT,"text":"MediaReference identity, and separate media-format from sensor-modality."},
-], top=1.8, size=16, gap=12)
-footer(s, 11)
+ {"tag":"Q-G","tagcolor":ACCENT,"text":"Robot-to-robot coordination content type + issuing authority (from CASEVAC)."},
+ {"tag":"Q-H","tagcolor":ACCENT,"text":"Rationale/explanation ReportContent - report why, not just what (from CASEVAC)."},
+], top=1.7, size=14, gap=9)
+footer(s)
 
-# ---------------- Slide 12: Next steps ----------------
+# ---------------- Next steps ----------------
 s = slide(); header(s, "Recommended next steps")
 bullets(s, [
  {"text":"Settle the two entity-typing decisions (Q-A, Q-B) - this unblocks Initialization.","bold":True},
  {"text":"Complete the Initialization instantiations (drafts provided for the 3 named scenarios)."},
- {"text":"Walk CASEVAC end-to-end to exercise coordination and explainability."},
+ {"text":"Add the two CASEVAC content types (Q-G robot-to-robot, Q-H rationale) - both are explicit scenario requirements."},
  {"text":"Reconcile the OWL model with the June spreadsheet decisions; fix the typos."},
  {"text":"Optional: adopt the diff-able (.xml) workbooks so edits can be reviewed and merged in git."},
-], top=1.8, size=17, gap=13)
-footer(s, 12)
+], top=1.8, size=16.5, gap=12)
+footer(s)
 
-out = r"C:\Users\PauloBarthelmess\Source\Repos\C2SIM\C2SIMArtifacts\Subgroups\ASX\InstantiationReview\ASX-Instantiation-Findings.pptx"
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ASX-Instantiation-Findings.pptx")
 prs.save(out)
 print("saved:", out, "slides:", len(prs.slides._sldIdLst))
