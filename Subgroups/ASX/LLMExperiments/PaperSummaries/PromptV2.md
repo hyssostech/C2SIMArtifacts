@@ -104,6 +104,10 @@ Grounding rules (anti-hallucination)
 4. Prefer the document's own terms; map each to the standard UxS class in
    parentheses on first use, e.g. "robotic mule (UGV)".
 5. Quote sparingly (<= 15 words) and only when a phrase is load-bearing.
+6. Distinguish intended/designed behavior from what was actually executed in the
+   reported run. If a field experiment or demonstration deviates from the
+   scenario as designed (e.g. an asset was planned but not flown), state both -
+   the design in the narrative/steps and the deviation under Environment.
 
 Process (perform internally; output only the final record(s))
 =============================================================
@@ -217,3 +221,12 @@ exactly what the V1 synthetic outputs lack.
     wrong.
   - (E) "Domain / mission type" tag added per record, so library coverage gaps
     can be tracked directly (the stated purpose of this expansion effort).
+- v2.2 - Refinement from running V2.1 against Langerwisch 2013 (the schema-drift
+  case; see [V2-HeadToHead.md](./V2-HeadToHead.md) Case 4). The paper distinguishes
+  the MOVE design (UAV escort) from the MOVE as-run (UGVs only); nothing in v2.1
+  mandated separating designed behavior from the reported run, though field-
+  experiment papers routinely differ on exactly that.
+  - (F) Grounding rule 6 added: distinguish intended/designed behavior from what
+    was actually executed; if a demonstration deviates from the design, state both.
+  Across four papers (combat/urban, subterranean SAR, counter-UAS, field
+  reconnaissance) no further schema gaps surfaced; v2.2 is the current locked version.
