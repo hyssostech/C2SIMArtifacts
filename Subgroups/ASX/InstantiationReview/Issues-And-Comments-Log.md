@@ -68,10 +68,25 @@ Items marked **[deck]** are candidates for the findings presentation.
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | C1 | HIGH | PARTIAL | Initialization entirely un-instantiated (0 of 3 named scenarios) | Draft instantiations for all 3 named scenarios now applied to the `.xml` on branch (pending group review). **[deck]** |
-| C2 | HIGH | OPEN | CASEVAC (flagship contributed scenario) has no messages of any type | Needs M2M route hand-off, "explainable reasons" report, on-the-loop status - patterns not yet covered. **[deck]** |
+| C2 | HIGH | WALKED | CASEVAC (flagship contributed scenario) has no messages of any type | Walked end-to-end in `CASEVAC-Walk.md`; surfaced X1/X2 (see section 6b). **[deck]** |
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | OPEN | Non-video sensors not covered | CBRN/EW/jammer/GPR/thermal absent; SensorType enum incomplete for them. Ties to M5/D2. |
 | C5 | LOW | OPEN | Swarm Detection report + swarm coordination order not done | Stubs only. |
+
+## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| X1 | HIGH | OPEN | No robot-to-robot coordination content type | Envelope addressing (isFromSender/isToReceiver) supports peer messages, but no ReportContent/OrderBody wraps "verified safe route, use it"; UGV-as-issuer authority unclear. CASEVAC scout->transport hand-off. **[deck]** |
+| X2 | HIGH | OPEN | No rationale/explanation ReportContent | ReportContent = {ObservationReportContent, PositionReportContent, TaskStatus}. CASEVAC "explainable reasons" (why route changed / mission failed) has no element. TaskStatus gives state, not rationale. Candidate: new ASX RationaleReportContent. **[deck]** |
+| X3 | MED | OPEN | Route exists but no share-payload wrapper | `Route` (SMX) exists; ASX Order sheet used free-text "New Route Pattern" instead. Refines M6/P5. |
+| X4 | MED | OPEN | No obstacle/threat observation subtype | Detected IED/broken-bridge that triggers replanning would fall to ActivityObservation or a new type; hazard entity typing unclear. |
+| X5 | LOW | MOSTLY COVERED | Phased tasks/ETA | Base `PlanBody`/`PlanPhase`/`PlanPhaseTrigger` exist; recommend reuse. Only an ETA/estimate attribute is open. |
+| X6 | LOW | OPEN | CASEVAC task + re-tasking semantics | Is CASEVAC a base TaskActionCode or new ASX task; mid-mission order amendment semantics. |
+
+Note: position/status reporting, routes, and phased planning are **covered by
+the base standard** - CASEVAC did not break them. The genuinely new needs are
+X1 and X2.
 
 ## 7. Open decisions for the sub-group (comments)
 
@@ -88,6 +103,10 @@ Items marked **[deck]** are candidates for the findings presentation.
   (Resolves M1.)
 - **Q-F** Decide MediaReference identity (repository+report vs URL) and separate
   media-format from sensor-modality. (Resolves M2/M5.)
+- **Q-G [deck]** Define a robot-to-robot coordination content type (e.g. safe-route
+  advertisement) and the authority model for a robot issuing it. (Resolves X1.)
+- **Q-H [deck]** Add a rationale/explanation ReportContent so autonomous systems can
+  report *why* (route change, mission failure), not just *what*. (Resolves X2.)
 
 ## Change log
 
@@ -96,3 +115,6 @@ Items marked **[deck]** are candidates for the findings presentation.
 - 2026-07-10: Converted the 3 sample-message workbooks to diff-able `.xml`
   (fidelity verified), applied the Initialization instantiations to the `.xml`,
   generated the findings deck. Added S4 (dual source of truth); updated S3, C1.
+- 2026-07-10: Walked CASEVAC end-to-end (`CASEVAC-Walk.md`). Added section 6b
+  (X1-X6) and decisions Q-G/Q-H; updated C2. Grounding check killed two false
+  gaps (Route and phased-planning both already exist in the standard).

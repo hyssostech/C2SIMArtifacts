@@ -22,6 +22,10 @@ the workbooks by their owner.
   three Initialization scenarios Elizabeth named but left empty
   (`UAV with Video Init`, `UAV Patrol Initialization`, `Swarm Initialization`),
   mirroring her sheet columns, with the problems each one exposes.
+- [CASEVAC-Walk.md](./CASEVAC-Walk.md) - end-to-end walk of the CASEVAC
+  contributed scenario (Init + Order + robot-to-robot coordination + Reports),
+  surfacing X1 (no robot-to-robot content type) and X2 (no explainability
+  element) as the highest-value gaps it exposes.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.
