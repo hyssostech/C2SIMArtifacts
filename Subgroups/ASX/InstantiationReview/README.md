@@ -30,6 +30,9 @@ the workbooks by their owner.
   instantiations that stress the sensor model; shows the media-based
   `Video Detection Report` model does not generalize to non-imaging sensors
   (Y1-Y5).
+- [Swarm-Walk.md](./Swarm-Walk.md) - swarm detection report + coordination
+  order; exercises P7 (a swarm can't be tasked/report as modeled) and shows
+  membership/command already exist in base C2SIM (P8 narrowed; Z1/Z2 residuals).
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.

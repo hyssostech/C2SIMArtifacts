@@ -177,8 +177,9 @@ tb, tf = box(s, 8.2, 4.75, 3.6, 0.4); p=tf.paragraphs[0]
 set_run(p.add_run(), "taskable - receives orders, reports", 12, GREEN, italic=True)
 bullets(s, [
  {"text":"A swarm is exactly what orders are addressed to and what sends reports - it must be an ActorEntity."},
+ {"text":"Once fixed, membership and command already exist in base C2SIM (hasSubordinate, hasCommandRelation); the residual swarm needs are small.","lvl":1},
  {"tag":"Decision (Q-B):","tagcolor":ACCENT,"text":"derive Swarm from CollectiveEntity (already an ActorEntity) rather than from the device/artifact tree."},
-], top=5.4, size=15, gap=8)
+], top=5.3, size=13.5, gap=6)
 footer(s)
 
 # ---------------- Model drift detail ----------------

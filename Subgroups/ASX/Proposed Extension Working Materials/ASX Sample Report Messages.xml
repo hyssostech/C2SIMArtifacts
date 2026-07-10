@@ -1017,7 +1017,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="Swarm Detection">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="1" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="129.5"
    ss:DefaultRowHeight="14.5">
    <Row ss:Height="18.5" ss:StyleID="s18">
@@ -1028,6 +1028,51 @@
     <Cell><Data ss:Type="String">Type</Data></Cell>
     <Cell><Data ss:Type="String">Value</Data></Cell>
     <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportingEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(swarm UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P7: a ReportingEntity must be an ActorEntity; ASX Swarm derives from PhysicalEntity -&gt; cannot report</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(aggregated detections)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Z1: no aggregation construct - one collective report or N member reports?</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(targets detected by members)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(detected target location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">member UAV #1</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(swarm UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">Membership via hasSuperior/hasSubordinate (base) - works IF the swarm is an ActorEntity (P7)</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">

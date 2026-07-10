@@ -59,7 +59,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | P5 | HIGH | OPEN | Patrol route/area not modeled as an init object | Order references a route to change; nothing declares the baseline. Can host as MapGraphic. Gap on both Init and Order sides. Ties to M6. |
 | P6 | HIGH | OPEN | Three competing autonomy vocabularies at init time | Same as D1, surfaced concretely when declaring an entity. |
 | P7 | BLOCKER | OPEN | Swarm cannot be tasked as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity` (inert), but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. **[deck]** |
-| P8 | HIGH | OPEN | Swarm membership + leader have no property | ConceptMapping "Leader-Boolean, Network" has no OWL property; `hasSuperior` is the natural base hook. |
+| P8 | HIGH | NARROWED | Swarm membership + leader partially covered | `hasSubordinate`/`hasSuperior`/`hasCommandRelation` (base) cover membership + command; residual gap is network params, leader-as-role, and dynamic handover. See section 6d. |
 | P9 | TYPO | OPEN | Misspelling O1 propagates into swarm instance data | Same root as O1. |
 | P10 | MED | OPEN | Heterogeneous (mixed UAV+UGV) swarm membership unconfirmed | MUTT-style mixed swarms; confirm members of different platform types can share one collective. |
 
@@ -71,7 +71,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C2 | HIGH | INSTANTIATED | CASEVAC (flagship contributed scenario) has no messages of any type | Walked in `CASEVAC-Walk.md`; 5 tabs added to the `.xml` workbooks (CASEVAC Init; CASEVAC Tasking + Route Advert; CASEVAC Status+Threat + Explainable). Surfaced X1/X2 (section 6b). **[deck]** |
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | INSTANTIATED | Non-video sensors not covered | Walked in `NonVideoSensors-Walk.md`; 3 report tabs added to the `.xml` (CBRN / EW Emitter / GPR Mine). Surfaced Y1-Y5 (section 6c). **[deck]** |
-| C5 | LOW | OPEN | Swarm Detection report + swarm coordination order not done | Stubs only. |
+| C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
@@ -102,6 +102,20 @@ Partially covered (not gaps): location (`LocationObservation`), detected-object
 identity (`SubjectTypeObservation`, if the entity type exists), confidence
 (`hasConfidenceLevel`).
 
+## 6d. Swarm walk findings (from Swarm-Walk.md)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| P7 | BLOCKER | OPEN | Swarm cannot be tasked or report | Confirmed by both swarm messages: an OrderBody recipient and a ReportBody `hasReportingEntity` must be an ActorEntity; ASX Swarm derives from PhysicalEntity. Fix: `Swarm subClassOf CollectiveEntity` (SMX). **[deck]** |
+| Z1 | MED | OPEN | No aggregation construct | A swarm detection built from multiple members' observations - one collective report or N member reports? No aggregation model. |
+| Z2 | MED | OPEN | No swarm-lifecycle construct | Dynamic member rotation / resupply / replacement (June deck) has no construct. |
+| P8 | HIGH | NARROWED | Membership + command mostly covered | `hasSubordinate`/`hasSuperior`/`hasCommandRelation` exist; residual is network params, leader-as-role, dynamic handover. |
+| P10 | MED | OPEN | Heterogeneous membership | Mixed UAV+UGV in one collective - confirm. |
+
+Partially covered (checked): collective entity type (`CollectiveEntity`),
+membership/command (`hasSubordinate`/`hasSuperior`/`hasCommandRelation`),
+reporting linkage (`hasReportingEntity`) - all conditional on fixing P7.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -124,6 +138,9 @@ identity (`SubjectTypeObservation`, if the entity type exists), confidence
 - **Q-I [deck]** Define a media-independent sensor-reading / measurement
   representation (value + unit + modality) and complete the SensorType taxonomy,
   so non-imaging sensors (CBRN, EW, GPR, thermal) can report. (Resolves Y1/Y2/Y5.)
+- **Q-J** After fixing P7, add the small swarm residuals: network/comms
+  parameters, a leader role, report aggregation (Z1), and member lifecycle
+  (Z2). Membership/command reuse base `hasSubordinate`/`hasCommandRelation`.
 
 ## Change log
 
@@ -145,3 +162,7 @@ identity (`SubjectTypeObservation`, if the entity type exists), confidence
   (Y1-Y5) and decision Q-I; updated C4. Grounding check confirmed the gaps are
   real (no measurement/hazard Observation subtype; no sensor-reading value+unit;
   no CBRN/EW-sensing/radar classes).
+- 2026-07-10: Walked swarm (`Swarm-Walk.md`); filled the `Swarm Detection` stub
+  (Report) and added `Swarm Coordination` (Order). Added section 6d (Z1/Z2),
+  decision Q-J; updated C5. Grounding narrowed P8 - membership/command already
+  exist in base C2SIM (`hasSubordinate`/`hasCommandRelation`).
