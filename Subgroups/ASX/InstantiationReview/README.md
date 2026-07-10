@@ -48,6 +48,13 @@ the workbooks by their owner.
   session (`LLMExperiments/V2Extractions/` + its `OntologyCoverageClustering.md`
   handoff). Corroborates P1/X1/N2/Y and adds G1-G10, incl. a proposed generic
   Detection Report that resolves the sensor-report (Y) series.
+- [ValidationEvidence-Walk.md](./ValidationEvidence-Walk.md) - integrates the
+  scavenger session's nine sourced missions (`Documents-Found.md`). Moves the
+  validation holes to evidenced and captures concrete report schemas to adopt -
+  most importantly BML `WhoMeasuredType`, prior art in C2SIM's lineage for the
+  measurement report (Q-Q).
+- [Documents-Needed.md](./Documents-Needed.md) / [Documents-Found.md](./Documents-Found.md)
+  - the sourcing brief and the scavenger session's point-by-point response.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.

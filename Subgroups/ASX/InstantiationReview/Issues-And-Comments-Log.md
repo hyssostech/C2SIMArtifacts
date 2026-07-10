@@ -74,6 +74,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
 | C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Still open: route-clearance-neutralize, companion drones, urban combat. **[deck]** |
 | C7 | HIGH | INSTANTIATED | Sourced scenarios (maritime MCM, subterranean SubT, sustainment) not integrated | Walked in `SourcedScenarios-Walk.md`; 7 tabs added (MCM Init, SubT Team Init, MCM Cross-Cue Neutralize, Explore Area Order, Contested Resupply Order, Naval Mine Detection Report, Generic Detection Report). Corroborated X1/N2/P1/Y; added G1-G10 (6h). Still un-extracted: counter-UAS swarm, HMT, SAR. **[deck]** |
+| C8 | HIGH | EVIDENCED | Validation holes (explainability, CBRN, EW, persistence) unexercised by any sourced mission | Scavenger extracted all 9 `Documents-Needed` requests; integrated in `ValidationEvidence-Walk.md` (6j). Holes now grounded; Q-Q/Q-F/Q-H gain concrete schemas (BML WhoMeasuredType/ResourceType; Agrawal explanation). Added G13/Q-V; 2 tabs. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
@@ -222,6 +223,37 @@ and persistence have no scenario evidence** - the ASX model asserts/intends thes
 but no real sourced mission exercises them. A corpus gap, distinct from the
 expressiveness gaps - see section 8.
 
+## 6j. Validation-evidence integration (nine sourced missions)
+
+The scavenger session extracted all nine `Documents-Needed.md` requests (see
+`Documents-Found.md`, `LLMExperiments/V2Extractions/`). Walked in
+`ValidationEvidence-Walk.md`. Effect: asserted findings are now **evidenced**,
+and three decisions gain a concrete schema / prior art.
+
+**Now evidenced by a real mission:** explainability X2/Q-H (Agrawal DroneResponse),
+on-the-loop authority W1/Q-K (Agrawal override verbs), measurement+generic
+detection Y5/Q-Q (CBRN radiation value+variance, EW RSS + error ellipse,
+Remmersmann WhoMeasuredType), area-as-subject N1/Q-M (CBRN radiation map),
+persistence N2 (MDARS), swarm/engagement Q-B/Q-K/Q-P (CounterUAS CNAS),
+neutral/SAR G10/R2/Q-N (SAR_Kim + CBRN + Explainability), formation Q-U
+(FormationConvoy_Hu, Langerwisch), manipulation E1/E2 (CBRN valve/sample, breach).
+
+**Design schemas to adopt (prior art, not invent):**
+- **Q-Q/Y5 <- BML `WhoMeasuredType` {value, UOM, phenomenon, sensor, time, place}**
+  (Remmersmann - a BML paper). C2SIM descends from BML but lacks this; re-adopt
+  rather than invent. Highest-value input.
+- Q-F <- BML `ResourceType` {media URL, geo}; Q-H <- {event, action, reasoning,
+  change, confidence} (Agrawal); N1/Q-M <- per-cell value+variance map (CBRN);
+  Q-K <- configure/suspend/acknowledge/override (Agrawal); Z1 + collective-task
+  decomposition <- BML disaggregation/aggregation (Remmersmann).
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G13 | MED | OPEN | Dynamic capability self-report | BML `WhoHoldingType`: a reconfigurable robot self-reports mounted equipment; tasking assigned by capability. Init tabs declare a fixed type only. |
+
+Two tabs added (`.xml`): `Hazard Area Map Report` (Report), `MUM-T High-Level
+Tasking` (Order).
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -277,6 +309,11 @@ expressiveness gaps - see section 8.
   illumination, sea-state, terrain, domain) to `RoboticEnvironment`. (Resolves G11.)
 - **Q-U** Add a **formation / relative-geometry** construct (orbit, convoy
   spacing, observation-pose pattern) beyond single `RelativeLocation`. (Resolves G12.)
+- **Q-V** Add **capability self-report** (a robot declares its mounted/reconfigurable
+  equipment; tasks assigned by capability) - BML `WhoHoldingType`. (Resolves G13.)
+- **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
+  `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
+  (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
 
 ## 8. Why the identified gaps are not yet filled
 
@@ -363,6 +400,11 @@ instantiation to see which is which.
   doc (a150ffb -> `OntologyConceptCoverage.md`). Mostly aligned; added G11
   (environment conditions) and G12 (formation geometry) that I had under-covered,
   decisions Q-T/Q-U, and section 8 ("why the gaps are not yet filled").
+- 2026-07-10: Integrated the scavenger session's nine sourced missions
+  (`Documents-Found.md` / V2Extractions). Section 6j, coverage C8, G13/Q-V, two
+  tabs. Bucket-3 validation holes now evidenced; key result: the measurement
+  report (Q-Q) is prior art in C2SIM's BML lineage (WhoMeasuredType) - re-adopt,
+  don't invent. Buckets 1-2 (property layer, ~20 decisions) unaffected.
 - 2026-07-10: Redundancy pass over route-clearance / companion / urban
   (`RedundancyPass-Walk.md`). Confirmed ~80% redundant; extracted N1 (area as
   subject of task/report - new) and N2 (folds into Q-L). Added section 6g,

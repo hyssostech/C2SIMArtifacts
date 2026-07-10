@@ -259,6 +259,16 @@ bullets(s, [
 ], top=1.75, size=15, gap=13)
 footer(s)
 
+# ---------------- Validation evidence ----------------
+s = slide(); header(s, "Validation: the gaps are now evidenced", "Nine sourced missions closed the document holes")
+bullets(s, [
+ {"tag":"Now grounded by a real mission:","tagcolor":GREEN,"text":"explainability (Agrawal DroneResponse), CBRN (UGV-CBRN), EW (UAV emitter geolocation), persistence (MDARS) - all previously asserted-but-untested."},
+ {"tag":"Prior art, not invention (Q-Q):","tagcolor":ACCENT,"text":"the measurement report flagged as missing already existed in C2SIM's BML lineage - WhoMeasuredType {value, unit, phenomenon, sensor, time, place}. Re-adopt it."},
+ {"tag":"Concrete schemas:","tagcolor":ORANGE,"text":"explanation report {event, action, reasoning, confidence} (Q-H); area map w/ per-cell value+variance (Q-M/Q-Q); on-the-loop verbs configure/suspend/ack/override (Q-K)."},
+ {"text":"New: capability self-report (G13/Q-V) and collective-task decomposition + report aggregation (Z1), from BML MUM-T tasking.","color":MGRAY},
+], top=1.75, size=14.5, gap=12)
+footer(s)
+
 # ---------------- Decisions 1: model structure ----------------
 s = slide(); header(s, "Decisions (1/2): model structure")
 bullets(s, [
@@ -295,7 +305,8 @@ bullets(s, [
  {"tag":"Q-S","tagcolor":ACCENT,"text":"Decoy/deception behavior + threat-aware order annotations."},
  {"tag":"Q-T","tagcolor":ACCENT,"text":"Operating-environment condition attributes (GPS-denied, illumination, sea-state, terrain)."},
  {"tag":"Q-U","tagcolor":ACCENT,"text":"Formation / relative-geometry construct (orbit, convoy spacing) beyond single RelativeLocation."},
-], top=1.6, size=13.5, gap=8)
+ {"tag":"Q-V","tagcolor":ACCENT,"text":"Capability self-report (robot declares mounted equipment; assign by capability) - BML WhoHoldingType."},
+], top=1.55, size=13, gap=7)
 footer(s)
 
 # ---------------- Proposed fixes (pending buy-in) ----------------
