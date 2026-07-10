@@ -191,6 +191,37 @@ Still un-extracted by the sourcing session (future scenarios): counter-UAS /
 swarm-vs-swarm, human-machine teaming (HATOM), humanitarian SAR - see
 `CandidateSources.md`.
 
+## 6i. Re-sync with the sourcing session's concept-coverage doc
+
+The sourcing session revised its analysis (commit a150ffb) into a concept-centric
+bidirectional read (`LLMExperiments/OntologyConceptCoverage.md`) against
+`CSIM_ASX.rdf` v0.0.1 and the InstantiationReview framing. Reconciliation:
+
+**Aligned** (their 11 expressiveness gaps <-> my findings): maritime USV/UUV
+(P1/G6), locomotion subtypes (G5/Q-R), coordination + M2M tasking (X1/G3/Q-G/Q-P),
+comms/relay + denied-comms (G1/Q-O), generic detection w/ confidence (G4/Q-Q),
+task breadth incl. explore/neutralize/decoy (Q-L/Q-N/Q-S), persistence (N2),
+graded LoA (D1/Q-D).
+
+**Refined:** neutral actors - their doc hedges ("if the model presumes a hostile
+side"); my grounding confirms `NeutralSide`/`HostilityStatusCode` exist, so the
+gap is only neutral-as-constraint / no-adversary missions (G10). Graded LoA -
+their #6 sharpens Q-D: autonomy is not one flat vocabulary but a graded scale
+that can vary by mission phase.
+
+**Two aspects I had under-covered (now added):**
+
+| ID | Sev | Item | Grounding |
+|---|---|---|---|
+| G11 | MED | Operating-environment *conditions* as attributes (GPS-denied, illumination, sea-state, terrain, domain) | `EnvironmentalObject` / `RoboticEnvironment` exist as bare classes; no condition attributes. |
+| G12 | MED | Formation / relative geometry (orbit, convoy spacing, "one overhead, others orbiting") | `RelativeLocation` exists (single relative pos); no formation pattern/geometry. |
+
+**Their complementary "validation" reading (which I did not produce):** among the
+six sourced scenarios, **explainability, CBRN/EW sensing, CASEVAC coordination,
+and persistence have no scenario evidence** - the ASX model asserts/intends these
+but no real sourced mission exercises them. A corpus gap, distinct from the
+expressiveness gaps - see section 8.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -242,6 +273,55 @@ swarm-vs-swarm, human-machine teaming (HATOM), humanitarian SAR - see
   detector/neutralizer USV). Extends Q-A. (Resolves G5.)
 - **Q-S** Add **decoy/deception** as a taskable behavior and **threat-aware**
   order annotations (risk, low-signature, level-of-autonomy). (Resolves G8/G9.)
+- **Q-T** Add **operating-environment condition** attributes (GPS-denied,
+  illumination, sea-state, terrain, domain) to `RoboticEnvironment`. (Resolves G11.)
+- **Q-U** Add a **formation / relative-geometry** construct (orbit, convoy
+  spacing, observation-pose pattern) beyond single `RelativeLocation`. (Resolves G12.)
+
+## 8. Why the identified gaps are not yet filled
+
+"Lacking documents" is one cause, but the minority one. The gaps fall into three
+separable buckets, and only the third is about sources:
+
+1. **Top-down model that never built its property layer (most gaps).**
+   `CSIM_ASX.rdf` is v0.0.1, "work in progress": ~15 classes, **1 object
+   property, 0 datatype properties**. The classes are imported robotics
+   upper-ontology terms (Robot, Sensor, Actuator, Device - CORA/ORA/SUMO
+   lineage), i.e. a *taxonomy of things*. The *message layer* - the attributes
+   you actually need to send - was never derived. So most "gaps" are simply
+   not-yet-built, not blocked. Bottom-up instantiation surfaces them because it
+   does the derivation the OWL skipped. No document fills these - modeling does.
+
+2. **Deferred decisions and track desync (information already in hand).**
+   P1 (UAV double-typed vs SMX Platform), P7 (swarm typing), D1/D2 (autonomy and
+   sensor each defined three ways) are unresolved *choices*, plus a drift between
+   the OWL track (Jan) and Elizabeth's spreadsheet track (Jun). Cross-cutting
+   abstractions - generic Detection Report (G4), area-as-subject (N1),
+   engagement-authority-vs-autonomy (W1) - are modeling insights reachable from
+   scenarios already in hand. These need a decision or an abstraction, not a
+   source.
+
+3. **Genuine document/scenario gaps - but for DOMAINS and VALIDATION, not
+   concepts.** Here "lacking documents" really bites, in two forms:
+   - *Invisible-domain gaps:* the scenario library was narrow (all UAV/UGV
+     air-ground recon/escort). No maritime/undersea/subterranean case existed, so
+     no one saw USV/UUV (P1/G6), denied-comms/relay (G1), locomotion subtypes
+     (G5), formation geometry (G12), or environment conditions (G11) were needed.
+     These were unfilled *because the revealing documents were not in the
+     corpus.* Sourcing them (MCM/SubT) is exactly the fix, and it worked.
+   - *Validation holes:* explainability, CBRN/EW, CASEVAC coordination, and
+     persistence are asserted/intended in the model but **no sourced mission
+     exercises them** (sourcing session's Reading 1). Here the model ran ahead of
+     the documents - the concept exists with no source to ground it. Targeted
+     sourcing (a CBRN mission, an explainability/on-the-loop mission, a
+     persistent-sentry mission) fills these.
+
+**Bottom line:** the domain-coverage and validation gaps (bucket 3) do reflect a
+document shortfall and are being closed by the sourcing effort; but the larger
+share - the missing property/message layer, unmade typing/vocabulary decisions,
+track drift, and cross-cutting abstractions (buckets 1-2) - are not document
+problems and no amount of new scenarios fills them. It takes bottom-up
+instantiation to see which is which.
 
 ## Change log
 
@@ -279,6 +359,10 @@ swarm-vs-swarm, human-machine teaming (HATOM), humanitarian SAR - see
   (G1-G10) and decisions Q-N..Q-S. Correction: the earlier "findings converged"
   call was premature - this input extended the findings (esp. G4 generic
   Detection Report, G1 denied-comms, G2 explore). Grounding narrowed G6/G10.
+- 2026-07-10: Re-synced against the sourcing session's revised concept-coverage
+  doc (a150ffb -> `OntologyConceptCoverage.md`). Mostly aligned; added G11
+  (environment conditions) and G12 (formation geometry) that I had under-covered,
+  decisions Q-T/Q-U, and section 8 ("why the gaps are not yet filled").
 - 2026-07-10: Redundancy pass over route-clearance / companion / urban
   (`RedundancyPass-Walk.md`). Confirmed ~80% redundant; extracted N1 (area as
   subject of task/report - new) and N2 (folds into Q-L). Added section 6g,
