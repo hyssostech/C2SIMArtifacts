@@ -73,6 +73,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C4 | MED | INSTANTIATED | Non-video sensors not covered | Walked in `NonVideoSensors-Walk.md`; 3 report tabs added to the `.xml` (CBRN / EW Emitter / GPR Mine). Surfaced Y1-Y5 (section 6c). **[deck]** |
 | C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
 | C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Still open: route-clearance-neutralize, companion drones, urban combat. **[deck]** |
+| C7 | HIGH | INSTANTIATED | Sourced scenarios (maritime MCM, subterranean SubT, sustainment) not integrated | Walked in `SourcedScenarios-Walk.md`; 7 tabs added (MCM Init, SubT Team Init, MCM Cross-Cue Neutralize, Explore Area Order, Contested Resupply Order, Naval Mine Detection Report, Generic Detection Report). Corroborated X1/N2/P1/Y; added G1-G10 (6h). Still un-extracted: counter-UAS swarm, HMT, SAR. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
@@ -162,6 +163,34 @@ Confirmed redundant (no new finding): neutralize = engage (W), detection = Y,
 transport = L, clear = E, recon = Y, relay = CommunicationNetwork + verb. The
 "redundant" call held ~80%; N1 is the nugget that justified the pass.
 
+## 6h. Sourced-scenarios reconciliation (MCM / SubT / Sustainment)
+
+From the parallel scenario-sourcing session (`LLMExperiments/V2Extractions/` +
+`OntologyCoverageClustering.md`), walked in `SourcedScenarios-Walk.md`. This
+input was initially missed and then integrated; it corroborates several findings
+and adds new ones.
+
+**Corroborated:** X1 (robot-to-robot <- MCM cross-cueing), N2 (persistent <-
+MCM revisit), P1 (typing <- SubT/MCM, + locomotion axis G5), Y-series (sensor
+reports <- SubT/MCM detections, + the generic-report answer G4).
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G1 | HIGH | OPEN | Denied-comms mode + relay as deployable taskable entity | SubT. `CommunicationNetwork` is a network, not a droppable node/behavior; no comms-degraded operating mode. **[deck]** |
+| G2 | HIGH | OPEN | Explore / Search-Area order with a coverage goal | SubT. No search/explore/coverage task verb; distinct from Patrol. Ties N1. **[deck]** |
+| G3 | MED | OPEN | Cross-cueing: system-to-system task + shared classified track | MCM. Reuses X1 + M1; no Track/Contact object type. |
+| G4 | HIGH | OPEN | Generic parameterized Detection Report | confidence + error-bound + false-positive + modality; subsumes Video/CBRN/EW/GPR/naval-mine/artifact. **Resolves Y1/M3/M4.** **[deck]** |
+| G5 | MED | OPEN | Platform locomotion/role subtypes | wheeled/tracked/legged UGV; detector/neutralizer USV. Extends P1. |
+| G6 | LOW | MOSTLY REUSE | Maritime depth | naval mine (moored/bottom) via SubjectTypeObservation; UUV=SubsurfaceVessel; sea-lane area. |
+| G7 | LOW | OPEN | Measure-of-effectiveness attributes on reports | % neutralized, active time (MCM). |
+| G8 | MED | OPEN | Decoy / deception behavior | Sustainment. No decoy concept. |
+| G9 | MED | OPEN | Threat-aware / contested-delivery order annotations | Sustainment. Risk/threat + level-of-autonomy on a logistics order. |
+| G10 | LOW | MOSTLY COVERED | Neutral-actor framing | `HostilityStatusCode`/`NeutralSide` exist; residual = neutral-as-constraint + no-adversary missions. |
+
+Still un-extracted by the sourcing session (future scenarios): counter-UAS /
+swarm-vs-swarm, human-machine teaming (HATOM), humanitarian SAR - see
+`CandidateSources.md`.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -200,6 +229,19 @@ transport = L, clear = E, recon = Y, relay = CommunicationNetwork + verb. The
   an `hasAffectedArea` counterpart to `hasAffectedEntity`, and an area-state
   (cleared / contaminated / mined). Areas (`TacticalArea`, `MapGraphic`) exist;
   tasking/reporting on them does not. (Resolves N1.)
+- **Q-N [deck]** Add an **Explore / Search-Area** order with a coverage goal,
+  distinct from Patrol (fixed route) and point tasks. (Resolves G2.)
+- **Q-O [deck]** Model **denied-comms operation**: a comms-degraded operating
+  mode and a deployable comms-relay entity/behavior. (Resolves G1.)
+- **Q-P** Extend robot-to-robot (Q-G) with **cross-cueing**: system-to-system
+  tasking plus a shared classified **track/contact** object. (Resolves G3.)
+- **Q-Q [deck]** Define one **generic parameterized Detection Report**
+  (confidence + error-bound + false-positive + modality) that subsumes the
+  per-sensor reports. Extends Q-I. (Resolves G4 / Y1 / M3 / M4.)
+- **Q-R** Add **platform locomotion/role subtypes** (wheeled/tracked/legged UGV;
+  detector/neutralizer USV). Extends Q-A. (Resolves G5.)
+- **Q-S** Add **decoy/deception** as a taskable behavior and **threat-aware**
+  order annotations (risk, low-signature, level-of-autonomy). (Resolves G8/G9.)
 
 ## Change log
 
@@ -230,6 +272,13 @@ transport = L, clear = E, recon = Y, relay = CommunicationNetwork + verb. The
   decision Q-K, coverage C6; deck gained a Fire Support slide and split decisions
   into 2 slides. Grounding narrowed the finding: ROE + authorization already
   exist (LOX/C2SIM); the real gap (W1) is the autonomy-to-engagement link.
+- 2026-07-10: Integrated the parallel scenario-sourcing session's output
+  (SubT, Cooperative MCM, Sustainment + `OntologyCoverageClustering.md`), which
+  had been missed earlier when its commits were wrongly filed as unrelated.
+  Walked all three (`SourcedScenarios-Walk.md`), added 7 tabs, section 6h
+  (G1-G10) and decisions Q-N..Q-S. Correction: the earlier "findings converged"
+  call was premature - this input extended the findings (esp. G4 generic
+  Detection Report, G1 denied-comms, G2 explore). Grounding narrowed G6/G10.
 - 2026-07-10: Redundancy pass over route-clearance / companion / urban
   (`RedundancyPass-Walk.md`). Confirmed ~80% redundant; extracted N1 (area as
   subject of task/report - new) and N2 (folds into Q-L). Added section 6g,

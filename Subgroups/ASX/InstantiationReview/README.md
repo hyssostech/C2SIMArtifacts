@@ -43,6 +43,11 @@ the workbooks by their owner.
 - [RedundancyPass-Walk.md](./RedundancyPass-Walk.md) - confirmation pass over
   route-clearance / companion / urban; mostly redundant, but extracts N1 (an
   area cannot be the subject of a task or report).
+- [SourcedScenarios-Walk.md](./SourcedScenarios-Walk.md) - maritime MCM,
+  subterranean SubT, and sustainment, taken from the parallel scenario-sourcing
+  session (`LLMExperiments/V2Extractions/` + its `OntologyCoverageClustering.md`
+  handoff). Corroborates P1/X1/N2/Y and adds G1-G10, incl. a proposed generic
+  Detection Report that resolves the sensor-report (Y) series.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.

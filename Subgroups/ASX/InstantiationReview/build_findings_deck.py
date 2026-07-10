@@ -210,7 +210,8 @@ bullets(s, [
  {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
  {"text":"Task/effect scenarios: engagement, delivery, manipulation, rescue walked - the gap is consistent (task verbs + payload/effector typing)."},
  {"text":"Redundancy pass (route-clearance, companion, urban): confirmed - plus one new finding, N1 (an area cannot be the subject of a task/report)."},
-], top=1.7, size=16.5, gap=12)
+ {"text":"Sourced scenarios (subterranean, maritime MCM, sustainment): integrated from the scenario-sourcing session - corroborate P1/X1/N2/Y and add G1-G10 (incl. a generic Detection Report)."},
+], top=1.6, size=14.5, gap=8)
 footer(s)
 
 # ---------------- CASEVAC walk ----------------
@@ -248,6 +249,16 @@ bullets(s, [
 ], top=4.0, size=14, gap=9)
 footer(s)
 
+# ---------------- Sourced scenarios (SubT / MCM / Sustainment) ----------------
+s = slide(); header(s, "Integrated from the scenario-sourcing session", "SubT (subterranean) + Cooperative MCM (maritime) + Sustainment")
+bullets(s, [
+ {"tag":"Corroborated (fresh domains):","tagcolor":GREEN,"text":"platform typing P1, robot-to-robot X1 (-> cross-cueing), persistent tasking N2, and the sensor-report problem Y1."},
+ {"tag":"Best contribution (G4):","tagcolor":ACCENT,"text":"one generic Detection Report (confidence + error-bound + false-positive) subsumes Video/CBRN/EW/GPR/naval-mine and resolves the whole Y-series."},
+ {"tag":"New gaps:","tagcolor":ORANGE,"text":"Explore/Search-Area order (G2); denied-comms operation + deployable relay (G1); decoy behavior (G8); maritime cross-cue with a shared track (G3)."},
+ {"text":"Neutral-actor framing is mostly covered (NeutralSide exists). Still un-extracted: counter-UAS swarm, human-machine teaming, SAR.","color":MGRAY},
+], top=1.75, size=15, gap=13)
+footer(s)
+
 # ---------------- Decisions 1: model structure ----------------
 s = slide(); header(s, "Decisions (1/2): model structure")
 bullets(s, [
@@ -259,7 +270,7 @@ bullets(s, [
 footer(s)
 
 # ---------------- Decisions 2: new content ----------------
-s = slide(); header(s, "Decisions (2/2): new content types needed")
+s = slide(); header(s, "Decisions (2/3): new content types needed")
 bullets(s, [
  {"tag":"Q-E","tagcolor":ACCENT,"text":"Inline entity definition for newly-observed entities in reports."},
  {"tag":"Q-F","tagcolor":ACCENT,"text":"MediaReference identity; separate media-format from sensor-modality."},
@@ -273,12 +284,24 @@ bullets(s, [
 ], top=1.6, size=13.5, gap=8)
 footer(s)
 
+# ---------------- Decisions 3: from sourced scenarios ----------------
+s = slide(); header(s, "Decisions (3/3): from the sourced scenarios")
+bullets(s, [
+ {"tag":"Q-N","tagcolor":ACCENT,"text":"Explore / Search-Area order with a coverage goal (distinct from Patrol)."},
+ {"tag":"Q-O","tagcolor":ACCENT,"text":"Denied-comms operating mode + deployable comms-relay entity/behavior."},
+ {"tag":"Q-P","tagcolor":ACCENT,"text":"Cross-cueing: system-to-system tasking + shared classified track/contact (extends Q-G)."},
+ {"tag":"Q-Q","tagcolor":ACCENT,"text":"One generic Detection Report (confidence + error-bound + false-positive) - resolves the Y-series (extends Q-I)."},
+ {"tag":"Q-R","tagcolor":ACCENT,"text":"Platform locomotion/role subtypes: wheeled/tracked/legged UGV; detector/neutralizer USV (extends Q-A)."},
+ {"tag":"Q-S","tagcolor":ACCENT,"text":"Decoy/deception behavior + threat-aware order annotations."},
+], top=1.7, size=15, gap=11)
+footer(s)
+
 # ---------------- Proposed fixes (pending buy-in) ----------------
 s = slide(); header(s, "Proposed fixes", "Pending group buy-in - nothing applied to the model")
 bullets(s, [
  {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"class typo CollecticeRoboticSystem -> Collective (O1); versionInfo Extrension -> Extension (O2); file CSIM_ASX -> C2SIM_ASX (O3); hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
  {"tag":"Structural (decide first):","tagcolor":ORANGE,"text":"UAV/robot typing (Q-A); Swarm -> CollectiveEntity so it is taskable (Q-B); one sensor model (Q-C); one autonomy vocabulary (Q-D)."},
- {"tag":"New content (design):","tagcolor":ACCENT,"text":"inline entity def (Q-E), MediaReference (Q-F), robot-to-robot (Q-G), rationale report (Q-H), sensor-reading (Q-I), swarm residuals (Q-J), engagement authority (Q-K), task verbs + payload (Q-L), area subject (Q-M)."},
+ {"tag":"New content (design):","tagcolor":ACCENT,"text":"inline entity def (Q-E), MediaReference (Q-F), robot-to-robot + cross-cue (Q-G/Q-P), rationale report (Q-H), generic detection report (Q-I/Q-Q), swarm residuals (Q-J), engagement authority (Q-K), task verbs + payload (Q-L), area subject (Q-M), explore order (Q-N), denied-comms/relay (Q-O), locomotion subtypes (Q-R), decoy/threat-aware (Q-S)."},
  {"text":"Nothing here is applied to the model - all items are proposals for group buy-in.","bold":True},
 ], top=1.7, size=14, gap=13)
 footer(s)
