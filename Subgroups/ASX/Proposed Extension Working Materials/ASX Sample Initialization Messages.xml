@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Elizabeth Hosang</Author>
+  <LastAuthor>Paulo Barthelmess</LastAuthor>
+  <Created>2025-10-08T12:49:40Z</Created>
+  <LastSaved>2026-05-15T19:08:19Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>8880</WindowHeight>
+  <WindowWidth>17280</WindowWidth>
+  <WindowTopX>5860</WindowTopX>
+  <WindowTopY>3170</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s16">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+  </Style>
+  <Style ss:ID="s17">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="14"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s18">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s19">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s20">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Italic="1"/>
+  </Style>
+  <Style ss:ID="s21">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s22">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s23">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFFF00" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Initialization Message Body">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="68" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="135.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="162.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="150.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="116"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="209"/>
+   <Row ss:Height="37" ss:StyleID="s17">
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Class that Defines Field</Data></Cell>
+    <Cell><Data ss:Type="String">Model that defines attribute</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Report</Data></Cell>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">See hasC2SIMHeader</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">SeeMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasCommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">CommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">See JC3IEDM</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasSecurityClassificationCode</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">SecurityClassificationCode</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasSendingTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasProtocol</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s19"><Data ss:Type="String">SISO-STD-C2SIM </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasProtocolVersion</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">1.0.0</Data></Cell>
+    <Cell><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConversationId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSendingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceivingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasReplyToSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isReplyToMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell ss:StyleID="s18"><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasInitializationFile </Data></Cell>
+    <Cell><Data ss:Type="String">InitializationDataFile</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">ObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasSystemEntityList</Data></Cell>
+    <Cell><Data ss:Type="String">SystemEntityList</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">ScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row ss:Index="27">
+    <Cell ss:StyleID="s18"/>
+    <Cell ss:Index="3" ss:StyleID="s18"/>
+   </Row>
+   <Row ss:Height="29">
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">This varies for individual use cases.</Data></Cell>
+   </Row>
+   <Row ss:Index="31">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="21.625">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+   <Row ss:Index="34">
+    <Cell ss:StyleID="s18"/>
+    <Cell ss:Index="3" ss:StyleID="s18"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="3" ss:StyleID="s21"/>
+    <Cell ss:StyleID="s21"/>
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="38">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+   <Row ss:Index="44">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="49">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="58">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="64">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="68">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>9</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="UAV with Video Init">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="1" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="138.5"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Model</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Field</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Value</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="UAV Patrol Initialization">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="1" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="124"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Model</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Field</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Value</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Swarm Initialization">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="1" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="121.5"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Model</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Field</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Value</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
