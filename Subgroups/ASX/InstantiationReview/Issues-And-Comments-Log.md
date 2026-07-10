@@ -70,7 +70,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C1 | HIGH | PARTIAL | Initialization entirely un-instantiated (0 of 3 named scenarios) | Draft instantiations for all 3 named scenarios now applied to the `.xml` on branch (pending group review). **[deck]** |
 | C2 | HIGH | INSTANTIATED | CASEVAC (flagship contributed scenario) has no messages of any type | Walked in `CASEVAC-Walk.md`; 5 tabs added to the `.xml` workbooks (CASEVAC Init; CASEVAC Tasking + Route Advert; CASEVAC Status+Threat + Explainable). Surfaced X1/X2 (section 6b). **[deck]** |
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
-| C4 | MED | OPEN | Non-video sensors not covered | CBRN/EW/jammer/GPR/thermal absent; SensorType enum incomplete for them. Ties to M5/D2. |
+| C4 | MED | INSTANTIATED | Non-video sensors not covered | Walked in `NonVideoSensors-Walk.md`; 3 report tabs added to the `.xml` (CBRN / EW Emitter / GPR Mine). Surfaced Y1-Y5 (section 6c). **[deck]** |
 | C5 | LOW | OPEN | Swarm Detection report + swarm coordination order not done | Stubs only. |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
@@ -87,6 +87,20 @@ Items marked **[deck]** are candidates for the findings presentation.
 Note: position/status reporting, routes, and phased planning are **covered by
 the base standard** - CASEVAC did not break them. The genuinely new needs are
 X1 and X2.
+
+## 6c. Non-video sensor walk findings (from NonVideoSensors-Walk.md)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| Y1 | HIGH | OPEN | The media-based report model does not generalize | `Video Detection Report` models sensor output as `SensorObservation` + `MediaReference` + `MediaTypeEnum` (a video file). Non-video sensors emit readings, not media files - CBRN/EW/GPR have no place to put the measurement. **[deck]** |
+| Y2 | MED | OPEN | SensorType enum incomplete | {Visual, EW, CounterEW, Audio} omits CBRN, radiological, nuclear, biological, GPR/radar, thermal, LIDAR, metal-detector. |
+| Y3 | HIGH | OPEN | No detection/hazard Observation subtype | Observation subtypes are only {Activity, Health, Location, Name, Resource, SubjectType}; none fits a detected agent/emitter/hazard. Ties to X4. |
+| Y4 | MED | OPEN | EW sensing has no report content type | `JAM` is a LOX TaskActionCode (the action), not an observation of an intercepted emitter. |
+| Y5 | HIGH | OPEN | No sensor-reading value+unit property | Concentration, dose rate, frequency, depth have no home; only logistics quantities, `hasSpatialMeasure`, and `hasConfidenceLevel` exist. **[deck]** |
+
+Partially covered (not gaps): location (`LocationObservation`), detected-object
+identity (`SubjectTypeObservation`, if the entity type exists), confidence
+(`hasConfidenceLevel`).
 
 ## 7. Open decisions for the sub-group (comments)
 
@@ -107,6 +121,9 @@ X1 and X2.
   advertisement) and the authority model for a robot issuing it. (Resolves X1.)
 - **Q-H [deck]** Add a rationale/explanation ReportContent so autonomous systems can
   report *why* (route change, mission failure), not just *what*. (Resolves X2.)
+- **Q-I [deck]** Define a media-independent sensor-reading / measurement
+  representation (value + unit + modality) and complete the SensorType taxonomy,
+  so non-imaging sensors (CBRN, EW, GPR, thermal) can report. (Resolves Y1/Y2/Y5.)
 
 ## Change log
 
@@ -123,3 +140,8 @@ X1 and X2.
   round-trip; existing sheets preserved). Reviewed Elizabeth's own annotations
   on the worked scenarios (see conversation; agree on most, disagree on
   MediaType/SensorObservation typing and flag the M3 cross-sheet inconsistency).
+- 2026-07-10: Walked non-video sensors (`NonVideoSensors-Walk.md`); added 3
+  report tabs (CBRN / EW Emitter / GPR Mine) to the `.xml`. Added section 6c
+  (Y1-Y5) and decision Q-I; updated C4. Grounding check confirmed the gaps are
+  real (no measurement/hazard Observation subtype; no sensor-reading value+unit;
+  no CBRN/EW-sensing/radar classes).

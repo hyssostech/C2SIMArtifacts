@@ -1381,4 +1381,199 @@
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
+ <Worksheet ss:Name="CBRN Detection Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(CBRN detection)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(contamination location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - where is expressible</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(agent detection)</Data></Cell>
+    <Cell><Data ss:Type="String">Observation?</Data></Cell>
+    <Cell><Data ss:Type="String">detected agent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Chemical agent (e.g. GB)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y3: no hazard/detection Observation subtype fits</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(reading)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">concentration</Data></Cell>
+    <Cell><Data ss:Type="String">value + unit</Data></Cell>
+    <Cell><Data ss:Type="String">5 mg/m3</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y5: no sensor-reading value+unit property exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(sensor)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">CBRN-Chemical</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y2: SensorType enum has no CBRN / radiological / nuclear / biological</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">SensorObservation</Data></Cell>
+    <Cell><Data ss:Type="String">ActivityObservation</Data></Cell>
+    <Cell><Data ss:Type="String">media</Data></Cell>
+    <Cell><Data ss:Type="String">MediaReference</Data></Cell>
+    <Cell><Data ss:Type="String">(none)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y1: media-based model does not apply - a CBRN reading is not a media file; MediaTypeEnum cannot represent a measurement</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="EW Emitter Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(emitter intercept)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(emitter bearing/location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - direction-finding location</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(emitter/signal)</Data></Cell>
+    <Cell><Data ss:Type="String">Observation?</Data></Cell>
+    <Cell><Data ss:Type="String">detected emitter</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Hostile radio, 243.0 MHz</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y3/Y4: no emitter/signal observation type; JAM is a LOX TaskActionCode (the action), not a sensing report</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(reading)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">frequency / bandwidth</Data></Cell>
+    <Cell><Data ss:Type="String">value + unit</Data></Cell>
+    <Cell><Data ss:Type="String">243.0 MHz / 25 kHz</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y5: no measurement value+unit property</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(sensor)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">EW</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType has EW - the sensor is typable; the observation of an intercept is not</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="GPR Mine Detection Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(mine detection)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(mine location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectTypeObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">observed type</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectType</Data></Cell>
+    <Cell><Data ss:Type="String">Mine / IED</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - identity is expressible IF a Mine/IED entity type exists (ties to X4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectTypeObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">0.85</Data></Cell>
+    <Cell><Data ss:Type="String">Works - confidence exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(reading)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">depth / burial</Data></Cell>
+    <Cell><Data ss:Type="String">value + unit</Data></Cell>
+    <Cell><Data ss:Type="String">0.3 m</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y5: no measurement value+unit for subsurface depth</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(sensor)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">GPR / Radar</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y2: SensorType enum has no GPR / radar / metal-detector</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>

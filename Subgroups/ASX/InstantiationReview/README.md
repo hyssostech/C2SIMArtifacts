@@ -26,6 +26,10 @@ the workbooks by their owner.
   contributed scenario (Init + Order + robot-to-robot coordination + Reports),
   surfacing X1 (no robot-to-robot content type) and X2 (no explainability
   element) as the highest-value gaps it exposes.
+- [NonVideoSensors-Walk.md](./NonVideoSensors-Walk.md) - CBRN / EW / GPR report
+  instantiations that stress the sensor model; shows the media-based
+  `Video Detection Report` model does not generalize to non-imaging sensors
+  (Y1-Y5).
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.

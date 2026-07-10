@@ -206,7 +206,7 @@ s = slide(); header(s, "Biggest coverage gaps")
 bullets(s, [
  {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
  {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
- {"text":"Non-video sensors (CBRN, EW/jammer, GPR, thermal): no reports; SensorType enum incomplete."},
+ {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
  {"text":"8 of 10 MUTT scenarios have no instantiations."},
 ], top=1.7, size=16.5, gap=12)
 footer(s)
@@ -236,7 +236,8 @@ bullets(s, [
  {"tag":"Q-F","tagcolor":ACCENT,"text":"MediaReference identity, and separate media-format from sensor-modality."},
  {"tag":"Q-G","tagcolor":ACCENT,"text":"Robot-to-robot coordination content type + issuing authority (from CASEVAC)."},
  {"tag":"Q-H","tagcolor":ACCENT,"text":"Rationale/explanation ReportContent - report why, not just what (from CASEVAC)."},
-], top=1.7, size=14, gap=9)
+ {"tag":"Q-I","tagcolor":ACCENT,"text":"Media-independent sensor-reading (value+unit+modality) + complete SensorType taxonomy (non-video walk)."},
+], top=1.6, size=13, gap=8)
 footer(s)
 
 # ---------------- Next steps ----------------
