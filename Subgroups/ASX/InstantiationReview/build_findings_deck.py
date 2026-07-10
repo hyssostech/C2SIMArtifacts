@@ -208,7 +208,7 @@ bullets(s, [
  {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
  {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
  {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
- {"text":"Task/effect scenarios: Fire Support walked (autonomous engagement); logistics, engineering, rescue still open."},
+ {"text":"Task/effect scenarios: engagement, delivery, manipulation, rescue walked - the gap is consistent (task verbs + payload/effector typing)."},
 ], top=1.7, size=16.5, gap=12)
 footer(s)
 
@@ -236,6 +236,16 @@ bullets(s, [
 ], top=3.8, size=14.5, gap=11)
 footer(s)
 
+# ---------------- Task/effect summary ----------------
+s = slide(); header(s, "The task/effect axis distills to two gaps", "Across engagement, delivery, manipulation, rescue")
+rbox(s, 0.8, 2.0, 5.75, 1.75, "1.  Task verbs\n\nNo vocabulary for what systems DO: deliver, dig / clear / emplace, recover / rescue (engage uncertain).", NAVY, size=14)
+rbox(s, 6.8, 2.0, 5.75, 1.75, "2.  Payload / effector / weapon typing\n\nCargo (L1), manipulator (E2), weapon (W2) are one gap: no typed thing carried or wielded.", NAVY, size=14)
+bullets(s, [
+ {"tag":"Already there (checked):","tagcolor":GREEN,"text":"effects (DesiredEffectCode), targets (hasAffectedEntity), resources + quantities, ROE, authorization, and platform types (Vehicle / Aircraft / SurfaceVessel)."},
+ {"tag":"Decision (Q-L):","tagcolor":ACCENT,"text":"define the task-verb vocabulary and the typed payload / effector / weapon - that is the whole axis."},
+], top=4.05, size=15, gap=12)
+footer(s)
+
 # ---------------- Decisions 1: model structure ----------------
 s = slide(); header(s, "Decisions (1/2): model structure")
 bullets(s, [
@@ -256,7 +266,8 @@ bullets(s, [
  {"tag":"Q-I","tagcolor":ACCENT,"text":"Media-independent sensor-reading (value+unit+modality) + full SensorType taxonomy."},
  {"tag":"Q-J","tagcolor":ACCENT,"text":"Swarm residuals: network params, leader role, aggregation, member lifecycle."},
  {"tag":"Q-K","tagcolor":ACCENT,"text":"Engagement authority as a function of autonomy level (Fire Support)."},
-], top=1.7, size=15, gap=10)
+ {"tag":"Q-L","tagcolor":ACCENT,"text":"Task-verb vocabulary (deliver, manipulate, recover) + typed payload/effector/weapon."},
+], top=1.65, size=14, gap=9)
 footer(s)
 
 # ---------------- Next steps ----------------

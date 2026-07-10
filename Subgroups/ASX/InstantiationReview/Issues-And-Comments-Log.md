@@ -72,7 +72,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | INSTANTIATED | Non-video sensors not covered | Walked in `NonVideoSensors-Walk.md`; 3 report tabs added to the `.xml` (CBRN / EW Emitter / GPR Mine). Surfaced Y1-Y5 (section 6c). **[deck]** |
 | C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
-| C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Fire Support walked in `FireSupport-Walk.md`; `Fire Support Order` + `BDA Report` tabs added. Surfaced W1-W3 (section 6e). Remaining task/effect scenarios (logistics, engineering, route-clearance-neutralize, USV rescue, companion) still open. **[deck]** |
+| C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Still open: route-clearance-neutralize, companion drones, urban combat. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
@@ -130,6 +130,23 @@ authorization, desired effect (`DesiredEffectCode`), target designation
 (`hasAffectedEntity`). The engagement machinery mostly exists - the missing
 piece is autonomy-to-permission.
 
+## 6f. Task/effect batch findings (from TaskEffect-Batch-Walk.md)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| L1 | MED | OPEN | No cargo/payload manifest | What a platform carries. `Resource` + quantities exist; "load carried" does not. ConceptMapping Payload absent from OWL. |
+| L2 | MED | OPEN | No delivery-confirmation ReportContent | What was delivered and received by whom; `TaskStatus` only says the task ran. |
+| E1 | HIGH | OPEN | No manipulation/effector task verbs | dig / clear / breach / emplace / construct - the task model has no physical-manipulation verbs. |
+| E2 | MED | OPEN | No effector/manipulator equipment concept | arm / blade / excavator. Ties to P2/D3. |
+| R1 | - | reconfirms P1 | USV typing (SMX `SurfaceVessel` vs ASX `USV`/Robot), now maritime. |
+| R2 | MED | OPEN | No recovery/rescue/tow task verb | "recover downed pilot" has no task verb. |
+
+Recurring shape of the whole task/effect axis: only two things are missing -
+**(a) task verbs** (deliver, dig/clear, recover/rescue; engage uncertain) and
+**(b) payload/effector/weapon typing** (cargo L1, manipulator E2, weapon W2 are
+one gap). Entity structure, addressing, effects, targets, resources, ROE, and
+authorization already exist. Distilled into decision Q-L.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -159,6 +176,10 @@ piece is autonomy-to-permission.
   may a system at this autonomy level take this (lethal) action without a human
   in/on the loop? ROE and authorization already exist; this link does not.
   (Resolves W1.)
+- **Q-L [deck]** Define the task/effect vocabulary the axis needs: (a) task
+  verbs (deliver, dig/clear/emplace, recover/rescue, engage) and (b) typed
+  payload/effector/weapon (cargo, manipulator, munition). Effects, targets,
+  and resources already exist. (Resolves L1/L2/E1/E2/R2/W2.)
 
 ## Change log
 
@@ -189,3 +210,9 @@ piece is autonomy-to-permission.
   decision Q-K, coverage C6; deck gained a Fire Support slide and split decisions
   into 2 slides. Grounding narrowed the finding: ROE + authorization already
   exist (LOX/C2SIM); the real gap (W1) is the autonomy-to-engagement link.
+- 2026-07-10: Batched Logistics + Engineering + USV Rescue
+  (`TaskEffect-Batch-Walk.md`); added 4 tabs (Logistics Delivery Order,
+  Engineering Task Order, USV Rescue Order, Delivery Confirmation Report). Added
+  section 6f (L/E/R), decision Q-L. Grounding: Resource/quantities and
+  SurfaceVessel already exist; the task/effect axis distills to task verbs +
+  payload/effector/weapon typing.

@@ -36,6 +36,10 @@ the workbooks by their owner.
 - [FireSupport-Walk.md](./FireSupport-Walk.md) - armed engagement + BDA;
   opens the task/effect axis and surfaces W1 (no link between autonomy level and
   authority to take a lethal action). ROE and authorization already exist.
+- [TaskEffect-Batch-Walk.md](./TaskEffect-Batch-Walk.md) - Logistics, Engineering,
+  and USV Rescue in one pass; shows the task/effect axis distills to two gaps
+  (task verbs + payload/effector/weapon typing) with everything else already in
+  the standard.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.
