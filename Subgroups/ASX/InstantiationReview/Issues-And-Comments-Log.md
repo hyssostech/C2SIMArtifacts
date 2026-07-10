@@ -16,7 +16,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | S1 | HIGH | RESOLVED | Local clone was 52 commits behind origin/main | Fixed by pull on 2026-07-09; now level with origin (`021e715`). |
 | S2 | HIGH | OPEN | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** |
 | S3 | MED | DONE (branch) | Workbooks are `.xlsx` (zipped XML), git cannot merge | All 3 sample-message workbooks converted to diff-able SpreadsheetML 2003 `.xml` (fidelity verified, 0 mismatches) and committed on branch `asx-diffable-spreadsheets`. NOTE: `.xml` and `.xlsx` now coexist - see S4. |
-| S4 | HIGH | OPEN | Dual source of truth: `.xml` (with my Init rows) and `.xlsx` diverge | Init contributions were applied to the `.xml` only, so the `.xml` and `.xlsx` Initialization workbooks now differ. Group must decide whether to adopt `.xml` as source of truth and retire `.xlsx`. **[deck]** |
+| S4 | HIGH | DECIDED | Dual source of truth: `.xml` vs `.xlsx` | Decision (2026-07-10): the `.xml` workbooks are the working copy for this review; Elizabeth's `.xlsx` files are left untouched for now. All new instantiation work (Init rows, CASEVAC tabs) goes into the `.xml` only. The `.xlsx` will diverge by design until the group reconciles. |
 
 ## 2. Model drift: OWL vs Spreadsheet vs Deck
 
@@ -68,7 +68,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | C1 | HIGH | PARTIAL | Initialization entirely un-instantiated (0 of 3 named scenarios) | Draft instantiations for all 3 named scenarios now applied to the `.xml` on branch (pending group review). **[deck]** |
-| C2 | HIGH | WALKED | CASEVAC (flagship contributed scenario) has no messages of any type | Walked end-to-end in `CASEVAC-Walk.md`; surfaced X1/X2 (see section 6b). **[deck]** |
+| C2 | HIGH | INSTANTIATED | CASEVAC (flagship contributed scenario) has no messages of any type | Walked in `CASEVAC-Walk.md`; 5 tabs added to the `.xml` workbooks (CASEVAC Init; CASEVAC Tasking + Route Advert; CASEVAC Status+Threat + Explainable). Surfaced X1/X2 (section 6b). **[deck]** |
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | OPEN | Non-video sensors not covered | CBRN/EW/jammer/GPR/thermal absent; SensorType enum incomplete for them. Ties to M5/D2. |
 | C5 | LOW | OPEN | Swarm Detection report + swarm coordination order not done | Stubs only. |
@@ -118,3 +118,8 @@ X1 and X2.
 - 2026-07-10: Walked CASEVAC end-to-end (`CASEVAC-Walk.md`). Added section 6b
   (X1-X6) and decisions Q-G/Q-H; updated C2. Grounding check killed two false
   gaps (Route and phased-planning both already exist in the standard).
+- 2026-07-10: S4 decided - `.xml` is the working copy, `.xlsx` left untouched.
+  Added 5 CASEVAC tabs to the `.xml` workbooks (verified via LibreOffice
+  round-trip; existing sheets preserved). Reviewed Elizabeth's own annotations
+  on the worked scenarios (see conversation; agree on most, disagree on
+  MediaType/SensorObservation typing and flag the M3 cross-sheet inconsistency).

@@ -1299,4 +1299,86 @@
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>
  </Worksheet>
+ <Worksheet ss:Name="CASEVAC Status+Threat">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">PositionReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(scout position)</Data></Cell>
+    <Cell><Data ss:Type="String">Base-covered - PositionReportContent exists (SMX)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(suspected IED / broken bridge)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] X4: no obstacle/threat observation subtype</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(observed hazard)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">IED / Obstacle</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] X4: how is a detected hazard that triggers replanning typed?</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="CASEVAC Explainable">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(rationale)</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent?</Data></Cell>
+    <Cell><Data ss:Type="String">why route changed</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(free text / structured?)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] X2: no rationale/explanation ReportContent exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">task outcome</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">Incomplete</Data></Cell>
+    <Cell><Data ss:Type="String">Reports the state, not the reason</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(comment)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Candidate: new ASX RationaleReportContent to report WHY (route change, mission failure)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>

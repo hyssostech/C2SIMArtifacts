@@ -596,4 +596,126 @@
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>
  </Worksheet>
+ <Worksheet ss:Name="CASEVAC Init">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="13" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">(the UGVs)</Data></Cell>
+    <Cell><Data ss:Type="String">Container for scenario entity definitions</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Vehicle or UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">UGV-Scout</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P1: SMX Vehicle(subClassOf Platform) vs ASX UGV(subClassOf Robot) - conflicting trees</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(scout entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Scout-UGV-1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(scout entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(soldier UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">Tasking unit</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Vehicle or UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">UGV-Transport</Data></Cell>
+    <Cell><Data ss:Type="String">Second UGV; carries the casualty</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(transport entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Transport-UGV-1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">soldier / C2 unit</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity (Unit)</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">HOTL-Soldier</Data></Cell>
+    <Cell><Data ss:Type="String">On-the-loop tasker; receives reports</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">Route</Data></Cell>
+    <Cell><Data ss:Type="String">(SMX)</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">CASEVAC-Route-0</Data></Cell>
+    <Cell><Data ss:Type="String">[!] X3: use existing SMX Route class, not free text</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">CollectionPoint</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic (PhysicalEntity)</Data></Cell>
+    <Cell><Data ss:Type="String">(geometry)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Casualty pickup point</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">EvacPoint</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic (PhysicalEntity)</Data></Cell>
+    <Cell><Data ss:Type="String">(geometry)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Medical evacuation point</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">scout sensors</Data></Cell>
+    <Cell><Data ss:Type="String">Sensor / Equipment</Data></Cell>
+    <Cell><Data ss:Type="String">SensorCapability</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">(obstacle/threat sensing)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P2: sensor typing unresolved; scout needs hazard detection</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(both UGVs)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">ControlMode / autonomy</Data></Cell>
+    <Cell><Data ss:Type="String">enum / Code</Data></Cell>
+    <Cell><Data ss:Type="String">Unpiloted-Autonomous</Data></Cell>
+    <Cell><Data ss:Type="String">[!] D1/P6: three autonomy vocabularies exist</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>
