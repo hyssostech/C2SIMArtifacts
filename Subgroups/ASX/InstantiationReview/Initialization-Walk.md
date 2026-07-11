@@ -58,8 +58,9 @@ Problems this exposes:
 
 - **P1 [!] Entity-type conflict.** The proposed OWL declares
   `UAV subClassOf Robot subClassOf ActorEntity`, while SMX already declares
-  `Aircraft subClassOf Platform subClassOf ActorEntity`. These are disjoint
-  sibling hierarchies. When we set `hasEntityType` for the drone, is it an SMX
+  `Aircraft subClassOf Platform subClassOf ActorEntity`. These are parallel
+  (non-overlapping) sibling hierarchies - not declared `owl:disjointWith`, but
+  no entity is typed under both. When we set `hasEntityType` for the drone, is it an SMX
   `Aircraft` or an ASX `UAV`/`Robot`? Picking `Robot` orphans the drone from all
   existing Platform machinery (SMX Platform attributes, LOX behaviors); picking
   `Aircraft` makes the ASX `Robot`/`UAV` classes unused for real platforms.

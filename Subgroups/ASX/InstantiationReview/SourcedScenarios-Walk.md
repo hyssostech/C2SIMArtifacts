@@ -14,8 +14,8 @@ Proposals only; nothing applied.
 
 Grounding recap (checked before writing):
 - Exists / reused: `SurfaceVessel`, `SubsurfaceVessel` (SMX); `CommunicationNetwork`,
-  `RelativeLocation`; `HostilityStatusCode` (neutral value `smx#ANT`) and the
-  affiliation individual `NeutralSide`;
+  `RelativeLocation`; `HostilityStatusCode` (neutral value `smx#NEUTRL`;
+  `smx#ANT` = assumed-neutral) and an untyped `NeutralSide` individual;
   `hasConfidenceLevel`; `SubjectTypeObservation`; `DesiredEffectCode`.
 - Absent: any search / explore / coverage task; decoy / deception; MoE /
   effectiveness attribute; track / cue / contact class.
@@ -33,7 +33,7 @@ traffic transits throughout.
 |---|---|---|---|---|---|---|
 | SMX or ASX | SurfaceVessel or USV | Platform / Robot | hasEntityType | EntityType | Detector-USV | [+/!] P1 (maritime): SMX `SurfaceVessel` vs ASX `USV`/Robot. |
 | ASX | Detector-USV | ? | role subtype | ??? | detector (TSAS) | [!] G5: no platform role/locomotion subtype (detector vs neutralizer vs CUSV). Extends P1. |
-| SMX | commercial vessel | ActorEntity | hasHostilityStatusCode | HostilityStatusCode | smx#ANT (Assumed neutral) | [+] neutral affiliation exists (`ANT` hostility value, or the `NeutralSide` affiliation individual); [!] G10: but "neutral traffic constrains the search path" (behavioral constraint) is not modeled. |
+| SMX | commercial vessel | ActorEntity | hasHostilityStatusCode | HostilityStatusCode | smx#NEUTRL (Neutral) | [+] neutral affiliation exists (`smx#NEUTRL` hostility value; `smx#ANT` = assumed-neutral); [!] G10: but "neutral traffic constrains the search path" (behavioral constraint) is not modeled. |
 | SMX | sea line of communication | TacticalArea / MapGraphic | (operating area) | - | - | Reuse area object; ties to N1 (area as subject). |
 
 ### MCM Cross-Cue & Neutralize Order (autonomy-to-autonomy)
@@ -62,7 +62,7 @@ arbitrary artifacts with an error bound. No adversary.
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
 | SMX or ASX | Vehicle or UGV | Platform / Robot | hasEntityType | EntityType | Wheeled / Tracked / Legged UGV | [!] G5: no locomotion subtype axis (wheeled/tracked/legged). Extends P1. |
-| ASX | comms relay | Equipment / Entity | deployable relay | ??? | relay node | [!] G1: relay as a deployable taskable entity is not modeled (CommunicationNetwork exists as a network, not a droppable node/behavior). |
+| ASX | comms relay | Equipment / Entity | deployable relay | ??? | relay node | [!] G1: a relay task verb `lox#COMREL` exists, but a droppable relay ENTITY/node is not modeled (`CommunicationNetwork` is a network, not a node). |
 | C2SIM | (mission) | - | force sides | - | (none hostile) | [+] G10: a mission with no hostile ForceSide - allowed (just omit), but the model tends to assume a hostile side. |
 
 ### Explore / Search Area Order
@@ -112,7 +112,7 @@ vignette - no new message thread needed. Two net-new items:
 
 | ID | Sev | One-line |
 |---|---|---|
-| G1 | HIGH | Denied-comms operating mode + comms-relay as a deployable taskable entity (SubT). |
+| G1 | MED | Denied-comms operating MODE + a deployable relay ENTITY/node (SubT); the relay verb `lox#COMREL` already exists. |
 | G2 | MED | Area-coverage / exploration *goal* (explore-until-covered) - search/recce verbs (`RECCE`, `PATROL`, `SWEEP`) exist; the coverage-goal semantics + N1 area subject do not. |
 | G3 | MED | Cross-cueing: system-to-system tasking with a shared classified track/contact object (MCM); reuses X1 + M1, but no Track type. |
 | G4 | HIGH | Generic parameterized Detection Report (confidence + error-bound + false-positive + modality) subsuming the per-sensor reports - resolves Y1/M3/M4. |
@@ -121,14 +121,15 @@ vignette - no new message thread needed. Two net-new items:
 | G7 | LOW | Measure-of-effectiveness attributes on reports (% neutralized, active time). |
 | G8 | LOW | Decoy as a distinct behavior/role - deception verbs (`DECEIV`, `DAZZLE`) exist; a decoy role is the residual. |
 | G9 | MED | Threat-aware / contested-delivery order annotations (Sustainment). |
-| G10 | LOW | Neutral-actor framing is MOSTLY COVERED (`NeutralSide`); residual = neutral-as-constraint + no-adversary missions. |
+| G10 | LOW | Neutral-actor framing is MOSTLY COVERED (`smx#NEUTRL` hostility value; `NeutralSide` is an untyped stub); residual = neutral-as-constraint + no-adversary missions. |
 
 ## Headline
 
 The sourcing session's two new domains (maritime, subterranean) confirm the
 entity-typing (P1) and coordination (X1) findings from a fresh angle, and add a
-search/explore task (G2), denied-comms/relay (G1), cross-cueing with a shared
-track (G3), decoy (G8), and MoE (G7). The single most useful contribution is
+an area-coverage/exploration goal (G2), denied-comms mode + relay entity (G1),
+cross-cueing with a shared track (G3), a decoy role (G8), and MoE (G7). The
+single most useful contribution is
 **G4: one generic Detection Report** (confidence + error-bound + false-positive)
 that subsumes the per-sensor reports and resolves the whole Y-series - a
 consolidation, not just another gap.

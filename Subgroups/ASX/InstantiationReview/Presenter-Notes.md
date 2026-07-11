@@ -52,7 +52,7 @@ a proposal; nothing has been applied to the model or the workbooks.
   - Rules of engagement, order authorization, desired effects, routes,
     resources, maritime vessels, and neutral affiliation **already exist** in the
     base standard - we verified this against the RDF, not from memory.
-  - The **task-verb vocabulary already exists**: LOX has 445 `TaskActionCode`
+  - The **task-verb vocabulary already exists**: LOX has 446 `TaskActionCode`
     verbs (engage, attack, breach, construct, clear, transport, resupply,
     rescue, recover, neutralize, escort, follow, recce, patrol, sweep, deceive).
     So the task/effect work is not "invent verbs" - it is the payload/effector/

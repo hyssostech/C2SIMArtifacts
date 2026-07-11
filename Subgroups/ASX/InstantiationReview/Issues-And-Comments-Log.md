@@ -145,17 +145,17 @@ piece is autonomy-to-permission.
 |---|---|---|---|---|
 | L1 | MED | OPEN | No cargo/payload manifest | What a platform carries. `Resource` + quantities exist; "load carried" does not. ConceptMapping Payload absent from OWL. |
 | L2 | MED | OPEN | No delivery-confirmation ReportContent | What was delivered and received by whom; `TaskStatus` only says the task ran. |
-| E1 | MED | OPEN | No dig/clear/emplace/construct verbs | `lox#BREACH` exists as a TaskActionCode; the manipulation verbs dig/clear/emplace/construct do not. |
+| E1 | LOW | mostly covered | Engineering verbs exist in LOX | `CONSTR` (build/dig), `CLROBS`/`CLRLND` (clear), `MINLAY` (emplace), `BREACH` exist; folds into E2 (effector typing). |
 | E2 | MED | OPEN | No effector/manipulator equipment concept | arm / blade / excavator. Ties to P2/D3. |
 | R1 | - | reconfirms P1 | USV typing (SMX `SurfaceVessel` vs ASX `USV`/Robot), now maritime. |
 | R2 | LOW | OPEN | Only a general tow/salvage verb absent | `lox#RESCUE` and `lox#RECOVR` exist as TaskActionCodes (the downed-pilot task uses RESCUE); only a general tow/salvage verb is missing. |
 
-Recurring shape of the whole task/effect axis: LOX already has 445 `TaskActionCode`
-verbs (incl. BREACH, ENGAGE, ATTACK, RESCUE, RECOVR), so what is actually missing
-is narrow - **(a) a few task verbs** (dig/clear/emplace/construct, general
-tow/salvage) and **(b) payload/effector/weapon typing** (cargo L1, manipulator E2,
-weapon W2 are one gap). Entity structure, addressing, effects, targets, resources,
-ROE, authorization, and most task verbs already exist. Distilled into decision Q-L.
+Recurring shape of the whole task/effect axis: LOX already has 446 `TaskActionCode`
+verbs (incl. BREACH, ENGAGE, ATTACK, CONSTR, CLROBS, MINLAY, RESCUE, RECOVR, NTRCOM),
+so what is actually missing is narrow - **(a) payload/effector/weapon typing**
+(cargo L1, manipulator E2, weapon W2 are one gap) and **(b) a general tow/salvage
+verb**. Entity structure, addressing, effects, targets, resources, ROE, and the
+whole task-verb vocabulary already exist. Distilled into decision Q-L.
 
 ## 6g. Redundancy-pass findings (from RedundancyPass-Walk.md)
 
@@ -185,7 +185,7 @@ reports <- SubT/MCM detections, + the generic-report answer G4).
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| G1 | HIGH | OPEN | Denied-comms mode + relay as deployable taskable entity | SubT. `CommunicationNetwork` is a network, not a droppable node/behavior; no comms-degraded operating mode. **[deck]** |
+| G1 | MED | OPEN | Denied-comms mode + deployable relay entity | SubT. A relay task verb `lox#COMREL` exists; missing is a comms-degraded operating MODE and a droppable relay ENTITY/node (`CommunicationNetwork` is a network, not a node). **[deck]** |
 | G2 | MED | OPEN | Area-coverage / exploration goal | SubT. Search/recce verbs (`RECCE`, `RECONS`, `PATROL`, `SWEEP`, `DETECT`) exist; missing is the coverage-*goal* semantics (explore-until-covered), tied to N1. **[deck]** |
 | G3 | MED | OPEN | Cross-cueing: system-to-system task + shared classified track | MCM. Reuses X1 + M1; no Track/Contact object type. |
 | G4 | HIGH | OPEN | Generic parameterized Detection Report | confidence + error-bound + false-positive + modality; subsumes Video/CBRN/EW/GPR/naval-mine/artifact. **Resolves Y1/M3/M4.** **[deck]** |
@@ -194,7 +194,7 @@ reports <- SubT/MCM detections, + the generic-report answer G4).
 | G7 | LOW | OPEN | Measure-of-effectiveness attributes on reports | % neutralized, active time (MCM). |
 | G8 | LOW | OPEN | Decoy as a distinct behavior/role | Deception verbs (`DECEIV`, `DAZZLE`) exist; a decoy role/behavior is the residual. |
 | G9 | MED | OPEN | Threat-aware / contested-delivery order annotations | Sustainment. Risk/threat + level-of-autonomy on a logistics order. |
-| G10 | LOW | MOSTLY COVERED | Neutral-actor framing | `HostilityStatusCode` (neutral value `smx#ANT`) and the affiliation individual `NeutralSide` exist; residual = neutral-as-constraint + no-adversary missions. |
+| G10 | LOW | MOSTLY COVERED | Neutral-actor framing | `HostilityStatusCode` neutral value `smx#NEUTRL` exists (`smx#ANT` = assumed-neutral); a `NeutralSide` individual also exists but is untyped. Residual = neutral-as-constraint + no-adversary missions. |
 
 Un-extracted at this (6h) stage - all three were later extracted in the
 validation pass (see 6j / C8): counter-UAS / swarm-vs-swarm, human-machine
@@ -214,8 +214,8 @@ task breadth incl. explore/neutralize/decoy (Q-L/Q-N/Q-S), persistence (N2),
 graded LoA (D1/Q-D).
 
 **Refined:** neutral actors - their doc hedges ("if the model presumes a hostile
-side"); my grounding confirms both the neutral `HostilityStatusCode` value
-`smx#ANT` and the `NeutralSide` affiliation individual exist, so the gap is only
+side"); my grounding confirms the neutral `HostilityStatusCode` value
+`smx#NEUTRL` exists (and an untyped `NeutralSide` individual), so the gap is only
 neutral-as-constraint / no-adversary missions (G10). Graded LoA -
 their #6 sharpens Q-D: autonomy is not one flat vocabulary but a graded scale
 that can vary by mission phase.
@@ -293,13 +293,12 @@ Tasking` (Order).
   may a system at this autonomy level take this (lethal) action without a human
   in/on the loop? ROE and authorization already exist; this link does not.
   (Resolves W1.)
-- **Q-L [deck]** Complete the task/effect vocabulary: (a) add the few missing
-  task verbs (dig/clear/emplace/construct, general tow/salvage) - most verbs
-  (BREACH, ENGAGE, ATTACK, RESCUE, RECOVR, plus follow/escort over
-  `RelativeLocation`/`CommunicationNetwork`) already exist in LOX and should be
-  reused; and (b) add typed payload/effector/weapon (cargo, manipulator,
-  munition). Effects, targets, and resources already exist.
-  (Resolves L1/L2/E1/E2/W2/N2; R2 is only a tow/salvage top-up.)
+- **Q-L [deck]** Add typed **payload / effector / weapon** (cargo, manipulator,
+  munition) - the action verbs already exist in LOX (BREACH, ENGAGE, ATTACK,
+  CONSTR, CLROBS, MINLAY, RESCUE, RECOVR, NTRCOM, ESCRT/FOLASS, plus
+  follow/escort over `RelativeLocation`), and only a general tow/salvage verb is
+  a residual. Effects, targets, and resources already exist.
+  (Resolves L1/L2/E2/W2/N2; E1/R2 are minor residuals.)
 - **Q-M [deck]** Allow an **area** to be the subject of a task and a report -
   an `hasAffectedArea` counterpart to `hasAffectedEntity`, and an area-state
   (cleared / contaminated / mined). Areas (`TacticalArea`, `MapGraphic`) exist;
@@ -309,7 +308,8 @@ Tasking` (Order).
   autonomous area exploration is expressible beyond a fixed patrol route.
   (Resolves G2.)
 - **Q-O [deck]** Model **denied-comms operation**: a comms-degraded operating
-  mode and a deployable comms-relay entity/behavior. (Resolves G1.)
+  mode and a deployable relay entity/node (the relay verb `lox#COMREL` already
+  exists). (Resolves G1.)
 - **Q-P** Extend robot-to-robot (Q-G) with **cross-cueing**: system-to-system
   tasking plus a shared classified **track/contact** object. (Resolves G3.)
 - **Q-Q [deck]** Define one **generic parameterized Detection Report**
@@ -397,7 +397,7 @@ instantiation to see which is which.
 - 2026-07-10: Walked swarm (`Swarm-Walk.md`); filled the `Swarm Detection` stub
   (Report) and added `Swarm Coordination` (Order). Added section 6d (Z1/Z2),
   decision Q-J; updated C5. Grounding narrowed P8 - membership/command already
-  exist in base C2SIM (`hasSubordinate`/`hasCommandRelation`).
+  exist in the base standard (C2SIM `hasSubordinate`, SMX `hasCommandRelation`).
 - 2026-07-10: Walked Fire Support (`FireSupport-Walk.md`) - opens the task/effect
   axis; added `Fire Support Order` + `BDA Report` tabs. Added section 6e (W1-W3),
   decision Q-K, coverage C6; deck gained a Fire Support slide and split decisions

@@ -9,7 +9,7 @@ Layout mirrors the workbook columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
 **[Q]** = open question, **[!]** = gap/defect. Proposals only; nothing applied.
 
-Grounding done first (and it narrowed the findings a lot). LOX carries 445
+Grounding done first (and it narrowed the findings a lot). LOX carries 446
 `TaskActionCode` verbs, so almost every action verb already exists - the gaps
 are about *typed things carried/wielded* and a few autonomy-specific semantics,
 not verbs:
@@ -87,7 +87,7 @@ Partially covered / reused (checked): `Resource` + quantities,
 ## Headline: the task/effect axis has one recurring shape
 
 Across engagement, delivery, manipulation, rescue, search, and escort, LOX
-already carries the action vocabulary - 445 `TaskActionCode` verbs, including
+already carries the action vocabulary - 446 `TaskActionCode` verbs, including
 `ENGAGE`, `ATTACK`, `BREACH`, `CONSTR`, `CLROBS`, `MINLAY`, `TRANS`, `RESUPL`,
 `RESCUE`, `RECOVR`, `NTRCOM`/`NTREXP` (neutralize), `ESCRT`, `FOLASS`, `RECCE`,
 `PATROL`, `SWEEP`, `DECEIV`/`DAZZLE`. So the task/effect axis is **not** a
