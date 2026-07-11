@@ -1,18 +1,18 @@
 # ASX Message-Instantiation Review Notes
 
 These are **review / analysis notes**, contributed for discussion. They are
-**not** authoritative model changes and they do **not** modify Elizabeth's
-sample-message workbooks. The intent is to add *coverage* (walking scenarios
-that do not yet have message instantiations) and to surface *problems* that
-instantiation reveals in the proposed ASX elements - phrased as questions for
-the sub-group, not as decisions.
+**not** authoritative model changes, and nothing has been applied to the OWL
+model. The intent is to add *coverage* (walking scenarios into concrete message
+instances) and to surface *problems* that instantiation reveals in the proposed
+ASX elements - phrased as questions for the sub-group, not as decisions.
 
-Why a separate folder instead of editing the workbooks: the sample-message
-files are binary `.xlsx` that Elizabeth is actively editing (all three were
-created 2026-06-10). Two people editing the same workbook cannot be merged, so
-any concurrent edit risks silently losing her work. Keeping this as separate
-Markdown avoids that collision; anything here that is useful can be folded into
-the workbooks by their owner.
+How the message work is stored (decision S4 in the log): Elizabeth's binary
+`.xlsx` sample-message workbooks are **left untouched** (binary workbooks cannot
+be merged if two people edit them). Instead, this review works on diff-able
+**SpreadsheetML `.xml` copies** of the three workbooks - in `Subgroups/ASX/
+Proposed Extension Working Materials/` - and that is where all the instantiation
+tabs live. The `.xml` were verified cell-for-cell against the originals; nothing
+in the `.xlsx` changed.
 
 ## Start here
 
@@ -22,7 +22,8 @@ the workbooks by their owner.
 ## Contents
 
 - [Message-Instantiation-Coverage.md](./Message-Instantiation-Coverage.md) -
-  what is instantiated today vs. still open, across every in-repo scenario.
+  the pre-walk `.xlsx` baseline snapshot (2026-06-10) that motivated the review;
+  the current instantiation state is tracked in the log (C1-C8).
 - [Initialization-Walk.md](./Initialization-Walk.md) - a proposed walk of the
   three Initialization scenarios Elizabeth named but left empty
   (`UAV with Video Init`, `UAV Patrol Initialization`, `Swarm Initialization`),
@@ -42,16 +43,16 @@ the workbooks by their owner.
   opens the task/effect axis and surfaces W1 (no link between autonomy level and
   authority to take a lethal action). ROE and authorization already exist.
 - [TaskEffect-Batch-Walk.md](./TaskEffect-Batch-Walk.md) - Logistics, Engineering,
-  and USV Rescue in one pass; shows the task/effect axis distills to two gaps
-  (task verbs + payload/effector/weapon typing) with everything else already in
-  the standard.
+  and USV Rescue in one pass; the task/effect axis needs mainly payload/effector/
+  weapon typing plus a few manipulation verbs - most task verbs (BREACH, ENGAGE,
+  ATTACK, RESCUE, RECOVR, ...) already exist in LOX.
 - [RedundancyPass-Walk.md](./RedundancyPass-Walk.md) - confirmation pass over
   route-clearance / companion / urban; mostly redundant, but extracts N1 (an
   area cannot be the subject of a task or report).
 - [SourcedScenarios-Walk.md](./SourcedScenarios-Walk.md) - maritime MCM,
   subterranean SubT, and sustainment, taken from the parallel scenario-sourcing
-  session (`LLMExperiments/V2Extractions/` + its `OntologyCoverageClustering.md`
-  handoff). Corroborates P1/X1/N2/Y and adds G1-G10, incl. a proposed generic
+  session (`LLMExperiments/PaperSummaries/V2Extractions/` + its
+  `OntologyConceptCoverage.md` handoff). Corroborates P1/X1/N2/Y and adds G1-G10, incl. a proposed generic
   Detection Report that resolves the sensor-report (Y) series.
 - [ValidationEvidence-Walk.md](./ValidationEvidence-Walk.md) - integrates the
   scavenger session's nine sourced missions (`Documents-Found.md`). Moves the
@@ -73,9 +74,12 @@ the workbooks by their owner.
 - Proposed OWL model: `Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf`
   (last updated 2026-01-20).
 - Attribute concepts: `Subgroups/ASX/Proposed Extension Working Materials/ASX Concept Mapping.xlsx`.
-- Worked message examples: the three `ASX Sample * Messages.xlsx` workbooks
-  (created 2026-06-10).
+- Worked message examples (Elizabeth's, untouched): the three
+  `ASX Sample * Messages.xlsx` workbooks (created 2026-06-10).
+- Review working copies (diff-able, where the instantiation tabs live): the three
+  `ASX Sample * Messages.xml` in `Proposed Extension Working Materials/`.
 - Base standard classes: `Ontology/C2SIM.rdf`, `Ontology/C2SIM_SMX.rdf`,
   `Ontology/C2SIM_LOX.rdf`.
 
-Status: uncommitted working-tree notes. Prepared by Paulo Barthelmess (Hyssos).
+Status: committed on branch `asx-diffable-spreadsheets` (draft PR #3 on the
+fork). Prepared by Paulo Barthelmess (Hyssos).

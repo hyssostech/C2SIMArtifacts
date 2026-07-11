@@ -1,5 +1,15 @@
 # ASX Message-Instantiation Coverage
 
+> **NOTE - this is the pre-walk baseline (2026-06-10 `.xlsx`), now superseded.**
+> It records the state of Elizabeth's `.xlsx` workbooks *before* this review's
+> walks. The review's instantiation tabs (Init, CASEVAC, sensing, swarm,
+> task/effect, sourced scenarios) were subsequently added to the diff-able
+> `.xml` copies - see decision S4 and coverage rows C1-C8 in
+> `Issues-And-Comments-Log.md`. The STUB/empty rows and "0 Initialization /
+> biggest hole" reading below describe the `.xlsx` baseline only; all three
+> Initialization scenarios and the Swarm Detection report are now instantiated
+> in the `.xml`.
+
 Snapshot of which scenarios have concrete C2SIM message instantiations in the
 `ASX Sample * Messages.xlsx` workbooks, and which are still open. Compiled by
 reading every sheet in the three workbooks (created 2026-06-10) plus the

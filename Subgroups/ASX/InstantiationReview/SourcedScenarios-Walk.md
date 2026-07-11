@@ -2,7 +2,7 @@
 
 These three scenarios came from the parallel **scenario-sourcing session**
 (`LLMExperiments/PaperSummaries/V2Extractions/`), which explicitly handed them
-off to this review in `LLMExperiments/OntologyCoverageClustering.md`. This walk
+off to this review in `LLMExperiments/OntologyConceptCoverage.md`. This walk
 instantiates the two new-domain threads (maritime MCM, subterranean SubT) and
 validates Logistics against Sustainment, then reconciles everything with the
 prior findings.
@@ -14,7 +14,8 @@ Proposals only; nothing applied.
 
 Grounding recap (checked before writing):
 - Exists / reused: `SurfaceVessel`, `SubsurfaceVessel` (SMX); `CommunicationNetwork`,
-  `RelativeLocation`; `HostilityStatusCode` with `NeutralSide` / `NeutralTo`;
+  `RelativeLocation`; `HostilityStatusCode` (neutral value `smx#ANT`) and the
+  affiliation individual `NeutralSide`;
   `hasConfidenceLevel`; `SubjectTypeObservation`; `DesiredEffectCode`.
 - Absent: any search / explore / coverage task; decoy / deception; MoE /
   effectiveness attribute; track / cue / contact class.
@@ -32,7 +33,7 @@ traffic transits throughout.
 |---|---|---|---|---|---|---|
 | SMX or ASX | SurfaceVessel or USV | Platform / Robot | hasEntityType | EntityType | Detector-USV | [+/!] P1 (maritime): SMX `SurfaceVessel` vs ASX `USV`/Robot. |
 | ASX | Detector-USV | ? | role subtype | ??? | detector (TSAS) | [!] G5: no platform role/locomotion subtype (detector vs neutralizer vs CUSV). Extends P1. |
-| SMX | commercial vessel | ActorEntity | hasHostilityStatusCode | HostilityStatusCode | NeutralSide | [+] neutral affiliation exists; [!] G10: but "neutral traffic constrains the search path" (behavioral constraint) is not modeled. |
+| SMX | commercial vessel | ActorEntity | hasHostilityStatusCode | HostilityStatusCode | smx#ANT (Assumed neutral) | [+] neutral affiliation exists (`ANT` hostility value, or the `NeutralSide` affiliation individual); [!] G10: but "neutral traffic constrains the search path" (behavioral constraint) is not modeled. |
 | SMX | sea line of communication | TacticalArea / MapGraphic | (operating area) | - | - | Reuse area object; ties to N1 (area as subject). |
 
 ### MCM Cross-Cue & Neutralize Order (autonomy-to-autonomy)
@@ -41,7 +42,7 @@ traffic transits throughout.
 | C2SIM | OrderBody | DomainMessageBody | isFromSender | UUIDBase | (detector USV) | [+] X1: robot-to-robot - detector tasks neutralizer. |
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (neutralizer USV) | |
 | ASX | classified contact | ??? | (shared track) | ??? | moored mine @ posn, class=high | [!] G3: no track/contact object to share a classified detection; reuses M1 (inline entity def) + X1 but has no "track" type. |
-| C2SIM / ASX | Neutralize Task | Task | hasTask | TaskActionCode | Neutralize | [!] Q-L verb (neutralize). |
+| C2SIM / ASX | Neutralize Task | Task | hasTask | TaskActionCode | NTRCOM / NTREXP | `NTRCOM` / `NTREXP` / `NTRCHM` (neutralize) exist in LOX. |
 | SMX | naval mine | SubjectTypeObservation | observed type | SubjectType | Moored / Bottom mine | [+] identity via SubjectTypeObservation (like GPR); no mine class. |
 
 ### Naval Mine Detection Report
@@ -68,7 +69,7 @@ arbitrary artifacts with an error bound. No adversary.
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (robot team) | |
-| C2SIM / ASX | Explore Task | Task | hasTask | TaskActionCode | Explore / SearchArea | [!] G2: no search/explore/coverage task verb - distinct from Patrol (fixed route) and point tasks. |
+| C2SIM / ASX | Explore Task | Task | hasTask | TaskActionCode | RECCE / RECONS / PATROL | G2: search/recce/patrol verbs exist (`RECCE`, `RECONS`, `PATROL`, `SWEEP`, `DETECT`); the gap is an area-coverage *goal* (explore-until-covered), tied to N1. |
 | SMX | search area | TacticalArea | (coverage goal) | ??? | Cave sector A | [!] N1 + G2: task an area with a coverage goal - no hasAffectedArea, no coverage-goal attribute. |
 | ASX | (comms) | ? | operating mode | ??? | denied-comms / relay-linked | [!] G1: no comms-degraded operating mode. |
 
@@ -92,7 +93,7 @@ vignette - no new message thread needed. Two net-new items:
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (resupply UGV) | |
 | C2SIM / ASX | Deliver Task | Task | hasTask | TaskActionCode | Deliver | Validated against real vignette (L-series). |
-| ASX | (2nd platform) | ? | decoy behavior | ??? | act as decoy | [!] G8: no decoy / deception behavior concept. |
+| ASX | (2nd platform) | ? | decoy behavior | ??? | act as decoy | G8: deception verbs exist (`DECEIV`, `DAZZLE`); a distinct decoy behavior/role is the residual. |
 | ASX | (order) | ? | threat-aware attrs | ??? | route-under-threat; low-signature | [!] G9: no risk/threat annotation or level-of-autonomy on a logistics order. |
 
 ---
@@ -112,13 +113,13 @@ vignette - no new message thread needed. Two net-new items:
 | ID | Sev | One-line |
 |---|---|---|
 | G1 | HIGH | Denied-comms operating mode + comms-relay as a deployable taskable entity (SubT). |
-| G2 | HIGH | Explore / Search-Area order with a coverage goal (SubT); distinct from Patrol. |
+| G2 | MED | Area-coverage / exploration *goal* (explore-until-covered) - search/recce verbs (`RECCE`, `PATROL`, `SWEEP`) exist; the coverage-goal semantics + N1 area subject do not. |
 | G3 | MED | Cross-cueing: system-to-system tasking with a shared classified track/contact object (MCM); reuses X1 + M1, but no Track type. |
 | G4 | HIGH | Generic parameterized Detection Report (confidence + error-bound + false-positive + modality) subsuming the per-sensor reports - resolves Y1/M3/M4. |
 | G5 | MED | Platform locomotion/role subtypes (wheeled/tracked/legged UGV; detector/neutralizer USV) - extends P1. |
 | G6 | LOW | Maritime depth: naval mine (moored/bottom) via SubjectTypeObservation, UUV=SubsurfaceVessel, sea-lane area - mostly reuse. |
 | G7 | LOW | Measure-of-effectiveness attributes on reports (% neutralized, active time). |
-| G8 | MED | Decoy / deception behavior (Sustainment). |
+| G8 | LOW | Decoy as a distinct behavior/role - deception verbs (`DECEIV`, `DAZZLE`) exist; a decoy role is the residual. |
 | G9 | MED | Threat-aware / contested-delivery order annotations (Sustainment). |
 | G10 | LOW | Neutral-actor framing is MOSTLY COVERED (`NeutralSide`); residual = neutral-as-constraint + no-adversary missions. |
 

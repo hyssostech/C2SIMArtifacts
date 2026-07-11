@@ -63,8 +63,9 @@ in two groups:
 - **Model structure (decide first):** UAV/robot typing (Q-A), swarm ->
   CollectiveEntity (Q-B), one sensor model (Q-C), one autonomy vocabulary (Q-D).
 - **New content types / attributes:** generic detection report with confidence,
-  rationale report, robot-to-robot + cross-cue, engagement authority, task verbs
-  + payload/effector/weapon typing, area-as-subject, explore order, denied-comms
+  rationale report, robot-to-robot + cross-cue, engagement authority,
+  payload/effector/weapon typing (the task verbs already exist in LOX),
+  area-as-subject, area-coverage goal, denied-comms
   + relay, formation geometry, capability self-report, and more.
 
 ## Status and next step

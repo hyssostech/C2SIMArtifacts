@@ -164,7 +164,7 @@ footer(s)
 # ---------------- P7 diagram ----------------
 s = slide(); header(s, "P7  -  A swarm cannot receive orders", "BLOCKER")
 rbox(s, 0.9, 2.0, 3.1, 0.7, "Swarm  (ASX)", ORANGE, size=13)
-rbox(s, 4.3, 2.0, 3.6, 0.7, "CollectiveRoboticSystem", ORANGE, size=12)
+rbox(s, 4.3, 2.0, 3.6, 0.7, "CollecticeRoboticSystem", ORANGE, size=12)
 rbox(s, 8.2, 2.0, 3.4, 0.7, "... PhysicalEntity", RED, size=13)
 arrow(s, 4.0, 2.35, 4.3, 2.35, RED); arrow(s, 7.9, 2.35, 8.2, 2.35, RED)
 tb, tf = box(s, 8.2, 2.75, 3.6, 0.4); p=tf.paragraphs[0]
@@ -208,7 +208,7 @@ bullets(s, [
  {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
  {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
  {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
- {"text":"Task/effect scenarios: engagement, delivery, manipulation, rescue walked - the gap is consistent (task verbs + payload/effector typing)."},
+ {"text":"Task/effect scenarios: engagement, delivery, manipulation, rescue walked - the gap is mainly payload/effector/weapon typing (most task verbs already exist in LOX)."},
  {"text":"Redundancy pass (route-clearance, companion, urban): confirmed - plus one new finding, N1 (an area cannot be the subject of a task/report)."},
  {"text":"Sourced scenarios (subterranean, maritime MCM, sustainment): integrated from the scenario-sourcing session - corroborate P1/X1/N2/Y and add G1-G10 (incl. a generic Detection Report)."},
 ], top=1.6, size=14.5, gap=8)
@@ -232,20 +232,20 @@ footer(s)
 s = slide(); header(s, "Fire Support: autonomous engagement authority", "The task/effect axis")
 rbox(s, 0.8, 1.95, 11.75, 1.6, "W1  -  No link between autonomy level and permission to engage\n\nThe standard can say WHAT effect, WHICH ROE, and WHO authorized the order - but not whether a FullAuto system may take a lethal action without a human in / on the loop.", RED, size=15)
 bullets(s, [
- {"tag":"Checked - already exist (not gaps):","tagcolor":GREEN,"text":"rules of engagement (RuleOfEngagement, WeaponROECode - LOX), order authorization (AuthorizationHeader), desired effect (DesiredEffectCode), target (hasAffectedEntity)."},
+ {"tag":"Checked - already exist (not gaps):","tagcolor":GREEN,"text":"rules of engagement (RuleOfEngagement, WeaponRuleOfEngagementCode - LOX), order authorization (AuthorizationHeader), desired effect (DesiredEffectCode), target (hasAffectedEntity), and the engage/attack verbs (lox#ENGAGE / lox#ATTACK)."},
  {"tag":"Also gaps:","tagcolor":ORANGE,"text":"W2 weapon/munition not typed; W3 no battle-damage / effect-achieved report (TaskStatus = the task ran, not the target destroyed)."},
  {"tag":"Decision (Q-K):","tagcolor":ACCENT,"text":"model engagement authority as a function of autonomy level - may this system take this action unsupervised?"},
 ], top=3.8, size=14.5, gap=11)
 footer(s)
 
 # ---------------- Task/effect summary ----------------
-s = slide(); header(s, "The task/effect axis distills to two gaps", "Across engagement, delivery, manipulation, rescue")
-rbox(s, 0.8, 2.0, 5.75, 1.75, "1.  Task verbs\n\nNo vocabulary for what systems DO: deliver, dig / clear / emplace, recover / rescue (engage uncertain).", NAVY, size=14)
-rbox(s, 6.8, 2.0, 5.75, 1.75, "2.  Payload / effector / weapon typing\n\nCargo (L1), manipulator (E2), weapon (W2) are one gap: no typed thing carried or wielded.", NAVY, size=14)
+s = slide(); header(s, "The task/effect axis is mostly already there", "Across engagement, delivery, manipulation, rescue, search")
+rbox(s, 0.8, 2.0, 5.75, 1.75, "Action verbs already exist\n\nLOX has 445 TaskActionCode verbs - ENGAGE, ATTACK, BREACH, CONSTR, CLROBS, MINLAY, TRANS, RESUPL, RESCUE, RECOVR, NTRCOM, ESCRT, RECCE, PATROL. Not a missing-verb problem.", GREEN, size=13)
+rbox(s, 6.8, 2.0, 5.75, 1.75, "The real gap: payload / effector / weapon typing\n\nCargo (L1), manipulator (E2), weapon (W2) are one gap: no typed thing carried or wielded.", NAVY, size=13)
 bullets(s, [
- {"tag":"Already there (checked):","tagcolor":GREEN,"text":"effects (DesiredEffectCode), targets (hasAffectedEntity), resources + quantities, ROE, authorization, and platform types (Vehicle / Aircraft / SurfaceVessel)."},
- {"tag":"Also (N1):","tagcolor":ORANGE,"text":"an area cannot be the subject of a task or report - no hasAffectedArea, no area-state (cleared/contaminated). See Q-M."},
- {"tag":"Decision (Q-L):","tagcolor":ACCENT,"text":"define the task-verb vocabulary and the typed payload / effector / weapon - that is the whole axis."},
+ {"tag":"Also already there (checked):","tagcolor":GREEN,"text":"effects (DesiredEffectCode), targets (hasAffectedEntity), resources + quantities, ROE, authorization, platform types (Vehicle / Aircraft / SurfaceVessel)."},
+ {"tag":"Small residuals:","tagcolor":ORANGE,"text":"an area cannot be a task/report subject (N1 / Q-M); an area-coverage exploration goal (G2); a general tow/salvage; a decoy role."},
+ {"tag":"Decision (Q-L):","tagcolor":ACCENT,"text":"add the typed payload / effector / weapon - the verbs are already in LOX."},
 ], top=4.0, size=14, gap=9)
 footer(s)
 
@@ -254,8 +254,8 @@ s = slide(); header(s, "Integrated from the scenario-sourcing session", "SubT (s
 bullets(s, [
  {"tag":"Corroborated (fresh domains):","tagcolor":GREEN,"text":"platform typing P1, robot-to-robot X1 (-> cross-cueing), persistent tasking N2, and the sensor-report problem Y1."},
  {"tag":"Best contribution (G4):","tagcolor":ACCENT,"text":"one generic Detection Report (confidence + error-bound + false-positive) subsumes Video/CBRN/EW/GPR/naval-mine and resolves the whole Y-series."},
- {"tag":"New gaps:","tagcolor":ORANGE,"text":"Explore/Search-Area order (G2); denied-comms + relay (G1); decoy (G8); maritime cross-cue with a shared track (G3); environment conditions (G11); formation geometry (G12)."},
- {"text":"Neutral-actor framing is mostly covered (NeutralSide exists). Still un-extracted: counter-UAS swarm, human-machine teaming, SAR.","color":MGRAY},
+ {"tag":"New gaps:","tagcolor":ORANGE,"text":"area-coverage/exploration goal (G2, search verbs exist); denied-comms + relay (G1); decoy role (G8, deception verbs exist); maritime cross-cue with a shared track (G3); environment conditions (G11); formation geometry (G12)."},
+ {"text":"Neutral-actor framing is mostly covered (NeutralSide affiliation individual + smx#ANT hostility value). Counter-UAS, human-machine teaming, and SAR were all extracted in the later validation pass.","color":MGRAY},
 ], top=1.75, size=15, gap=13)
 footer(s)
 
@@ -270,7 +270,7 @@ bullets(s, [
 footer(s)
 
 # ---------------- Decisions 1: model structure ----------------
-s = slide(); header(s, "Decisions (1/2): model structure")
+s = slide(); header(s, "Decisions (1/3): model structure")
 bullets(s, [
  {"tag":"Q-A","tagcolor":ACCENT,"text":"UAV/robot typing: a role on the existing Platform tree, or a parallel Robot tree?"},
  {"tag":"Q-B","tagcolor":ACCENT,"text":"Swarm: derive from CollectiveEntity (ActorEntity) so it can be tasked."},
@@ -289,7 +289,7 @@ bullets(s, [
  {"tag":"Q-I","tagcolor":ACCENT,"text":"Media-independent sensor-reading (value+unit+modality) + full SensorType taxonomy."},
  {"tag":"Q-J","tagcolor":ACCENT,"text":"Swarm residuals: network params, leader role, aggregation, member lifecycle."},
  {"tag":"Q-K","tagcolor":ACCENT,"text":"Engagement authority as a function of autonomy level (Fire Support)."},
- {"tag":"Q-L","tagcolor":ACCENT,"text":"Task-verb vocabulary (deliver, manipulate, recover) + typed payload/effector/weapon."},
+ {"tag":"Q-L","tagcolor":ACCENT,"text":"Typed payload/effector/weapon (the action verbs already exist in LOX; only tow/salvage is a residual)."},
  {"tag":"Q-M","tagcolor":ACCENT,"text":"Let an area be the subject of a task/report (hasAffectedArea + area-state)."},
 ], top=1.6, size=13.5, gap=8)
 footer(s)
@@ -297,7 +297,7 @@ footer(s)
 # ---------------- Decisions 3: from sourced scenarios ----------------
 s = slide(); header(s, "Decisions (3/3): from the sourced scenarios")
 bullets(s, [
- {"tag":"Q-N","tagcolor":ACCENT,"text":"Explore / Search-Area order with a coverage goal (distinct from Patrol)."},
+ {"tag":"Q-N","tagcolor":ACCENT,"text":"Area-coverage / exploration goal (explore-until-covered) - search verbs already exist."},
  {"tag":"Q-O","tagcolor":ACCENT,"text":"Denied-comms operating mode + deployable comms-relay entity/behavior."},
  {"tag":"Q-P","tagcolor":ACCENT,"text":"Cross-cueing: system-to-system tasking + shared classified track/contact (extends Q-G)."},
  {"tag":"Q-Q","tagcolor":ACCENT,"text":"One generic Detection Report (confidence + error-bound + false-positive) - resolves the Y-series (extends Q-I)."},

@@ -81,7 +81,7 @@ Section-8 **bucket 3** (document/validation gaps) is essentially closed - the
 concepts the model asserted are now exercised by concrete sourced missions, and
 three of them (Q-Q, Q-F, Q-H) have a concrete schema or in-family prior art to
 adopt. **Buckets 1-2 are unchanged** - the unbuilt property/message layer and the
-~20 open typing/vocabulary decisions remain the modeling side's job. What
+~22 open typing/vocabulary decisions remain the modeling side's job. What
 changed is that those decisions can now be made on evidence, and the measurement
 report in particular (Q-Q) should be a *re-adoption* of BML `WhoMeasuredType`
 rather than a fresh invention.

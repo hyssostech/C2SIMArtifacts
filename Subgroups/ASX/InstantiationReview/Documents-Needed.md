@@ -147,7 +147,7 @@ claims. The rest extend into domains the library has not yet seen.
 ## UPDATE (2026-07-10) - all nine sourced; residual recommendation
 
 The scavenger session extracted all nine requests (see `Documents-Found.md` and
-`LLMExperiments/V2Extractions/`); the integration is in `ValidationEvidence-Walk.md`.
+`LLMExperiments/PaperSummaries/V2Extractions/`); the integration is in `ValidationEvidence-Walk.md`.
 On the three residual holes the sourcing session offered to chase, the modeling
 side's recommendation is:
 

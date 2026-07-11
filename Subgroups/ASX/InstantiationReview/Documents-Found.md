@@ -34,6 +34,11 @@ the RCBC/JWA-19 breach (units, obstacle composition, vehicle counts, timing), wi
 the caveat that the primary Maneuver Battle Lab report is not openly available. The
 sections below record the original sourcing detail.
 
+> **All sections below are the ORIGINAL pre-UPDATE assessment.** Per-request
+> status labels in them (SOURCED / HUNTING / "extraction pending") and the
+> trailing "Summary for the ontology session" are superseded by the UPDATE table
+> above: all nine requests are now EXTRACTED.
+
 ## Validation holes (top priority)
 
 ### 1. Explainability / human-on-the-loop - EXTRACTED

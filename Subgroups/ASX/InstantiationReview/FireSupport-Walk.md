@@ -18,9 +18,10 @@ Grounding done first - and it narrowed the findings a lot:
   `hasAuthorizationType` **already exists** - order authorization is modeled.
 - `DesiredEffectCode` **exists** and is already used in the UAV/UGV order sheets.
 - `hasAffectedEntity` (order sheets) can carry the **target** reference.
-- **Not found:** any weapon/munition class, any target class, any
-  battle-damage / effect-achieved report content, and any TaskActionCode
-  individuals (could not enumerate the task verbs from RDF - see Q below).
+- `lox#ENGAGE` and `lox#ATTACK` **exist** as `TaskActionCode` individuals
+  (LOX has 445), so the engage/attack verb is available via `hasTask`.
+- **Not found:** any weapon/munition class, any target class, and any
+  battle-damage / effect-achieved report content.
 
 So ROE and authorization are NOT gaps. The real question is autonomy-specific.
 
@@ -32,7 +33,7 @@ An armed UGV is tasked to engage a target with rules of engagement.
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (armed UGV UUID) | |
 | C2SIM | Message | - | hasAuthorizationHeader | AuthorizationHeader | (issuer credentials) | Works - authorization is modeled (C2SIM). |
-| C2SIM / ASX | Engage Task | Task | hasTask | TaskActionCode | Engage / Attack | [Q] confirm an engage/attack TaskActionCode value exists (could not enumerate from RDF). |
+| C2SIM / ASX | Engage Task | Task | hasTask | TaskActionCode | Engage / Attack | Works - `lox#ENGAGE` and `lox#ATTACK` exist as TaskActionCode individuals. |
 | C2SIM | (task) | Task | hasAffectedEntity | UUIDBase | (target UUID) | Target via hasAffectedEntity - partial (target is a plain entity ref). |
 | C2SIM | (task) | Task | hasDesiredEffectCode | DesiredEffectCode | Destroy / Suppress | Works - DesiredEffectCode exists. |
 | LOX | (task) | Task | hasRuleOfEngagement | RuleOfEngagement | (ROE) | Works - ROE exists (LOX). |

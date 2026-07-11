@@ -89,7 +89,7 @@ Findings:
 
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
-| C2SIM | ReportBody | DomainMessageBody | hasReportContent | PositionReportContent | (scout position) | Base-covered - `PositionReportContent` exists (SMX). |
+| C2SIM | ReportBody | DomainMessageBody | hasReportContent | PositionReportContent | (scout position) | Base-covered - `PositionReportContent` exists (C2SIM). |
 
 Finding: this one is **covered by the base standard** - no new ASX element
 needed. (Recorded so the walk does not overstate the gap.)

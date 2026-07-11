@@ -9,14 +9,20 @@ Layout mirrors the workbook columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
 **[Q]** = open question, **[!]** = gap/defect. Proposals only; nothing applied.
 
-Grounding done first (and it narrowed the findings):
-- Logistics: no cargo/payload/manifest/delivery class, but `Resource` /
-  `ResourceObservation` and quantity properties (`hasOnHandQuantity` etc.)
-  **exist** - so supplies are partly modelable; manifest + delivery are gaps.
-- Engineering: **nothing** for manipulation / effector / excavate / clear /
-  emplace / construct - no physical-manipulation task verbs exist.
+Grounding done first (and it narrowed the findings a lot). LOX carries 445
+`TaskActionCode` verbs, so almost every action verb already exists - the gaps
+are about *typed things carried/wielded* and a few autonomy-specific semantics,
+not verbs:
+- Logistics: delivery/transport verbs **exist** (`TRANS` Transport, `RESUPL`
+  Resupply, `LIFT`, `ARDROP`); `Resource` / `ResourceObservation` / quantities
+  exist too. The gaps are the cargo *manifest* and a delivery-confirmation
+  report, not the verb.
+- Engineering: the verbs **exist** too - `CONSTR` (build/dig/create), `CLROBS`
+  (clear obstacle), `CLRLND` (clear land), `MINLAY` (emplace), `BREACH`. The gap
+  is the effector/manipulator *equipment* concept (E2), not the action verb.
 - Maritime: `SurfaceVessel` / `SubsurfaceVessel` **exist** (SMX) - USV typing is
-  the same P1 conflict; no recover / rescue / tow task verb exists.
+  the same P1 conflict; `lox#RESCUE` and `lox#RECOVR` **exist**, so only a
+  general tow/salvage verb is absent.
 - `DesiredEffectCode`, `hasAffectedEntity`, `Person` all exist and are reused.
 
 ## 1. Logistics - Delivery Order + Confirmation
@@ -26,7 +32,7 @@ Grounding done first (and it narrowed the findings):
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (transport UGV UUID) | |
-| C2SIM / ASX | Deliver Task | Task | hasTask | TaskActionCode | Transport / Deliver | [Q] confirm a transport/deliver TaskActionCode exists. |
+| C2SIM / ASX | Deliver Task | Task | hasTask | TaskActionCode | TRANS / RESUPL | Works - `TRANS` (Transport) and `RESUPL` (Resupply) exist in LOX. |
 | C2SIM | (task) | Task | hasLocation | Location | (FOB destination) | Works. |
 | SMX | (cargo) | Resource / Equipment | (manifest) | ??? | Ammunition, Water, Medical | [!] L1: no cargo/payload manifest (what a platform carries). Resource exists but not "load carried"; ConceptMapping Payload absent from OWL. |
 | SMX | (cargo item) | Resource | hasOnHandQuantity | quantity | 500 rounds | Partial - resource quantities exist. |
@@ -45,7 +51,7 @@ Grounding done first (and it narrowed the findings):
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (engineer UGV UUID) | |
-| C2SIM / ASX | Engineering Task | Task | hasTask | TaskActionCode | Excavate / Clear / Emplace | [!] E1: no manipulation/effector task verbs (dig / clear / breach / construct) in the standard. |
+| C2SIM / ASX | Engineering Task | Task | hasTask | TaskActionCode | CONSTR / CLROBS / MINLAY | E1: use existing LOX verbs (`CONSTR` build/dig, `CLROBS` clear, `MINLAY` emplace, `BREACH`); the gap is effector typing (E2), not the verb. |
 | C2SIM | (task) | Task | hasAffectedEntity | UUIDBase | (obstacle / site) | Partial - target of manipulation via hasAffectedEntity. |
 | C2SIM | (task) | Task | hasDesiredEffectCode | DesiredEffectCode | (site cleared) | Partial - effect code exists. |
 | ASX | effector | Equipment / Payload | (manipulator) | ??? | dozer blade / excavator / arm | [!] E2: no effector/manipulator equipment concept. Ties to P2/D3. |
@@ -57,7 +63,7 @@ Grounding done first (and it narrowed the findings):
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (USV UUID) | [!] R1/P1: USV is an SMX `SurfaceVessel` vs ASX `USV subClassOf Robot` - the P1 conflict, now maritime. |
 | SMX | USV | SurfaceVessel (SMX) | hasEntityType | EntityType | USV | Maritime platform type exists (`SurfaceVessel`) - reuse vs the ASX Robot tree. |
-| C2SIM / ASX | Rescue Task | Task | hasTask | TaskActionCode | Recover / Rescue | [!] R2: no recovery / rescue / tow / salvage task verb in the standard. |
+| C2SIM / ASX | Rescue Task | Task | hasTask | TaskActionCode | Recover / Rescue | R2: use `lox#RESCUE` or `lox#RECOVR` (both exist); only a general tow/salvage verb is absent. |
 | C2SIM | (task) | Task | hasAffectedEntity | UUIDBase | (downed pilot) | Rescue subject; `Person` entity exists. |
 | C2SIM | (task) | Task | hasLocation | Location | (last-known position) | Works. |
 
@@ -69,10 +75,10 @@ Grounding done first (and it narrowed the findings):
 |---|---|---|---|
 | L1 | MED | gap | No cargo/payload manifest (what a platform carries); Resource + quantities exist, "load carried" does not. |
 | L2 | MED | gap | No delivery-confirmation ReportContent (what delivered, received by whom). |
-| E1 | HIGH | gap | No manipulation/effector task verbs (dig, clear, breach, construct). |
+| E1 | LOW | mostly covered | Engineering verbs exist in LOX (`CONSTR`, `CLROBS`, `CLRLND`, `MINLAY`, `BREACH`); folds into E2 (effector typing). |
 | E2 | MED | gap | No effector/manipulator equipment concept (arm, blade, excavator). |
 | R1 | - | reconfirms P1 | USV typing conflict (SMX SurfaceVessel vs ASX USV/Robot), now maritime. |
-| R2 | MED | gap | No recovery/rescue/tow task verb. |
+| R2 | LOW | minor gap | `lox#RESCUE` and `lox#RECOVR` exist; only a general tow/salvage verb is absent. |
 
 Partially covered / reused (checked): `Resource` + quantities,
 `ResourceObservation`, `DesiredEffectCode`, `hasAffectedEntity`, `Person`,
@@ -80,12 +86,17 @@ Partially covered / reused (checked): `Resource` + quantities,
 
 ## Headline: the task/effect axis has one recurring shape
 
-Across engagement (Fire Support), delivery, manipulation, and rescue, the same
-two things are missing and nothing else is:
-1. **Task verbs** for what autonomous systems do - deliver, dig/clear/emplace,
-   recover/rescue (engage is uncertain). The standard has generic
-   `DesiredEffectCode` and `hasAffectedEntity`, but not the action vocabulary.
-2. **Payload / effector / weapon typing** - cargo (L1), manipulators (E2), and
-   weapons (W2) are all the same gap: no typed thing-carried-or-wielded.
-Entity structure (P1), addressing, effects, targets, and resources are already
-there. This distills the whole task/effect axis into one decision (Q-L).
+Across engagement, delivery, manipulation, rescue, search, and escort, LOX
+already carries the action vocabulary - 445 `TaskActionCode` verbs, including
+`ENGAGE`, `ATTACK`, `BREACH`, `CONSTR`, `CLROBS`, `MINLAY`, `TRANS`, `RESUPL`,
+`RESCUE`, `RECOVR`, `NTRCOM`/`NTREXP` (neutralize), `ESCRT`, `FOLASS`, `RECCE`,
+`PATROL`, `SWEEP`, `DECEIV`/`DAZZLE`. So the task/effect axis is **not** a
+missing-verb problem. The genuine ASX gaps are:
+1. **Payload / effector / weapon typing** - cargo (L1), manipulators (E2), and
+   weapons (W2) are the same gap: no typed thing-carried-or-wielded.
+2. **A few autonomy-specific semantics** - an area-coverage / exploration
+   *goal* (explore-until-covered, tied to N1), and a general tow/salvage; plus
+   the autonomy-to-engagement-authority link (W1).
+Entity structure (P1), addressing, effects, targets, resources, and the whole
+task-verb vocabulary are already there. The residual task/effect work is the
+payload/effector/weapon typing (Q-L), not the verbs.

@@ -6,7 +6,10 @@ instantiations. This is the working source; the planned findings PowerPoint is
 generated from it. Kept current as work proceeds.
 
 Severity: **BLOCKER** (stops a message being instantiated) / **HIGH** /
-**MED** / **LOW** / **TYPO**. Status: **OPEN** / **RESOLVED**.
+**MED** / **LOW** / **TYPO**. Status: **OPEN** / **RESOLVED**, plus qualified
+states used in the tables (all variants of in-progress or partially-resolved):
+**PARTIAL**, **NARROWED**, **MOSTLY COVERED**, **MOSTLY REUSE**, **WALKED**,
+**INSTANTIATED**, **EVIDENCED**, **DECIDED**, **DONE**, **FOLDS INTO Q-x**.
 Items marked **[deck]** are candidates for the findings presentation.
 
 ## 1. Repo sync & process
@@ -51,6 +54,10 @@ Items marked **[deck]** are candidates for the findings presentation.
 
 ## 5. Initialization walk - entity-typing findings (headline)
 
+(Note: the P-series is intentionally non-contiguous - P4 was retired/merged
+during the walk. The P-IDs are stable cross-reference handles and are not
+renumbered.)
+
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | P1 | BLOCKER | OPEN | UAV typed twice, incompatibly: ASX `UAV subClassOf Robot subClassOf ActorEntity` vs SMX `Aircraft subClassOf Platform subClassOf ActorEntity` | Disjoint sibling trees. `Robot` orphans the drone from Platform machinery; `Aircraft` leaves ASX classes unused. **[deck]** |
@@ -72,8 +79,8 @@ Items marked **[deck]** are candidates for the findings presentation.
 | C3 | MED | OPEN | 8 of 10 MUTT scenarios have no instantiations | Only Recon->video and Logistics->UGV transport partly covered. |
 | C4 | MED | INSTANTIATED | Non-video sensors not covered | Walked in `NonVideoSensors-Walk.md`; 3 report tabs added to the `.xml` (CBRN / EW Emitter / GPR Mine). Surfaced Y1-Y5 (section 6c). **[deck]** |
 | C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
-| C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Still open: route-clearance-neutralize, companion drones, urban combat. **[deck]** |
-| C7 | HIGH | INSTANTIATED | Sourced scenarios (maritime MCM, subterranean SubT, sustainment) not integrated | Walked in `SourcedScenarios-Walk.md`; 7 tabs added (MCM Init, SubT Team Init, MCM Cross-Cue Neutralize, Explore Area Order, Contested Resupply Order, Naval Mine Detection Report, Generic Detection Report). Corroborated X1/N2/P1/Y; added G1-G10 (6h). Still un-extracted: counter-UAS swarm, HMT, SAR. **[deck]** |
+| C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Route-clearance / companion / urban examined in the redundancy pass (6g; a Route Clearance Order tab was added). **[deck]** |
+| C7 | HIGH | INSTANTIATED | Sourced scenarios (maritime MCM, subterranean SubT, sustainment) not integrated | Walked in `SourcedScenarios-Walk.md`; 7 tabs added (MCM Init, SubT Team Init, MCM Cross-Cue Neutralize, Explore Area Order, Contested Resupply Order, Naval Mine Detection Report, Generic Detection Report). Corroborated X1/N2/P1/Y; added G1-G10 (6h). (Counter-UAS, HMT, and SAR were un-extracted at this stage; all three were later extracted in the validation pass - see C8/6j.) **[deck]** |
 | C8 | HIGH | EVIDENCED | Validation holes (explainability, CBRN, EW, persistence) unexercised by any sourced mission | Scavenger extracted all 9 `Documents-Needed` requests; integrated in `ValidationEvidence-Walk.md` (6j). Holes now grounded; Q-Q/Q-F/Q-H gain concrete schemas (BML WhoMeasuredType/ResourceType; Agrawal explanation). Added G13/Q-V; 2 tabs. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
@@ -109,7 +116,7 @@ identity (`SubjectTypeObservation`, if the entity type exists), confidence
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| P7 | BLOCKER | OPEN | Swarm cannot be tasked or report | Confirmed by both swarm messages: an OrderBody recipient and a ReportBody `hasReportingEntity` must be an ActorEntity; ASX Swarm derives from PhysicalEntity. Fix: `Swarm subClassOf CollectiveEntity` (SMX). **[deck]** |
+| P7 | BLOCKER | OPEN | Swarm cannot be tasked or report | Confirmed by both swarm messages: an OrderBody recipient and a ReportBody `hasReportingEntity` must be an ActorEntity; ASX Swarm derives from PhysicalEntity. Fix: `Swarm subClassOf CollectiveEntity` (C2SIM; re-declared in SMX). **[deck]** |
 | Z1 | MED | OPEN | No aggregation construct | A swarm detection built from multiple members' observations - one collective report or N member reports? No aggregation model. |
 | Z2 | MED | OPEN | No swarm-lifecycle construct | Dynamic member rotation / resupply / replacement (June deck) has no construct. |
 | P8 | HIGH | NARROWED | Membership + command mostly covered | `hasSubordinate`/`hasSuperior`/`hasCommandRelation` exist; residual is network params, leader-as-role, dynamic handover. |
@@ -138,16 +145,17 @@ piece is autonomy-to-permission.
 |---|---|---|---|---|
 | L1 | MED | OPEN | No cargo/payload manifest | What a platform carries. `Resource` + quantities exist; "load carried" does not. ConceptMapping Payload absent from OWL. |
 | L2 | MED | OPEN | No delivery-confirmation ReportContent | What was delivered and received by whom; `TaskStatus` only says the task ran. |
-| E1 | HIGH | OPEN | No manipulation/effector task verbs | dig / clear / breach / emplace / construct - the task model has no physical-manipulation verbs. |
+| E1 | MED | OPEN | No dig/clear/emplace/construct verbs | `lox#BREACH` exists as a TaskActionCode; the manipulation verbs dig/clear/emplace/construct do not. |
 | E2 | MED | OPEN | No effector/manipulator equipment concept | arm / blade / excavator. Ties to P2/D3. |
 | R1 | - | reconfirms P1 | USV typing (SMX `SurfaceVessel` vs ASX `USV`/Robot), now maritime. |
-| R2 | MED | OPEN | No recovery/rescue/tow task verb | "recover downed pilot" has no task verb. |
+| R2 | LOW | OPEN | Only a general tow/salvage verb absent | `lox#RESCUE` and `lox#RECOVR` exist as TaskActionCodes (the downed-pilot task uses RESCUE); only a general tow/salvage verb is missing. |
 
-Recurring shape of the whole task/effect axis: only two things are missing -
-**(a) task verbs** (deliver, dig/clear, recover/rescue; engage uncertain) and
-**(b) payload/effector/weapon typing** (cargo L1, manipulator E2, weapon W2 are
-one gap). Entity structure, addressing, effects, targets, resources, ROE, and
-authorization already exist. Distilled into decision Q-L.
+Recurring shape of the whole task/effect axis: LOX already has 445 `TaskActionCode`
+verbs (incl. BREACH, ENGAGE, ATTACK, RESCUE, RECOVR), so what is actually missing
+is narrow - **(a) a few task verbs** (dig/clear/emplace/construct, general
+tow/salvage) and **(b) payload/effector/weapon typing** (cargo L1, manipulator E2,
+weapon W2 are one gap). Entity structure, addressing, effects, targets, resources,
+ROE, authorization, and most task verbs already exist. Distilled into decision Q-L.
 
 ## 6g. Redundancy-pass findings (from RedundancyPass-Walk.md)
 
@@ -166,8 +174,8 @@ transport = L, clear = E, recon = Y, relay = CommunicationNetwork + verb. The
 
 ## 6h. Sourced-scenarios reconciliation (MCM / SubT / Sustainment)
 
-From the parallel scenario-sourcing session (`LLMExperiments/V2Extractions/` +
-`OntologyCoverageClustering.md`), walked in `SourcedScenarios-Walk.md`. This
+From the parallel scenario-sourcing session (`LLMExperiments/PaperSummaries/V2Extractions/` +
+`OntologyConceptCoverage.md`), walked in `SourcedScenarios-Walk.md`. This
 input was initially missed and then integrated; it corroborates several findings
 and adds new ones.
 
@@ -178,18 +186,19 @@ reports <- SubT/MCM detections, + the generic-report answer G4).
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | G1 | HIGH | OPEN | Denied-comms mode + relay as deployable taskable entity | SubT. `CommunicationNetwork` is a network, not a droppable node/behavior; no comms-degraded operating mode. **[deck]** |
-| G2 | HIGH | OPEN | Explore / Search-Area order with a coverage goal | SubT. No search/explore/coverage task verb; distinct from Patrol. Ties N1. **[deck]** |
+| G2 | MED | OPEN | Area-coverage / exploration goal | SubT. Search/recce verbs (`RECCE`, `RECONS`, `PATROL`, `SWEEP`, `DETECT`) exist; missing is the coverage-*goal* semantics (explore-until-covered), tied to N1. **[deck]** |
 | G3 | MED | OPEN | Cross-cueing: system-to-system task + shared classified track | MCM. Reuses X1 + M1; no Track/Contact object type. |
 | G4 | HIGH | OPEN | Generic parameterized Detection Report | confidence + error-bound + false-positive + modality; subsumes Video/CBRN/EW/GPR/naval-mine/artifact. **Resolves Y1/M3/M4.** **[deck]** |
 | G5 | MED | OPEN | Platform locomotion/role subtypes | wheeled/tracked/legged UGV; detector/neutralizer USV. Extends P1. |
 | G6 | LOW | MOSTLY REUSE | Maritime depth | naval mine (moored/bottom) via SubjectTypeObservation; UUV=SubsurfaceVessel; sea-lane area. |
 | G7 | LOW | OPEN | Measure-of-effectiveness attributes on reports | % neutralized, active time (MCM). |
-| G8 | MED | OPEN | Decoy / deception behavior | Sustainment. No decoy concept. |
+| G8 | LOW | OPEN | Decoy as a distinct behavior/role | Deception verbs (`DECEIV`, `DAZZLE`) exist; a decoy role/behavior is the residual. |
 | G9 | MED | OPEN | Threat-aware / contested-delivery order annotations | Sustainment. Risk/threat + level-of-autonomy on a logistics order. |
-| G10 | LOW | MOSTLY COVERED | Neutral-actor framing | `HostilityStatusCode`/`NeutralSide` exist; residual = neutral-as-constraint + no-adversary missions. |
+| G10 | LOW | MOSTLY COVERED | Neutral-actor framing | `HostilityStatusCode` (neutral value `smx#ANT`) and the affiliation individual `NeutralSide` exist; residual = neutral-as-constraint + no-adversary missions. |
 
-Still un-extracted by the sourcing session (future scenarios): counter-UAS /
-swarm-vs-swarm, human-machine teaming (HATOM), humanitarian SAR - see
+Un-extracted at this (6h) stage - all three were later extracted in the
+validation pass (see 6j / C8): counter-UAS / swarm-vs-swarm, human-machine
+teaming, humanitarian SAR - see
 `CandidateSources.md`.
 
 ## 6i. Re-sync with the sourcing session's concept-coverage doc
@@ -205,8 +214,9 @@ task breadth incl. explore/neutralize/decoy (Q-L/Q-N/Q-S), persistence (N2),
 graded LoA (D1/Q-D).
 
 **Refined:** neutral actors - their doc hedges ("if the model presumes a hostile
-side"); my grounding confirms `NeutralSide`/`HostilityStatusCode` exist, so the
-gap is only neutral-as-constraint / no-adversary missions (G10). Graded LoA -
+side"); my grounding confirms both the neutral `HostilityStatusCode` value
+`smx#ANT` and the `NeutralSide` affiliation individual exist, so the gap is only
+neutral-as-constraint / no-adversary missions (G10). Graded LoA -
 their #6 sharpens Q-D: autonomy is not one flat vocabulary but a graded scale
 that can vary by mission phase.
 
@@ -226,7 +236,7 @@ expressiveness gaps - see section 8.
 ## 6j. Validation-evidence integration (nine sourced missions)
 
 The scavenger session extracted all nine `Documents-Needed.md` requests (see
-`Documents-Found.md`, `LLMExperiments/V2Extractions/`). Walked in
+`Documents-Found.md`, `LLMExperiments/PaperSummaries/V2Extractions/`). Walked in
 `ValidationEvidence-Walk.md`. Effect: asserted findings are now **evidenced**,
 and three decisions gain a concrete schema / prior art.
 
@@ -283,17 +293,21 @@ Tasking` (Order).
   may a system at this autonomy level take this (lethal) action without a human
   in/on the loop? ROE and authorization already exist; this link does not.
   (Resolves W1.)
-- **Q-L [deck]** Define the task/effect vocabulary the axis needs: (a) task
-  verbs (deliver, dig/clear/emplace, recover/rescue, engage, follow/escort/relay)
-  and (b) typed payload/effector/weapon (cargo, manipulator, munition). Effects,
-  targets, resources, `RelativeLocation`, and `CommunicationNetwork` already
-  exist. (Resolves L1/L2/E1/E2/R2/W2/N2.)
+- **Q-L [deck]** Complete the task/effect vocabulary: (a) add the few missing
+  task verbs (dig/clear/emplace/construct, general tow/salvage) - most verbs
+  (BREACH, ENGAGE, ATTACK, RESCUE, RECOVR, plus follow/escort over
+  `RelativeLocation`/`CommunicationNetwork`) already exist in LOX and should be
+  reused; and (b) add typed payload/effector/weapon (cargo, manipulator,
+  munition). Effects, targets, and resources already exist.
+  (Resolves L1/L2/E1/E2/W2/N2; R2 is only a tow/salvage top-up.)
 - **Q-M [deck]** Allow an **area** to be the subject of a task and a report -
   an `hasAffectedArea` counterpart to `hasAffectedEntity`, and an area-state
   (cleared / contaminated / mined). Areas (`TacticalArea`, `MapGraphic`) exist;
   tasking/reporting on them does not. (Resolves N1.)
-- **Q-N [deck]** Add an **Explore / Search-Area** order with a coverage goal,
-  distinct from Patrol (fixed route) and point tasks. (Resolves G2.)
+- **Q-N [deck]** Add an **area-coverage / exploration goal** (explore-until-covered)
+  on top of the existing search/recce verbs (`RECCE`, `PATROL`, `SWEEP`), so
+  autonomous area exploration is expressible beyond a fixed patrol route.
+  (Resolves G2.)
 - **Q-O [deck]** Model **denied-comms operation**: a comms-degraded operating
   mode and a deployable comms-relay entity/behavior. (Resolves G1.)
 - **Q-P** Extend robot-to-robot (Q-G) with **cross-cueing**: system-to-system
@@ -390,7 +404,7 @@ instantiation to see which is which.
   into 2 slides. Grounding narrowed the finding: ROE + authorization already
   exist (LOX/C2SIM); the real gap (W1) is the autonomy-to-engagement link.
 - 2026-07-10: Integrated the parallel scenario-sourcing session's output
-  (SubT, Cooperative MCM, Sustainment + `OntologyCoverageClustering.md`), which
+  (SubT, Cooperative MCM, Sustainment + `OntologyConceptCoverage.md`), which
   had been missed earlier when its commits were wrongly filed as unrelated.
   Walked all three (`SourcedScenarios-Walk.md`), added 7 tabs, section 6h
   (G1-G10) and decisions Q-N..Q-S. Correction: the earlier "findings converged"
@@ -404,7 +418,7 @@ instantiation to see which is which.
   (`Documents-Found.md` / V2Extractions). Section 6j, coverage C8, G13/Q-V, two
   tabs. Bucket-3 validation holes now evidenced; key result: the measurement
   report (Q-Q) is prior art in C2SIM's BML lineage (WhoMeasuredType) - re-adopt,
-  don't invent. Buckets 1-2 (property layer, ~20 decisions) unaffected.
+  don't invent. Buckets 1-2 (property layer, ~22 decisions) unaffected.
 - 2026-07-10: Redundancy pass over route-clearance / companion / urban
   (`RedundancyPass-Walk.md`). Confirmed ~80% redundant; extracted N1 (area as
   subject of task/report - new) and N2 (folds into Q-L). Added section 6g,
