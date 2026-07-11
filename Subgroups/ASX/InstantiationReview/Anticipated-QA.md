@@ -6,8 +6,8 @@ claim was verified against the RDF, that is noted.
 
 **Q. Did you actually check the base standard, or just assume these are gaps?**
 Checked. Before asserting any gap we grep'd the C2SIM / SMX / LOX RDF. That is why
-several things came back as "already exists" (rules of engagement, order
-authorization, `DesiredEffectCode`, `Route`, `Resource`, `SurfaceVessel` /
+several things came back as "already exists" (rules of engagement,
+`DesiredEffectCode`, `Route`, `Resource`, `SurfaceVessel` /
 `SubsurfaceVessel`, `CollectiveEntity`, `RelativeLocation`, `HostilityStatusCode`
 (neutral value `smx#NEUTRL`; `smx#ANT` = assumed-neutral), an untyped `NeutralSide` individual, and the LOX
 task verbs BREACH / ENGAGE / ATTACK / RESCUE / RECOVR) and two would-be gaps were

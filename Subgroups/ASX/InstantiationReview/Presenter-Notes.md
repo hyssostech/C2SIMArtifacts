@@ -49,9 +49,11 @@ a proposal; nothing has been applied to the model or the workbooks.
 - Much of what's "missing" is **re-adopt, not invent**:
   - The sensor-measurement report is prior art in C2SIM's own **BML** lineage -
     `WhoMeasuredType` (value + unit + phenomenon + sensor + time + place).
-  - Rules of engagement, order authorization, desired effects, routes,
-    resources, maritime vessels, and neutral affiliation **already exist** in the
-    base standard - we verified this against the RDF, not from memory.
+  - Rules of engagement, desired effects, routes, resources, maritime vessels,
+    and a neutral hostility value (`smx#NEUTRL`) **already exist** in the base
+    standard - we verified this against the RDF, not from memory. (Command
+    authorization of an engagement does *not* exist - that is the W1 gap;
+    `AuthorizationHeader` is only message-sender authentication.)
   - The **task-verb vocabulary already exists**: LOX has 446 `TaskActionCode`
     verbs (engage, attack, breach, construct, clear, transport, resupply,
     rescue, recover, neutralize, escort, follow, recce, patrol, sweep, deceive).

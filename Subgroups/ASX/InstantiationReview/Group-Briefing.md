@@ -52,9 +52,10 @@ Much of what is "missing" is already present or has prior art - so several
 decisions are *re-adopt*, not *invent*:
 - The **measurement/detection report** is prior art in C2SIM's own **BML**
   lineage (`WhoMeasuredType`: value + unit + phenomenon + sensor + time + place).
-- Rules of engagement, order authorization, desired effects, targets, routes,
-  resources, maritime vessels, and neutral affiliation **already exist** in the
-  base standard.
+- Rules of engagement, desired effects, targets, routes, resources, maritime
+  vessels, and a neutral hostility value (`smx#NEUTRL`) **already exist** in the
+  base standard. (Command authorization of an engagement does *not* - that is the
+  W1 gap; `AuthorizationHeader` is only message-sender authentication.)
 
 ## What the group needs to decide
 

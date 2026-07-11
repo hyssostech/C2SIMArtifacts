@@ -60,13 +60,13 @@ renumbered.)
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| P1 | BLOCKER | OPEN | UAV typed twice, incompatibly: ASX `UAV subClassOf Robot subClassOf ActorEntity` vs SMX `Aircraft subClassOf Platform subClassOf ActorEntity` | Disjoint sibling trees. `Robot` orphans the drone from Platform machinery; `Aircraft` leaves ASX classes unused. **[deck]** |
+| P1 | BLOCKER | OPEN | UAV typed twice, incompatibly: ASX `UAV subClassOf Robot subClassOf ActorEntity` vs SMX `Aircraft subClassOf Platform subClassOf ActorEntity` | Parallel (non-overlapping) sibling trees. `Robot` orphans the drone from Platform machinery; `Aircraft` leaves ASX classes unused. **[deck]** |
 | P2 | BLOCKER | OPEN | Sensor: separately-declared entity, or attribute on platform? | Init must pick one; Report side only consumed sensor output. Ties to D2. **[deck]** |
 | P3 | HIGH | OPEN | `hasAutonomousRoleCode` has no attachment point on the entity | Defined in OWL, but no Init field and not on EntityDescriptor. |
 | P5 | HIGH | OPEN | Patrol route/area not modeled as an init object | Order references a route to change; nothing declares the baseline. Can host as MapGraphic. Gap on both Init and Order sides. Ties to M6. |
 | P6 | HIGH | OPEN | Three competing autonomy vocabularies at init time | Same as D1, surfaced concretely when declaring an entity. |
 | P7 | BLOCKER | OPEN | Swarm cannot be tasked as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity` (inert), but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. **[deck]** |
-| P8 | HIGH | NARROWED | Swarm membership + leader partially covered | `hasSubordinate`/`hasSuperior`/`hasCommandRelation` (base) cover membership + command; residual gap is network params, leader-as-role, and dynamic handover. See section 6d. |
+| P8 | HIGH | NARROWED | Swarm membership + leader partially covered | `hasSubordinate`/`hasSuperior` (C2SIM) and `hasCommandRelation` (SMX) cover membership + command; residual gap is network params, leader-as-role, and dynamic handover. See section 6d. |
 | P9 | TYPO | OPEN | Misspelling O1 propagates into swarm instance data | Same root as O1. |
 | P10 | MED | OPEN | Heterogeneous (mixed UAV+UGV) swarm membership unconfirmed | MUTT-style mixed swarms; confirm members of different platform types can share one collective. |
 
@@ -134,9 +134,11 @@ reporting linkage (`hasReportingEntity`) - all conditional on fixing P7.
 | W2 | MED | OPEN | Weapon/munition not typed | ConceptMapping Payload = Armiture/Ammunition; absent from OWL. Ties to D3/P2. |
 | W3 | MED | OPEN | No effect-achieved / BDA ReportContent | `TaskStatus` reports the task ran, not whether the target was destroyed. |
 
-Partially covered (checked, NOT gaps): rules of engagement, order
-authorization, desired effect (`DesiredEffectCode`), target designation
-(`hasAffectedEntity`). The engagement machinery mostly exists - the missing
+Partially covered (checked, NOT gaps): rules of engagement, desired effect
+(`DesiredEffectCode`), target designation (`hasAffectedEntity`), the engage/attack
+verbs. (`AuthorizationHeader` is message-sender authentication, NOT command
+authorization of fires - so who-approved-the-engagement is part of W1.) The
+engagement machinery mostly exists - the missing
 piece is autonomy-to-permission.
 
 ## 6f. Task/effect batch findings (from TaskEffect-Batch-Walk.md)
@@ -288,10 +290,11 @@ Tasking` (Order).
   so non-imaging sensors (CBRN, EW, GPR, thermal) can report. (Resolves Y1/Y2/Y5.)
 - **Q-J** After fixing P7, add the small swarm residuals: network/comms
   parameters, a leader role, report aggregation (Z1), and member lifecycle
-  (Z2). Membership/command reuse base `hasSubordinate`/`hasCommandRelation`.
+  (Z2). Membership/command reuse C2SIM `hasSubordinate` / SMX `hasCommandRelation`.
 - **Q-K [deck]** Model engagement authority as a function of autonomy level -
   may a system at this autonomy level take this (lethal) action without a human
-  in/on the loop? ROE and authorization already exist; this link does not.
+  in/on the loop? ROE already exists; command authorization of the engagement and
+  this autonomy link do not (`AuthorizationHeader` is only message-sender auth).
   (Resolves W1.)
 - **Q-L [deck]** Add typed **payload / effector / weapon** (cargo, manipulator,
   munition) - the action verbs already exist in LOX (BREACH, ENGAGE, ATTACK,
@@ -401,8 +404,9 @@ instantiation to see which is which.
 - 2026-07-10: Walked Fire Support (`FireSupport-Walk.md`) - opens the task/effect
   axis; added `Fire Support Order` + `BDA Report` tabs. Added section 6e (W1-W3),
   decision Q-K, coverage C6; deck gained a Fire Support slide and split decisions
-  into 2 slides. Grounding narrowed the finding: ROE + authorization already
-  exist (LOX/C2SIM); the real gap (W1) is the autonomy-to-engagement link.
+  into 2 slides. Grounding narrowed the finding: ROE already exists (LOX); the
+  real gap (W1) is the autonomy-to-engagement-authority link (AuthorizationHeader
+  is only message-sender authentication, not command authorization).
 - 2026-07-10: Integrated the parallel scenario-sourcing session's output
   (SubT, Cooperative MCM, Sustainment + `OntologyConceptCoverage.md`), which
   had been missed earlier when its commits were wrongly filed as unrelated.

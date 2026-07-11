@@ -41,7 +41,8 @@ in the `.xlsx` changed.
   membership/command already exist in base C2SIM (P8 narrowed; Z1/Z2 residuals).
 - [FireSupport-Walk.md](./FireSupport-Walk.md) - armed engagement + BDA;
   opens the task/effect axis and surfaces W1 (no link between autonomy level and
-  authority to take a lethal action). ROE and authorization already exist.
+  authority to take a lethal action). ROE already exists; command authorization
+  of fires is part of the W1 gap.
 - [TaskEffect-Batch-Walk.md](./TaskEffect-Batch-Walk.md) - Logistics, Engineering,
   and USV Rescue in one pass; the task/effect axis needs mainly payload/effector/
   weapon typing plus a few manipulation verbs - most task verbs (BREACH, ENGAGE,
