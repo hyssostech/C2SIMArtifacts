@@ -38,7 +38,7 @@ in the `.xlsx` changed.
   (Y1-Y5).
 - [Swarm-Walk.md](./Swarm-Walk.md) - swarm detection report + coordination
   order; exercises P7 (a swarm can't be tasked/report as modeled) and shows
-  membership/command already exist in base C2SIM (P8 narrowed; Z1/Z2 residuals).
+  membership/command already exist in the base standard (P8 narrowed; Z1/Z2 residuals).
 - [FireSupport-Walk.md](./FireSupport-Walk.md) - armed engagement + BDA;
   opens the task/effect axis and surfaces W1 (no link between autonomy level and
   authority to take a lethal action). ROE already exists; command authorization
