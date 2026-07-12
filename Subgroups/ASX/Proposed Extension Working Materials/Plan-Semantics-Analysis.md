@@ -7,6 +7,17 @@ incorporates the results of an adversarial review pass (ontology-consistency che
 core/SMX/LOX, fact-check against the repository artifacts, and a conceptual review of the
 BT/BDI mappings); §7 records what the module deliberately does not cover.*
 
+*Verification cross-reference (2026-07-12): an independently produced
+standards-matrix pass (`../InstantiationReview/PlanSemantics-Walk.md`,
+sections 3 and 8) verified this document's C2SIM-side claims against the
+RDF and mapped the module against JAUS AS6062, STANAG 4586, IEEE
+1872.1-2024, MAVLink, FlexBE, and 4D/RCS. It corroborates the construct
+choices (independent derivation converged on the same set), lists v-next
+deltas (plan identifier, Suspended outcome, task-targeted acks, waypoint
+schema, failsafe/geofence binding), and corrects one alignment target:
+IEEE 1872.2 verifiably defines no Plan/Goal/Mission constructs - align to
+IEEE 1872.1-2024 only.*
+
 ---
 
 ## 1. Purpose and scope

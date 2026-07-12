@@ -100,6 +100,22 @@ Anchor autonomy-level terms to **ALFUS / 4D/RCS**, and keep the whole
 ontology consistent with **C2SIM / STANAG** naming, since C2SIM is ASX's
 parent standard.
 
+## See also
+
+- `../Proposed Extension Working Materials/Plan-Semantics-Analysis.md` -
+  the ASX plan-semantics proposal built on this survey: BT/BDI/HTN
+  correlation with the LOX plan model plus a draft OWL module
+  (`ASX-PlanSemantics-Draft.ttl`) and three validation walks.
+- `../InstantiationReview/PlanSemantics-Walk.md` - verification and
+  breadth pass over that proposal: capability matrix vs BT/Nav2,
+  PDDL/PlanSys2, FlexBE, MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS
+  AS6062, STANAG 4586, 4D/RCS, HTN, FIPA/BDI, with every C2SIM-side claim
+  verified against the RDF. Two survey updates established there:
+  IEEE 1872.1 published as **1872.1-2024** (June 2024), and IEEE 1872.2
+  (AuR) verifiably defines **no Plan/Goal/Mission constructs of its own** -
+  for plan semantics the relevant anchors are 1872.1-2024, STANAG 4586,
+  and JAUS AS6062, not 1872.2.
+
 ## Sources
 
 - IEEE 1872.2-2021 AuR Ontology:
