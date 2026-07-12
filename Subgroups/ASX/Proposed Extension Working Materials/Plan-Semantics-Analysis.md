@@ -242,6 +242,11 @@ fragment in the ASX namespace importing LOX — rather than a freestanding ontol
 
 ## 5. Proposed ASX plan-semantics module (sketch)
 
+> The module described in this section is fully drafted as a machine-readable OWL file:
+> [`ASX-PlanSemantics-Draft.ttl`](./ASX-PlanSemantics-Draft.ttl) (Turtle, same serialization
+> conventions as `CSIM_ASX.rdf`; entities in the `asx#` namespace under a separate module
+> ontology IRI importing lox, so it can be merged into the ASX ontology once reviewed).
+
 Design rules observed throughout: UpperCamelCase classes; `hasXxx` properties; enumerations
 as `…Code` ⊑ `C2SIM:Code` with `owl:NamedIndividual` members; qualified-cardinality
 restrictions; UUID datatype references for cross-links, object properties for containment;
