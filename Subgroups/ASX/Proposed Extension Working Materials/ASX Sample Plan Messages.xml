@@ -1,0 +1,1509 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>C2SIM ASX Sub-group (plan-semantics working session)</Author>
+  <Created>2026-07-12T00:00:00Z</Created>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Plan MessageBody Fields">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="53" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Class that Defines Field</Data></Cell>
+    <Cell><Data ss:Type="String">Model that defines attribute</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Plan</Data></Cell>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">See hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Same header fields as Order/Report workbooks</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">ASX (plan module)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">subclass of LOX PlanBody; draft v0.0.2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">lox:PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">All additions optional atop a plain LOX plan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">isToBeExecutedNow</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">boolean</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">MUST be false for plan-library variants (rule R14)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGoal</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Goal (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">inline Goal definition - the transport slot</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">the Goal this plan pursues</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasContextCondition</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Condition (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">plan applicability; plan pre-selection library (R14)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">phases may be AutonomousPlanPhase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">lox:PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">inherits exactly-1 trigger + exactly-1 completion condition</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasPhaseFailureCondition</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">PhaseFailureCondition (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AnyTaskFailed | AllTasksFailed</Data></Cell>
+    <Cell><Data ss:Type="String">aggregation policy only; timeout/guard failures implicit (R4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasOnFailurePhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">BT Fallback; target trigger MUST be OnPhaseFailureTrigger (R7)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasExecutionPolicyCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">PhaseExecutionPolicyCode (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">SequentialInOrder | ParallelAll | ParallelAny | PriorityFallback</Data></Cell>
+    <Cell><Data ss:Type="String">subphase control flow; order via hasPhasePriority</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasRepetitionPolicyCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">RepetitionPolicyCode (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">ExecuteOnce | RetryOnFailure | RepeatUntilCondition | MaintainContinuously</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PM1: no cadence/interval slot yet (v0.0.3 delta)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasRepetitionUntilCondition</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Condition (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">closes the loop; LOX completion code closes each iteration</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasRepetitionLimit</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">nonNegativeInteger (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGuardCondition</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Condition (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">conjunctive invariants (R12); violation fails phase (R4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasPhaseTimeout</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Duration (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasRequiredAutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Teleop | ReCont | Automated | FullAuto</Data></Cell>
+    <Cell><Data ss:Type="String">graded per-phase autonomy (Q-D)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasPhasePriority</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">nonNegativeInteger (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">explicit ordering; RDF is unordered</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasPhaseProductReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">runtime data products (pre-allocated UUIDs - PC2 convention)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PlanPhaseTrigger subclasses</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">lox:PlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">fail-closed for consumers that cannot interpret them (R13)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition (1)</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">level-triggered on own world model (R11)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger / hasLogicalOperatorCode</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhaseTrigger (2..*) / LogicalOperatorCode (1)</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AllSubTriggers | AnySubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">R9: discrete latch, state must hold</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HumanApprovalTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasApprovingEntity / hasApprovalTimeout / hasOnTimeoutPhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (1) / Duration (0..1) / UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">HumanApprovalTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">engagement-authority gate (W1/Q-K); Refuse = timeout disposition</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">OnPhaseFailureTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasTriggerPhase</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (1)</Data></Cell>
+    <Cell><Data ss:Type="String">OnPhaseFailureTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">failure dual of PriorPhaseCompletionTrigger</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ParentPhasePolicyTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">(none)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">ParentPhasePolicyTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">fills mandatory slot of policy-managed subphases</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMContent</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">end state distinct from procedure</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasUUID</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (1)</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasAchievementCondition</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Condition (1..*)</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">conjunctive (R12)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGoalFailureCondition</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Condition (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">abandonment criteria</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">GoalCommitmentCode (1)</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AchieveOnce | Maintain | AchieveThenMaintain</Data></Cell>
+    <Cell><Data ss:Type="String">Maintain = standing/persistent tasking (N2)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasGoalPriority</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">nonNegativeInteger (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasDesiredEffectCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">DesiredEffectCode (0..*)</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">back-link to existing WHY vocabulary</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMContent</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">typed parameters; no expression language</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasConditionPredicateCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">ConditionPredicateCode (1)</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">12 predicates (see module)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">isNegated</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">boolean (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">default false</Data></Cell>
+    <Cell><Data ss:Type="String">guard polarity / else-branches</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasConditionSubjectReference / hasConditionObjectReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1 each)</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">[!] PM3: EntityType-filter semantics of object ref to be stated</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasThresholdValue / hasThresholdDuration</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">double / Duration (0..1 each)</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">units defined per predicate</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasUUID</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">so reports can cite the condition that fired</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Report contents (see report tabs)</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent / PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">additive - degrade gracefully</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Control verbs (TaskActionCode)</Data></Cell>
+    <Cell><Data ss:Type="String">ConfigureAutonomy, SuspendPlanExecution, ResumePlanExecution, OverrideAction, AbortPlanExecution, AchieveGoal</Data></Cell>
+    <Cell><Data ss:Type="String">TaskActionCode individuals</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">TASKFAILD added to TaskStatusCode (candidate core erratum)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Normative rules</Data></Cell>
+    <Cell><Data ss:Type="String">R1-R14</Data></Cell>
+    <Cell><Data ss:Type="String">module ontology header</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">execution semantics OWL cannot carry; vocabulary + rules = the proposal</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+ <Worksheet ss:Name="CASEVAC Scout Plan">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="22" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(soldier UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(scout UGV UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToBeExecutedNow</Data></Cell>
+    <Cell><Data ss:Type="String">boolean</Data></Cell>
+    <Cell><Data ss:Type="String">true</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoal</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">G1 (inline, below)</Data></Cell>
+    <Cell><Data ss:Type="String">goal transported inline - v0.0.2 fix for untransmittable Goal</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasUUID</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-G1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String">GoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String">AchieveOnce</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">hasAchievementCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">EntityAtLocation(casualty, evac point, 25 m)</Data></Cell>
+    <Cell><Data ss:Type="String">mission WHY as data - unsayable in v0.0.1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">S1 Verify route</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnOrderTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">(execute-plan task UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">AllTasksComplete</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(recon move along Route-0)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGuardCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">HazardOnRoute(Route-0), isNegated=true</Data></Cell>
+    <Cell><Data ss:Type="String">invariant: route clear; both replan causes (sensed obstacle, received IED report) surface as this guard</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasOnFailurePhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-S2</Data></Cell>
+    <Cell><Data ss:Type="String">BT Fallback (rule R7)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPhaseProductReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-Route-1</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PC2: pre-allocated UUID for runtime product - convention to state normatively</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-G1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">S2 Replan and continue</Data></Cell>
+    <Cell><Data ss:Type="String">fallback target</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnPhaseFailureTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasTriggerPhase = UUID-S1</Data></Cell>
+    <Cell><Data ss:Type="String">fires ONLY on S1 failure (R7); if S2 succeeds, S1 counts succeeded for parent</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">AllTasksComplete</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S2</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGuardCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">HazardOnRoute(new route), isNegated=true</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S2</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasOnFailurePhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-S3 (hold and report)</Data></Cell>
+    <Cell><Data ss:Type="String">chain = further alternatives; must be acyclic (R7)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase S2</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPhaseProductReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-Route-1</Data></Cell>
+    <Cell><Data ss:Type="String">same product slot - whichever phase verifies the route fills it</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+ <Worksheet ss:Name="CASEVAC Transport Plan">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="16" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(soldier UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(transport UGV UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToBeExecutedNow</Data></Cell>
+    <Cell><Data ss:Type="String">boolean</Data></Cell>
+    <Cell><Data ss:Type="String">true</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-G1</Data></Cell>
+    <Cell><Data ss:Type="String">same goal as scout plan (defined there)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">T1 Load casualty</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase T1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnOrderTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">(execute-plan task UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase T1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(move to collection point; load)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">T2 Transport via published route</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase T2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">AllSubTriggers (3 sub-triggers below)</Data></Cell>
+    <Cell><Data ss:Type="String">R9: discrete sub-triggers latch; state conditions must HOLD at firing</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">T2 trigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">EventTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">RouteAdvertisedEvent</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PC3: the advertisement MESSAGE remains undefined (v0.0.1 X1/X3); trigger side ready</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">T2 trigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">EntityWithinRange(casualty, transport, 2 m)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PC1: false proxy for 'casualty loaded' - propose PayloadOnBoard predicate (v0.0.3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">T2 trigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">CommsAvailable(transport)</Data></Cell>
+    <Cell><Data ss:Type="String">cannot depart during comms outage on a stale check (R9)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase T2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">AllTasksComplete</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase T2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(transport move via UUID-Route-1)</Data></Cell>
+    <Cell><Data ss:Type="String">task consumes S1's late-bound product</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase T2</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-G1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+ <Worksheet ss:Name="DroneResponse Search Plan">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="25" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(operator UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">one plan per sUAS (Task has exactly one performer); x4 identical shape</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(sUAS-1 UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToBeExecutedNow</Data></Cell>
+    <Cell><Data ss:Type="String">boolean</Data></Cell>
+    <Cell><Data ss:Type="String">true</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoal</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">G1 Victim located</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String">GoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String">AchieveOnce</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">hasAchievementCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">EstimateConfidenceAbove(victim-track, 0.7)</Data></Cell>
+    <Cell><Data ss:Type="String">achievement by BELIEF state - 'person detected with sufficient confidence'</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">D1 Area search (sector A)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnOrderTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">(execute-plan task UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">AllTasksComplete</Data></Cell>
+    <Cell><Data ss:Type="String">closes each sweep ITERATION</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasRepetitionPolicyCode</Data></Cell>
+    <Cell><Data ss:Type="String">RepetitionPolicyCode</Data></Cell>
+    <Cell><Data ss:Type="String">RepeatUntilCondition</Data></Cell>
+    <Cell><Data ss:Type="String">loop decorator</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasRepetitionUntilCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">EstimateConfidenceAbove(victim-track, 0.7)</Data></Cell>
+    <Cell><Data ss:Type="String">closes the LOOP - v0.0.2 split; under v0.0.1 the loop ended after one sweep</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasRequiredAutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">FullAuto</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGuardCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">EntityHealthBelow(self, 0.2), isNegated=true</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PD2: battery proxy - propose RemainingEnduranceBelow (v0.0.3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasOnFailurePhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-D3</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">D2 Track victim</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">EstimateConfidenceAbove(victim-track, 0.7)</Data></Cell>
+    <Cell><Data ss:Type="String">search-to-track transition; level-triggered (R11)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">OtherOrderReceived</Data></Cell>
+    <Cell><Data ss:Type="String">tracks until relieved</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">D3 Replan path</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D3</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnPhaseFailureTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasTriggerPhase = UUID-D1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D3</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasOnFailurePhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-D4</Data></Cell>
+    <Cell><Data ss:Type="String">chain end = escalate to human</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">D4 Request assistance / hold</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D4</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnPhaseFailureTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasTriggerPhase = UUID-D3</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D4</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(HoldInPlace)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PD3: hold + deviation report + await = escalation pattern to name; request rides on RequestBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase D4</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">OtherOrderReceived</Data></Cell>
+    <Cell><Data ss:Type="String">operator's response is the exit</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+ <Worksheet ss:Name="MDARS Standing Watch Plan">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="24" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(host console UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">one guard : many platforms; per-platform plan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(MDARS-1 UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToBeExecutedNow</Data></Cell>
+    <Cell><Data ss:Type="String">boolean</Data></Cell>
+    <Cell><Data ss:Type="String">true</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoal</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">G1 Depot region secure</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String">GoalCommitmentCode</Data></Cell>
+    <Cell><Data ss:Type="String">Maintain</Data></Cell>
+    <Cell><Data ss:Type="String">never-terminal commitment - unsayable in core tasking or v0.0.1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Goal G1</Data></Cell>
+    <Cell><Data ss:Type="String">Goal</Data></Cell>
+    <Cell><Data ss:Type="String">hasAchievementCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">ThreatDetectedInArea(region A), isNegated=true</Data></Cell>
+    <Cell><Data ss:Type="String">maintain: no unresolved threat in region</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">M1 Standing patrol + inventory</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">OnOrderTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">(execute-plan task UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">OtherOrderReceived</Data></Cell>
+    <Cell><Data ss:Type="String">per module guidance for standing phases</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(PATROL region A)</Data></Cell>
+    <Cell><Data ss:Type="String">LOX task verb</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(RF-tag inventory - UseCapability)</Data></Cell>
+    <Cell><Data ss:Type="String">inventory rides in the same phase (done during patrol)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasRepetitionPolicyCode</Data></Cell>
+    <Cell><Data ss:Type="String">RepetitionPolicyCode</Data></Cell>
+    <Cell><Data ss:Type="String">MaintainContinuously</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PM1: revisit CADENCE has no slot - propose hasRepetitionInterval (MDARS + MCM both demand it)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGuardCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">CommsAvailable(MDARS-1, host console)</Data></Cell>
+    <Cell><Data ss:Type="String">platform out of contact = exception, not routine</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M1</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-G1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">M2 Assess and challenge</Data></Cell>
+    <Cell><Data ss:Type="String">exception path</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">AnySubTrigger (3 sub-triggers below)</Data></Cell>
+    <Cell><Data ss:Type="String">exception = OR over the extraction's three exceptional events</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">M2 trigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ThreatDetectedInArea(region A)</Data></Cell>
+    <Cell><Data ss:Type="String">intruder</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">M2 trigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">EntityHealthBelow(self, 0.5)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PM2: 'robot trapped' proxy - propose EntityImmobilized (v0.0.3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">M2 trigger</Data></Cell>
+    <Cell><Data ss:Type="String">CompositeTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">hasSubTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">StateConditionTrigger</Data></Cell>
+    <Cell><Data ss:Type="String">ThreatDetectedInArea(region A, type=fire)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] PM3: EntityType filter semantics of object ref to be stated (ties to X4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(assess contact; audio challenge)</Data></Cell>
+    <Cell><Data ss:Type="String">non-lethal challenge-and-response ROE</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M2</Data></Cell>
+    <Cell><Data ss:Type="String">PlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseCompletionCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">AllTasksComplete</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Phase M2</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">hasRequiredAutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">ReCont</Data></Cell>
+    <Cell><Data ss:Type="String">guard takes direct control on exception - autonomy drops by design</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(supervision)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">TaskActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">SuspendPlanExecution / ResumePlanExecution</Data></Cell>
+    <Cell><Data ss:Type="String">guard intervention loop; declarative preemption not needed for HOTL case (walk finding)</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+ <Worksheet ss:Name="Plan Execution Status Rpt">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="11" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(scout UGV UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(soldier UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportingEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(scout UGV UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent</Data></Cell>
+    <Cell><Data ss:Type="String">(below)</Data></Cell>
+    <Cell><Data ss:Type="String">additive - degrades gracefully for legacy consumers</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-S1</Data></Cell>
+    <Cell><Data ss:Type="String">which phase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasPhaseOutcomeCode</Data></Cell>
+    <Cell><Data ss:Type="String">PhaseOutcomeCode</Data></Cell>
+    <Cell><Data ss:Type="String">PhaseInProgress</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasActiveGoalReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-G1</Data></Cell>
+    <Cell><Data ss:Type="String">the system's active INTENTION (BDI transparency)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasAttemptNumber</Data></Cell>
+    <Cell><Data ss:Type="String">nonNegativeInteger</Data></Cell>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">prevents premature contingency firing under retry (R10)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanExecutionStatusContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasEstimatedPhaseCompletionTime</Data></Cell>
+    <Cell><Data ss:Type="String">TimeInstant</Data></Cell>
+    <Cell><Data ss:Type="String">(DateTime)</Data></Cell>
+    <Cell><Data ss:Type="String">CASEVAC 'expected time to complete phased tasks' - closes old X5 residual</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasTimeOfObservation</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+    <Cell><Data ss:Type="String">(timestamp)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+ <Worksheet ss:Name="Plan Deviation Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="11" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(scout UGV UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(soldier UUID)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(below)</Data></Cell>
+    <Cell><Data ss:Type="String">closes [!] X2 recorded in 'ASX Sample Report Messages / CASEVAC Explainable'</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasDeviationTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">DeviationTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">FallbackActivated</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] PD1/PM4: vocabulary scope (BehaviorAdjusted / ExceptionRaised) - v0.0.3 decision</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasDeviationCondition</Data></Cell>
+    <Cell><Data ss:Type="String">Condition</Data></Cell>
+    <Cell><Data ss:Type="String">(guard UUID-guard-route0-clear)</Data></Cell>
+    <Cell><Data ss:Type="String">the violated guard, citable by UUID</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanPhaseReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-S1</Data></Cell>
+    <Cell><Data ss:Type="String">affected phase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasRationaleText</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Suspected IED reported on Route-0 at bridge crossing; replanning via northern ford, transport clearance verified.</Data></Cell>
+    <Cell><Data ss:Type="String">the WHY - CASEVAC 'explainable reasons', structured</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">PlanDeviationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">0.85</Data></Cell>
+    <Cell><Data ss:Type="String">reuses SMX observation confidence</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasTimeOfObservation</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+    <Cell><Data ss:Type="String">(timestamp)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(schema note)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">adapted from DroneResponse explanation schema {event, action, reasoning, change, confidence}; [!] PD4: 'action taken' slot proposed for v0.0.3</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+</Workbook>
