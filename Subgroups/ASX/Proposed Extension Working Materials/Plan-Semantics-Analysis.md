@@ -614,3 +614,9 @@ highest construct density:
 
 These five, plus CASEVAC, cover every §5 construct at least twice and are the recommended
 walk set for instantiation review (§6.5).
+
+**Walk status:** three of these walks are done — CASEVAC, DroneResponse, and MDARS — in
+[`PlanSemanticsWalks/`](./PlanSemanticsWalks/). All three scenarios instantiate end-to-end
+in the module vocabulary (Turtle blocks validated against the module); the walks surfaced
+no structural defects and nine vocabulary/convention deltas proposed for v0.0.3 (see the
+walks' README for the consolidated list).
