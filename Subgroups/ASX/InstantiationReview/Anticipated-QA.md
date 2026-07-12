@@ -16,12 +16,16 @@ planning already exist). The genuinely-missing items are the message/attribute
 layer and the ~22 decisions.
 
 **Q. Isn't the OWL just an early draft? Aren't you criticizing incomplete work?**
-It is explicitly v0.0.1, "work in progress", and we treat it that way. The finding
-is not "it's wrong" - it's "it's a taxonomy of things (15 classes, 0 datatype
-properties) whose message layer hasn't been built yet, and here is exactly what
-that layer needs." It's a to-do list derived by instantiation, not a critique.
+Yes, and we treat it exactly as that. It is an early v0.0.x work-in-progress, and
+the findings are things *still to be defined*, not defects. The finding is not
+"it's wrong" - it's "the v0.0.1 baseline is a taxonomy of things (15 classes, 0
+datatype properties) whose message/attribute layer hadn't been built yet, and
+here is exactly what that layer needs." Michael's v0.0.3 already starts that layer
+(it adds datatype properties for the Video Detection Report), which is the model
+moving in the direction this review points to. It's a to-do list derived by
+instantiation, not a critique.
 
-**Q. You say a swarm can't be tasked - can't we just add a property?**
+**Q. You say a swarm isn't yet taskable - can't we just add a property?**
 It's a class-tree issue, not a missing property. `Swarm` currently derives from
 `PhysicalEntity` (an inert object), and orders/reports are addressed to an
 `ActorEntity`. The clean fix is to derive `Swarm` from `CollectiveEntity`, which
@@ -60,7 +64,7 @@ Initialization, which is the message type with zero worked examples and the one
 that forces the model's hardest choices.
 
 **Q. Why do the OWL and the spreadsheets disagree?**
-They are two tracks that drifted: the OWL was last updated in January, the
+They are two tracks at different stages: the OWL was last updated in January, the
 spreadsheets in June. So autonomy and sensors are each defined three different
 ways. Reconciling the two is part of decision Q-C / Q-D.
 
@@ -76,7 +80,8 @@ decisions and the attribute layer follow. We can turn any decision into concrete
 message instances quickly, since the walks already show the shape.
 
 **Q. How confident are you in the specific findings?**
-The structural findings (P1, P7, the typos, "0 datatype properties", what exists
-vs. doesn't) were verified directly against the RDF files, and the workbook
+The structural findings (P1, P7, the typos, "0 datatype properties" in the v0.0.1
+baseline, what exists vs. doesn't) were verified directly against the RDF files
+(and re-checked against v0.0.3), and the workbook
 conversions were verified by round-trip. The design *recommendations* (e.g. which
 way to resolve P1) are proposals for the group, not conclusions.

@@ -2,7 +2,7 @@
 
 One-page bearings on what this review is, what it found, and what the group needs
 to decide. Detail is in the other files in this folder; the deck
-(`ASX-Instantiation-Findings.pptx`, 20 slides) is the presentation version.
+(`ASX-Instantiation-Findings.pptx`, 22 slides) is the presentation version.
 
 ## What this is
 
@@ -23,28 +23,43 @@ been applied to the OWL model or to Elizabeth's message workbooks.
   plus a redundancy pass.
 - Integrated a parallel scenario-sourcing effort that **grounded every gap in a
   real mission** (nine sourced missions).
-- Produced a 20-slide findings deck and a full issues/decisions log.
+- Took the instantiation from **4 worked message instances (0 Initialization) to
+  ~33** across Init / Order / Report (~29 drafted in this review), spanning 20+
+  scenarios - all on the branch, pending group review.
+- Produced a 22-slide findings deck and a full issues/decisions log.
 
 ## What we found (headline)
 
-Three structural **blockers** - each stops a message from being built:
-- **P1** - a UAV/UGV is typed two incompatible ways: the proposed ASX `Robot`
-  tree runs parallel to the existing SMX `Platform` tree.
-- **P7** - a swarm derives from `PhysicalEntity`, so it cannot be tasked or send a
-  report; it should derive from the existing `CollectiveEntity`.
-- **P2** - a sensor has no agreed representation (class vs enum vs equipment).
+This is an early WIP ontology, so the findings are things *still to be defined*,
+not defects. Three of them are foundational typing decisions worth settling
+first, because Initialization is hard to build cleanly until they are settled:
+- **P1** - a UAV/UGV is currently typed two ways: the proposed ASX `Robot` tree
+  runs parallel to the existing SMX `Platform` tree (v0.0.3 declares both).
+- **P7** - a swarm derives from `PhysicalEntity`, so it isn't yet taskable / able
+  to report; deriving it from the existing `CollectiveEntity` would fix that.
+- **P2** - a sensor's representation isn't settled yet (class vs enum vs equipment).
 
-Recurring themes:
-- The OWL is a **taxonomy of things with almost no message attributes** (0
-  datatype properties); the layer that says what you actually *send* was never
-  built.
-- **Autonomy and sensors are each defined three different ways** - the OWL track
-  (Jan) and the spreadsheet track (Jun) drifted apart.
-- The **report model was built around a camera** and does not generalize to other
-  sensors (CBRN/EW/measurements).
-- No model yet for **autonomous engagement authority**, **robot-to-robot
-  coordination**, **"explainable reasons"**, or an **area** as the subject of a
+Recurring themes (all normal for a v0.0.x model being built out):
+- The OWL is still mostly a **taxonomy of things**; the attribute layer that says
+  what you actually *send* is only just starting (v0.0.1 had 0 datatype
+  properties; v0.0.3 begins it for the Video Detection Report).
+- **Autonomy and sensors are each described three different ways** - the OWL and
+  the spreadsheet tracks are at different stages and need reconciling.
+- The **report model started from a camera**; extending it to other sensors
+  (CBRN/EW/measurements) is still to do.
+- Not yet defined: **autonomous engagement authority**, **robot-to-robot
+  coordination**, **"explainable reasons"**, and an **area** as the subject of a
   task/report.
+
+## Where the model is now (v0.0.3)
+
+Michael's v0.0.3 shows the model moving in this direction: it begins the
+attribute layer and folds the Video Detection Report into the OWL. It also brings
+the P1 typing question to a head rather than settling it - v0.0.3 now declares
+*both* the Robot-tree and the SMX-Vehicle-tree names, so the group still has to
+pick one. Still to define: a taskable collective (the `Swarm` class was dropped;
+`CollecticeRoboticSystem` is still non-actor), the broader attribute set, and the
+new content types above - plus two typos to fix. (Detail in section 9 of the log.)
 
 ## The good news
 
@@ -75,7 +90,7 @@ in two groups:
   a real mission (one nice-to-have remains: a dedicated autonomous-CASEVAC
   mission).
 - **The ball is on the modeling side.** The remaining work - building the OWL
-  property/message layer, reconciling the drifted tracks, and making the ~22
+  property/message layer, reconciling the two tracks, and making the ~22
   decisions - is not a document problem; more scenarios will not fill it. It needs
   the sub-group's decisions and modeling.
 

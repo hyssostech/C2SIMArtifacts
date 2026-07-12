@@ -8,7 +8,7 @@ P10) concretely, filling the empty `Swarm Detection` report stub and adding a
 
 Layout mirrors the workbook columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
-**[Q]** = open question, **[!]** = gap/defect. Anchored to the ontology.
+**[Q]** = open question, **[!]** = not-yet-defined item / gap. Anchored to the ontology.
 
 Grounding done first (and it narrowed two findings):
 - `CollectiveEntity` (SMX) is `subClassOf ActorEntity` - the clean target for
@@ -19,7 +19,7 @@ Grounding done first (and it narrowed two findings):
 - `hasReportingEntity` exists, but only an ActorEntity can be one (P7 again).
 - No aggregation construct, and no swarm-lifecycle (member rotation) construct.
 
-## Reminder: the blocker (P7)
+## Reminder: the P7 typing decision
 
 The proposed OWL has `Swarm subClassOf CollecticeRoboticSystem -> ... ->
 PhysicalEntity` (an inert object). Both messages below need the swarm to be an
@@ -58,7 +58,7 @@ member rotation/resupply (from the June robotics-concepts discussion).
 
 | ID | Sev | Status | One-line |
 |---|---|---|---|
-| P7 | BLOCKER | gap | Swarm derives from PhysicalEntity - cannot be ordered or be a ReportingEntity. Fix: derive from `CollectiveEntity` (ActorEntity). |
+| P7 | DECIDE-FIRST | gap | Swarm derives from PhysicalEntity - not yet orderable or a ReportingEntity. Fix: derive from `CollectiveEntity` (ActorEntity). |
 | P8 | HIGH | **narrowed** | Membership + command are partially expressible via `hasSubordinate`/`hasSuperior`/`hasCommandRelation`; residual gap is network params + leader-as-role + dynamic handover. |
 | P10 | MED | question | Heterogeneous (mixed UAV+UGV) membership in one collective - confirm. |
 | Z1 | MED | gap | No aggregation construct for a collective report built from member observations. |

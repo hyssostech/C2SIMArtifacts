@@ -9,8 +9,8 @@ scenario-sheet columns so any of this can be pasted back in by the owner:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`
 
 Everything below is anchored to real classes in `Ontology/C2SIM.rdf` and
-`Ontology/C2SIM_SMX.rdf`. Open questions are marked **[Q]**; suspected defects
-in the current proposal are marked **[!]**. None of this is a decision - it is
+`Ontology/C2SIM_SMX.rdf`. Open questions are marked **[Q]**; not-yet-defined
+items in the current proposal are marked **[!]**. None of this is a decision - it is
 input for the sub-group.
 
 ## Shared envelope (all three)
@@ -163,7 +163,7 @@ Problems this exposes:
 | P3 | [Q] | hasAutonomousRoleCode has no attachment point on the entity |
 | P5 | [!] | Patrol route/area not modeled as an init object (also missing on Order side) |
 | P6 | [!] | Three competing autonomy vocabularies |
-| P7 | [!] | Swarm is under PhysicalEntity, so it cannot be tasked or report |
+| P7 | [!] | Swarm is under PhysicalEntity, so it is not yet taskable or able to report |
 | P8 | [Q] | Swarm membership + leader have no property |
 | P9 | [!] | "CollecticeRoboticSystem" misspelling will propagate to instances |
 | P10 | [Q] | Heterogeneous (mixed-type) swarm membership unconfirmed |

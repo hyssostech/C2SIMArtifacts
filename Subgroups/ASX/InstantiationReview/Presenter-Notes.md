@@ -1,6 +1,6 @@
 # Presenter Notes - ASX Instantiation Review
 
-Talking points for presenting `ASX-Instantiation-Findings.pptx` (20 slides) to
+Talking points for presenting `ASX-Instantiation-Findings.pptx` (22 slides) to
 the sub-group. Grouped by section, not one line per slide. Keep the framing
 **constructive**: this is a review that *builds on* the proposed extension and
 Elizabeth's message work - it is not a critique of incomplete work. Everything is
@@ -14,24 +14,30 @@ a proposal; nothing has been applied to the model or the workbooks.
   format so instantiations can be reviewed in git; the original `.xlsx` are
   untouched.
 
-## State of play + coverage
-- Started from 4 worked instantiations (2 Reports, 2 Orders, 0 Initialization).
+## State of play + coverage (lead with the numbers - this is the contribution)
+- Started from **4** worked instantiations (2 Reports, 2 Orders, **0
+  Initialization**) - Elizabeth's baseline. This review drafted **~29 more, to
+  ~33** across Init / Order / Report. Slide 3 shows the before/after; slide 4
+  ("Scenarios analyzed") shows the 20+ scenarios behind it.
+- Say it plainly: Initialization went 0 -> 6, Orders 2 -> 14, Reports 2 -> 13.
+  That breadth - not any single message - is what surfaced the to-define items.
 - Walked scenarios across Init/Order/Report; then integrated a parallel
-  scenario-sourcing effort that grounded every gap in a real mission.
+  scenario-sourcing effort (Cooperative MCM, SubT, sustainment + nine documented
+  missions) that grounded every gap in a real mission.
 - The one contributed, human-authored scenario (CASEVAC) had no messages; we
-  walked it end to end.
+  walked it end to end (Init -> Orders -> Reports).
 
-## The two tracks drifted (say this early - it explains a lot)
+## The two tracks are at different stages (say this early - it explains a lot)
 - The OWL model (`CSIM_ASX.rdf`, last updated Jan) and the spreadsheets
   (updated Jun) evolved separately, so autonomy and sensors are each defined
   three different ways. Reconciling them is one of the first decisions.
 
-## The three blockers (the core of the talk)
+## The three foundational decisions (the core of the talk)
 - **P1 - a UAV/UGV is typed two incompatible ways.** The proposed `Robot` class
   tree runs parallel to the existing SMX `Platform` tree, both under
   `ActorEntity`. Pick `Robot` and you lose the Platform machinery; pick
   `Aircraft`/`Vehicle` and the ASX classes go unused.
-- **P7 - a swarm can't be tasked or report.** `Swarm` derives from
+- **P7 - a swarm isn't yet taskable or able to report.** `Swarm` derives from
   `PhysicalEntity` (an inert object), but orders and reports need an
   `ActorEntity`. The fix is already in the base standard: derive from
   `CollectiveEntity`.
@@ -39,11 +45,12 @@ a proposal; nothing has been applied to the model or the workbooks.
 - Land the point: "all three are entity-typing decisions - so Initialization,
   not Reports, is where the model has to be settled."
 
-## Why so much is missing: the model has a taxonomy but no attributes
-- The OWL is 15 classes, 1 object property, **0 datatype properties**. It is a
-  taxonomy of *things*; the layer that says what you actually *send* was never
-  built. Most "gaps" are simply not-yet-built - which is why writing messages
-  surfaces them.
+## Why so much is still to define: the model has a taxonomy, attributes just starting
+- The v0.0.1 baseline is 15 classes, 1 object property, **0 datatype properties**.
+  It is a taxonomy of *things*; the layer that says what you actually *send*
+  hadn't been built yet. v0.0.3 begins it (datatype properties for the Video
+  Detection Report). Most "gaps" are simply not-yet-built - which is why writing
+  messages surfaces them.
 
 ## The good news (say this - it lowers the temperature)
 - Much of what's "missing" is **re-adopt, not invent**:

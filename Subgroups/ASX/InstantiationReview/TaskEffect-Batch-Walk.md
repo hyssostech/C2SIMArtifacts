@@ -7,7 +7,7 @@ gaps are task verbs and payload/effector typing, not entity structure.
 
 Layout mirrors the workbook columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
-**[Q]** = open question, **[!]** = gap/defect. Proposals only; nothing applied.
+**[Q]** = open question, **[!]** = not-yet-defined item / gap. Proposals only; nothing applied.
 
 Grounding done first (and it narrowed the findings a lot). LOX carries 446
 `TaskActionCode` verbs, so almost every action verb already exists - the gaps

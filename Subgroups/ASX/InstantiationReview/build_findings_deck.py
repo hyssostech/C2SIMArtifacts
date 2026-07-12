@@ -104,48 +104,63 @@ accent.fill.solid(); accent.fill.fore_color.rgb = ACCENT; accent.line.fill.backg
 s = slide(); header(s, "The method", "Building on the sample-message work")
 bullets(s, [
  {"text":"Walk each scenario and instantiate real Initialization / Order / Report messages using C2SIM + the proposed ASX elements."},
- {"text":"Where a proposed element cannot be instantiated cleanly, a concrete problem surfaces - that is the signal we want."},
- {"text":"This review focused on Initialization (which had zero worked examples) and the CASEVAC scenario, and cross-checked the OWL model against the spreadsheets."},
- {"text":"Findings are framed as decisions for the group, not as objections to the approach - the approach is working."},
-], top=1.7, size=18, gap=14)
+ {"text":"The ASX model is an early work-in-progress (v0.0.x) and the message instances are still being put in place - instantiation is how we build those instances and surface what is still to be defined."},
+ {"text":"Where a proposed element is not yet defined enough to instantiate cleanly, that marks a concrete thing to specify next - not a defect."},
+ {"text":"Everything here is decisions and to-define items for the group; the approach is working."},
+], top=1.7, size=17, gap=13)
 footer(s)
 
 # ---------------- State of play ----------------
-s = slide(); header(s, "Where the instantiation stands")
+s = slide(); header(s, "Where the instantiation stands", "From 4 worked messages to ~33 - this review is the bulk of that")
 bullets(s, [
- {"text":"4 worked instantiations so far: 2 Reports, 2 Orders, 0 Initialization.","bold":True},
- {"text":"Reports are the mature track (Video Detection Report); Orders are partial; every Initialization sheet is still a stub.","lvl":1},
- {"text":"Coverage is concentrated on a single UAV video-surveillance thread plus one UGV transport order.","lvl":1},
- {"text":"CASEVAC - the one human-authored contributed scenario - had no messages of any type (now walked in this review).","bold":True},
- {"text":"Initialization is the biggest hole and the highest-signal place to test the model (drafted in this review).","lvl":1},
-], top=1.7, size=17, gap=12)
+ {"text":"Start: 4 worked instances (2 Reports, 2 Orders, 0 Initialization) - Elizabeth's baseline. This review drafted ~29 more, to ~33 across Init / Order / Report (on the branch, pending group review).","bold":True},
+ {"text":"Initialization   0 -> 6   (the 3 named scenarios + CASEVAC / MCM / SubT) - was the least-developed; now seeded.","lvl":1},
+ {"text":"Orders   2 -> 14   (CASEVAC, swarm, fire support, logistics / engineering / rescue, route clearance, MCM, explore, resupply, MUM-T).","lvl":1},
+ {"text":"Reports   2 -> 13   (swarm, CASEVAC status / explainable, CBRN / EW / GPR, BDA, delivery, naval mine, generic detection, hazard area).","lvl":1},
+ {"text":"CASEVAC - the one contributed scenario - had no messages; now walked end-to-end (Init + Orders + Reports).","bold":True},
+ {"text":"The breadth is the point: each new instance exercises a proposed element and surfaces what is still to define.","lvl":1},
+], top=1.75, size=15, gap=9)
+footer(s)
+
+# ---------------- Scenarios analyzed (showcase) ----------------
+s = slide(); header(s, "Scenarios analyzed", "20+ scenarios walked into ~33 message instances - Init / Order / Report")
+bullets(s, [
+ {"text":"Named + contributed - instantiated end-to-end:","bold":True},
+ {"text":"the 3 named Init scenarios (UAV video, UAV patrol, swarm) + CASEVAC, the one human-authored contributed scenario - walked Init -> tasking Order -> robot-to-robot hand-off -> status/threat + explainable Reports.","lvl":1},
+ {"text":"Capability stress-tests - instantiated:","bold":True},
+ {"text":"non-video sensing (CBRN, EW emitter, GPR mine); swarm detect + coordinate; the task/effect axis (fire support + BDA, logistics delivery, engineering, USV rescue, route clearance).","lvl":1},
+ {"text":"Newly sourced from real missions, then analyzed:","bold":True},
+ {"text":"Cooperative MCM (maritime), Subterranean SubT, contested sustainment - plus nine documented missions that grounded the validation holes: explainability (DroneResponse), CBRN (UGV), EW geolocation, persistence (MDARS), counter-UAS, human-machine teaming (MUM-T), SAR, formation, robotic breach.","lvl":1},
+ {"text":"Screened for redundancy:","bold":True},
+ {"text":"route-clearance / companion / urban - confirmed ~80% redundant, but still yielded N1 (an area as the subject of a task/report).","lvl":1},
+], top=1.7, size=13, gap=7)
 footer(s)
 
 # ---------------- Two tracks out of sync ----------------
-s = slide(); header(s, "Two tracks have drifted apart")
+s = slide(); header(s, "The OWL and the spreadsheets are at different stages")
 rbox(s, 0.8, 1.9, 5.5, 1.5, "OWL model  (CSIM_ASX.rdf)\nlast updated  Jan 2026", NAVY, size=15)
 rbox(s, 7.0, 1.9, 5.5, 1.5, "Spreadsheets  (Concept Mapping,\nsample messages)  updated  Jun 2026", ACCENT, size=15)
-arrow(s, 6.3, 2.65, 7.0, 2.65, RED)
+arrow(s, 6.3, 2.65, 7.0, 2.65, ORANGE)
 bullets(s, [
- {"tag":"Consequence:","tagcolor":RED,"text":"the model does not reflect ~5 months of attribute decisions made in the spreadsheets."},
- {"text":"Autonomy is defined three different ways across the two tracks.","lvl":1},
- {"text":"Sensors are defined three different ways.","lvl":1},
- {"text":"The whole attribute layer (Payload, Mobility, VehicleType, ...) exists only in the spreadsheets, not the OWL.","lvl":1},
+ {"tag":"Where things stand:","tagcolor":ORANGE,"text":"the OWL has not yet caught up to ~5 months of attribute work in the spreadsheets - expected for a v0.0.x model that is still being built."},
+ {"text":"Autonomy is currently described three different ways across the two tracks - to reconcile.","lvl":1},
+ {"text":"Sensors are described three different ways - to reconcile.","lvl":1},
+ {"text":"The attribute layer (Payload, Mobility, VehicleType, ...) is in the spreadsheets, not yet in the OWL.","lvl":1},
 ], top=3.8, size=16, gap=10)
 footer(s)
 
 # ---------------- 3 blockers ----------------
-s = slide(); header(s, "Instantiating one entity hits three blockers")
-rbox(s, 0.8, 2.0, 3.8, 2.2, "P1\nA UAV is typed two\nincompatible ways", RED, size=16)
-rbox(s, 4.85, 2.0, 3.8, 2.2, "P2\nA sensor has no\nagreed representation", RED, size=16)
-rbox(s, 8.9, 2.0, 3.65, 2.2, "P7\nA swarm cannot be\ntasked as modeled", RED, size=16)
+s = slide(); header(s, "First to settle: three structural typing decisions")
+rbox(s, 0.8, 2.0, 3.8, 2.2, "P1\nUAV typing: Robot\ntree vs SMX Platform", ORANGE, size=16)
+rbox(s, 4.85, 2.0, 3.8, 2.2, "P2\nSensor: one\nrepresentation to pick", ORANGE, size=16)
+rbox(s, 8.9, 2.0, 3.65, 2.2, "P7\nSwarm: make it\ntaskable (ActorEntity)", ORANGE, size=16)
 bullets(s, [
- {"text":"All three are entity-typing decisions - so Initialization, not Reports, is where the proposed model must be exercised and settled.","bold":True},
+ {"text":"P1 and P7 are entity-typing (what a drone / a swarm IS); P2 is how a sensor is represented. All three are structural choices not yet settled - so Initialization, not Reports, is where the model gets exercised and pinned down first.","bold":True},
 ], top=4.7, size=17)
 footer(s)
 
 # ---------------- P1 diagram ----------------
-s = slide(); header(s, "P1  -  A UAV is typed twice", "BLOCKER")
+s = slide(); header(s, "P1  -  A UAV is typed twice", "Entity-typing decision")
 rbox(s, 5.2, 1.7, 3.0, 0.75, "ActorEntity", NAVY, size=14)
 rbox(s, 2.4, 3.0, 3.0, 0.75, "Platform  (SMX)", ACCENT, size=13)
 rbox(s, 2.4, 4.2, 3.0, 0.75, "Aircraft  (SMX)", ACCENT, size=13)
@@ -157,18 +172,19 @@ bullets(s, [
  {"text":"Two parallel sibling trees under ActorEntity model the same real drone."},
  {"text":"Type it as Robot -> it loses all existing SMX Platform / LOX machinery.","lvl":1},
  {"text":"Type it as Aircraft -> the ASX Robot / UAV classes go unused.","lvl":1},
+ {"tag":"Now live in v0.0.3:","tagcolor":ORANGE,"text":"v0.0.3 declares both - UAV/UGV under Robot AND UnmannedAerial/Ground/Maritime/UnderwaterVehicle under SMX Vehicle - so this choice is now in the model to settle."},
  {"tag":"Decision (Q-A):","tagcolor":ACCENT,"text":"make ASX autonomy a role/facet on the existing Platform subtree instead of a parallel Robot tree?"},
-], top=5.05, size=14, gap=6)
+], top=4.85, size=13, gap=5)
 footer(s)
 
 # ---------------- P7 diagram ----------------
-s = slide(); header(s, "P7  -  A swarm cannot receive orders", "BLOCKER")
+s = slide(); header(s, "P7  -  A swarm is not yet taskable", "Entity-typing decision")
 rbox(s, 0.9, 2.0, 3.1, 0.7, "Swarm  (ASX)", ORANGE, size=13)
 rbox(s, 4.3, 2.0, 3.6, 0.7, "CollecticeRoboticSystem", ORANGE, size=12)
 rbox(s, 8.2, 2.0, 3.4, 0.7, "... PhysicalEntity", RED, size=13)
 arrow(s, 4.0, 2.35, 4.3, 2.35, RED); arrow(s, 7.9, 2.35, 8.2, 2.35, RED)
 tb, tf = box(s, 8.2, 2.75, 3.6, 0.4); p=tf.paragraphs[0]
-set_run(p.add_run(), "inert object - cannot be tasked", 12, RED, italic=True)
+set_run(p.add_run(), "not yet taskable (under PhysicalEntity)", 12, ORANGE, italic=True)
 rbox(s, 0.9, 4.0, 3.1, 0.7, "Swarm  (proposed)", GREEN, size=13)
 rbox(s, 4.3, 4.0, 3.6, 0.7, "CollectiveEntity  (C2SIM)", GREEN, size=12)
 rbox(s, 8.2, 4.0, 3.4, 0.7, "ActorEntity", GREEN, size=13)
@@ -176,34 +192,34 @@ arrow(s, 4.0, 4.35, 4.3, 4.35, GREEN); arrow(s, 7.9, 4.35, 8.2, 4.35, GREEN)
 tb, tf = box(s, 8.2, 4.75, 3.6, 0.4); p=tf.paragraphs[0]
 set_run(p.add_run(), "taskable - receives orders, reports", 12, GREEN, italic=True)
 bullets(s, [
- {"text":"A swarm is exactly what orders are addressed to and what sends reports - it must be an ActorEntity."},
- {"text":"Once fixed, membership and command already exist in the base standard (C2SIM hasSubordinate, SMX hasCommandRelation); the residual swarm needs are small.","lvl":1},
- {"tag":"Decision (Q-B):","tagcolor":ACCENT,"text":"derive Swarm from CollectiveEntity (already an ActorEntity) rather than from the device/artifact tree."},
-], top=5.3, size=13.5, gap=6)
+ {"text":"A swarm is what orders are addressed to and what sends reports - so it needs to be an ActorEntity."},
+ {"text":"Membership and command already exist in the base standard (C2SIM hasSubordinate, SMX hasCommandRelation), so the residual swarm work is small. (v0.0.3 dropped the Swarm class; CollecticeRoboticSystem is still under PhysicalEntity.)","lvl":1},
+ {"tag":"Decision (Q-B):","tagcolor":ACCENT,"text":"derive the collective/Swarm from CollectiveEntity (already an ActorEntity) rather than the device/artifact tree."},
+], top=5.3, size=13, gap=5)
 footer(s)
 
 # ---------------- Model drift detail ----------------
-s = slide(); header(s, "The model lags the spreadsheets")
+s = slide(); header(s, "The OWL is still catching up to the spreadsheets", "v0.0.x - expected at this stage")
 bullets(s, [
- {"tag":"Autonomy - 3 vocabularies:","tagcolor":ORANGE,"text":"OWL {Automated, FullAuto, ReCont, Teleop}  vs  ControlMode {Piloted, Unpiloted-Autonomous, Swarm}  vs  NavigationAutonomy {FPV, Autonomous, RemoteControl}."},
- {"tag":"Sensor - 3 models:","tagcolor":ORANGE,"text":"OWL Sensor class  vs  SensorType enum  vs  SensorCapability as associated equipment."},
- {"tag":"Missing from OWL:","tagcolor":ORANGE,"text":"Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, SwarmParameters. The OWL has 0 datatype properties."},
+ {"tag":"Autonomy - 3 vocabularies to reconcile:","tagcolor":ORANGE,"text":"OWL {Automated, FullAuto, ReCont, Teleop}  vs  ControlMode {Piloted, Unpiloted-Autonomous, Swarm}  vs  NavigationAutonomy {FPV, Autonomous, RemoteControl}."},
+ {"tag":"Sensor - 3 models to reconcile:","tagcolor":ORANGE,"text":"OWL Sensor class  vs  SensorType enum  vs  SensorCapability as associated equipment."},
+ {"tag":"Not yet in the OWL:","tagcolor":ORANGE,"text":"Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, SwarmParameters. (v0.0.1 had 0 datatype properties; v0.0.3 begins the layer, for the Video Detection Report only.)"},
  {"tag":"Decisions (Q-C, Q-D):","tagcolor":ACCENT,"text":"pick one normative sensor model and one normative autonomy vocabulary; express the rest as derived."},
-], top=1.8, size=15.5, gap=14)
+], top=1.8, size=15, gap=13)
 footer(s)
 
 # ---------------- Sample-message defects ----------------
-s = slide(); header(s, "Defects in the existing instantiations")
+s = slide(); header(s, "Open items in the current instantiations", "small things to tidy as the model firms up")
 bullets(s, [
- {"tag":"M1 (HIGH):","tagcolor":ORANGE,"text":"actorReference is a string, but it must define an entity not yet in the database - no inline entity-definition mechanism exists for observed (uncooperative) entities."},
- {"tag":"M5 (MED):","tagcolor":ORANGE,"text":"MediaTypeEnum conflates media format (Video/Audio/Image/Document) with sensor modality (a note asks it to also cover 'thermal scan')."},
- {"tag":"M7 (HIGH):","tagcolor":ORANGE,"text":"hasStartTime is typed UUIDBase while hasEndTime is TimeInstant - almost certainly a copy/paste error."},
- {"tag":"Typos:","tagcolor":RED,"text":"class 'CollecticeRoboticSystem' (should be Collective) and versionInfo 'Extrension' - cheap to fix now, painful after messages exist."},
-], top=1.8, size=15.5, gap=13)
+ {"tag":"M1:","tagcolor":ORANGE,"text":"actorReference is a string, but it needs to define an entity not yet in the database - an inline entity-definition mechanism for observed entities is still to be added."},
+ {"tag":"M5:","tagcolor":ORANGE,"text":"MediaTypeCode mixes media format (Video/Audio/Image/Document) with sensor modality (a note asks it to also cover 'thermal scan') - worth separating."},
+ {"tag":"M7:","tagcolor":ORANGE,"text":"in an Order sheet hasStartTime is typed UUIDBase while hasEndTime is TimeInstant - looks like a copy/paste slip."},
+ {"tag":"Typos:","tagcolor":ORANGE,"text":"class 'CollecticeRoboticSystem' (should be 'CollectiveRoboticSystem') and versionInfo 'Extrension' - both still in v0.0.3; easiest to fix before messages are built on them."},
+], top=1.8, size=15, gap=13)
 footer(s)
 
 # ---------------- Coverage gaps ----------------
-s = slide(); header(s, "Biggest coverage gaps")
+s = slide(); header(s, "Coverage: what is still to instantiate")
 bullets(s, [
  {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
  {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
@@ -270,6 +286,15 @@ bullets(s, [
 ], top=1.75, size=14.5, gap=12)
 footer(s)
 
+# ---------------- v0.0.3 status ----------------
+s = slide(); header(s, "Where the OWL is now (v0.0.3)", "Michael's update - the model is moving")
+bullets(s, [
+ {"tag":"Started (good):","tagcolor":GREEN,"text":"v0.0.3 begins the attribute layer (first datatype properties - v0.0.1 had none; plus further object properties) and folds the Video Detection Report into the OWL (MediaReference, MediaTypeCode, SensorObservation, VideoDetectionReportContent) + an AutonomyLevelCode model."},
+ {"tag":"Brings a decision to a head:","tagcolor":ORANGE,"text":"P1 is now in the model, not yet settled - v0.0.3 declares both UAV/UGV (under Robot) and UnmannedAerial/Ground/Maritime/UnderwaterVehicle (under SMX Vehicle), so the group still picks one; the maritime ones sit under Vehicle rather than SurfaceVessel/SubsurfaceVessel."},
+ {"tag":"Still to define:","tagcolor":ACCENT,"text":"the broader attribute set, a taskable collective (Swarm was removed; CollecticeRoboticSystem still non-actor), the generic Detection Report, and the rationale / robot-to-robot / area content - plus the two typos."},
+], top=1.8, size=15, gap=13)
+footer(s)
+
 # ---------------- Decisions 1: model structure ----------------
 s = slide(); header(s, "Decisions (1/3): model structure")
 bullets(s, [
@@ -311,9 +336,9 @@ bullets(s, [
 footer(s)
 
 # ---------------- Proposed fixes (pending buy-in) ----------------
-s = slide(); header(s, "Proposed fixes", "Pending group buy-in - nothing applied to the model")
+s = slide(); header(s, "Proposed refinements", "Pending group buy-in - nothing applied to the model")
 bullets(s, [
- {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"class typo CollecticeRoboticSystem -> Collective (O1); versionInfo Extrension -> Extension (O2); file CSIM_ASX -> C2SIM_ASX (O3); hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
+ {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"class typo CollecticeRoboticSystem -> CollectiveRoboticSystem (O1); versionInfo Extrension -> Extension (O2); file CSIM_ASX -> C2SIM_ASX (O3); hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
  {"tag":"Structural (decide first):","tagcolor":ORANGE,"text":"UAV/robot typing (Q-A); Swarm -> CollectiveEntity so it is taskable (Q-B); one sensor model (Q-C); one autonomy vocabulary (Q-D)."},
  {"tag":"New content (design):","tagcolor":ACCENT,"text":"inline entity def (Q-E), MediaReference (Q-F), robot-to-robot + cross-cue (Q-G/Q-P), rationale report (Q-H), generic detection report (Q-I/Q-Q), swarm residuals (Q-J), engagement authority (Q-K), payload/effector/weapon typing (Q-L), area subject (Q-M), explore order (Q-N), denied-comms/relay (Q-O), locomotion subtypes (Q-R), decoy/threat-aware (Q-S), environment conditions (Q-T), formation geometry (Q-U)."},
  {"text":"Nothing here is applied to the model - all items are proposals for group buy-in.","bold":True},

@@ -8,7 +8,7 @@ coordination, explainability, autonomous replanning).
 
 Layout mirrors the workbook scenario-sheet columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
-**[Q]** = open question, **[!]** = suspected defect/gap. Findings anchored to
+**[Q]** = open question, **[!]** = not-yet-defined item / gap. Findings anchored to
 `Ontology/C2SIM.rdf`, `C2SIM_SMX.rdf`, `C2SIM_LOX.rdf`. This is review input,
 not a decision.
 
@@ -105,7 +105,7 @@ needed. (Recorded so the walk does not overstate the gap.)
 
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
-| ASX? | (rationale) | ReportContent? | why route changed | ??? | (free text / structured?) | [!] X2 BLOCKER-for-scenario: no rationale/explanation ReportContent exists. |
+| ASX? | (rationale) | ReportContent? | why route changed | ??? | (free text / structured?) | [!] X2 DECIDE-FIRST-for-scenario: no rationale/explanation ReportContent defined yet. |
 | C2SIM | TaskStatus | ReportContent | task outcome | TaskStatus | "Incomplete" | Can say *that* it failed, not *why*. |
 
 Finding:
@@ -128,8 +128,8 @@ Finding:
 | X4 | MED | partial | No obstacle/threat observation subtype for hazards that trigger replanning. |
 | X5 | LOW | mostly covered | Phased tasks/ETA likely map to base `PlanBody`/`PlanPhase`; ETA attribute is the open bit. |
 | X6 | LOW | question | Is CASEVAC a base `TaskActionCode` or a new ASX task; re-tasking mid-mission semantics. |
-| P1 | BLOCKER | gap | UGV double-typed (SMX Vehicle vs ASX UGV/Robot) - same as UAV. |
-| P2 | BLOCKER | gap | Scout sensor typing unresolved. |
+| P1 | DECIDE-FIRST | gap | UGV double-typed (SMX Vehicle vs ASX UGV/Robot) - same as UAV. |
+| P2 | DECIDE-FIRST | gap | Scout sensor typing not yet settled. |
 
 The two findings unique to CASEVAC and not seen in the UAV/Init walks are
 **X1 (robot-to-robot coordination)** and **X2 (explainability)**. Both are

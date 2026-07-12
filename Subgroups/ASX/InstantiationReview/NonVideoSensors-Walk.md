@@ -9,7 +9,7 @@ that model generalizes. It does not.
 
 Layout mirrors the workbook columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
-**[Q]** = open question, **[!]** = gap/defect. Anchored to the ontology.
+**[Q]** = open question, **[!]** = not-yet-defined item / gap. Anchored to the ontology.
 
 Grounding done first (to avoid inventing gaps):
 - `Observation` subtypes are exactly {Activity, Health, Location, Name,

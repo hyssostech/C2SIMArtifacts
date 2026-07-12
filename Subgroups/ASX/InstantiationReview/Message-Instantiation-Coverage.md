@@ -5,8 +5,8 @@
 > walks. The review's instantiation tabs (Init, CASEVAC, sensing, swarm,
 > task/effect, sourced scenarios) were subsequently added to the diff-able
 > `.xml` copies - see decision S4 and coverage rows C1-C8 in
-> `Issues-And-Comments-Log.md`. The STUB/empty rows and "0 Initialization /
-> biggest hole" reading below describe the `.xlsx` baseline only; all three
+> `Issues-And-Comments-Log.md`. The STUB/empty rows and the "0 Initialization"
+> reading below describe the `.xlsx` baseline only; all three
 > Initialization scenarios and the Swarm Detection report are now instantiated
 > in the `.xml`.
 
@@ -70,7 +70,7 @@ for that scenario.
 - Instantiation so far is concentrated on **one UAV video-surveillance thread**
   (Report done, patrol Order done) plus a **UGV transport Order**. That is the
   ~20% that is done.
-- **Initialization is the single biggest hole**: zero worked examples across all
+- **Initialization is the least-developed area** (no worked examples yet across all
   three named scenarios. It is also the message type that most directly forces
   the entity-typing decisions in the ASX proposal (how an autonomous platform,
   its sensors, and a swarm are declared). This is why the companion

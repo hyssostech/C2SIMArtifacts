@@ -8,7 +8,7 @@ action, and under what approval?
 
 Layout mirrors the workbook columns:
 `Model | C2SIM Object | Parent Type | Field | Type | Value | Notes`.
-**[Q]** = open question, **[!]** = gap/defect. Anchored to the ontology. All
+**[Q]** = open question, **[!]** = not-yet-defined item / gap. Anchored to the ontology. All
 findings are proposals for the group; nothing here is applied to the model.
 
 Grounding done first - and it narrowed the findings a lot:
