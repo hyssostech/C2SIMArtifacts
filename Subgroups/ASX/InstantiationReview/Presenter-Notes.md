@@ -1,6 +1,6 @@
 # Presenter Notes - ASX Instantiation Review
 
-Talking points for presenting `ASX-Instantiation-Findings.pptx` (22 slides) to
+Talking points for presenting `ASX-Instantiation-Findings.pptx` (23 slides) to
 the sub-group. Grouped by section, not one line per slide. Keep the framing
 **constructive**: this is a review that *builds on* the proposed extension and
 Elizabeth's message work - it is not a critique of incomplete work. Everything is
@@ -68,6 +68,10 @@ a proposal; nothing has been applied to the model or the workbooks.
     weapon *typing* plus a couple of residual semantics.
 
 ## Decisions (the ask)
+- The three decisions slides carry a subtitle pointing to **log section 7** (all
+  22 in full, with what each resolves) - say "the full text is in the log" rather
+  than reading them out. The final slide ("Where to dig deeper") maps every topic
+  to its source doc, so the group can drill in after.
 - ~22 decisions, listed in the log. Present the grouping, not all 22:
   - **Structure first:** UAV/robot typing (Q-A), swarm -> CollectiveEntity (Q-B),
     one sensor model (Q-C), one autonomy vocabulary (Q-D).

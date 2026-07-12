@@ -2,7 +2,7 @@
 
 One-page bearings on what this review is, what it found, and what the group needs
 to decide. Detail is in the other files in this folder; the deck
-(`ASX-Instantiation-Findings.pptx`, 22 slides) is the presentation version.
+(`ASX-Instantiation-Findings.pptx`, 23 slides) is the presentation version.
 
 ## What this is
 
@@ -26,7 +26,8 @@ been applied to the OWL model or to Elizabeth's message workbooks.
 - Took the instantiation from **4 worked message instances (0 Initialization) to
   ~33** across Init / Order / Report (~29 drafted in this review), spanning 20+
   scenarios - all on the branch, pending group review.
-- Produced a 22-slide findings deck and a full issues/decisions log.
+- Produced a 23-slide findings deck (with a "Where to dig deeper" reference map)
+  and a full issues/decisions log.
 
 ## What we found (headline)
 

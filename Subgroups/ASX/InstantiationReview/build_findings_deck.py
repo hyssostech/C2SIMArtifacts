@@ -296,7 +296,7 @@ bullets(s, [
 footer(s)
 
 # ---------------- Decisions 1: model structure ----------------
-s = slide(); header(s, "Decisions (1/3): model structure")
+s = slide(); header(s, "Decisions (1/3): model structure", "Full register - all 22, with what each resolves: log section 7")
 bullets(s, [
  {"tag":"Q-A","tagcolor":ACCENT,"text":"UAV/robot typing: a role on the existing Platform tree, or a parallel Robot tree?"},
  {"tag":"Q-B","tagcolor":ACCENT,"text":"Swarm: derive from CollectiveEntity (ActorEntity) so it can be tasked."},
@@ -306,7 +306,7 @@ bullets(s, [
 footer(s)
 
 # ---------------- Decisions 2: new content ----------------
-s = slide(); header(s, "Decisions (2/3): new content types needed")
+s = slide(); header(s, "Decisions (2/3): new content types needed", "continued - full text + grounding in log section 7")
 bullets(s, [
  {"tag":"Q-E","tagcolor":ACCENT,"text":"Inline entity definition for newly-observed entities in reports."},
  {"tag":"Q-F","tagcolor":ACCENT,"text":"MediaReference identity; separate media-format from sensor-modality."},
@@ -321,7 +321,7 @@ bullets(s, [
 footer(s)
 
 # ---------------- Decisions 3: from sourced scenarios ----------------
-s = slide(); header(s, "Decisions (3/3): from the sourced scenarios")
+s = slide(); header(s, "Decisions (3/3): from the sourced scenarios", "continued - full text + grounding in log section 7")
 bullets(s, [
  {"tag":"Q-N","tagcolor":ACCENT,"text":"Area-coverage / exploration goal (explore-until-covered) - search verbs already exist."},
  {"tag":"Q-O","tagcolor":ACCENT,"text":"Denied-comms operating mode + deployable relay entity (the relay verb lox#COMREL already exists)."},
@@ -354,6 +354,21 @@ bullets(s, [
  {"text":"Reconcile the OWL model with the June spreadsheet decisions; fix the typos."},
  {"text":"Optional: adopt the diff-able (.xml) workbooks so edits can be reviewed and merged in git."},
 ], top=1.8, size=16.5, gap=12)
+footer(s)
+
+# ---------------- Where to dig deeper (reference map) ----------------
+s = slide(); header(s, "Where to dig deeper", "Branch asx-diffable-spreadsheets: docs in ASX/InstantiationReview, workbooks in ASX/Proposed Extension Working Materials")
+bullets(s, [
+ {"tag":"Master evidence log:","tagcolor":NAVY,"text":"Issues-And-Comments-Log.md - every finding, the 22 decisions (sec 7), v0.0.3 reconciliation (sec 9), why gaps remain (sec 8)."},
+ {"tag":"Briefing / Q&A / talk track:","tagcolor":NAVY,"text":"Group-Briefing.md (one page); Anticipated-QA.md; Presenter-Notes.md."},
+ {"tag":"Coverage + the actual messages:","tagcolor":NAVY,"text":"Message-Instantiation-Coverage.md; the three 'ASX Sample *.xml' workbooks (the ~33 instantiations, diff-able)."},
+ {"tag":"Initialization & entity typing (P1/P2/P7):","tagcolor":NAVY,"text":"Initialization-Walk.md; log sec 5."},
+ {"tag":"CASEVAC (X1/X2 -> Q-G/Q-H):","tagcolor":NAVY,"text":"CASEVAC-Walk.md; log sec 6b."},
+ {"tag":"Sensors & swarm (Y / Z series):","tagcolor":NAVY,"text":"NonVideoSensors-Walk.md; Swarm-Walk.md; log sec 6c / 6d."},
+ {"tag":"Task / effect & engagement (W / L, Q-K/Q-L):","tagcolor":NAVY,"text":"FireSupport-Walk.md; TaskEffect-Batch-Walk.md; log sec 6e / 6f."},
+ {"tag":"Sourced & validation missions:","tagcolor":NAVY,"text":"SourcedScenarios-Walk.md; ValidationEvidence-Walk.md; Documents-Found.md; log sec 6h / 6j."},
+ {"tag":"Redundancy screen (N1):","tagcolor":NAVY,"text":"RedundancyPass-Walk.md; log sec 6g."},
+], top=1.65, size=12.5, gap=6)
 footer(s)
 
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ASX-Instantiation-Findings.pptx")
