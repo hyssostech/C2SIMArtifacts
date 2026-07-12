@@ -27,6 +27,15 @@ third party.
 | [Engineering_RCBC2018.md](./Engineering_RCBC2018.md) | U.S. Army RCBC / JWA 19 breach (multi-source) | Combat-engineering robotic breach (request #9) |
 | [PersistentWatch_MDARS.md](./PersistentWatch_MDARS.md) | MDARS overview, DTIC ADA422465 | Persistent surveillance / sentry (validation hole #4) |
 | [ElectronicWarfare_EmitterGeoloc.md](./ElectronicWarfare_EmitterGeoloc.md) | AFIT thesis DTIC AD1054177 + ADA444985 | EW emitter geolocation + electronic attack (validation hole #3) |
+| [Brutzman_Fitzpatrick2020.md](./Brutzman_Fitzpatrick2020.md) | Brutzman & Fitzpatrick 2020, NPS-MV-20-001 | Village-defense MUM-T ISR (original library paper) |
+| [Biagini_Corona_Casar2017.md](./Biagini_Corona_Casar2017.md) | Biagini, Corona & Casar 2017, MESAS | Urban counter-UAxS, 2 variants (original library paper) |
+| [Langerwisch2013.md](./Langerwisch2013.md) | Langerwisch et al. 2013, SSRR | Heterogeneous MOVE/OBSERVE, 2 tasks (original library paper) |
+
+The last three promote the original library papers (Brutzman, Biagini/Corona 2017,
+Langerwisch) - whose v2 extractions previously lived only inside
+[V2-HeadToHead.md](../V2-HeadToHead.md) - into first-class standalone records, so
+the whole library now has uniform v2.2 coverage. Their content matches the
+head-to-head extractions; the head-to-head retains them for the V1-vs-V2 comparison.
 
 Source-fidelity notes (after the "hunt harder" pass): `ElectronicWarfare_EmitterGeoloc`
 is now a real extraction from a primary open-access UAV emitter-geolocation flight
