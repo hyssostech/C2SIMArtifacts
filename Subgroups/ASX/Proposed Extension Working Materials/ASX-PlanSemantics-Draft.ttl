@@ -10,24 +10,79 @@
 @base <http://www.sisostds.org/ontologies/asx#> .
 
 <http://www.sisostds.org/ontologies/asx/plan> rdf:type owl:Ontology ;
-    owl:versionIRI <http://www.sisostds.org/ontologies/asx/plan/0.0.1> ;
+    owl:versionIRI <http://www.sisostds.org/ontologies/asx/plan/0.0.2> ;
     owl:imports <http://www.sisostds.org/ontologies/lox> ;
     rdfs:comment """DRAFT — ASX Plan-Semantics module. Work in progress; not adopted by the ASX subgroup.
 
-Extends the LOX plan constructs (PlanBody, PlanPhase, PlanPhaseTrigger, PlanPhaseCompletionCondition)
-with the semantics required to express autonomous-system behavior: failure outcomes and fallback
-branching (behavior-tree Fallback/Selector), state-predicate guard conditions, composite and
-human-approval triggers, repetition/persistence policies, goals with achievement conditions and
-commitment modes (BDI), plan applicability conditions (BDI plan library / HTN methods), and
-intention/deviation reporting. Design rationale and construct-by-construct derivation are in
-'Plan-Semantics-Analysis.md' in this directory.
+Extends the LOX plan constructs (PlanBody, PlanPhase, PlanPhaseTrigger) with the semantics required
+to express autonomous-system behavior: failure outcomes and fallback branching (behavior-tree
+Fallback/Selector), state-predicate guard conditions, composite and human-approval triggers,
+repetition/persistence policies, goals with achievement conditions and commitment modes (BDI),
+plan applicability conditions (plan pre-selection library), and intention/deviation reporting.
+It also adds the failure-side dual of the LOX PlanPhaseCompletionCondition code list.
+Design rationale and construct-by-construct derivation are in 'Plan-Semantics-Analysis.md'
+in this directory.
 
-All constructs are additive and optional: a plain LOX plan remains valid, and consumers that do not
-understand this module can process an AutonomousPlanPhase as an ordinary lox:PlanPhase.
+Additive REPORTING constructs (status and deviation report contents, new code individuals) degrade
+gracefully for consumers that ignore unknown vocabulary. GATING and RESTRICTING constructs (triggers,
+guards, timeouts, failure handling) are mandatory-to-understand: they narrow when and how a phase may
+execute, so ignoring them removes the safety envelope. See rule R13.
 
-Entities are declared in the asx namespace so the module can be merged into the ASX ontology once
-reviewed.""" ;
-    owl:versionInfo "C2SIM ASX Plan-Semantics module v0.0.1 DRAFT" .
+NORMATIVE EXECUTION-SEMANTICS RULES. OWL cannot express execution semantics; the following rules are
+normative for implementations of this module and are referenced from entity comments as R1..R14.
+ R1  (outcomes) A plan phase reaches exactly one terminal outcome: PhaseSucceeded, PhaseFailed,
+     PhaseAborted, or PhaseSkipped. PhasePending and PhaseInProgress are non-terminal states.
+ R2  (sequencing) A lox:PriorPhaseCompletionTrigger fires only when the referenced phase's outcome
+     is PhaseSucceeded or PhaseSkipped. Failure does not fire it; failed chains resolve via
+     fallback (R7) or parent failure aggregation (R3), never by silently continuing.
+ R3  (failure aggregation) hasPhaseFailureCondition carries only the member-aggregation policy:
+     AnyTaskFailed (the default when omitted) or AllTasksFailed. "Task" includes subphases.
+     When the policy is met, the phase fails immediately.
+ R4  (implicit failure modes) Declaring hasPhaseTimeout or hasGuardCondition makes the corresponding
+     failure mode live regardless of the aggregation policy: timeout expiry or guard violation fails
+     the phase at once. TimeoutExceeded and GuardViolated are used as failure-cause values in reports
+     (hasPhaseFailureCauseCode), not as selectable aggregation policies.
+ R5  (propagation on termination) When a phase reaches a terminal outcome, its in-flight member tasks
+     are aborted (TASKABRT), in-flight subphases become PhaseAborted, and not-yet-started members
+     become PhaseSkipped.
+ R6  (precedence) Completion and failure conditions are evaluated against event times, not report
+     arrival times. If both are satisfiable for the same phase, failure takes precedence.
+ R7  (fallback) When a phase fails and declares hasOnFailurePhaseReference, the referenced phase is
+     activated. The referenced phase's mandatory trigger MUST be an OnPhaseFailureTrigger naming the
+     failing phase; the two references must agree. If the fallback phase (or its own onward fallback
+     chain) ultimately succeeds, the failed phase is treated as succeeded for purposes of its
+     parent's completion and failure aggregation. Fallback chains MUST be acyclic, and a phase that
+     has reached a terminal outcome may be re-entered only under an explicit repetition policy.
+ R8  (fallback vs. policy) hasOnFailurePhaseReference provides peer-level fallback;
+     the PriorityFallback execution policy provides alternative subphases. When both apply, a failed
+     subphase's own fallback chain resolves before the parent advances to its next-priority
+     alternative.
+ R9  (composite AND) A CompositeTrigger with operator AllSubTriggers fires at the first instant at
+     which every discrete sub-trigger (event, order, approval, prior-phase, phase-failure) has
+     occurred AND every StateConditionTrigger sub-condition currently holds. Discrete sub-triggers
+     latch once occurred; state conditions do not latch and must hold at the instant of firing.
+ R10 (one-shot triggers) Phase triggers gate initial activation only and do not re-arm. Iterations
+     of a repeated phase are governed solely by the repetition policy. PhaseFailed is reported as
+     the terminal outcome only after the repetition policy is exhausted; per-attempt state is
+     conveyed via hasAttemptNumber on PlanExecutionStatusContent.
+ R11 (state evaluation) A StateConditionTrigger is level-triggered: it fires as soon as its
+     condition evaluates true against the executing system's own world model, at or after the time
+     the phase becomes eligible (including immediately, if already true). Different systems may
+     legitimately hold different world models; the commander must treat such triggers as evaluated
+     from the tasked system's perspective.
+ R12 (condition conjunction) Repeated values of hasGuardCondition, hasAchievementCondition,
+     hasGoalFailureCondition, and hasContextCondition are conjunctive. Disjunction and richer
+     composition are provided only at the trigger level (CompositeTrigger) in this version.
+ R13 (fail-closed interoperability) A consumer that cannot interpret a phase's trigger — including
+     the trigger subclasses defined here — MUST treat the phase as not triggerable, MUST NOT execute
+     it, and SHOULD report the inability (ACKNOTUNDSTD). Plans using this module's gating constructs
+     SHOULD only be transmitted to consumers that have negotiated the module at initialization.
+ R14 (plan library) AutonomousPlanBody instances carrying hasContextCondition MUST be transmitted
+     with isToBeExecutedNow = false and only to consumers that have negotiated this module. Context
+     conditions are re-evaluated during execution: when the active plan's context becomes false and
+     another transmitted plan for the same Goal is applicable, the executing system switches and
+     reports a PlanSwitched deviation.""" ;
+    owl:versionInfo "C2SIM ASX Plan-Semantics module v0.0.2 DRAFT" .
 
 #################################################################
 #    External entities referenced (declaration stubs)
@@ -45,14 +100,19 @@ lox:PlanBody rdf:type owl:Class .
 lox:PlanPhase rdf:type owl:Class .
 lox:PlanPhaseTrigger rdf:type owl:Class .
 
+c2sim:UUIDBase rdf:type rdfs:Datatype .
+
 c2sim:hasCode rdf:type owl:ObjectProperty .
 c2sim:hasDesiredEffectCode rdf:type owl:ObjectProperty .
+c2sim:hasDuration rdf:type owl:ObjectProperty .
+c2sim:hasTimeInstant rdf:type owl:ObjectProperty .
 
 c2sim:hasActorReference rdf:type owl:DatatypeProperty .
 c2sim:hasEventReference rdf:type owl:DatatypeProperty .
 c2sim:hasReference rdf:type owl:DatatypeProperty .
 c2sim:hasUUID rdf:type owl:DatatypeProperty .
 lox:hasPlanPhaseReference rdf:type owl:DatatypeProperty .
+lox:hasTriggerPhase rdf:type owl:DatatypeProperty .
 smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 
 #################################################################
@@ -68,19 +128,19 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :hasGuardCondition rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf :hasCondition ;
     rdfs:range :Condition ;
-    rdfs:comment "An invariant that must hold for the duration of a plan phase. Violation while the phase is active constitutes the GuardViolated failure condition." .
+    rdfs:comment "An invariant that must hold for the duration of a plan phase. Violation while the phase is active fails the phase immediately (rule R4). Repeated guards are conjunctive (R12)." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasContextCondition
 :hasContextCondition rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf :hasCondition ;
     rdfs:range :Condition ;
-    rdfs:comment "An applicability condition on a plan: the plan may be selected for execution only while this condition holds. When several plans reference the same Goal, context conditions determine which is applicable (BDI context condition; HTN method precondition)." .
+    rdfs:comment "An applicability condition on a plan: the plan may be selected for execution only while this condition holds, and it is re-evaluated during execution (rule R14). When several plans reference the same Goal, context conditions determine which is applicable (BDI-style context condition; HTN method precondition)." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasAchievementCondition
 :hasAchievementCondition rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf :hasCondition ;
     rdfs:range :Condition ;
-    rdfs:comment "The end state that defines achievement of a Goal. The Goal is achieved when this condition becomes true." .
+    rdfs:comment "The end state that defines achievement of a Goal. The Goal is achieved when this condition becomes true. Repeated values are conjunctive (R12)." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasGoalFailureCondition
 :hasGoalFailureCondition rdf:type owl:ObjectProperty ;
@@ -92,7 +152,18 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :hasDeviationCondition rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf :hasCondition ;
     rdfs:range :Condition ;
-    rdfs:comment "The world-state condition that caused a reported deviation, when the cause was a Condition rather than a discrete Event." .
+    rdfs:comment "The world-state condition that caused a reported deviation, when the cause was a Condition rather than a discrete Event. Where the condition instance carried a UUID, the report may cite it by reference instead." .
+
+###  http://www.sisostds.org/ontologies/asx#hasRepetitionUntilCondition
+:hasRepetitionUntilCondition rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasCondition ;
+    rdfs:range :Condition ;
+    rdfs:comment "The loop-termination condition of a phase whose repetition policy is RepeatUntilCondition. The inherited LOX completion condition closes each iteration; this condition closes the loop (e.g. repeat detect-and-neutralize passes until the route-clear condition holds)." .
+
+###  http://www.sisostds.org/ontologies/asx#hasGoal
+:hasGoal rdf:type owl:ObjectProperty ;
+    rdfs:range :Goal ;
+    rdfs:comment "Containment of an inline Goal definition. Goals are defined inline once (typically in the AutonomousPlanBody that first pursues them) and referenced elsewhere by UUID via hasGoalReference." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasSubTrigger
 :hasSubTrigger rdf:type owl:ObjectProperty ;
@@ -103,43 +174,49 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :hasLogicalOperatorCode rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :LogicalOperatorCode ;
-    rdfs:comment "The logical operator combining the sub-triggers of a CompositeTrigger." .
+    rdfs:comment "The logical operator combining the sub-triggers of a CompositeTrigger. See rule R9 for the semantics of AllSubTriggers over mixed discrete and state sub-triggers." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasConditionPredicateCode
 :hasConditionPredicateCode rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :ConditionPredicateCode ;
-    rdfs:comment "The predicate that a Condition evaluates. The interpretation of hasConditionParameter values is defined per predicate code." .
+    rdfs:comment "The predicate that a Condition evaluates. Each predicate code documents which of the typed condition properties (subject reference, object reference, threshold value, threshold duration) it uses and how." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasPhaseFailureCondition
 :hasPhaseFailureCondition rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :PhaseFailureCondition ;
-    rdfs:comment "A code defining the condition under which a plan phase is considered to have failed. The failure-side dual of lox:hasPlanPhaseCompletionCondition." .
+    rdfs:comment "The member-aggregation failure policy of a plan phase: AnyTaskFailed (default when omitted) or AllTasksFailed, where members are the phase's tasks and subphases (rule R3). Timeout and guard failures are implicit whenever hasPhaseTimeout or hasGuardCondition are declared (rule R4) and are not selected here. The failure-side dual of lox:hasPlanPhaseCompletionCondition." .
+
+###  http://www.sisostds.org/ontologies/asx#hasPhaseFailureCauseCode
+:hasPhaseFailureCauseCode rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasCode ;
+    rdfs:range :PhaseFailureCondition ;
+    rdfs:comment "In a report, the cause of a phase failure: the aggregation policy that was met (AnyTaskFailed, AllTasksFailed) or an implicit failure mode (TimeoutExceeded, GuardViolated)." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasExecutionPolicyCode
 :hasExecutionPolicyCode rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :PhaseExecutionPolicyCode ;
-    rdfs:comment "The policy governing execution of the subphases of a plan phase (sequential, parallel, or priority fallback). Makes composite control flow explicit rather than implied by pairwise triggers." .
+    rdfs:comment "The policy governing execution of the subphases of a plan phase. Subphases of a policy-bearing parent carry a ParentPhasePolicyTrigger in their mandatory trigger slot; ordering under SequentialInOrder and PriorityFallback is given by hasPhasePriority. If subphases instead carry their own triggers, those triggers must be consistent with the policy; on conflict the policy is normative." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasRepetitionPolicyCode
 :hasRepetitionPolicyCode rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :RepetitionPolicyCode ;
-    rdfs:comment "The repetition/persistence policy of a plan phase: execute once, retry on failure, repeat until a condition holds, or maintain continuously as a standing behavior." .
+    rdfs:comment "The repetition/persistence policy of a plan phase: execute once, retry on failure, repeat until a condition holds, or maintain continuously as a standing behavior. See rule R10: the phase trigger gates only initial activation; iterations are governed by this policy." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasPhaseOutcomeCode
 :hasPhaseOutcomeCode rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :PhaseOutcomeCode ;
-    rdfs:comment "The execution status or terminal outcome of a plan phase, as reported in a PlanExecutionStatusContent." .
+    rdfs:comment "The execution state or terminal outcome of a plan phase, as reported in a PlanExecutionStatusContent." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasGoalCommitmentCode
 :hasGoalCommitmentCode rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf c2sim:hasCode ;
     rdfs:range :GoalCommitmentCode ;
-    rdfs:comment "The commitment mode of a Goal: achieve once, maintain continuously, or achieve then maintain." .
+    rdfs:comment "The commitment mode of a Goal: achieve once, maintain continuously, or achieve then maintain. This qualifies the goal's success-condition temporality; the executing agent's reconsideration strategy is deliberately not modeled." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasDeviationTypeCode
 :hasDeviationTypeCode rdf:type owl:ObjectProperty ;
@@ -155,16 +232,25 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 
 ###  http://www.sisostds.org/ontologies/asx#hasPhaseTimeout
 :hasPhaseTimeout rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasDuration ;
     rdfs:range c2sim:Duration ;
-    rdfs:comment "Maximum duration for a plan phase, measured from phase start. Expiry constitutes the TimeoutExceeded failure condition." .
+    rdfs:comment "Maximum duration for a plan phase, measured from phase start. Declaring it makes the TimeoutExceeded failure mode live (rule R4)." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasApprovalTimeout
 :hasApprovalTimeout rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasDuration ;
     rdfs:range c2sim:Duration ;
     rdfs:comment "Maximum duration a HumanApprovalTrigger waits for approval before the timeout disposition applies." .
 
+###  http://www.sisostds.org/ontologies/asx#hasThresholdDuration
+:hasThresholdDuration rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasDuration ;
+    rdfs:range c2sim:Duration ;
+    rdfs:comment "A duration parameter of a Condition, where its predicate calls for one (e.g. CommsDenied for longer than this duration; TimeElapsedSince a referenced event)." .
+
 ###  http://www.sisostds.org/ontologies/asx#hasEstimatedPhaseCompletionTime
 :hasEstimatedPhaseCompletionTime rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasTimeInstant ;
     rdfs:range c2sim:TimeInstant ;
     rdfs:comment "The executing system's current estimate of when the reported plan phase will complete." .
 
@@ -176,19 +262,19 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :hasOnFailurePhaseReference rdf:type owl:DatatypeProperty ;
     rdfs:subPropertyOf lox:hasPlanPhaseReference ;
     rdfs:range c2sim:UUIDBase ;
-    rdfs:comment "Reference to the plan phase to be triggered if this phase fails (behavior-tree Fallback/Selector semantics; activation semantics for JC3IEDM ALT/HASPRV task relations). Further alternatives are expressed by chaining: the fallback phase may itself declare a fallback." .
+    rdfs:comment "Reference to the plan phase to be activated if this phase fails (behavior-tree Fallback/Selector semantics; activation semantics for JC3IEDM ALT/HASPRV task relations). The referenced phase's mandatory trigger MUST be an OnPhaseFailureTrigger naming this phase, and the two references must agree (rule R7). Further alternatives are expressed by chaining: the fallback phase may itself declare a fallback. Chains must be acyclic. Interaction with the PriorityFallback execution policy is defined by rule R8." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasOnTimeoutPhaseReference
 :hasOnTimeoutPhaseReference rdf:type owl:DatatypeProperty ;
     rdfs:subPropertyOf lox:hasPlanPhaseReference ;
     rdfs:range c2sim:UUIDBase ;
-    rdfs:comment "Reference to the plan phase to be triggered if a HumanApprovalTrigger times out without approval (e.g. a safe-hold or withdraw phase). If omitted, the gated phase is skipped." .
+    rdfs:comment "Reference to the plan phase to be activated if a HumanApprovalTrigger times out without approval, or is refused (e.g. a safe-hold or withdraw phase). If omitted, the gated phase becomes PhaseSkipped; per rule R2 a skipped phase satisfies downstream PriorPhaseCompletionTriggers, so the remainder of the plan proceeds." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasGoalReference
 :hasGoalReference rdf:type owl:DatatypeProperty ;
     rdfs:subPropertyOf c2sim:hasReference ;
     rdfs:range c2sim:UUIDBase ;
-    rdfs:comment "Reference to the Goal that a plan, plan phase, or task is intended to achieve." .
+    rdfs:comment "Reference to the Goal that a plan, plan phase, or task is intended to achieve. The referenced Goal must have been defined inline (hasGoal) in a previously transmitted or accompanying message." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasActiveGoalReference
 :hasActiveGoalReference rdf:type owl:DatatypeProperty ;
@@ -200,13 +286,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :hasApprovingEntity rdf:type owl:DatatypeProperty ;
     rdfs:subPropertyOf c2sim:hasActorReference ;
     rdfs:range c2sim:UUIDBase ;
-    rdfs:comment "Reference to the ActorEntity whose approval satisfies a HumanApprovalTrigger. Approval is conveyed by a message from this entity with CommunicativeActTypeCode Agree or Confirm referencing the gated plan phase." .
-
-###  http://www.sisostds.org/ontologies/asx#hasConditionSubjectReference
-:hasConditionSubjectReference rdf:type owl:DatatypeProperty ;
-    rdfs:subPropertyOf c2sim:hasReference ;
-    rdfs:range c2sim:UUIDBase ;
-    rdfs:comment "Reference to the entity, task, location, or route that a Condition's predicate is evaluated against." .
+    rdfs:comment "Reference to the ActorEntity whose approval satisfies a HumanApprovalTrigger. Approval is conveyed by a message from this entity with CommunicativeActTypeCode Agree or Confirm whose body references the gated plan phase's UUID; refusal by a Refuse message. The precise message-body binding is an open item for message-schema definition." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasTriggeringEventReference
 :hasTriggeringEventReference rdf:type owl:DatatypeProperty ;
@@ -214,25 +294,53 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:range c2sim:UUIDBase ;
     rdfs:comment "Reference to the Event that caused a reported deviation, when the cause was a discrete Event." .
 
+###  http://www.sisostds.org/ontologies/asx#hasConditionSubjectReference
+:hasConditionSubjectReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "Reference to the entity, task, location, route, or area that a Condition's predicate is evaluated against (the predicate's subject)." .
+
+###  http://www.sisostds.org/ontologies/asx#hasConditionObjectReference
+:hasConditionObjectReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "Reference to the second participant of a binary Condition predicate (e.g. the location for EntityAtLocation; the reference entity for EntityWithinRange; the counterpart node for CommsAvailable; the anchor event for TimeElapsedSince)." .
+
+###  http://www.sisostds.org/ontologies/asx#hasThresholdValue
+:hasThresholdValue rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:double ;
+    rdfs:comment "A numeric parameter of a Condition, where its predicate calls for one. Units are defined by the predicate code (e.g. meters for EntityWithinRange and EntityAtLocation tolerance; a 0..1 fraction for AreaCoverageAchieved and EstimateConfidenceAbove; a health fraction for EntityHealthBelow)." .
+
+###  http://www.sisostds.org/ontologies/asx#isNegated
+:isNegated rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "When true, the Condition's truth value is the negation of its predicate (default false). Provides guard polarity and else-branches without a general expression language (e.g. guard 'no hazard on route' = HazardOnRoute with isNegated true)." .
+
 ###  http://www.sisostds.org/ontologies/asx#hasRepetitionLimit
 :hasRepetitionLimit rdf:type owl:DatatypeProperty ;
     rdfs:range xsd:nonNegativeInteger ;
     rdfs:comment "Upper bound on the number of executions of a phase under a RetryOnFailure or RepeatUntilCondition repetition policy." .
 
+###  http://www.sisostds.org/ontologies/asx#hasAttemptNumber
+:hasAttemptNumber rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:comment "In a PlanExecutionStatusContent, the current attempt number of a phase executing under a repetition policy (rule R10: PhaseFailed is terminal only after the policy is exhausted)." .
+
 ###  http://www.sisostds.org/ontologies/asx#hasPhasePriority
 :hasPhasePriority rdf:type owl:DatatypeProperty ;
     rdfs:range xsd:nonNegativeInteger ;
-    rdfs:comment "Ordering rank of a subphase under a parent phase with the PriorityFallback execution policy; lower values are attempted first." .
+    rdfs:comment "Ordering rank of a subphase under a parent phase whose execution policy is SequentialInOrder or PriorityFallback; lower values run/are attempted first. RDF property values are unordered, so ordering is always explicit via this property, never by declaration order." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasGoalPriority
 :hasGoalPriority rdf:type owl:DatatypeProperty ;
     rdfs:range xsd:nonNegativeInteger ;
-    rdfs:comment "Relative priority of a Goal for deconfliction when an executing system holds multiple concurrent goals; lower values take precedence." .
+    rdfs:comment "Relative priority of a Goal for deconfliction when an executing system holds multiple concurrent goals; lower values take precedence. This version does not define preemption semantics between running plans; priority informs the executing system's own deliberation." .
 
-###  http://www.sisostds.org/ontologies/asx#hasConditionParameter
-:hasConditionParameter rdf:type owl:DatatypeProperty ;
-    rdfs:range xsd:string ;
-    rdfs:comment "A parameter value for a Condition's predicate (e.g. a range in meters, a health threshold). Number, ordering, and interpretation of parameters are defined by the ConditionPredicateCode." .
+###  http://www.sisostds.org/ontologies/asx#hasPhaseProductReference
+:hasPhaseProductReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "Reference to a data product (e.g. a surveyed route, a hazard map, a track) that this phase publishes on completion for consumption by other entities' tasks — the interoperability-visible portion of a producer/consumer handoff, such as a scout advertising a safe route to a transport vehicle. Definition of product object types is left to the ASX message layer." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasConditionText
 :hasConditionText rdf:type owl:DatatypeProperty ;
@@ -260,14 +368,30 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange c2sim:UUIDBase ] ,
         [ rdf:type owl:Restriction ;
-          owl:onProperty :hasConditionParameter ;
-          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-          owl:onDataRange xsd:string ] ,
+          owl:onProperty :hasConditionObjectReference ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasThresholdValue ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:double ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasThresholdDuration ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass c2sim:Duration ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :isNegated ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:boolean ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty c2sim:hasUUID ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
         [ rdf:type owl:Restriction ;
           owl:onProperty :hasConditionText ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:string ] ;
-    rdfs:comment "A machine-evaluable predicate over world state: a predicate code, an optional subject reference, and predicate-specific parameters. Conditions serve as phase guards, trigger conditions, goal achievement/failure criteria, and plan applicability (context) conditions. Deliberately code-based rather than a general expression language; logical composition is provided only by CompositeTrigger (AND/OR), keeping conditions checkable by all consumers." .
+    rdfs:comment "A machine-evaluable predicate over world state: a predicate code, optional negation, an optional subject reference, and typed parameters (object reference, threshold value, threshold duration) whose use is defined per predicate. Conditions serve as phase guards, trigger conditions, loop-termination conditions, goal achievement/failure criteria, and plan applicability (context) conditions. A Condition may carry a UUID so reports can cite the specific condition that fired or was violated. Deliberately code-based rather than a general expression language; conjunction of repeated conditions is defined by rule R12 and disjunction is provided at the trigger level (CompositeTrigger)." .
 
 ###  http://www.sisostds.org/ontologies/asx#StateConditionTrigger
 :StateConditionTrigger rdf:type owl:Class ;
@@ -276,7 +400,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty :hasCondition ;
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass :Condition ] ;
-    rdfs:comment "A plan phase trigger that fires when a world-state Condition becomes true, in contrast to lox:EventTrigger which fires on occurrence of a discrete reported Event. The behavior-tree guard/condition-node primitive." .
+    rdfs:comment "A plan phase trigger that fires when a world-state Condition evaluates true (level-triggered, rule R11), in contrast to lox:EventTrigger which is anchored to the occurrence time of a discrete reported Event. This is the module's mechanism for runtime reactivity and the behavior-tree guard/condition-node primitive." .
 
 ###  http://www.sisostds.org/ontologies/asx#CompositeTrigger
 :CompositeTrigger rdf:type owl:Class ;
@@ -289,7 +413,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty :hasLogicalOperatorCode ;
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass :LogicalOperatorCode ] ;
-    rdfs:comment "A plan phase trigger composed of two or more sub-triggers combined by a logical operator (AND: fires when all sub-triggers have fired; OR: fires when any has). Nesting composite triggers yields arbitrary and/or trees while respecting the exactly-one hasPlanPhaseTrigger cardinality of lox:PlanPhase." .
+    rdfs:comment "A plan phase trigger composed of two or more sub-triggers combined by a logical operator (AllSubTriggers: rule R9 — discrete sub-triggers latch, state conditions must currently hold; AnySubTrigger: fires when any sub-trigger fires). Nesting composite triggers yields and/or trees while respecting the exactly-one hasPlanPhaseTrigger cardinality of lox:PlanPhase. Negation is provided on Condition (isNegated), not as an operator. k-of-n voting (e.g. any 2 of 3 sensors confirm) is a candidate future operator." .
 
 ###  http://www.sisostds.org/ontologies/asx#HumanApprovalTrigger
 :HumanApprovalTrigger rdf:type owl:Class ;
@@ -306,7 +430,21 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty :hasOnTimeoutPhaseReference ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange c2sim:UUIDBase ] ;
-    rdfs:comment "A plan phase trigger satisfied only by explicit approval from the referenced authority. Provides on-the-loop gating of designated phases (notably engagement or other lethal-effect phases), making engagement authority an inspectable property of the plan and linking level of autonomy to human approval requirements. Typically composed with other triggers via CompositeTrigger (e.g. tactical trigger AND approval)." .
+    rdfs:comment "A plan phase trigger satisfied only by explicit approval from the referenced authority (Agree/Confirm message referencing the gated phase). A Refuse message from that authority, or expiry of hasApprovalTimeout, immediately applies the timeout disposition: activate hasOnTimeoutPhaseReference if given, else the gated phase becomes PhaseSkipped. Provides on-the-loop gating of designated phases (notably engagement or other lethal-effect phases), making engagement authority an inspectable property of the plan and linking level of autonomy to human approval requirements. Typically composed with tactical triggers via CompositeTrigger. NOTE rule R13: this is a mandatory-to-understand construct — consumers that cannot interpret it must fail closed (never execute the gated phase)." .
+
+###  http://www.sisostds.org/ontologies/asx#OnPhaseFailureTrigger
+:OnPhaseFailureTrigger rdf:type owl:Class ;
+    rdfs:subClassOf lox:PlanPhaseTrigger ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty lox:hasTriggerPhase ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ;
+    rdfs:comment "A plan phase trigger that fires when the referenced phase reaches the PhaseFailed outcome — the failure-side dual of lox:PriorPhaseCompletionTrigger. This is the sanctioned trigger for phases referenced by hasOnFailurePhaseReference (rule R7), satisfying the LOX exactly-one-trigger requirement while guaranteeing the fallback phase cannot activate independently of the failure path." .
+
+###  http://www.sisostds.org/ontologies/asx#ParentPhasePolicyTrigger
+:ParentPhasePolicyTrigger rdf:type owl:Class ;
+    rdfs:subClassOf lox:PlanPhaseTrigger ;
+    rdfs:comment "A plan phase trigger whose firing is controlled entirely by the parent phase's execution policy (hasExecutionPolicyCode): the parent activates the subphase when the policy dictates (in hasPhasePriority order under SequentialInOrder/PriorityFallback, immediately under ParallelAll/ParallelAny). Fills the mandatory trigger slot of policy-managed subphases without introducing an independent activation path." .
 
 ###  http://www.sisostds.org/ontologies/asx#AutonomousPlanPhase
 :AutonomousPlanPhase rdf:type owl:Class ;
@@ -328,6 +466,10 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass :RepetitionPolicyCode ] ,
         [ rdf:type owl:Restriction ;
+          owl:onProperty :hasRepetitionUntilCondition ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass :Condition ] ,
+        [ rdf:type owl:Restriction ;
           owl:onProperty :hasRepetitionLimit ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:nonNegativeInteger ] ,
@@ -348,14 +490,22 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:nonNegativeInteger ] ,
         [ rdf:type owl:Restriction ;
+          owl:onProperty :hasPhaseProductReference ;
+          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
+        [ rdf:type owl:Restriction ;
           owl:onProperty :hasGoalReference ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange c2sim:UUIDBase ] ;
-    rdfs:comment "A lox:PlanPhase enriched with autonomous-execution semantics, all optional: a failure condition and fallback phase reference (behavior-tree Fallback/Selector; alternative HTN method), guard conditions (invariants), an execution policy over subphases, a repetition/persistence policy (retry loops, standing behaviors), a timeout, a required level of autonomy, a priority rank under PriorityFallback parents, and a reference to the Goal the phase serves. Consumers unaware of this module may process it as an ordinary PlanPhase." .
+    rdfs:comment "A lox:PlanPhase enriched with autonomous-execution semantics, all optional: a failure aggregation policy and fallback phase reference (rules R3, R7, R8), guard conditions (R4, R12), an execution policy over subphases, a repetition/persistence policy with loop-termination condition and attempt limit (R10), a timeout (R4), a required level of autonomy, a priority rank under ordered policies, published data products, and a reference to the Goal the phase serves. Reporting additions degrade gracefully; gating additions are mandatory-to-understand (R13)." .
 
 ###  http://www.sisostds.org/ontologies/asx#AutonomousPlanBody
 :AutonomousPlanBody rdf:type owl:Class ;
     rdfs:subClassOf lox:PlanBody ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasGoal ;
+          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+          owl:onClass :Goal ] ,
         [ rdf:type owl:Restriction ;
           owl:onProperty :hasGoalReference ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -364,7 +514,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty :hasContextCondition ;
           owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
           owl:onClass :Condition ] ;
-    rdfs:comment "A lox:PlanBody that may declare the Goal it is intended to achieve and the context conditions under which it is applicable. Several AutonomousPlanBody instances referencing the same Goal with different context conditions constitute a transmitted plan library (primary, degraded-comms, contested variants); the executing system selects among applicable plans and reports switches via PlanDeviationReportContent (PlanSwitched)." .
+    rdfs:comment "A lox:PlanBody that may define Goals inline (hasGoal), declare the Goal it is intended to achieve (hasGoalReference), and declare the context conditions under which it is applicable. Several AutonomousPlanBody instances referencing the same Goal with different context conditions constitute a transmitted plan pre-selection library (primary, degraded-comms, contested variants); per rule R14 such variants MUST carry isToBeExecutedNow = false, MUST only be sent to consumers that have negotiated this module, and plan switches are reported via PlanSwitched. Runtime subgoaling and agent reconsideration strategies are deliberately not modeled." .
 
 ###  http://www.sisostds.org/ontologies/asx#Goal
 :Goal rdf:type owl:Class ;
@@ -393,7 +543,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty c2sim:hasUUID ;
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange c2sim:UUIDBase ] ;
-    rdfs:comment "A desired end state, distinct from any procedure for achieving it: achievement condition(s), optional failure/abandonment conditions, a commitment mode (achieve once / maintain / achieve then maintain), optional links to the existing DesiredEffectCode vocabulary, and a priority for deconfliction. Enables goal-directed tasking (transmit the Goal, constraints, and ROE; the system plans) as well as goal-annotated procedural plans (AutonomousPlanBody referencing the Goal). Maintenance goals provide standing/persistent tasking semantics." .
+    rdfs:comment "A desired end state, distinct from any procedure for achieving it: achievement condition(s) (conjunctive, R12), optional failure/abandonment conditions, a commitment mode (achieve once / maintain / achieve then maintain), optional links to the existing DesiredEffectCode vocabulary, and a priority for deconfliction. Goals are defined inline via hasGoal on an AutonomousPlanBody and referenced elsewhere by UUID. Enables goal-directed tasking (an AchieveGoal task conveying end state, constraints, and ROE) as well as goal-annotated procedural plans. Maintenance goals provide standing/persistent tasking semantics." .
 
 ###  http://www.sisostds.org/ontologies/asx#PlanExecutionStatusContent
 :PlanExecutionStatusContent rdf:type owl:Class ;
@@ -407,6 +557,14 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass :PhaseOutcomeCode ] ,
         [ rdf:type owl:Restriction ;
+          owl:onProperty :hasPhaseFailureCauseCode ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass :PhaseFailureCondition ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasAttemptNumber ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:nonNegativeInteger ] ,
+        [ rdf:type owl:Restriction ;
           owl:onProperty :hasActiveGoalReference ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange c2sim:UUIDBase ] ,
@@ -414,7 +572,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty :hasEstimatedPhaseCompletionTime ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass c2sim:TimeInstant ] ;
-    rdfs:comment "Report content conveying plan-execution state at phase granularity: the referenced phase, its status/outcome, the goal currently being pursued (the reporting system's active intention), and estimated completion time. Complements the task-level TaskStatus report content." .
+    rdfs:comment "Report content conveying plan-execution state at phase granularity: the referenced phase, its status/outcome, the failure cause where applicable, the current attempt number under a repetition policy, the goal currently being pursued (the reporting system's active intention), and estimated completion time. Complements the task-level TaskStatus report content. An additive reporting construct: degrades gracefully for consumers that ignore it." .
 
 ###  http://www.sisostds.org/ontologies/asx#PlanDeviationReportContent
 :PlanDeviationReportContent rdf:type owl:Class ;
@@ -443,7 +601,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty smx:hasConfidenceLevel ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:double ] ;
-    rdfs:comment "Report content sent whenever the executing system exercises an autonomous choice not scripted by the operator: what kind of deviation occurred, what event or condition triggered it, the affected plan phase, a human-understandable rationale, and the system's confidence. Follows the explainability schema (event, action, reasoning, operational change, confidence) identified in the ASX reference materials." .
+    rdfs:comment "Report content sent whenever the executing system exercises an autonomous choice not scripted by the operator: what kind of deviation occurred, what event or condition triggered it, the affected plan phase, a human-understandable rationale, and the system's confidence. Follows the explainability schema (event, action, reasoning, operational change, confidence) identified in the ASX reference materials. An additive reporting construct: degrades gracefully." .
 
 ###  http://www.sisostds.org/ontologies/asx#AutonomyLevelCode
 :AutonomyLevelCode rdf:type owl:Class ;
@@ -458,17 +616,17 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 ###  http://www.sisostds.org/ontologies/asx#ConditionPredicateCode
 :ConditionPredicateCode rdf:type owl:Class ;
     rdfs:subClassOf c2sim:Code ;
-    rdfs:comment "The predicate vocabulary for Condition. Each code defines the semantics of the subject reference and the number and interpretation of parameters. The list is intentionally small and scenario-driven; extensions add individuals as requirements are evidenced." .
+    rdfs:comment "The predicate vocabulary for Condition. Each code defines the semantics of the subject/object references and the meaning and units of the threshold value/duration. The list is intentionally small and scenario-driven; extensions add individuals as requirements are evidenced." .
 
 ###  http://www.sisostds.org/ontologies/asx#PhaseFailureCondition
 :PhaseFailureCondition rdf:type owl:Class ;
     rdfs:subClassOf c2sim:Code ;
-    rdfs:comment "A code defining the condition under which a plan phase is considered failed. The failure-side dual of lox:PlanPhaseCompletionCondition." .
+    rdfs:comment "Codes for phase failure: the selectable member-aggregation policies (AnyTaskFailed, AllTasksFailed — rule R3) and the implicit failure modes (TimeoutExceeded, GuardViolated — rule R4) used as failure-cause values in reports. Named without the -Code suffix to parallel its LOX completion-side dual, lox:PlanPhaseCompletionCondition." .
 
 ###  http://www.sisostds.org/ontologies/asx#PhaseExecutionPolicyCode
 :PhaseExecutionPolicyCode rdf:type owl:Class ;
     rdfs:subClassOf c2sim:Code ;
-    rdfs:comment "Policy governing how the subphases of a plan phase are executed." .
+    rdfs:comment "Policy governing how the subphases of a plan phase are executed. See hasExecutionPolicyCode for the interaction with subphase triggers." .
 
 ###  http://www.sisostds.org/ontologies/asx#RepetitionPolicyCode
 :RepetitionPolicyCode rdf:type owl:Class ;
@@ -478,7 +636,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 ###  http://www.sisostds.org/ontologies/asx#PhaseOutcomeCode
 :PhaseOutcomeCode rdf:type owl:Class ;
     rdfs:subClassOf c2sim:Code ;
-    rdfs:comment "Execution status or terminal outcome of a plan phase." .
+    rdfs:comment "Execution states (PhasePending, PhaseInProgress) and terminal outcomes (PhaseSucceeded, PhaseFailed, PhaseAborted, PhaseSkipped) of a plan phase — see rule R1." .
 
 ###  http://www.sisostds.org/ontologies/asx#GoalCommitmentCode
 :GoalCommitmentCode rdf:type owl:Class ;
@@ -496,25 +654,25 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 
 ###  Logical operators
 
-:AND rdf:type owl:NamedIndividual , :LogicalOperatorCode ;
-    rdfs:comment "The composite trigger fires when all sub-triggers have fired." .
+:AllSubTriggers rdf:type owl:NamedIndividual , :LogicalOperatorCode ;
+    rdfs:comment "The composite trigger fires when all sub-triggers are satisfied — discrete sub-triggers latch once occurred; state-condition sub-triggers must hold at the instant of firing (rule R9)." .
 
-:OR rdf:type owl:NamedIndividual , :LogicalOperatorCode ;
-    rdfs:comment "The composite trigger fires when any sub-trigger has fired." .
+:AnySubTrigger rdf:type owl:NamedIndividual , :LogicalOperatorCode ;
+    rdfs:comment "The composite trigger fires when any sub-trigger fires." .
 
 ###  Phase failure conditions
 
 :AnyTaskFailed rdf:type owl:NamedIndividual , :PhaseFailureCondition ;
-    rdfs:comment "The phase fails when any of its tasks or subphases fails." .
+    rdfs:comment "Aggregation policy (default): the phase fails when any of its member tasks or subphases fails." .
 
 :AllTasksFailed rdf:type owl:NamedIndividual , :PhaseFailureCondition ;
-    rdfs:comment "The phase fails only when all of its tasks or subphases have failed." .
+    rdfs:comment "Aggregation policy: the phase fails only when all of its member tasks or subphases have failed." .
 
 :TimeoutExceeded rdf:type owl:NamedIndividual , :PhaseFailureCondition ;
-    rdfs:comment "The phase fails when its hasPhaseTimeout duration expires before the completion condition is met." .
+    rdfs:comment "Failure cause (implicit mode, rule R4): the phase's hasPhaseTimeout duration expired before its completion condition was met. Not selectable as an aggregation policy; live whenever hasPhaseTimeout is declared." .
 
 :GuardViolated rdf:type owl:NamedIndividual , :PhaseFailureCondition ;
-    rdfs:comment "The phase fails when any of its guard conditions ceases to hold while the phase is active." .
+    rdfs:comment "Failure cause (implicit mode, rule R4): a guard condition of the phase ceased to hold while the phase was active. Not selectable as an aggregation policy; live whenever hasGuardCondition is declared." .
 
 ###  Phase outcomes
 
@@ -525,30 +683,30 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:comment "The phase has been triggered and is executing." .
 
 :PhaseSucceeded rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
-    rdfs:comment "The phase met its completion condition." .
+    rdfs:comment "The phase met its completion condition (or its fallback chain ultimately succeeded, rule R7)." .
 
 :PhaseFailed rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
-    rdfs:comment "The phase met its failure condition. Distinct from PhaseAborted (stopped by command)." .
+    rdfs:comment "The phase met its failure condition, after any repetition policy was exhausted (rule R10) and any fallback chain also failed (rule R7). Distinct from PhaseAborted (stopped by command)." .
 
 :PhaseAborted rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
-    rdfs:comment "Execution of the phase was stopped by command or exception before completion or failure." .
+    rdfs:comment "Execution of the phase was stopped by command, exception, or termination of its parent (rule R5) before completion or failure." .
 
 :PhaseSkipped rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
-    rdfs:comment "The phase was never executed because control flow bypassed it (e.g. a fallback that was not needed, or an approval timeout with no timeout phase)." .
+    rdfs:comment "The phase was never executed because control flow bypassed it (an unneeded fallback, an approval refusal/timeout with no timeout phase, or a sibling's failure under rule R5). A skipped phase satisfies downstream PriorPhaseCompletionTriggers (rule R2)." .
 
 ###  Phase execution policies
 
 :SequentialInOrder rdf:type owl:NamedIndividual , :PhaseExecutionPolicyCode ;
-    rdfs:comment "Subphases execute one at a time in their declared trigger order; equivalent to a chain of PriorPhaseCompletionTriggers. Behavior-tree Sequence semantics when combined with AnyTaskFailed." .
+    rdfs:comment "Subphases execute one at a time in hasPhasePriority order. With the default AnyTaskFailed aggregation this yields behavior-tree Sequence semantics: a subphase failure fails the parent immediately and remaining subphases are skipped (rules R3, R5)." .
 
 :ParallelAll rdf:type owl:NamedIndividual , :PhaseExecutionPolicyCode ;
-    rdfs:comment "Subphases execute concurrently; the parent completes when all complete. Corresponds to lox:AllTasksComplete at subphase granularity." .
+    rdfs:comment "Subphases activate concurrently; the parent completes when all complete. Corresponds to lox:AllTasksComplete at subphase granularity. On parent termination, in-flight subphases are aborted (rule R5)." .
 
 :ParallelAny rdf:type owl:NamedIndividual , :PhaseExecutionPolicyCode ;
-    rdfs:comment "Subphases execute concurrently; the parent completes when any completes. Corresponds to lox:OneTaskComplete at subphase granularity." .
+    rdfs:comment "Subphases activate concurrently; the parent completes when any completes, and the remaining in-flight subphases are then aborted (rule R5). Corresponds to lox:OneTaskComplete at subphase granularity." .
 
 :PriorityFallback rdf:type owl:NamedIndividual , :PhaseExecutionPolicyCode ;
-    rdfs:comment "Subphases are attempted in hasPhasePriority order; the parent succeeds when one succeeds and fails when all fail. Behavior-tree Fallback/Selector semantics; HTN alternative methods." .
+    rdfs:comment "Subphases are attempted one at a time in hasPhasePriority order; the parent succeeds when one succeeds and fails when all have failed. Behavior-tree Fallback/Selector semantics as a containment policy; interaction with per-phase fallback references is defined by rule R8." .
 
 ###  Repetition policies
 
@@ -556,13 +714,13 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:comment "The phase executes a single time (default when no repetition policy is given)." .
 
 :RetryOnFailure rdf:type owl:NamedIndividual , :RepetitionPolicyCode ;
-    rdfs:comment "On failure the phase is re-attempted, up to hasRepetitionLimit attempts, before the failure condition propagates. Behavior-tree retry decorator." .
+    rdfs:comment "On failure the phase is re-attempted, up to hasRepetitionLimit attempts, before PhaseFailed becomes terminal and propagates (rule R10). Behavior-tree retry decorator." .
 
 :RepeatUntilCondition rdf:type owl:NamedIndividual , :RepetitionPolicyCode ;
-    rdfs:comment "The phase executes repeatedly until its completion condition holds (e.g. repeat detect-mark-neutralize along a route until the route is clear). Behavior-tree loop decorator." .
+    rdfs:comment "The phase executes repeatedly — each iteration closed by the inherited LOX completion condition — until the phase's hasRepetitionUntilCondition holds (e.g. repeat detect-mark-neutralize passes until the route-clear condition is true). Behavior-tree loop decorator." .
 
 :MaintainContinuously rdf:type owl:NamedIndividual , :RepetitionPolicyCode ;
-    rdfs:comment "A standing behavior: the phase remains active indefinitely, re-establishing its condition whenever violated (patrol, overwatch, communications relay), until preempted by order. BDI maintenance-goal semantics." .
+    rdfs:comment "A standing behavior: the phase remains active indefinitely, re-establishing its condition whenever violated (patrol, overwatch, communications relay), until preempted by order (e.g. SuspendPlanExecution/AbortPlanExecution, or lox:OtherOrderReceived). BDI maintenance-goal semantics. A standing phase should declare lox:OtherOrderReceived as its LOX completion condition." .
 
 ###  Goal commitment modes
 
@@ -578,37 +736,40 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 ###  Condition predicates
 
 :EntityAtLocation rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the subject entity is at the location given by parameter (location reference). Parameters: location UUID, optional tolerance in meters." .
+    rdfs:comment "True when the subject entity is at the referenced location (object reference = location UUID; threshold value = tolerance in meters, optional)." .
 
 :EntityWithinRange rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the subject entity is within the parameter range of a reference entity or location. Parameters: reference UUID, range in meters." .
+    rdfs:comment "True when the subject entity is within range of the referenced entity or location (object reference = reference UUID; threshold value = range in meters)." .
 
 :EntityHealthBelow rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the subject entity's health/operational status falls below the parameter threshold." .
+    rdfs:comment "True when the subject entity's health/operational status falls below the threshold value (0..1 fraction of full capability)." .
 
 :ThreatDetectedInArea rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when a hostile or suspect entity has been detected within the subject area. Parameters: optional hostility filter, optional entity-type filter." .
+    rdfs:comment "True when a hostile or suspect entity has been detected within the subject area (object reference = optional entity-type filter)." .
 
 :HazardOnRoute rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when a reported hazard (obstacle, IED, contamination) intersects the subject route." .
+    rdfs:comment "True when a reported hazard (obstacle, IED, contamination) intersects the subject route. Use with isNegated true as the 'route is clear' guard or loop-termination condition." .
 
 :CommsAvailable rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the subject entity has a usable communications link to the entity given by parameter (default: its command node)." .
+    rdfs:comment "True when the subject entity has a usable communications link to the referenced entity (object reference; default: its command node)." .
 
 :CommsDenied rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the subject entity has no usable communications link for longer than the parameter duration. Gates degraded-mode contingency plans." .
+    rdfs:comment "True when the subject entity has had no usable communications link for longer than the threshold duration. Gates degraded-mode contingency plans." .
 
 :AreaCoverageAchieved rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the fraction of the subject area covered by search/survey reaches the parameter threshold. Provides the explore-until-covered termination criterion for search and reconnaissance goals." .
+    rdfs:comment "True when the fraction of the subject area covered by search/survey reaches the threshold value (0..1). Provides the explore-until-covered termination criterion for search and reconnaissance goals." .
+
+:EstimateConfidenceAbove rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
+    rdfs:comment "True when the executing system's confidence in the referenced estimate or detection (object reference = track/estimate/observation UUID) reaches the threshold value (0..1). Supports belief-state gating such as switch-to-tracking on sufficient detection confidence, or repeat-measurement until a geolocation confidence ellipse converges." .
 
 :PayloadCapacityAvailable rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the subject entity has at least the parameter amount of payload capacity available." .
+    rdfs:comment "True when the subject entity has at least the threshold value of payload capacity available (units per the platform's declared capacity model)." .
 
 :TimeElapsedSince rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when the parameter duration has elapsed since the referenced event or phase start." .
+    rdfs:comment "True when the threshold duration has elapsed since the referenced event (object reference = event UUID; default anchor: subject phase start)." .
 
 :WeatherLimitExceeded rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
-    rdfs:comment "True when observed environmental conditions exceed the subject platform's operating limits given by parameters." .
+    rdfs:comment "True when observed environmental conditions exceed the subject platform's declared operating limits (limits taken from the platform's initialization data, not carried in the condition)." .
 
 ###  Deviation types
 
@@ -616,16 +777,16 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:comment "The system autonomously changed its route from the one planned or previously reported." .
 
 :FallbackActivated rdf:type owl:NamedIndividual , :DeviationTypeCode ;
-    rdfs:comment "A phase failed and its on-failure fallback phase was activated." .
+    rdfs:comment "A phase failed and its on-failure fallback phase (or next-priority alternative) was activated." .
 
 :PlanSwitched rdf:type owl:NamedIndividual , :DeviationTypeCode ;
-    rdfs:comment "The system switched to a different transmitted plan for the same goal because context conditions changed." .
+    rdfs:comment "The system switched to a different transmitted plan for the same goal because context conditions changed (rule R14)." .
 
 :GoalAbandoned rdf:type owl:NamedIndividual , :DeviationTypeCode ;
     rdfs:comment "A goal's failure condition was met and the system withdrew commitment to it." .
 
 :TaskReassigned rdf:type owl:NamedIndividual , :DeviationTypeCode ;
-    rdfs:comment "A task was autonomously reassigned to a different performing entity (e.g. within a swarm or team)." .
+    rdfs:comment "A task was autonomously reassigned to a different performing entity (e.g. within a swarm or team). NOTE: this reports a reassignment; constructs for commanding or constraining reassignment (capability declaration, allocation authority) are future work." .
 
 ###  Additions to core code lists
 
@@ -650,4 +811,4 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :AchieveGoal rdf:type owl:NamedIndividual , c2sim:TaskActionCode ;
     rdfs:comment "Achieve goal: to accomplish the referenced Goal by means of the performing entity's own planning; the task conveys the end state, constraints, and ROE rather than a procedure. Goal-directed tasking." .
 
-###  Generated by hand to match OWL API serialization conventions of CSIM_ASX.rdf
+###  Hand-authored to match the OWL API serialization conventions of CSIM_ASX.rdf
