@@ -1050,7 +1050,7 @@
     <Cell><Data ss:Type="String">hasTask</Data></Cell>
     <Cell><Data ss:Type="String">TaskActionCode</Data></Cell>
     <Cell><Data ss:Type="String">Recover / Rescue</Data></Cell>
-    <Cell><Data ss:Type="String">[!] R2: no recovery/rescue/tow/salvage task verb in the standard</Data></Cell>
+    <Cell><Data ss:Type="String">R2: lox#RESCUE / lox#RECOVR exist - reuse them; only a general-purpose tow/salvage verb is absent (closest: TOWTGT, gunnery targets only)</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>

@@ -1,15 +1,15 @@
 # Documents Needed to Close the ASX Coverage Gaps
 
-A sourcing brief for the scenario-scavenger session. It lists the source
+A sourcing brief for the scenario-sourcing track. It lists the source
 documents that would fill the **document-shaped** gaps found by the
 instantiation review - i.e. the gaps in section 8 bucket 3 of
 `Issues-And-Comments-Log.md` (invisible-domain gaps + validation holes). It does
 **not** ask for sources for the model-internal gaps (missing property layer,
-typing decisions, track drift) - those are not fixed by documents.
+typing decisions, tracks at different stages) - those are not fixed by documents.
 
 ## Extraction criteria (unchanged from the current pipeline)
 
-Match what the scavenger already uses (`CandidateSources.md`, `PromptV2.md`):
+Match what the sourcing pipeline already uses (`CandidateSources.md`, `PromptV2.md`):
 a **concrete, situated mission vignette** in a technical report, thesis, or
 after-action review - **not** a survey, doctrine overview, or news item. The
 source must be readable in full and describe an actual (or simulated/experiment)
@@ -146,7 +146,7 @@ claims. The rest extend into domains the library has not yet seen.
 
 ## UPDATE (2026-07-10) - all nine sourced; residual recommendation
 
-The scavenger session extracted all nine requests (see `Documents-Found.md` and
+The sourcing track extracted all nine requests (see `Documents-Found.md` and
 `LLMExperiments/PaperSummaries/V2Extractions/`); the integration is in `ValidationEvidence-Walk.md`.
 On the three residual holes the sourcing session offered to chase, the modeling
 side's recommendation is:

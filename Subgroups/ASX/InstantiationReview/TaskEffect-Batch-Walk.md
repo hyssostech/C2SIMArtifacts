@@ -22,7 +22,8 @@ not verbs:
   is the effector/manipulator *equipment* concept (E2), not the action verb.
 - Maritime: `SurfaceVessel` / `SubsurfaceVessel` **exist** (SMX) - USV typing is
   the same P1 conflict; `lox#RESCUE` and `lox#RECOVR` **exist**, so only a
-  general tow/salvage verb is absent.
+  general-purpose tow/salvage verb is absent (closest: `lox#TOWTGT`, scoped to
+  gunnery targets; the broadly-defined `RECOVR` may already cover salvage).
 - `DesiredEffectCode`, `hasAffectedEntity`, `Person` all exist and are reused.
 
 ## 1. Logistics - Delivery Order + Confirmation
@@ -63,7 +64,7 @@ not verbs:
 |---|---|---|---|---|---|---|
 | C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (USV UUID) | [!] R1/P1: USV is an SMX `SurfaceVessel` vs ASX `USV subClassOf Robot` - the P1 conflict, now maritime. |
 | SMX | USV | SurfaceVessel (SMX) | hasEntityType | EntityType | USV | Maritime platform type exists (`SurfaceVessel`) - reuse vs the ASX Robot tree. |
-| C2SIM / ASX | Rescue Task | Task | hasTask | TaskActionCode | Recover / Rescue | R2: use `lox#RESCUE` or `lox#RECOVR` (both exist); only a general tow/salvage verb is absent. |
+| C2SIM / ASX | Rescue Task | Task | hasTask | TaskActionCode | Recover / Rescue | R2: use `lox#RESCUE` or `lox#RECOVR` (both exist); only a general-purpose tow/salvage verb is absent (closest: `TOWTGT`, gunnery targets only). |
 | C2SIM | (task) | Task | hasAffectedEntity | UUIDBase | (downed pilot) | Rescue subject; `Person` entity exists. |
 | C2SIM | (task) | Task | hasLocation | Location | (last-known position) | Works. |
 
@@ -78,7 +79,7 @@ not verbs:
 | E1 | LOW | mostly covered | Engineering verbs exist in LOX (`CONSTR`, `CLROBS`, `CLRLND`, `MINLAY`, `BREACH`); folds into E2 (effector typing). |
 | E2 | MED | gap | No effector/manipulator equipment concept (arm, blade, excavator). |
 | R1 | - | reconfirms P1 | USV typing conflict (SMX SurfaceVessel vs ASX USV/Robot), now maritime. |
-| R2 | LOW | minor gap | `lox#RESCUE` and `lox#RECOVR` exist; only a general tow/salvage verb is absent. |
+| R2 | LOW | minor gap | `lox#RESCUE` and `lox#RECOVR` exist; only a general-purpose tow/salvage verb is absent (`TOWTGT` is gunnery-target towing only; `RECOVR` may already cover salvage). |
 
 Partially covered / reused (checked): `Resource` + quantities,
 `ResourceObservation`, `DesiredEffectCode`, `hasAffectedEntity`, `Person`,
@@ -95,7 +96,7 @@ missing-verb problem. The genuine ASX gaps are:
 1. **Payload / effector / weapon typing** - cargo (L1), manipulators (E2), and
    weapons (W2) are the same gap: no typed thing-carried-or-wielded.
 2. **A few autonomy-specific semantics** - an area-coverage / exploration
-   *goal* (explore-until-covered, tied to N1), and a general tow/salvage; plus
+   *goal* (explore-until-covered, tied to N1), and a general-purpose tow/salvage; plus
    the autonomy-to-engagement-authority link (W1).
 Entity structure (P1), addressing, effects, targets, resources, and the whole
 task-verb vocabulary are already there. The residual task/effect work is the

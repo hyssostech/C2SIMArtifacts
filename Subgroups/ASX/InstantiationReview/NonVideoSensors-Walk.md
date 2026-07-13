@@ -16,9 +16,13 @@ Grounding done first (to avoid inventing gaps):
   Resource, SubjectType}Observation - **no measurement / detection / hazard**
   subtype.
 - There are **no** CBRN / chemical / radiological / emitter / signal / radar /
-  thermal / mine classes anywhere in C2SIM, SMX, or LOX.
+  thermal / mine **sensor or observation** classes anywhere in C2SIM, SMX, or
+  LOX. (What does exist nearby: `smx#NBC_Event` - an APP6-C tactical-graphics
+  *symbol* class, not an observation - and LOX *task* verbs for chemical /
+  biological / nuclear sampling; both are reuse candidates but neither carries
+  a sensor reading.)
 - The only measure-like datatype properties are logistics quantities,
-  `hasSpatialMeasure`, `hasCoordinateValue`, and `hasConfidenceLevel` - **no**
+  `hasSpatialMeasure`, `hasCoordinateValue`, and `smx#hasConfidenceLevel` - **no**
   generic sensor-reading value+unit.
 - `JAM` exists but as a `TaskActionCode` (LOX) - the jamming *action*, not EW
   *sensing*.
@@ -37,7 +41,7 @@ A chemical sensor detects an agent at a location with a concentration reading.
 | ??? | (agent detection) | Observation? | detected agent | ??? | Chemical agent (e.g. GB) | [!] Y3: no hazard/detection Observation subtype fits (only Activity/Health/Location/Name/Resource/SubjectType). |
 | ASX? | (reading) | ? | concentration | value + unit | 5 mg/m3 | [!] Y5: no sensor-reading value+unit property exists. |
 | ASX | (sensor) | ? | SensorType | enum | CBRN-Chemical | [!] Y2: SensorType enum has no CBRN / radiological / nuclear / biological. |
-| ASX | SensorObservation | ActivityObservation | media | MediaReference | (none) | [!] Y1: the media-based model does not apply - a CBRN reading is not a media file; MediaTypeEnum {Video/Audio/Image/Document} cannot represent a measurement. |
+| ASX | SensorObservation | ActivityObservation | media | MediaReference | (none) | [!] Y1: the media-based model does not apply - a CBRN reading is not a media file; MediaTypeEnum {Video/Audio/Image/Document/NOS} cannot represent a measurement. |
 
 ## 2. EW Emitter Report
 

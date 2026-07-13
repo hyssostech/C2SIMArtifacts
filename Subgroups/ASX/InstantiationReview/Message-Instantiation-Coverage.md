@@ -71,7 +71,7 @@ for that scenario.
   (Report done, patrol Order done) plus a **UGV transport Order**. That is the
   ~20% that is done.
 - **Initialization is the least-developed area** (no worked examples yet across all
-  three named scenarios. It is also the message type that most directly forces
+  three named scenarios). It is also the message type that most directly forces
   the entity-typing decisions in the ASX proposal (how an autonomous platform,
   its sensors, and a swarm are declared). This is why the companion
   `Initialization-Walk.md` starts there - it is pure additive coverage and the

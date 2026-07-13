@@ -105,7 +105,7 @@ needed. (Recorded so the walk does not overstate the gap.)
 
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
-| ASX? | (rationale) | ReportContent? | why route changed | ??? | (free text / structured?) | [!] X2 DECIDE-FIRST-for-scenario: no rationale/explanation ReportContent defined yet. |
+| ASX? | (rationale) | ReportContent? | why route changed | ??? | (free text / structured?) | [!] X2 (HIGH): no rationale/explanation ReportContent defined yet. |
 | C2SIM | TaskStatus | ReportContent | task outcome | TaskStatus | "Incomplete" | Can say *that* it failed, not *why*. |
 
 Finding:

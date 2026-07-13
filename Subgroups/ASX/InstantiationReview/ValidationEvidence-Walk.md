@@ -1,6 +1,6 @@
 # Validation-Evidence Integration: the nine sourced missions
 
-The scavenger session sourced and extracted all nine `Documents-Needed.md`
+The sourcing track sourced and extracted all nine `Documents-Needed.md`
 requests (12 V2Extraction records total; response in `Documents-Found.md`). This
 walk integrates them into the review. Most **move an asserted finding to
 evidenced**; three supply a **concrete report schema worth adopting**; one adds a

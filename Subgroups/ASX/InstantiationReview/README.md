@@ -1,10 +1,14 @@
 # ASX Message-Instantiation Review Notes
 
 These are **review / analysis notes**, contributed for discussion. They are
-**not** authoritative model changes, and nothing has been applied to the OWL
-model. The intent is to add *coverage* (walking scenarios into concrete message
-instances) and to surface *problems* that instantiation reveals in the proposed
-ASX elements - phrased as questions for the sub-group, not as decisions.
+**not** authoritative model changes; the proposed ASX OWL (`CSIM_ASX.rdf` /
+v0.0.3 on `michael_d`) is untouched. (The plan-semantics work on branch
+`asx-plan-semantics` goes one step further: a *draft module* TTL plus
+validation walks in `../Proposed Extension Working Materials/` - still a
+proposal for the sub-group, not an adopted change.) The intent is to add
+*coverage* (walking scenarios into concrete message instances) and to surface
+*problems* that instantiation reveals in the proposed ASX elements - phrased
+as questions for the sub-group, not as decisions.
 
 How the message work is stored (decision S4 in the log): Elizabeth's binary
 `.xlsx` sample-message workbooks are **left untouched** (binary workbooks cannot
@@ -25,9 +29,9 @@ in the `.xlsx` changed.
   the pre-walk `.xlsx` baseline snapshot (2026-06-10) that motivated the review;
   the current instantiation state is tracked in the log (C1-C8).
 - [Initialization-Walk.md](./Initialization-Walk.md) - a proposed walk of the
-  three Initialization scenarios Elizabeth named but left empty
+  three named-but-not-yet-filled Initialization scenarios
   (`UAV with Video Init`, `UAV Patrol Initialization`, `Swarm Initialization`),
-  mirroring her sheet columns, with the problems each one exposes.
+  mirroring the sheet columns, with the problems each one exposes.
 - [CASEVAC-Walk.md](./CASEVAC-Walk.md) - end-to-end walk of the CASEVAC
   contributed scenario (Init + Order + robot-to-robot coordination + Reports),
   surfacing X1 (no robot-to-robot content type) and X2 (no explainability
@@ -56,12 +60,19 @@ in the `.xlsx` changed.
   `OntologyConceptCoverage.md` handoff). Corroborates P1/X1/N2/Y and adds G1-G10, incl. a proposed generic
   Detection Report that resolves the sensor-report (Y) series.
 - [ValidationEvidence-Walk.md](./ValidationEvidence-Walk.md) - integrates the
-  scavenger session's nine sourced missions (`Documents-Found.md`). Moves the
+  sourcing track's nine sourced missions (`Documents-Found.md`). Moves the
   validation holes to evidenced and captures concrete report schemas to adopt -
   most importantly BML `WhoMeasuredType`, prior art in C2SIM's lineage for the
   measurement report (Q-Q).
+- [PlanSemantics-Walk.md](./PlanSemantics-Walk.md) - plan-semantics gap
+  matrix: C2SIM/LOX plan machinery vs the robotic behavior standards (BT/Nav2,
+  PDDL, FlexBE, MAVLink, IEEE 1872.1-2024, JAUS AS6062, STANAG 4586, 4D/RCS,
+  HTN, FIPA/BDI), every C2SIM-side claim verified against the RDF; adds
+  PL1-PL11 and decisions Q-W..Q-Z (log 6k), and reconciles with the
+  plan-semantics module draft (its section 8 maps what the module already
+  covers).
 - [Documents-Needed.md](./Documents-Needed.md) / [Documents-Found.md](./Documents-Found.md)
-  - the sourcing brief and the scavenger session's point-by-point response.
+  - the sourcing brief and the sourcing track's point-by-point response.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
   consolidated log of every issue/comment found, with severity and status;
   the findings deck is generated from it.
@@ -73,7 +84,11 @@ in the `.xlsx` changed.
 ## Source of truth
 
 - Proposed OWL model: `Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf`
-  (last updated 2026-01-20).
+  (v0.0.1, last updated 2026-01-20); v0.0.3 on branch `michael_d`
+  (`Ontology/C2SIM_ASX-v003.rdf`).
+- Proposed plan-semantics module (draft, this branch):
+  `Subgroups/ASX/Proposed Extension Working Materials/ASX-PlanSemantics-Draft.ttl`
+  + `Plan-Semantics-Analysis.md` + `PlanSemanticsWalks/`.
 - Attribute concepts: `Subgroups/ASX/Proposed Extension Working Materials/ASX Concept Mapping.xlsx`.
 - Worked message examples (Elizabeth's, untouched): the three
   `ASX Sample * Messages.xlsx` workbooks (created 2026-06-10).
@@ -82,5 +97,9 @@ in the `.xlsx` changed.
 - Base standard classes: `Ontology/C2SIM.rdf`, `Ontology/C2SIM_SMX.rdf`,
   `Ontology/C2SIM_LOX.rdf`.
 
-Status: committed on branch `asx-diffable-spreadsheets` (draft PR #3 on the
-fork). Prepared by Paulo Barthelmess (Hyssos).
+Status: instantiation review committed on branch `asx-diffable-spreadsheets`
+(draft PR #3 on the fork); the plan-semantics track (module draft, validation
+walks) lives on branch `asx-plan-semantics` - its standards gap matrix
+(`PlanSemantics-Walk.md`, log section 6k) is carried on this branch too so the
+findings deck and log are self-contained. Prepared by Paulo Barthelmess
+(Hyssos).

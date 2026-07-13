@@ -299,7 +299,7 @@
     <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
     <Cell><Data ss:Type="String">EntityType</Data></Cell>
     <Cell><Data ss:Type="String">UAV</Data></Cell>
-    <Cell><Data ss:Type="String">[!] P1 BLOCKER: ASX UAV(subClassOf Robot) vs SMX Aircraft(subClassOf Platform) - conflicting parallel trees under ActorEntity. Which is normative?</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P1 DECIDE-FIRST: ASX UAV(subClassOf Robot) vs SMX Aircraft(subClassOf Platform) - conflicting parallel trees under ActorEntity. Which is normative?</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
@@ -371,7 +371,7 @@
     <Cell><Data ss:Type="String">SensorCapability</Data></Cell>
     <Cell><Data ss:Type="String">enum</Data></Cell>
     <Cell><Data ss:Type="String">SensorVideo</Data></Cell>
-    <Cell><Data ss:Type="String">[!] P2 BLOCKER: sensor as entity vs class vs attribute - pick one model (D2)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P2 DECIDE-FIRST: sensor as entity vs class vs attribute - pick one model (D2)</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
@@ -510,11 +510,11 @@
    <Row>
     <Cell><Data ss:Type="String">ASX or C2SIM</Data></Cell>
     <Cell><Data ss:Type="String">Swarm or CollectiveEntity</Data></Cell>
-    <Cell><Data ss:Type="String">CollectiveRoboticSystem / ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">CollecticeRoboticSystem (sic) / ActorEntity</Data></Cell>
     <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
     <Cell><Data ss:Type="String">EntityType</Data></Cell>
     <Cell><Data ss:Type="String">Swarm</Data></Cell>
-    <Cell><Data ss:Type="String">[!] P7 BLOCKER: OWL Swarm derives from PhysicalEntity (inert) but a swarm is tasked and reports -&gt; needs ActorEntity. Base C2SIM has CollectiveEntity subClassOf ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P7 DECIDE-FIRST: OWL Swarm derives from PhysicalEntity (inert) but a swarm is tasked and reports -&gt; needs ActorEntity. Base C2SIM has CollectiveEntity subClassOf ActorEntity</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>

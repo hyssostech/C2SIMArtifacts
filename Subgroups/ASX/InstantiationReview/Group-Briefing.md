@@ -2,7 +2,10 @@
 
 One-page bearings on what this review is, what it found, and what the group needs
 to decide. Detail is in the other files in this folder; the deck
-(`ASX-Instantiation-Findings.pptx`, 23 slides) is the presentation version.
+(`ASX-Instantiation-Findings.pptx`, 29 slides) is the presentation version - its
+last three slides ("How to use this material" / the finding-ID decoder ring /
+"Where to dig deeper") are the navigation aids for everything below, and every
+slide carries speaker notes with the talk track.
 
 ## What this is
 
@@ -26,8 +29,11 @@ been applied to the OWL model or to Elizabeth's message workbooks.
 - Took the instantiation from **4 worked message instances (0 Initialization) to
   ~33** across Init / Order / Report (~29 drafted in this review), spanning 20+
   scenarios - all on the branch, pending group review.
-- Produced a 23-slide findings deck (with a "Where to dig deeper" reference map)
-  and a full issues/decisions log.
+- Produced a 29-slide findings deck (a one-slide summary and process +
+  contributions slides up front; a reading guide by time budget, a finding-ID
+  decoder ring, and a "Where to dig deeper" reference map at the end; a
+  per-slide "Dig deeper" pointer to the doc behind each finding; and speaker
+  notes with the talk track on every slide) and a full issues/decisions log.
 
 ## What we found (headline)
 
@@ -54,13 +60,17 @@ Recurring themes (all normal for a v0.0.x model being built out):
 
 ## Where the model is now (v0.0.3)
 
-Michael's v0.0.3 shows the model moving in this direction: it begins the
+Michael's v0.0.3 (on branch `michael_d`) shows the model moving in this
+direction: it begins the
 attribute layer and folds the Video Detection Report into the OWL. It also brings
 the P1 typing question to a head rather than settling it - v0.0.3 now declares
 *both* the Robot-tree and the SMX-Vehicle-tree names, so the group still has to
 pick one. Still to define: a taskable collective (the `Swarm` class was dropped;
 `CollecticeRoboticSystem` is still non-actor), the broader attribute set, and the
-new content types above - plus two typos to fix. (Detail in section 9 of the log.)
+new content types above - plus two typos to fix. One coordination item: that
+branch also adds `owl:imports smx`/`lox` to the *base* `C2SIM.rdf`, creating a
+circular import (C2SIM <-> smx) worth a deliberate decision. (Detail in
+section 9 of the log.)
 
 ## The good news
 
@@ -85,11 +95,24 @@ in two groups:
   area-as-subject, area-coverage goal, denied-comms
   + relay, formation geometry, capability self-report, and more.
 
+## Also on this branch: plan semantics (log section 6k)
+
+A parallel plan-semantics track now lives on this branch: a draft ASX module
+(`Plan-Semantics-Analysis.md` + `ASX-PlanSemantics-Draft.ttl`), three validated
+walks (CASEVAC, DroneResponse, MDARS - all instantiate end-to-end), and a
+standards gap matrix (log section 6k) checking base C2SIM plan machinery
+against BT/Nav2, PDDL, FlexBE, MAVLink, IEEE 1872.1-2024, JAUS, and STANAG
+4586. Like everything above, this is work-in-progress for review, not a
+decision already made. The one decision to put on the group's agenda is
+**Q-W**: does the group want to review and adopt the module draft? The
+follow-ons Q-X/Q-Y/Q-Z (plan lifecycle, failsafe/geofence, structured
+waypoints) and a consolidated PDG errata package ride behind that call.
+
 ## Status and next step
 
-- **Sourcing is essentially complete** - every proposed concept is now grounded in
-  a real mission (one nice-to-have remains: a dedicated autonomous-CASEVAC
-  mission).
+- **Sourcing is essentially complete** - every gap this review raised is now
+  grounded in a real mission (one nice-to-have remains: a dedicated
+  autonomous-CASEVAC mission).
 - **The ball is on the modeling side.** The remaining work - building the OWL
   property/message layer, reconciling the two tracks, and making the ~22
   decisions - is not a document problem; more scenarios will not fill it. It needs

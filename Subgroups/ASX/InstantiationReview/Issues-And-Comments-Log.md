@@ -26,18 +26,19 @@ Items marked **[deck]** are candidates for the findings presentation.
 | S2 | HIGH | OPEN | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** |
 | S3 | MED | DONE (branch) | Workbooks are `.xlsx` (zipped XML), git cannot merge | All 3 sample-message workbooks converted to diff-able SpreadsheetML 2003 `.xml` (fidelity verified, 0 mismatches) and committed on branch `asx-diffable-spreadsheets`. NOTE: `.xml` and `.xlsx` now coexist - see S4. |
 | S4 | HIGH | DECIDED | Dual source of truth: `.xml` vs `.xlsx` | Decision (2026-07-10): the `.xml` workbooks are the working copy for this review; Elizabeth's `.xlsx` files are left untouched for now. All new instantiation work (Init rows, CASEVAC tabs) goes into the `.xml` only. The `.xlsx` will diverge by design until the group reconciles. |
+| S5 | MED | RESOLVED (lesson) | Stale local refs hid `origin/asx-plan-semantics` (module + walks) from a follow-on session, which re-derived the gap analysis against base+LOX only | Same failure shape as S1, at branch granularity: a conclusion of absence requires a `git fetch` first. Caught by the user 2026-07-12; reconciled in `PlanSemantics-Walk.md` section 8 - the independent re-derivation converged on the module's construct set, so the cost bought corroboration. |
 
-## 2. Model drift: OWL vs Spreadsheet vs Deck
+## 2. Track alignment: OWL vs Spreadsheet vs Deck (at different stages)
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | D1 | HIGH | OPEN | Autonomy vocabulary defined three incompatible ways | OWL individuals {Automated, FullAuto, ReCont, Teleop}; ConceptMapping `Control Mode` {Piloted, Unpiloted-Autonomous, Swarm}; `NavigationAutonomy` {FPV, Autonomous, RemoteControl}. Which is normative? **[deck]** |
-| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. Two ConceptMapping rows even disagree on values. **[deck]** |
+| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. (ConceptMapping also has internal value disagreements - not in `SensorType`, whose two rows are identical duplicates, but in `Payload` (row 12 adds `SensorType` to the value list) and `VehicleType` (`DroneFixedWing, DroneHover` vs `Drone - Fixed Wing, Drone - Hover`).) **[deck]** |
 | D3 | HIGH | OPEN | Attribute layer not yet in the OWL | Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters are in ConceptMapping but not yet in the OWL (v0.0.1: 0 datatype / 1 object property; v0.0.3 adds a few, for the Video Detection Report only - see section 9). **[deck]** |
 | D4 | MED | OPEN | Deck (June) proposes `Sensors subClassOf RobotPart`; OWL has `Sensor subClassOf ElectricDevice`, no RobotPart class | Slide 6 of 2026-06 status deck vs `CSIM_ASX.rdf`. Robotics-concept discussion not captured in model. |
 | D5 | LOW | OPEN | Deck frames robotics subclass axioms as an open question, but OWL already committed them | UAV/UGV subClassOf Robot etc. asked as "Do we want to add...?" in June yet present in Jan OWL. |
 
-## 3. OWL internal defects (`CSIM_ASX.rdf`)
+## 3. OWL typos & naming (`CSIM_ASX.rdf`)
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
@@ -53,10 +54,10 @@ Items marked **[deck]** are candidates for the findings presentation.
 | M2 | MED | OPEN | `MediaReference` identity triple-defined | repositoryReference(UUID) + reportReference(string) + url(string), note "String may be better." Unresolved. |
 | M3 | MED | OPEN | Same concept modeled two ways across two report sheets | media/analystComment placed on ActivityObservation/LocationObservation in one sheet vs. a new `SensorObservation` subclass in another. Which is normative? |
 | M4 | MED | OPEN | `SensorObservation subClassOf ActivityObservation` is questionable | A sensor location fix is a LocationObservation; sensor output is not inherently an activity. |
-| M5 | MED | OPEN | `MediaTypeCode` conflates media format with sensor modality | Values VID/AUD/IMG/DOC (was Video/Audio/Image/Document as `MediaTypeEnum` in the v0.0.1 sample messages; renamed to `MediaTypeCode` {VID/AUD/IMG/DOC/TXT/NOS} in v0.0.3), but a note asks it to also cover "thermal scan" (a sensor type). Category error. **[deck]** |
+| M5 | MED | OPEN | `MediaTypeCode` conflates media format with sensor modality | Sample-message `MediaTypeEnum` = {Video, Audio, Image, Document, Not Otherwise Specified} - the NOS value's own note says "other sensor types, e.g. thermal scan" (a sensor modality, not a media format). v0.0.3 carries the same five values plus TXT as `MediaTypeCode` {VID/AUD/IMG/DOC/TXT/NOS}. Category error either way. **[deck]** |
 | M6 | MED | OPEN | Order task payload not modeled | "New Route Pattern" / "New Location" appear as bare rows with no type under the UAV Change Patrol Route Task. |
 | M7 | HIGH | OPEN | `hasStartTime` typed `UUIDBase` | Both Order sheets; `hasEndTime` is `TimeInstant`. Almost certainly a copy-paste error. **[deck]** |
-| M8 | LOW | OPEN | Namespace label drift | `C2SIM_ASX` (Order, Report Base) vs `ASX` (Video Detection Report) for the same model. |
+| M8 | LOW | OPEN | Namespace label inconsistency | `C2SIM_ASX` (Order, Report Base) vs `ASX` (Video Detection Report) for the same model. |
 
 ## 5. Initialization walk - entity-typing findings (headline)
 
@@ -87,17 +88,17 @@ renumbered.)
 | C5 | LOW | INSTANTIATED | Swarm Detection report + swarm coordination order not done | Walked in `Swarm-Walk.md`; `Swarm Detection` stub filled (Report) and `Swarm Coordination` tab added (Order). Surfaced Z1/Z2 and narrowed P8 (section 6d). |
 | C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Route-clearance / companion / urban examined in the redundancy pass (6g; a Route Clearance Order tab was added). **[deck]** |
 | C7 | HIGH | INSTANTIATED | Sourced scenarios (maritime MCM, subterranean SubT, sustainment) not integrated | Walked in `SourcedScenarios-Walk.md`; 7 tabs added (MCM Init, SubT Team Init, MCM Cross-Cue Neutralize, Explore Area Order, Contested Resupply Order, Naval Mine Detection Report, Generic Detection Report). Corroborated X1/N2/P1/Y; added G1-G10 (6h). (Counter-UAS, HMT, and SAR were un-extracted at this stage; all three were later extracted in the validation pass - see C8/6j.) **[deck]** |
-| C8 | HIGH | EVIDENCED | Validation holes (explainability, CBRN, EW, persistence) unexercised by any sourced mission | Scavenger extracted all 9 `Documents-Needed` requests; integrated in `ValidationEvidence-Walk.md` (6j). Holes now grounded; Q-Q/Q-F/Q-H gain concrete schemas (BML WhoMeasuredType/ResourceType; Agrawal explanation). Added G13/Q-V; 2 tabs. **[deck]** |
+| C8 | HIGH | EVIDENCED | Validation holes (explainability, CBRN, EW, persistence) unexercised by any sourced mission | The sourcing track extracted all 9 `Documents-Needed` requests; integrated in `ValidationEvidence-Walk.md` (6j). Holes now grounded; Q-Q/Q-F/Q-H gain concrete schemas (BML WhoMeasuredType/ResourceType; Agrawal explanation). Added G13/Q-V; 2 tabs. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | X1 | HIGH | OPEN | No robot-to-robot coordination content type | Envelope addressing (isFromSender/isToReceiver) supports peer messages, but no ReportContent/OrderBody wraps "verified safe route, use it"; UGV-as-issuer authority unclear. CASEVAC scout->transport hand-off. **[deck]** |
-| X2 | HIGH | OPEN | No rationale/explanation ReportContent | ReportContent = {ObservationReportContent, PositionReportContent, TaskStatus}. CASEVAC "explainable reasons" (why route changed / mission failed) has no element. TaskStatus gives state, not rationale. Candidate: new ASX RationaleReportContent. **[deck]** |
+| X2 | HIGH | OPEN | No rationale/explanation ReportContent | ReportContent = {smx#ObservationReportContent, PositionReportContent, TaskStatus}. CASEVAC "explainable reasons" (why route changed / mission failed) has no element. TaskStatus gives state, not rationale. Candidate: new ASX RationaleReportContent. **[deck]** |
 | X3 | MED | OPEN | Route exists but no share-payload wrapper | `Route` (SMX) exists; ASX Order sheet used free-text "New Route Pattern" instead. Refines M6/P5. |
 | X4 | MED | OPEN | No obstacle/threat observation subtype | Detected IED/broken-bridge that triggers replanning would fall to ActivityObservation or a new type; hazard entity typing unclear. |
-| X5 | LOW | MOSTLY COVERED | Phased tasks/ETA | Base `PlanBody`/`PlanPhase`/`PlanPhaseTrigger` exist; recommend reuse. Only an ETA/estimate attribute is open. |
+| X5 | LOW | MOSTLY COVERED | Phased tasks/ETA | Base `PlanBody`/`PlanPhase`/`PlanPhaseTrigger` exist; recommend reuse. The ETA residual is addressed by the module's `hasEstimatedPhaseCompletionTime`; autonomy-grade limits of the base machinery mapped in 6k (Q-W). |
 | X6 | LOW | OPEN | CASEVAC task + re-tasking semantics | Is CASEVAC a base TaskActionCode or new ASX task; mid-mission order amendment semantics. |
 
 Note: position/status reporting, routes, and phased planning are **covered by
@@ -112,17 +113,19 @@ X1 and X2.
 | Y2 | MED | OPEN | SensorType enum incomplete | {Visual, EW, CounterEW, Audio} omits CBRN, radiological, nuclear, biological, GPR/radar, thermal, LIDAR, metal-detector. |
 | Y3 | HIGH | OPEN | No detection/hazard Observation subtype | Observation subtypes are only {Activity, Health, Location, Name, Resource, SubjectType}; none fits a detected agent/emitter/hazard. Ties to X4. |
 | Y4 | MED | OPEN | EW sensing has no report content type | `JAM` is a LOX TaskActionCode (the action), not an observation of an intercepted emitter. |
-| Y5 | HIGH | OPEN | No sensor-reading value+unit property | Concentration, dose rate, frequency, depth have no home; only logistics quantities, `hasSpatialMeasure`, and `hasConfidenceLevel` exist. **[deck]** |
+| Y5 | HIGH | OPEN | No sensor-reading value+unit property | Concentration, dose rate, frequency, depth have no home; only logistics quantities, `hasSpatialMeasure`, and `smx#hasConfidenceLevel` exist. **[deck]** |
 
 Partially covered (not gaps): location (`LocationObservation`), detected-object
 identity (`SubjectTypeObservation`, if the entity type exists), confidence
-(`hasConfidenceLevel`).
+(`smx#hasConfidenceLevel`). Reuse candidates nearby (neither carries a reading):
+`smx#NBC_Event` (an APP6-C tactical-graphics symbol class) and the LOX
+chemical/biological/nuclear *sampling* task verbs.
 
 ## 6d. Swarm walk findings (from Swarm-Walk.md)
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| P7 | DECIDE-FIRST | OPEN | Swarm not yet taskable or able to report | Both swarm messages show it: an OrderBody recipient and a ReportBody `hasReportingEntity` need to be an ActorEntity; ASX Swarm derives from PhysicalEntity. Proposed: `Swarm subClassOf CollectiveEntity` (C2SIM; re-declared in SMX). **[deck]** |
+| P7 | DECIDE-FIRST | OPEN | Swarm not yet taskable or able to report | Both swarm messages show it: an OrderBody recipient and a ReportBody `hasReportingEntity` need to be an ActorEntity; ASX Swarm derives from PhysicalEntity. (Precision: `hasPerformingEntity`/`hasReportingEntity` are datatype properties carrying UUID references, so nothing fails an OWL reasoner - the ActorEntity requirement is stated in their annotations: "the unique identifier of an individual of the ActorEntity class". The semantic mismatch stands.) Proposed: `Swarm subClassOf CollectiveEntity` (C2SIM; re-declared in SMX). **[deck]** |
 | Z1 | MED | OPEN | No aggregation construct | A swarm detection built from multiple members' observations - one collective report or N member reports? No aggregation model. |
 | Z2 | MED | OPEN | No swarm-lifecycle construct | Dynamic member rotation / resupply / replacement (June deck) has no construct. |
 | P8 | HIGH | NARROWED | Membership + command mostly covered | `hasSubordinate`/`hasSuperior`/`hasCommandRelation` exist; residual is network params, leader-as-role, dynamic handover. |
@@ -156,14 +159,16 @@ piece is autonomy-to-permission.
 | E1 | LOW | mostly covered | Engineering verbs exist in LOX | `CONSTR` (build/dig), `CLROBS`/`CLRLND` (clear), `MINLAY` (emplace), `BREACH` exist; folds into E2 (effector typing). |
 | E2 | MED | OPEN | No effector/manipulator equipment concept | arm / blade / excavator. Ties to P2/D3. |
 | R1 | - | reconfirms P1 | USV typing (SMX `SurfaceVessel` vs ASX `USV`/Robot), now maritime. |
-| R2 | LOW | OPEN | Only a general tow/salvage verb absent | `lox#RESCUE` and `lox#RECOVR` exist as TaskActionCodes (the downed-pilot task uses RESCUE); only a general tow/salvage verb is missing. |
+| R2 | LOW | OPEN | Only a general-purpose tow/salvage verb absent | `lox#RESCUE` and `lox#RECOVR` exist as TaskActionCodes (the downed-pilot task uses RESCUE). The closest to tow/salvage are `lox#TOWTGT` (tow, but scoped to gunnery targets) and the broadly-defined `lox#RECOVR` ("retrieve any lost, incapacitated or captured object") - so the residual is a general-purpose tow/salvage verb, and RECOVR may already suffice. |
 
 Recurring shape of the whole task/effect axis: LOX already has 446 `TaskActionCode`
 verbs (incl. BREACH, ENGAGE, ATTACK, CONSTR, CLROBS, MINLAY, RESCUE, RECOVR, NTRCOM),
 so what is actually missing is narrow - **(a) payload/effector/weapon typing**
-(cargo L1, manipulator E2, weapon W2 are one gap) and **(b) a general tow/salvage
-verb**. Entity structure, addressing, effects, targets, resources, ROE, and the
-whole task-verb vocabulary already exist. Distilled into decision Q-L.
+(cargo L1, manipulator E2, weapon W2 are one gap) and **(b) a general-purpose
+tow/salvage verb** (closest existing: `TOWTGT`, gunnery-target towing only, and
+the broadly-defined `RECOVR`). Entity structure, addressing, effects, targets,
+resources, ROE, and the whole task-verb vocabulary already exist. Distilled into
+decision Q-L.
 
 ## 6g. Redundancy-pass findings (from RedundancyPass-Walk.md)
 
@@ -243,7 +248,7 @@ expressiveness gaps - see section 8.
 
 ## 6j. Validation-evidence integration (nine sourced missions)
 
-The scavenger session extracted all nine `Documents-Needed.md` requests (see
+The sourcing track extracted all nine `Documents-Needed.md` requests (see
 `Documents-Found.md`, `LLMExperiments/PaperSummaries/V2Extractions/`). Walked in
 `ValidationEvidence-Walk.md`. Effect: asserted findings are now **evidenced**,
 and three decisions gain a concrete schema / prior art.
@@ -271,6 +276,52 @@ neutral/SAR G10/R2/Q-N (SAR_Kim + CBRN + Explainability), formation Q-U
 
 Two tabs added (`.xml`): `Hazard Area Map Report` (Report), `MUM-T High-Level
 Tasking` (Order).
+
+## 6k. Plan-semantics: standards gap matrix + module verification
+
+From `PlanSemantics-Walk.md`: an independent verification-and-breadth pass
+over plan semantics, produced against base C2SIM + LOX + the main-tree ASX
+files (a stale clone hid this branch's module - see S5), then reconciled
+with the module proposal (`Proposed Extension Working Materials/
+Plan-Semantics-Analysis.md` + `ASX-PlanSemantics-Draft.ttl`). Standards
+compared, all citation-backed: BT/Nav2, PDDL/PlanSys2, FlexBE/SMACH,
+MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS AS6062, STANAG 4586, 4D/RCS,
+HTN, FIPA/BDI. Every C2SIM-side claim was adversarially verified against
+the RDF (15 refutation passes; corrections listed in the walk's section 7).
+
+**Headline:** base C2SIM+LOX is strong on classical planning (sequencing,
+hierarchy, an 18-code temporal algebra incl. 6 concurrency codes - better
+than most robotic messaging standards there) and absent on the
+autonomy-execution half. The module draft on this branch already covers
+most of that half; the walk independently re-derived the same construct
+set (fallback, state conditions, goals, repetition, authority gate) -
+convergent evidence for the module's design. Statuses below are AFTER
+module reconciliation ("MODULE (draft)" = resolved once the module is
+adopted). **Update 2026-07-12 (later same day):** module TTL v0.0.3 applied
+the walks' nine deltas AND decisions Q-X/Q-Y/Q-Z (rules R15-R19,
+adversarially verified, all instance blocks rdflib-validated) - PL7/PL8/PL9
+moved to MODULE (draft v0.0.3) and PL10's plan-ID half is closed; statuses
+in the table are updated accordingly.
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| PL1 | HIGH | MODULE (draft) | Automatic on-failure contingency | Base: no failure trigger/completion; `EventCode` {GenericEvent, TaskStart, TaskEnd} cannot express failure; TASKABRT is report-only; dormant phase + `ExecutePlanPhase` is human-triggered and pre-wired. Module: `TASKFAILD` + `OnPhaseFailureTrigger` + `hasOnFailurePhaseReference` + R2-R7. Vs BT Fallback / Nav2 recovery / STANAG Contingency A/B + Define Contingency / 4D-RCS contingency libraries. **[deck]** |
+| PL2 | MED | MODULE (draft) | Loop/retry | Module `RepetitionPolicyCode` + until-condition + limit + timeout. Vs BT Retry/Repeat, MAVLink DO_JUMP, STANAG Loop WP (laps/time/fuel), JAUS iterative missions. |
+| PL3 | HIGH | MODULE (draft) | World-state triggers/completion | Base triggers fire on time/order/phase-completion only; completion = 3 codes. Module `Condition`/`StateConditionTrigger`/`CompositeTrigger`/guards; `AreaCoverageAchieved` covers Q-N. Residual: reactive cross-phase preemption (module's own 7.1). **[deck]** |
+| PL4 | HIGH | MODULE (draft) | Goal/end-state layer | No Goal/EndState class in base (DesiredEffectCode = weakest form). Module `Goal` (achieve/maintain, achievement+failure conditions). Full PDDL pre/effects deliberately out of scope at interchange altitude. **[deck]** |
+| PL5 | MED | PARTIAL | Inter-task data flow | All base task references are authoring-time UUIDs. Module `hasPhaseProductReference` = reference-level only; blackboard-grade binding (BT ports, FlexBE userdata) open. Extends M1/Q-E to tasking. |
+| PL6 | HIGH | MODULE (draft) | Autonomy-gated progression | Base has the vocabulary unlinked (AutonomyLevelCode, Operator, ROE, ack codes). Module `HumanApprovalTrigger` + `hasRequiredAutonomyLevelCode` + fail-closed R13; FlexBE required-autonomy-per-transition independently corroborates. Sharpens W1/Q-K. **[deck]** |
+| PL7 | MED | MODULE (draft v0.0.3) | Plan lifecycle | v0.0.3 adds `hasPlanID`/`hasSupersededPlanReference` (R16), `PhaseSuspended`+`TASKSUSP` (R17), and `TaskDispositionReportContent` with `TASKACPT`/`TASKRJCT` (task-targeted accept/reject). JAUS AS6062 = prior art. Extends X6. |
+| PL8 | MED | MODULE (draft v0.0.3) | Waypoint enrichment | v0.0.3 adds `StructuredRoute`/`RouteWaypoint` (R19): explicit ordering, per-point speed/arrival-time/loiter, task-on-arrival. STANAG 4586 #13002-#13004 alignment. Refines P5/X3. |
+| PL9 | MED | MODULE (draft v0.0.3) | Failsafe/geofence binding | v0.0.3 adds `EntityInsideArea` (keep-in/keep-out guards) and the lost-link disposition (`FailsafeBehaviorCode`, `hasLostLinkBehaviorCode`/`Timeout`, R18). Vs MAVLink fence/rally, STANAG. Extends Q-S/Q-M. |
+| PL10 | LOW | PARTIAL | Mission container / priority | Plan-ID half closed by v0.0.3 `hasPlanID`; residual: no Mission/Operation class, no preemption-priority model between plans. |
+| PL11 | LOW | OPEN | LOX-internal defects (upstream PDG) | (a) PlanPhase comment promises isActive/isComplete Boolean flags that do not exist as properties; (b) the hasTaskReference axiom cites a `hasTask` property PlanPhase never declares (inline tasks comment-only). Package with the module's three candidate core errata (TASKFAILD, cancel/suspend verbs, runtime event-occurrence report). |
+
+Covered, NOT gaps (verified in base): sequencing, hierarchy (recursive
+subphases), temporal algebra (18 codes + lags, `RelativeTime` H-hour), plan
+staging (`isToBeExecutedNow`) and pre-positioning (ObjectDefinitions
+references), structural waypoint routes, FIPA-style performatives in the
+header.
 
 ## 7. Open decisions for the sub-group (comments)
 
@@ -305,8 +356,10 @@ Tasking` (Order).
 - **Q-L [deck]** Add typed **payload / effector / weapon** (cargo, manipulator,
   munition) - the action verbs already exist in LOX (BREACH, ENGAGE, ATTACK,
   CONSTR, CLROBS, MINLAY, RESCUE, RECOVR, NTRCOM, ESCRT/FOLASS, plus
-  follow/escort over `RelativeLocation`), and only a general tow/salvage verb is
-  a residual. Effects, targets, and resources already exist.
+  follow/escort over `RelativeLocation`), and only a general-purpose tow/salvage
+  verb is a residual (closest: `TOWTGT`, gunnery targets only; the broad
+  `RECOVR` may already cover salvage). Effects, targets, and resources already
+  exist.
   (Resolves L1/L2/E2/W2/N2; E1/R2 are minor residuals.)
 - **Q-M [deck]** Allow an **area** to be the subject of a task and a report -
   an `hasAffectedArea` counterpart to `hasAffectedEntity`, and an area-state
@@ -334,6 +387,27 @@ Tasking` (Order).
   spacing, observation-pose pattern) beyond single `RelativeLocation`. (Resolves G12.)
 - **Q-V** Add **capability self-report** (a robot declares its mounted/reconfigurable
   equipment; tasks assigned by capability) - BML `WhoHoldingType`. (Resolves G13.)
+- **Q-W [deck]** Review and **adopt the plan-semantics module draft**
+  (`Plan-Semantics-Analysis.md` + `ASX-PlanSemantics-Draft.ttl` + three
+  validated walks, this branch). Adoption resolves PL1-PL4 and PL6; the 6k
+  standards matrix independently corroborates its construct choices.
+- **Q-X** [DRAFTED in module v0.0.3, pending review] Plan identifier,
+  Suspended phase outcome, task-targeted accept/reject acks (JAUS AS6062
+  precedent); IEEE alignment corrected to 1872.1-2024 only (1872.2
+  verifiably has no plan constructs). (Resolves PL7 and PL10's plan-ID
+  half; implemented as rules R16/R17 + TaskDispositionReportContent.)
+- **Q-Y** [DRAFTED in module v0.0.3, pending review] Failsafe/geofence
+  binding: lost-link/RTH default-behavior declaration + keep-in/keep-out
+  condition predicates (MAVLink fence/rally, STANAG 4586 prior art).
+  (Resolves PL9; implemented as FailsafeBehaviorCode + EntityInsideArea +
+  rule R18; extends Q-S/Q-M.)
+- **Q-Z** [DRAFTED in module v0.0.3, pending review] STANAG-4586-grade
+  waypoints on Route: explicit ordering, per-point speed/arrival-time/
+  loiter, optional per-waypoint task reference (STANAG #13002-#13004).
+  (Resolves PL8; implemented as StructuredRoute/RouteWaypoint + rule R19.)
+- PL5 folds into **Q-E** (runtime entity binding for tasking, not just
+  reports); PL11 + the module's three candidate core errata form one
+  consolidated **PDG package**.
 - **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
   `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
   (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
@@ -357,8 +431,8 @@ separable buckets, and only the third is about sources:
 
 2. **Deferred decisions and track desync (information already in hand).**
    P1 (UAV double-typed vs SMX Platform), P7 (swarm typing), D1/D2 (autonomy and
-   sensor each defined three ways) are unresolved *choices*, plus a drift between
-   the OWL track (Jan) and Elizabeth's spreadsheet track (Jun). Cross-cutting
+   sensor each defined three ways) are unresolved *choices*, plus the OWL track
+   (Jan) and the spreadsheet track (Jun) being at different stages. Cross-cutting
    abstractions - generic Detection Report (G4), area-as-subject (N1),
    engagement-authority-vs-autonomy (W1) - are modeling insights reachable from
    scenarios already in hand. These need a decision or an abstraction, not a
@@ -382,7 +456,7 @@ separable buckets, and only the third is about sources:
 **Bottom line:** the domain-coverage and validation gaps (bucket 3) do reflect a
 document shortfall and are being closed by the sourcing effort; but the larger
 share - the missing property/message layer, unmade typing/vocabulary decisions,
-track drift, and cross-cutting abstractions (buckets 1-2) - are not document
+track desync, and cross-cutting abstractions (buckets 1-2) - are not document
 problems and no amount of new scenarios fills them. It takes bottom-up
 instantiation to see which is which.
 
@@ -396,8 +470,11 @@ to base `C2SIM.rdf`. It is a **new file in a new location**; the v0.0.1
 findings were grounded on v0.0.1; here is how each moves against v0.0.3.
 
 Counts: v0.0.1 = 15 classes / 1 object prop / **0 datatype props**; v0.0.3 =
-~26 ASX classes / 4 object props / **2 datatype props**, plus a `MediaTypeCode`
-code list and an `AutonomyLevelCode` model. So the property layer has *begun*
+26 ASX classes / 4 object props / **2 datatype props**, plus a `MediaTypeCode`
+code list and an `AutonomyLevelCode` model. (Of the six new properties, four are
+object properties over code lists / time instants - `hasMediaTypeCode`,
+`hasCreationTime`, `hasLastModifiedTime`, `hasAutonomousRoleCode` - and two are
+datatype - `hasAnalystName`, `hasRepositoryReference`.) So the property layer has *begun*
 (for the Video Detection Report), and much of the review's direction is being
 adopted - the model is moving, as expected for a WIP.
 
@@ -424,8 +501,10 @@ adopted - the model is moving, as expected for a WIP.
   AND `UnmannedAerial/Ground/Maritime/UnderwaterVehicle subClassOf smx#Vehicle`.
   Two class sets for the same things - exactly the typing decision to settle.
 - **New (V1):** `UnmannedMaritimeVehicle` / `UnmannedUnderwaterVehicle` are under
-  `smx#Vehicle` (a land platform); SMX has `SurfaceVessel`/`SubsurfaceVessel` for
-  maritime. Worth re-parenting.
+  `smx#Vehicle` - a direct `Platform` sibling of `Aircraft` / `SurfaceVessel` /
+  `SubsurfaceVessel` whose rdfs:comment says "most often applies to ground
+  vehicle". SMX already has `SurfaceVessel`/`SubsurfaceVessel` for maritime;
+  worth re-parenting the maritime pair there.
 - **Y1/Y5/M5**: v0.0.3 committed to the media-based report (`MediaReference` +
   `MediaTypeCode`, with `NOS` "Not Otherwise Specified"), so the "doesn't
   generalise to non-imaging sensors / no measurement value+unit / media-type
@@ -443,10 +522,41 @@ adopted - the model is moving, as expected for a WIP.
 - **O1/O2 typos still present** in v0.0.3 (`CollecticeRoboticSystem`,
   versionInfo "Extrension").
 
+**Additional v0.0.3 observations (added 2026-07-12, on re-verification):**
+- **Import layering / circular import.** The `michael_d` edit to base
+  `C2SIM.rdf` adds `owl:imports smx` and `owl:imports lox` to the *base*
+  ontology header (its only substantive change; the rest of the diff is OWL-API
+  re-serialization). Since `C2SIM_SMX.rdf` imports C2SIM, this creates a
+  circular import (C2SIM <-> smx) and inverts the base<-extension layering -
+  worth a deliberate decision. Relatedly, v0.0.3's own import set grew: v0.0.1
+  imported only `lox`; v0.0.3 imports `C2SIM`, `lox`, and `smx`.
+- **New `Operator` class** (`subClassOf C2SIM#Person`), not previously
+  inventoried here; its comment carries a third typo ("semi,autonomous").
+- **The two halves of the autonomy model are not yet wired together:**
+  `hasAutonomousRoleCode` keeps its v0.0.1 declaration (range generic
+  `C2SIM#Code`, no domain, no restriction attaching it to Robot or any entity -
+  P3 still holds) even though `AutonomyLevelCode` now exists as its obvious
+  range.
+- **`MediaTypeCode` has no superclass** - unlike `AutonomyLevelCode
+  subClassOf C2SIM#Code` - inconsistent with the C2SIM code-list pattern.
+- **`VideoDetectionReportContent` is a bare subclass of `ReportContent`** - no
+  restriction links it to `MediaReference` / `AnalysisConcept` /
+  `SensorObservation`, so the Video Detection Report pieces are structurally
+  disconnected from the content class itself.
+- **Vacuous axioms:** `AnalysisComment`'s min-0 cardinality restrictions
+  (`hasCreationTime`, `hasLastModifiedTime`, `hasAnalystName`) constrain
+  nothing.
+- Support files: `catalog-v001.xml` has a duplicate mapping for the smx IRI;
+  the derived schema `Derived products/Schema_C2SIM_smx_lox_asx.xml` is an XSD
+  misnamed `.xml`.
+
 **Groundings intact:** Michael's `C2SIM.rdf` edits keep every base class the
 review cites (`CollectiveEntity`, `PositionReportContent`, `hasSubordinate`,
 `hasAffectedEntity`, `DesiredEffectCode`, `AuthorizationHeader`, ...), and SMX/LOX
-are untouched - so the review's RDF-verified facts still hold.
+are untouched - so the review's RDF-verified facts still hold. (One base-standard
+nit found while re-verifying, offered upstream: `AuthorizationHeader`'s two
+cardinality restrictions use `owl:onDataRange C2SIM#angle` - `C2SIM.rdf` lines
+1917/1924 - almost certainly not the intended range.)
 
 **Coordination note:** two ASX ontology files now exist (v0.0.1 in
 `Subgroups/ASX/Proposed Extension/`, v0.0.3 in `Ontology/`) on two branches; the
@@ -464,14 +574,17 @@ group should converge on one canonical version/location.
   gaps (Route and phased-planning both already exist in the standard).
 - 2026-07-10: S4 decided - `.xml` is the working copy, `.xlsx` left untouched.
   Added 5 CASEVAC tabs to the `.xml` workbooks (verified via LibreOffice
-  round-trip; existing sheets preserved). Reviewed Elizabeth's own annotations
-  on the worked scenarios (see conversation; agree on most, disagree on
-  MediaType/SensorObservation typing and flag the M3 cross-sheet inconsistency).
+  round-trip; existing sheets preserved). Reviewed the annotations on the worked
+  scenarios; most align with these findings, and the two open typing questions
+  they raise (MediaType and SensorObservation parent) are logged as M5/M4, plus
+  the M3 cross-sheet inconsistency.
 - 2026-07-10: Walked non-video sensors (`NonVideoSensors-Walk.md`); added 3
   report tabs (CBRN / EW Emitter / GPR Mine) to the `.xml`. Added section 6c
   (Y1-Y5) and decision Q-I; updated C4. Grounding check confirmed the gaps are
   real (no measurement/hazard Observation subtype; no sensor-reading value+unit;
-  no CBRN/EW-sensing/radar classes).
+  no CBRN/EW-sensing/radar *sensor or observation* classes - `smx#NBC_Event` is
+  a map-symbol class and LOX has CBRN *sampling* task verbs, neither carries a
+  reading).
 - 2026-07-10: Walked swarm (`Swarm-Walk.md`); filled the `Swarm Detection` stub
   (Report) and added `Swarm Coordination` (Order). Added section 6d (Z1/Z2),
   decision Q-J; updated C5. Grounding narrowed P8 - membership/command already
@@ -493,7 +606,7 @@ group should converge on one canonical version/location.
   doc (a150ffb -> `OntologyConceptCoverage.md`). Mostly aligned; added G11
   (environment conditions) and G12 (formation geometry) that I had under-covered,
   decisions Q-T/Q-U, and section 8 ("why the gaps are not yet filled").
-- 2026-07-10: Integrated the scavenger session's nine sourced missions
+- 2026-07-10: Integrated the sourcing track's nine sourced missions
   (`Documents-Found.md` / V2Extractions). Section 6j, coverage C8, G13/Q-V, two
   tabs. Bucket-3 validation holes now evidenced; key result: the measurement
   report (Q-Q) is prior art in C2SIM's BML lineage (WhoMeasuredType) - re-adopt,
@@ -517,6 +630,36 @@ group should converge on one canonical version/location.
   class dropped, `CollecticeRoboticSystem` still non-actor; broader attribute set;
   the new content types), and that the P9 typos survive. Groundings intact; noted
   the two-ASX-file coordination point (`CSIM_ASX.rdf` vs `C2SIM_ASX-v003.rdf`).
+- 2026-07-12 (later): Module TTL advanced to v0.0.3 and the whole package
+  built out. Applied the validation walks' nine deltas AND decisions
+  Q-X/Q-Y/Q-Z (new rules R15-R19: late-bound products, plan identity/
+  supersession, suspension, lost-link precedence, waypoint traversal; new
+  constructs incl. TaskDispositionReportContent, FailsafeBehaviorCode,
+  StructuredRoute/RouteWaypoint, hasRepetitionInterval, 4 new predicates,
+  TASKACPT/TASKRJCT/TASKSUSP). Walk addenda exercise every new construct
+  (all Turtle rdflib-validated); analysis doc sec. 5.10;
+  `PDG-Change-Proposals.md` consolidates 6 upstream items; findings deck
+  gains a 6k slide (27 slides), plan-semantics deck a v0.0.3 slide (19);
+  sample Plan Messages workbook conformed (hasPlanID rows). A 5-check
+  adversarial verification pass (rule coherence, cross-artifact
+  consistency, instance validity, hygiene) found and fixed 2 HIGH
+  (R16 supersession leak; R18/R14 interaction), 8 MED, and 10 LOW issues
+  before commit. PL7/PL8/PL9 -> MODULE (draft v0.0.3); PL10 plan-ID half
+  closed.
+- 2026-07-12: Plan-semantics standards matrix + module verification
+  (`PlanSemantics-Walk.md`). Independent gap analysis vs BT/Nav2,
+  PDDL/PlanSys2, FlexBE, MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS
+  AS6062, STANAG 4586, 4D/RCS, HTN, FIPA/BDI (sourced, cited); 15
+  C2SIM-side claims adversarially verified against the RDF. Initially
+  produced blind to this branch's module (stale local refs - S5), then
+  reconciled: the module covers PL1-PL4/PL6 (independent derivations
+  converged on the same constructs - corroboration, recorded in the walk's
+  section 8); residuals PL5/PL7-PL10 + upstream PL11. Added 6k, S5,
+  decisions Q-W..Q-Z, X5 cross-ref; survey doc gains See-also + two
+  corrections (IEEE 1872.1 is 2024; 1872.2 has no plan constructs). Key
+  verified negatives: IEEE 1872.2 defines no Plan/Goal/Mission constructs;
+  EventCode cannot express task failure; Route waypoint order exists only
+  as XML document order.
 - 2026-07-11: Tone reframe to work-in-progress across the shared artifacts (deck,
   briefing, presenter notes, Q&A, coverage, and the walk docs). Findings are
   presented as things *still to be defined* in a v0.0.x model, not as defects:
@@ -526,3 +669,50 @@ group should converge on one canonical version/location.
   stages"; "0 datatype properties ... never built" qualified as the v0.0.1
   baseline with v0.0.3 starting the layer. No verified fact changed - only framing;
   the genuine model bugs (typos, mis-parenting) are still called out in section 3.
+- 2026-07-12: Independent verification pass over the whole review (every
+  RDF-grounded claim re-checked against C2SIM/SMX/LOX and v0.0.3; `.xml`
+  workbooks re-compared cell-for-cell against the `.xlsx`; deck regenerated and
+  diffed; all cross-references and citations traced). Corrections applied:
+  D2's "two SensorType rows disagree" was wrong (they are identical duplicates;
+  the real ConceptMapping disagreements are Payload and VehicleType); M5 - the
+  sample-message `MediaTypeEnum` already had five values incl. "Not Otherwise
+  Specified" (so v0.0.3's NOS is not new); V1 - `smx#Vehicle` is a direct
+  Platform sibling, "land" only by comment; R2/Q-L - qualified with `lox#TOWTGT`
+  (gunnery-target towing) and the broadly-defined `RECOVR`; the CBRN grounding
+  narrowed to "no *sensor/observation* classes" (`smx#NBC_Event` symbol class
+  and LOX sampling verbs exist); namespace precision (smx# on
+  ObservationReportContent / hasConfidenceLevel); stale labels aligned (X2
+  severity, P8 narrowing in the Init walk, the USV-rescue R2 workbook cell);
+  remaining pre-reframe phrasing swept. Section 9 gained the re-verification
+  additions (import layering/circular import, `Operator` class, unwired
+  AutonomyLevelCode range, bare `VideoDetectionReportContent`, vacuous min-0
+  axioms, support-file nits) and the base-standard `AuthorizationHeader`
+  onDataRange nit. Reference corpus: two byte-identical duplicate PDFs removed;
+  two extraction records' source-location claims corrected to web-only; broken
+  relative links fixed; SAR source substitution (Kim 2021 for the MDPI-2020
+  candidate) noted where the candidate is listed. Deck regenerated (still 23
+  slides). No headline finding changed.
+- 2026-07-12: Added a process slide to the deck (slide 3): the three coordinated
+  sessions - document mining, scenario extraction (locked v2.2 prompt), and
+  ontology application (the instantiation walks) - plus the independent
+  verification pass, with the iteration loop (walk -> sourcing brief -> mining ->
+  extraction -> walk) called out. Deck is now 24 slides; briefing and presenter
+  notes updated to match.
+- 2026-07-12: Deck navigation/scaffolding pass (deck now 26 slides): added a
+  "What this review contributes" slide (the five deliverables, stated up front),
+  a "How to use this material" reading guide (paths by time budget, how to read
+  the workbooks' [!]/[Q] flags, how to challenge a claim, and the finding-ID
+  legend), and a per-slide "Dig deeper" line on every content slide naming the
+  walk doc / log section / workbook tabs behind it. Briefing and presenter notes
+  updated to match.
+- 2026-07-13: Deck presenter-notes + orientation pass (deck now 29 slides,
+  style aligned with the plan-semantics orientation deck): the talk track is
+  embedded as per-slide speaker notes (team-facing; includes a per-section
+  time budget for a 30-minute slot and a 20-minute fallback); added a
+  one-slide summary up front ("The whole review in one slide"), rebuilt "How
+  to use this material" as a reading-paths-by-time-budget table, and added a
+  finding-ID decoder-ring table slide. Presenter-Notes.md is now the
+  section-level view of the same track (stale 26-slide count corrected).
+  Also brought the InstantiationReview docs on this branch up to the
+  verification-pass state, including the plan-semantics standards matrix
+  (PlanSemantics-Walk.md, log sec 6k) so the deck's references resolve here.

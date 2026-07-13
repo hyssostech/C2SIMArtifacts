@@ -119,7 +119,7 @@ designated leader, declared as a collective that can be tasked and can report.
 
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
-| ASX **or** C2SIM | Swarm **or** CollectiveEntity | CollectiveRoboticSystem / ActorEntity | hasEntityType | EntityType | "Swarm" | **[!] collective typing conflict - see P7** |
+| ASX **or** C2SIM | Swarm **or** CollectiveEntity | CollecticeRoboticSystem (sic) / ActorEntity | hasEntityType | EntityType | "Swarm" | **[!] collective typing conflict - see P7** |
 | C2SIM | (Swarm) | ActorEntity | hasName | string | "Swarm-1" | must be taskable |
 | C2SIM | member UAV #1 | Platform/Robot | hasSuperior | UUIDBase | (Swarm UUID) | **[Q] is hasSuperior the membership link? - see P8** |
 | C2SIM | member UGV #2 | Platform/Robot | hasSuperior | UUIDBase | (Swarm UUID) | heterogeneous members - see P10 |
@@ -128,17 +128,19 @@ designated leader, declared as a collective that can be tasked and can report.
 
 Problems this exposes:
 
-- **P7 [!] A Swarm cannot receive orders as currently modeled.** The OWL declares
+- **P7 [!] A Swarm is not yet orderable as currently modeled.** The OWL declares
   `Swarm subClassOf CollecticeRoboticSystem subClassOf RoboticSystem subClassOf
   Device subClassOf Artifact subClassOf PhysicalEntity`. That places a swarm in
   the **PhysicalEntity** tree - an inert object - not under **ActorEntity**. But
   a swarm is exactly what orders are addressed to and what sends reports
   (see `Swarm Detection`), which requires `ActorEntity`. Base C2SIM already has
-  `CollectiveEntity subClassOf ActorEntity` for precisely this. As written, you
-  cannot instantiate a taskable swarm from the ASX model. **[Q]** Should `Swarm`
+  `CollectiveEntity subClassOf ActorEntity` for precisely this. As written, the
+  ASX model does not yet yield a taskable swarm instance. **[Q]** Should `Swarm`
   derive from `CollectiveEntity` (ActorEntity) rather than from the
   device/artifact tree?
-- **P8 [Q] Membership and leader have no property.** ConceptMapping lists
+- **P8 [Q] Membership and leader: no ASX property yet; base hooks exist.**
+  (Narrowed by the swarm walk: `hasSubordinate`/`hasSuperior` (C2SIM) and
+  `hasCommandRelation` (SMX) cover membership and command.) ConceptMapping lists
   "Swarm Parameters: Leader - Boolean, Network". There is no membership or leader
   object property in the OWL. `hasSuperior` (UUIDBase) is the natural base-C2SIM
   hook for member-to-collective linkage; leader could be a role rather than a
@@ -164,10 +166,10 @@ Problems this exposes:
 | P5 | [!] | Patrol route/area not modeled as an init object (also missing on Order side) |
 | P6 | [!] | Three competing autonomy vocabularies |
 | P7 | [!] | Swarm is under PhysicalEntity, so it is not yet taskable or able to report |
-| P8 | [Q] | Swarm membership + leader have no property |
+| P8 | [Q] | Swarm membership + leader - narrowed: base `hasSubordinate`/`hasSuperior`/`hasCommandRelation` cover it; residual is network params, leader-as-role, dynamic handover |
 | P9 | [!] | "CollecticeRoboticSystem" misspelling will propagate to instances |
 | P10 | [Q] | Heterogeneous (mixed-type) swarm membership unconfirmed |
 
-The three that would block actually sending a message today are **P1**, **P2**,
+The three to settle before a message can be built cleanly are **P1**, **P2**,
 and **P7**. They are all entity-typing decisions - which is why Initialization,
 not Reports, is where the proposal most needs to be exercised.

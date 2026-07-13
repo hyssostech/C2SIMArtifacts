@@ -13,7 +13,9 @@ several things came back as "already exists" (rules of engagement,
 task verbs BREACH / ENGAGE / ATTACK / RESCUE / RECOVR) and two would-be gaps were
 withdrawn (Route and phased
 planning already exist). The genuinely-missing items are the message/attribute
-layer and the ~22 decisions.
+layer and the ~22 decisions. (The re-check also surfaced one base-standard nit
+we offer upstream: `AuthorizationHeader`'s two cardinality restrictions use
+`owl:onDataRange C2SIM#angle` - almost certainly unintended.)
 
 **Q. Isn't the OWL just an early draft? Aren't you criticizing incomplete work?**
 Yes, and we treat it exactly as that. It is an early v0.0.x work-in-progress, and
@@ -31,6 +33,15 @@ It's a class-tree issue, not a missing property. `Swarm` currently derives from
 `ActorEntity`. The clean fix is to derive `Swarm` from `CollectiveEntity`, which
 is already an `ActorEntity` in the base standard (C2SIM). That is decision Q-B.
 Membership and command already exist (`hasSubordinate` / `hasCommandRelation`).
+
+**Q. Strictly speaking, `hasReportingEntity` is a UUID datatype property - a
+reasoner wouldn't reject a swarm-signed report. Is P7 really a defect?**
+Correct, and we phrase it as a semantic mismatch, not a logical inconsistency:
+the properties carry UUID references, and their annotations state the referenced
+individual must be "of the ActorEntity class". So nothing fails mechanically -
+but instance data would violate the standard's stated semantics, and any
+consumer that resolves the reference against the entity's type breaks. Fixing
+the class tree (Q-B) is still the right move.
 
 **Q. How many of these gaps are real vs. things we already have?**
 Three categories. (1) Already present - re-use it (ROE, routes, vessels, etc.).
@@ -69,7 +80,7 @@ spreadsheets in June. So autonomy and sensors are each defined three different
 ways. Reconciling the two is part of decision Q-C / Q-D.
 
 **Q. Is the sourcing/scenario work done?**
-Essentially, yes - every proposed concept now has at least one real sourced
+Essentially, yes - every gap the review raised now has at least one real sourced
 mission behind it. The one worthwhile remaining hunt is a dedicated
 autonomous-CASEVAC coordination mission. The rest of the remaining work is
 modeling, not sourcing.
@@ -85,3 +96,17 @@ baseline, what exists vs. doesn't) were verified directly against the RDF files
 (and re-checked against v0.0.3), and the workbook
 conversions were verified by round-trip. The design *recommendations* (e.g. which
 way to resolve P1) are proposals for the group, not conclusions.
+
+**Q. Why does ASX need its own plan constructs - doesn't C2SIM already have plans?**
+It does, and for what they were built for they hold up well. The LOX
+`PlanBody`/`PlanPhase` machinery covers sequencing, recursive hierarchy, and
+temporal constraints (an 18-code temporal algebra including 6 concurrency
+codes) - verified against the RDF; the standards matrix (log section 6k) rates
+base C2SIM better than most robotic messaging standards on classical planning.
+What it cannot say is the autonomy-execution half: no failure semantics (a task
+completes or is aborted - it cannot fail), no conditions over world state, no
+goals/end states, no loops or standing tasks, and no authority gating. The
+plan-semantics module adds exactly those and nothing else, and every construct
+in it traces both to a validated scenario walk (CASEVAC, DroneResponse, MDARS)
+and to prior art in what autonomy systems actually run (behavior trees, PDDL,
+JAUS, STANAG 4586, FlexBE).

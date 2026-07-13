@@ -142,7 +142,7 @@ sections below record the original sourcing detail.
 
 - **Extracted this pass:** explainability (#1) and CBRN (#2) - the two clearest
   validation holes, now grounded with concrete open-access vignettes.
-- **Ready to extract on request:** counter-UAS (#5), SAR (#6/#7) - candidates in
+- **Ready to extract on request:** counter-UAS (#5), HMT (#6), SAR (#7) - candidates in
   hand; EW (#3) and persistent (#4) sourced but vignette-thin (flagged).
 - **Needs more hunting:** a step-level swarm-vs-swarm vignette (#5), a dedicated
   formation-geometry mission (#8), and an EOD render-safe AAR (#9) if CBRN's

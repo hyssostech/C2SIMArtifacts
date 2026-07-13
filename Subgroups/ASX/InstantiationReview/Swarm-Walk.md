@@ -11,8 +11,8 @@ Layout mirrors the workbook columns:
 **[Q]** = open question, **[!]** = not-yet-defined item / gap. Anchored to the ontology.
 
 Grounding done first (and it narrowed two findings):
-- `CollectiveEntity` (SMX) is `subClassOf ActorEntity` - the clean target for
-  P7 (a swarm must be taskable / able to report).
+- `CollectiveEntity` (base C2SIM; re-declared in SMX) is `subClassOf ActorEntity`
+  - the clean target for P7 (a swarm must be taskable / able to report).
 - `hasSubordinate` / `hasSuperior` (C2SIM) and `hasCommandRelation` (SMX)
   **already exist** - so membership and leader/command are *partially*
   expressible in base C2SIM. P8 is therefore narrower than "no property."
@@ -24,7 +24,7 @@ Grounding done first (and it narrowed two findings):
 The proposed OWL has `Swarm subClassOf CollecticeRoboticSystem -> ... ->
 PhysicalEntity` (an inert object). Both messages below need the swarm to be an
 **ActorEntity** (to be ordered, and to be a ReportingEntity). As modeled it is
-neither. Recommended fix: `Swarm subClassOf CollectiveEntity` (SMX).
+neither. Recommended fix: `Swarm subClassOf CollectiveEntity` (base C2SIM).
 
 ## 1. Swarm Detection Report (fills the `Swarm Detection` stub)
 
@@ -32,7 +32,7 @@ The swarm collectively reports targets detected by its members.
 
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
-| C2SIM | ReportBody | DomainMessageBody | hasReportingEntity | UUIDBase | (swarm UUID) | [!] P7: a ReportingEntity must be an ActorEntity; ASX Swarm derives from PhysicalEntity -> cannot report as a collective. |
+| C2SIM | ReportBody | DomainMessageBody | hasReportingEntity | UUIDBase | (swarm UUID) | [!] P7: a ReportingEntity must be an ActorEntity; ASX Swarm derives from PhysicalEntity -> not yet able to report as a collective. |
 | C2SIM | ReportBody | DomainMessageBody | hasReportContent | ObservationReportContent | (aggregated detections) | [!] Z1: no aggregation construct - is a swarm detection one report from the collective, or N reports from members? |
 | SMX | ObservationReportContent | ReportContent | hasObservation | Observation | (targets detected by members) | |
 | SMX | LocationObservation | Observation | hasLocation | Location | (detected target location) | Works. |
@@ -45,7 +45,7 @@ member rotation/resupply (from the June robotics-concepts discussion).
 
 | Model | C2SIM Object | Parent Type | Field | Type | Value | Notes |
 |---|---|---|---|---|---|---|
-| C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (swarm UUID) | [!] P7: recipient must be an ActorEntity; ASX Swarm is PhysicalEntity -> cannot be ordered. |
+| C2SIM | OrderBody | DomainMessageBody | isToReceiver | UUIDBase | (swarm UUID) | [!] P7: recipient must be an ActorEntity; ASX Swarm is PhysicalEntity -> not yet orderable. |
 | C2SIM / ASX | Swarm Task | Task | hasTask | TaskActionCode | Surveil / Deliver | [Q] swarm-level task vs per-member decomposition - who decomposes, and is that modeled? |
 | SMX | (leader designation) | - | hasCommandRelation | CommandRelation | (member #1 leads) | Partial - `hasCommandRelation` exists; but ConceptMapping models leader as a Boolean, and dynamic leader handover is not clean. [P8, narrowed] |
 | ASX | (swarm) | ? | Network | Network | (comms params) | [!] P8: ConceptMapping SwarmParameters "Network" has no base property. |
@@ -73,7 +73,7 @@ ActorEntity.
 ## Headline
 
 Every swarm message runs into the same wall: as modeled, a swarm is a
-PhysicalEntity, so it can neither receive an order nor sign a report. Fixing
+PhysicalEntity, so it is not yet able to receive an order or sign a report. Fixing
 P7 (`Swarm subClassOf CollectiveEntity`) unlocks most of this - membership and
 command relations are already in the base standard. The genuinely new swarm
 needs are small: network/comms parameters, a leader role, aggregation (Z1), and
