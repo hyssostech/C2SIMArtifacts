@@ -2,7 +2,8 @@
 
 Ling, Tong H. (2020). Use of Cooperative Unmanned Systems for Mine
 Countermeasures. Naval Postgraduate School thesis (DTIC AD1126497). Source read
-in full: `References/` (apps.dtic.mil/sti/trecms/pdf/AD1126497.pdf).
+in full from the web (apps.dtic.mil/sti/trecms/pdf/AD1126497.pdf); no local copy
+in the repo.
 
 ### Scenario 1: Around-the-clock cooperative USV mine countermeasures on a sea line of communication
 

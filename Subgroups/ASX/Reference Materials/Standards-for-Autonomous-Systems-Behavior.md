@@ -78,8 +78,9 @@ system structure - useful for anchoring ASX terms.
   mission complexity, and environmental complexity.
 - **SAE J3016.** The widely cited driving-automation levels - useful as a
   levels-of-autonomy pattern even outside road vehicles.
-- **JAUS (SAE AS-4)**, **NATO STANAG 4586** (UAV control), and
-  **STANAG 4817 / AEP-84** (C2 of unmanned systems). Interoperability and
+- **JAUS (SAE AS-4)**, **NATO STANAG 4586 / AEP-84** (standard interfaces of
+  the UAV/UA control system), and **STANAG 4817** (multi-domain C2 of unmanned
+  systems, in development). Interoperability and
   messaging architectures. Relevant because ASX lives inside SISO C2SIM,
   so alignment with the military-standard interoperability vocabulary is
   a real design constraint.

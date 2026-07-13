@@ -8,7 +8,7 @@ Each of the variations is built on top of the previous one, in incremental chain
 1. Change of settings via a [`Change this to a tropical forest setting` prompt](./TropicalForrest.md).
 
 1. Change of type of asset via a [`Use just UGVs`prompt](./AssetTypeVariations.md).
-1. Ask for five different synthetic scenarios via a [`Generate 5 very distinct variations of the scenario. There are no restrictions on the type and number of autonomous system employed` prompt](./FiveAlternatives).
+1. Ask for five different synthetic scenarios via a [`Generate 5 very distinct variations of the scenario. There are no restrictions on the type and number of autonomous system employed` prompt](./FiveAlternatives.md).
 
 **NOTE**: GPT-4 runs with default parameters may generate different results for the same inputs. The files contained in here represent one of these runs, evaluated as having successfully met the evaluation criteria to a large extent. 
 
