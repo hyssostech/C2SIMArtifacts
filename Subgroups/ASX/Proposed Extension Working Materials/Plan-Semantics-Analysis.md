@@ -705,3 +705,17 @@ walks' README for the consolidated list). **Update 2026-07-12:** all nine deltas
 applied in TTL v0.0.3 (sec. 5.10), together with the standards-matrix deltas (plan identity,
 suspension, task disposition, lost-link failsafe, keep-in/keep-out, structured waypoints);
 each walk carries a "v0.0.3 constructs exercised" addendum.
+
+## See also
+
+- [`../Reference Materials/Standards-for-Autonomous-Systems-Behavior.md`](../Reference%20Materials/Standards-for-Autonomous-Systems-Behavior.md) -
+  the standards survey this proposal is built on (ALFUS/4D-RCS autonomy levels,
+  IEEE 1872.x, JAUS, STANAG, C2SIM/BML lineage).
+- [`../InstantiationReview/PlanSemantics-Walk.md`](../InstantiationReview/PlanSemantics-Walk.md) -
+  the verification and breadth pass over this proposal: capability matrix vs
+  BT/Nav2, PDDL/PlanSys2, FlexBE, MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS
+  AS6062, STANAG 4586, 4D/RCS, HTN, FIPA/BDI, every C2SIM-side claim verified
+  against the RDF. Two survey corrections established there: IEEE 1872.1 is now
+  **1872.1-2024** (June 2024), and IEEE 1872.2 (AuR) defines **no
+  Plan/Goal/Mission constructs of its own** - so the relevant plan-semantics
+  anchors are 1872.1-2024, STANAG 4586, and JAUS AS6062, not 1872.2.
