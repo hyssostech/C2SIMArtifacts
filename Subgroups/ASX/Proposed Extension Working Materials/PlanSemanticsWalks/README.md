@@ -12,7 +12,7 @@ nine deltas below; **eight are applied in the module TTL v0.0.3, and delta 8
 (the escalation-pattern naming) is a convention, recorded in
 Plan-Semantics-Analysis.md section 5.10** - together with the deltas from the
 standards-verification pass
-(`../../InstantiationReview/PlanSemantics-Walk.md` section 8: plan identity,
+(`../PlanSemantics-Walk.md` section 8: plan identity,
 suspension state, task disposition, lost-link failsafe, keep-in/keep-out,
 structured waypoints). Each walk ends with a "v0.0.3 addendum" exercising the
 constructs that resolve its findings.

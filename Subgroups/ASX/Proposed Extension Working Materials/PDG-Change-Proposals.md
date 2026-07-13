@@ -2,7 +2,7 @@
 
 Consolidated package of base-standard items surfaced by the ASX plan-semantics
 work (module `ASX-PlanSemantics-Draft.ttl` + the standards verification pass
-`../InstantiationReview/PlanSemantics-Walk.md`). These are items that benefit
+`./PlanSemantics-Walk.md`). These are items that benefit
 ALL C2SIM users, not only autonomy, and therefore belong upstream with the
 C2SIM Product Development Group rather than in the ASX layer. Each is carried
 in the ASX module in the interim (items 1-3 and 6) or is purely a

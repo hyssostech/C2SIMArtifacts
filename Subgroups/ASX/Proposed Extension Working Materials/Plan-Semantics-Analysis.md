@@ -8,7 +8,7 @@ core/SMX/LOX, fact-check against the repository artifacts, and a conceptual revi
 BT/BDI mappings); §7 records what the module deliberately does not cover.*
 
 *Verification cross-reference (2026-07-12): an independently produced
-standards-matrix pass (`../InstantiationReview/PlanSemantics-Walk.md`,
+standards-matrix pass (`./PlanSemantics-Walk.md`,
 sections 3 and 8) verified this document's C2SIM-side claims against the
 RDF and mapped the module against JAUS AS6062, STANAG 4586, IEEE
 1872.1-2024, MAVLink, FlexBE, and 4D/RCS. It corroborates the construct
@@ -545,7 +545,7 @@ the transport phase counts as succeeded for its parent (R7) — the mission proc
 Version 0.0.3 of the TTL applies two evidence streams onto the v0.0.2 base -
 the nine deltas the validation walks demanded, and the deltas from the
 independent standards-verification pass
-(`../InstantiationReview/PlanSemantics-Walk.md`, section 8). Rules R15-R19
+(`./PlanSemantics-Walk.md`, section 8). Rules R15-R19
 carry the added execution semantics.
 
 **From the validation walks (PlanSemanticsWalks/):**
@@ -711,7 +711,7 @@ each walk carries a "v0.0.3 constructs exercised" addendum.
 - [`../Reference Materials/Standards-for-Autonomous-Systems-Behavior.md`](../Reference%20Materials/Standards-for-Autonomous-Systems-Behavior.md) -
   the standards survey this proposal is built on (ALFUS/4D-RCS autonomy levels,
   IEEE 1872.x, JAUS, STANAG, C2SIM/BML lineage).
-- [`../InstantiationReview/PlanSemantics-Walk.md`](../InstantiationReview/PlanSemantics-Walk.md) -
+- [`./PlanSemantics-Walk.md`](./PlanSemantics-Walk.md) -
   the verification and breadth pass over this proposal: capability matrix vs
   BT/Nav2, PDDL/PlanSys2, FlexBE, MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS
   AS6062, STANAG 4586, 4D/RCS, HTN, FIPA/BDI, every C2SIM-side claim verified
