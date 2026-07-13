@@ -95,19 +95,6 @@ in two groups:
   area-as-subject, area-coverage goal, denied-comms
   + relay, formation geometry, capability self-report, and more.
 
-## Also on this branch: plan semantics (log section 6k)
-
-A parallel plan-semantics track now lives on this branch: a draft ASX module
-(`Plan-Semantics-Analysis.md` + `ASX-PlanSemantics-Draft.ttl`), three validated
-walks (CASEVAC, DroneResponse, MDARS - all instantiate end-to-end), and a
-standards gap matrix (log section 6k) checking base C2SIM plan machinery
-against BT/Nav2, PDDL, FlexBE, MAVLink, IEEE 1872.1-2024, JAUS, and STANAG
-4586. Like everything above, this is work-in-progress for review, not a
-decision already made. The one decision to put on the group's agenda is
-**Q-W**: does the group want to review and adopt the module draft? The
-follow-ons Q-X/Q-Y/Q-Z (plan lifecycle, failsafe/geofence, structured
-waypoints) and a consolidated PDG errata package ride behind that call.
-
 ## Status and next step
 
 - **Sourcing is essentially complete** - every gap this review raised is now
