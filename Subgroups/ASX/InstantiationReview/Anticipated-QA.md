@@ -96,17 +96,3 @@ baseline, what exists vs. doesn't) were verified directly against the RDF files
 (and re-checked against v0.0.3), and the workbook
 conversions were verified by round-trip. The design *recommendations* (e.g. which
 way to resolve P1) are proposals for the group, not conclusions.
-
-**Q. Why does ASX need its own plan constructs - doesn't C2SIM already have plans?**
-It does, and for what they were built for they hold up well. The LOX
-`PlanBody`/`PlanPhase` machinery covers sequencing, recursive hierarchy, and
-temporal constraints (an 18-code temporal algebra including 6 concurrency
-codes) - verified against the RDF; the standards matrix (log section 6k) rates
-base C2SIM better than most robotic messaging standards on classical planning.
-What it cannot say is the autonomy-execution half: no failure semantics (a task
-completes or is aborted - it cannot fail), no conditions over world state, no
-goals/end states, no loops or standing tasks, and no authority gating. The
-plan-semantics module adds exactly those and nothing else, and every construct
-in it traces both to a validated scenario walk (CASEVAC, DroneResponse, MDARS)
-and to prior art in what autonomy systems actually run (behavior trees, PDDL,
-JAUS, STANAG 4586, FlexBE).

@@ -2,10 +2,7 @@
 
 These are **review / analysis notes**, contributed for discussion. They are
 **not** authoritative model changes; the proposed ASX OWL (`CSIM_ASX.rdf` /
-v0.0.3 on `michael_d`) is untouched. (The plan-semantics work on branch
-`asx-plan-semantics` goes one step further: a *draft module* TTL plus
-validation walks in `../Proposed Extension Working Materials/` - still a
-proposal for the sub-group, not an adopted change.) The intent is to add
+v0.0.3 on `michael_d`) is untouched. The intent is to add
 *coverage* (walking scenarios into concrete message instances) and to surface
 *problems* that instantiation reveals in the proposed ASX elements - phrased
 as questions for the sub-group, not as decisions.
@@ -64,13 +61,6 @@ in the `.xlsx` changed.
   validation holes to evidenced and captures concrete report schemas to adopt -
   most importantly BML `WhoMeasuredType`, prior art in C2SIM's lineage for the
   measurement report (Q-Q).
-- [PlanSemantics-Walk.md](./PlanSemantics-Walk.md) - plan-semantics gap
-  matrix: C2SIM/LOX plan machinery vs the robotic behavior standards (BT/Nav2,
-  PDDL, FlexBE, MAVLink, IEEE 1872.1-2024, JAUS AS6062, STANAG 4586, 4D/RCS,
-  HTN, FIPA/BDI), every C2SIM-side claim verified against the RDF; adds
-  PL1-PL11 and decisions Q-W..Q-Z (log 6k), and reconciles with the
-  plan-semantics module draft (its section 8 maps what the module already
-  covers).
 - [Documents-Needed.md](./Documents-Needed.md) / [Documents-Found.md](./Documents-Found.md)
   - the sourcing brief and the sourcing track's point-by-point response.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
@@ -86,9 +76,6 @@ in the `.xlsx` changed.
 - Proposed OWL model: `Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf`
   (v0.0.1, last updated 2026-01-20); v0.0.3 on branch `michael_d`
   (`Ontology/C2SIM_ASX-v003.rdf`).
-- Proposed plan-semantics module (draft, this branch):
-  `Subgroups/ASX/Proposed Extension Working Materials/ASX-PlanSemantics-Draft.ttl`
-  + `Plan-Semantics-Analysis.md` + `PlanSemanticsWalks/`.
 - Attribute concepts: `Subgroups/ASX/Proposed Extension Working Materials/ASX Concept Mapping.xlsx`.
 - Worked message examples (Elizabeth's, untouched): the three
   `ASX Sample * Messages.xlsx` workbooks (created 2026-06-10).
@@ -98,8 +85,4 @@ in the `.xlsx` changed.
   `Ontology/C2SIM_LOX.rdf`.
 
 Status: instantiation review committed on branch `asx-diffable-spreadsheets`
-(draft PR #3 on the fork); the plan-semantics track (module draft, validation
-walks) lives on branch `asx-plan-semantics` - its standards gap matrix
-(`PlanSemantics-Walk.md`, log section 6k) is carried on this branch too so the
-findings deck and log are self-contained. Prepared by Paulo Barthelmess
-(Hyssos).
+(draft PR #3 on the fork). Prepared by Paulo Barthelmess (Hyssos).

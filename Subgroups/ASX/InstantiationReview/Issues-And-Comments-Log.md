@@ -26,7 +26,6 @@ Items marked **[deck]** are candidates for the findings presentation.
 | S2 | HIGH | OPEN | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** |
 | S3 | MED | DONE (branch) | Workbooks are `.xlsx` (zipped XML), git cannot merge | All 3 sample-message workbooks converted to diff-able SpreadsheetML 2003 `.xml` (fidelity verified, 0 mismatches) and committed on branch `asx-diffable-spreadsheets`. NOTE: `.xml` and `.xlsx` now coexist - see S4. |
 | S4 | HIGH | DECIDED | Dual source of truth: `.xml` vs `.xlsx` | Decision (2026-07-10): the `.xml` workbooks are the working copy for this review; Elizabeth's `.xlsx` files are left untouched for now. All new instantiation work (Init rows, CASEVAC tabs) goes into the `.xml` only. The `.xlsx` will diverge by design until the group reconciles. |
-| S5 | MED | RESOLVED (lesson) | Stale local refs hid `origin/asx-plan-semantics` (module + walks) from a follow-on session, which re-derived the gap analysis against base+LOX only | Same failure shape as S1, at branch granularity: a conclusion of absence requires a `git fetch` first. Caught by the user 2026-07-12; reconciled in `PlanSemantics-Walk.md` section 8 - the independent re-derivation converged on the module's construct set, so the cost bought corroboration. |
 
 ## 2. Track alignment: OWL vs Spreadsheet vs Deck (at different stages)
 
@@ -98,7 +97,7 @@ renumbered.)
 | X2 | HIGH | OPEN | No rationale/explanation ReportContent | ReportContent = {smx#ObservationReportContent, PositionReportContent, TaskStatus}. CASEVAC "explainable reasons" (why route changed / mission failed) has no element. TaskStatus gives state, not rationale. Candidate: new ASX RationaleReportContent. **[deck]** |
 | X3 | MED | OPEN | Route exists but no share-payload wrapper | `Route` (SMX) exists; ASX Order sheet used free-text "New Route Pattern" instead. Refines M6/P5. |
 | X4 | MED | OPEN | No obstacle/threat observation subtype | Detected IED/broken-bridge that triggers replanning would fall to ActivityObservation or a new type; hazard entity typing unclear. |
-| X5 | LOW | MOSTLY COVERED | Phased tasks/ETA | Base `PlanBody`/`PlanPhase`/`PlanPhaseTrigger` exist; recommend reuse. The ETA residual is addressed by the module's `hasEstimatedPhaseCompletionTime`; autonomy-grade limits of the base machinery mapped in 6k (Q-W). |
+| X5 | LOW | MOSTLY COVERED | Phased tasks/ETA | Base `PlanBody`/`PlanPhase`/`PlanPhaseTrigger` exist; recommend reuse for phased CASEVAC tasking. The estimated-completion / ETA residual is noted for follow-up. |
 | X6 | LOW | OPEN | CASEVAC task + re-tasking semantics | Is CASEVAC a base TaskActionCode or new ASX task; mid-mission order amendment semantics. |
 
 Note: position/status reporting, routes, and phased planning are **covered by
@@ -277,52 +276,6 @@ neutral/SAR G10/R2/Q-N (SAR_Kim + CBRN + Explainability), formation Q-U
 Two tabs added (`.xml`): `Hazard Area Map Report` (Report), `MUM-T High-Level
 Tasking` (Order).
 
-## 6k. Plan-semantics: standards gap matrix + module verification
-
-From `PlanSemantics-Walk.md`: an independent verification-and-breadth pass
-over plan semantics, produced against base C2SIM + LOX + the main-tree ASX
-files (a stale clone hid this branch's module - see S5), then reconciled
-with the module proposal (`Proposed Extension Working Materials/
-Plan-Semantics-Analysis.md` + `ASX-PlanSemantics-Draft.ttl`). Standards
-compared, all citation-backed: BT/Nav2, PDDL/PlanSys2, FlexBE/SMACH,
-MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS AS6062, STANAG 4586, 4D/RCS,
-HTN, FIPA/BDI. Every C2SIM-side claim was adversarially verified against
-the RDF (15 refutation passes; corrections listed in the walk's section 7).
-
-**Headline:** base C2SIM+LOX is strong on classical planning (sequencing,
-hierarchy, an 18-code temporal algebra incl. 6 concurrency codes - better
-than most robotic messaging standards there) and absent on the
-autonomy-execution half. The module draft on this branch already covers
-most of that half; the walk independently re-derived the same construct
-set (fallback, state conditions, goals, repetition, authority gate) -
-convergent evidence for the module's design. Statuses below are AFTER
-module reconciliation ("MODULE (draft)" = resolved once the module is
-adopted). **Update 2026-07-12 (later same day):** module TTL v0.0.3 applied
-the walks' nine deltas AND decisions Q-X/Q-Y/Q-Z (rules R15-R19,
-adversarially verified, all instance blocks rdflib-validated) - PL7/PL8/PL9
-moved to MODULE (draft v0.0.3) and PL10's plan-ID half is closed; statuses
-in the table are updated accordingly.
-
-| ID | Sev | Status | Item | Evidence / note |
-|---|---|---|---|---|
-| PL1 | HIGH | MODULE (draft) | Automatic on-failure contingency | Base: no failure trigger/completion; `EventCode` {GenericEvent, TaskStart, TaskEnd} cannot express failure; TASKABRT is report-only; dormant phase + `ExecutePlanPhase` is human-triggered and pre-wired. Module: `TASKFAILD` + `OnPhaseFailureTrigger` + `hasOnFailurePhaseReference` + R2-R7. Vs BT Fallback / Nav2 recovery / STANAG Contingency A/B + Define Contingency / 4D-RCS contingency libraries. **[deck]** |
-| PL2 | MED | MODULE (draft) | Loop/retry | Module `RepetitionPolicyCode` + until-condition + limit + timeout. Vs BT Retry/Repeat, MAVLink DO_JUMP, STANAG Loop WP (laps/time/fuel), JAUS iterative missions. |
-| PL3 | HIGH | MODULE (draft) | World-state triggers/completion | Base triggers fire on time/order/phase-completion only; completion = 3 codes. Module `Condition`/`StateConditionTrigger`/`CompositeTrigger`/guards; `AreaCoverageAchieved` covers Q-N. Residual: reactive cross-phase preemption (module's own 7.1). **[deck]** |
-| PL4 | HIGH | MODULE (draft) | Goal/end-state layer | No Goal/EndState class in base (DesiredEffectCode = weakest form). Module `Goal` (achieve/maintain, achievement+failure conditions). Full PDDL pre/effects deliberately out of scope at interchange altitude. **[deck]** |
-| PL5 | MED | PARTIAL | Inter-task data flow | All base task references are authoring-time UUIDs. Module `hasPhaseProductReference` = reference-level only; blackboard-grade binding (BT ports, FlexBE userdata) open. Extends M1/Q-E to tasking. |
-| PL6 | HIGH | MODULE (draft) | Autonomy-gated progression | Base has the vocabulary unlinked (AutonomyLevelCode, Operator, ROE, ack codes). Module `HumanApprovalTrigger` + `hasRequiredAutonomyLevelCode` + fail-closed R13; FlexBE required-autonomy-per-transition independently corroborates. Sharpens W1/Q-K. **[deck]** |
-| PL7 | MED | MODULE (draft v0.0.3) | Plan lifecycle | v0.0.3 adds `hasPlanID`/`hasSupersededPlanReference` (R16), `PhaseSuspended`+`TASKSUSP` (R17), and `TaskDispositionReportContent` with `TASKACPT`/`TASKRJCT` (task-targeted accept/reject). JAUS AS6062 = prior art. Extends X6. |
-| PL8 | MED | MODULE (draft v0.0.3) | Waypoint enrichment | v0.0.3 adds `StructuredRoute`/`RouteWaypoint` (R19): explicit ordering, per-point speed/arrival-time/loiter, task-on-arrival. STANAG 4586 #13002-#13004 alignment. Refines P5/X3. |
-| PL9 | MED | MODULE (draft v0.0.3) | Failsafe/geofence binding | v0.0.3 adds `EntityInsideArea` (keep-in/keep-out guards) and the lost-link disposition (`FailsafeBehaviorCode`, `hasLostLinkBehaviorCode`/`Timeout`, R18). Vs MAVLink fence/rally, STANAG. Extends Q-S/Q-M. |
-| PL10 | LOW | PARTIAL | Mission container / priority | Plan-ID half closed by v0.0.3 `hasPlanID`; residual: no Mission/Operation class, no preemption-priority model between plans. |
-| PL11 | LOW | OPEN | LOX-internal defects (upstream PDG) | (a) PlanPhase comment promises isActive/isComplete Boolean flags that do not exist as properties; (b) the hasTaskReference axiom cites a `hasTask` property PlanPhase never declares (inline tasks comment-only). Package with the module's three candidate core errata (TASKFAILD, cancel/suspend verbs, runtime event-occurrence report). |
-
-Covered, NOT gaps (verified in base): sequencing, hierarchy (recursive
-subphases), temporal algebra (18 codes + lags, `RelativeTime` H-hour), plan
-staging (`isToBeExecutedNow`) and pre-positioning (ObjectDefinitions
-references), structural waypoint routes, FIPA-style performatives in the
-header.
-
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -387,27 +340,6 @@ header.
   spacing, observation-pose pattern) beyond single `RelativeLocation`. (Resolves G12.)
 - **Q-V** Add **capability self-report** (a robot declares its mounted/reconfigurable
   equipment; tasks assigned by capability) - BML `WhoHoldingType`. (Resolves G13.)
-- **Q-W [deck]** Review and **adopt the plan-semantics module draft**
-  (`Plan-Semantics-Analysis.md` + `ASX-PlanSemantics-Draft.ttl` + three
-  validated walks, this branch). Adoption resolves PL1-PL4 and PL6; the 6k
-  standards matrix independently corroborates its construct choices.
-- **Q-X** [DRAFTED in module v0.0.3, pending review] Plan identifier,
-  Suspended phase outcome, task-targeted accept/reject acks (JAUS AS6062
-  precedent); IEEE alignment corrected to 1872.1-2024 only (1872.2
-  verifiably has no plan constructs). (Resolves PL7 and PL10's plan-ID
-  half; implemented as rules R16/R17 + TaskDispositionReportContent.)
-- **Q-Y** [DRAFTED in module v0.0.3, pending review] Failsafe/geofence
-  binding: lost-link/RTH default-behavior declaration + keep-in/keep-out
-  condition predicates (MAVLink fence/rally, STANAG 4586 prior art).
-  (Resolves PL9; implemented as FailsafeBehaviorCode + EntityInsideArea +
-  rule R18; extends Q-S/Q-M.)
-- **Q-Z** [DRAFTED in module v0.0.3, pending review] STANAG-4586-grade
-  waypoints on Route: explicit ordering, per-point speed/arrival-time/
-  loiter, optional per-waypoint task reference (STANAG #13002-#13004).
-  (Resolves PL8; implemented as StructuredRoute/RouteWaypoint + rule R19.)
-- PL5 folds into **Q-E** (runtime entity binding for tasking, not just
-  reports); PL11 + the module's three candidate core errata form one
-  consolidated **PDG package**.
 - **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
   `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
   (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
@@ -630,36 +562,6 @@ group should converge on one canonical version/location.
   class dropped, `CollecticeRoboticSystem` still non-actor; broader attribute set;
   the new content types), and that the P9 typos survive. Groundings intact; noted
   the two-ASX-file coordination point (`CSIM_ASX.rdf` vs `C2SIM_ASX-v003.rdf`).
-- 2026-07-12 (later): Module TTL advanced to v0.0.3 and the whole package
-  built out. Applied the validation walks' nine deltas AND decisions
-  Q-X/Q-Y/Q-Z (new rules R15-R19: late-bound products, plan identity/
-  supersession, suspension, lost-link precedence, waypoint traversal; new
-  constructs incl. TaskDispositionReportContent, FailsafeBehaviorCode,
-  StructuredRoute/RouteWaypoint, hasRepetitionInterval, 4 new predicates,
-  TASKACPT/TASKRJCT/TASKSUSP). Walk addenda exercise every new construct
-  (all Turtle rdflib-validated); analysis doc sec. 5.10;
-  `PDG-Change-Proposals.md` consolidates 6 upstream items; findings deck
-  gains a 6k slide (27 slides), plan-semantics deck a v0.0.3 slide (19);
-  sample Plan Messages workbook conformed (hasPlanID rows). A 5-check
-  adversarial verification pass (rule coherence, cross-artifact
-  consistency, instance validity, hygiene) found and fixed 2 HIGH
-  (R16 supersession leak; R18/R14 interaction), 8 MED, and 10 LOW issues
-  before commit. PL7/PL8/PL9 -> MODULE (draft v0.0.3); PL10 plan-ID half
-  closed.
-- 2026-07-12: Plan-semantics standards matrix + module verification
-  (`PlanSemantics-Walk.md`). Independent gap analysis vs BT/Nav2,
-  PDDL/PlanSys2, FlexBE, MAVLink, IEEE 1872.1-2024, IEEE 1872.2, JAUS
-  AS6062, STANAG 4586, 4D/RCS, HTN, FIPA/BDI (sourced, cited); 15
-  C2SIM-side claims adversarially verified against the RDF. Initially
-  produced blind to this branch's module (stale local refs - S5), then
-  reconciled: the module covers PL1-PL4/PL6 (independent derivations
-  converged on the same constructs - corroboration, recorded in the walk's
-  section 8); residuals PL5/PL7-PL10 + upstream PL11. Added 6k, S5,
-  decisions Q-W..Q-Z, X5 cross-ref; survey doc gains See-also + two
-  corrections (IEEE 1872.1 is 2024; 1872.2 has no plan constructs). Key
-  verified negatives: IEEE 1872.2 defines no Plan/Goal/Mission constructs;
-  EventCode cannot express task failure; Route waypoint order exists only
-  as XML document order.
 - 2026-07-11: Tone reframe to work-in-progress across the shared artifacts (deck,
   briefing, presenter notes, Q&A, coverage, and the walk docs). Findings are
   presented as things *still to be defined* in a v0.0.x model, not as defects:
@@ -706,7 +608,7 @@ group should converge on one canonical version/location.
   walk doc / log section / workbook tabs behind it. Briefing and presenter notes
   updated to match.
 - 2026-07-13: Deck presenter-notes + orientation pass (deck now 29 slides,
-  style aligned with the plan-semantics orientation deck): the talk track is
+  with a consistent onboarding style): the talk track is
   embedded as per-slide speaker notes (team-facing; includes a per-section
   time budget for a 30-minute slot and a 20-minute fallback); added a
   one-slide summary up front ("The whole review in one slide"), rebuilt "How
@@ -714,8 +616,7 @@ group should converge on one canonical version/location.
   finding-ID decoder-ring table slide. Presenter-Notes.md is now the
   section-level view of the same track (stale 26-slide count corrected).
   Also brought the InstantiationReview docs on this branch up to the
-  verification-pass state, including the plan-semantics standards matrix
-  (PlanSemantics-Walk.md, log sec 6k) so the deck's references resolve here.
+  verification-pass state so the deck's references resolve here.
 - 2026-07-13: Reconciled the one lagging file with v0.0.3. The
   scenario/concept coverage analysis
   (`LLMExperiments/OntologyConceptCoverage.md`) had still been framed against

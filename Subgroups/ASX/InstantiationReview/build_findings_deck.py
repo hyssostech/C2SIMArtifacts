@@ -1,8 +1,7 @@
-"""Builds ASX-Instantiation-Findings.pptx (29 slides) - findings from
+"""Builds ASX-Instantiation-Findings.pptx (28 slides) - findings from
 instantiating the proposed ASX extension against 20+ scenarios. Every slide
 carries speaker notes with the talk track (team-facing; Presenter-Notes.md is
-the section-level view of the same track). Style follows
-build_orientation_deck.py / build_plan_semantics_deck.py."""
+the section-level view of the same track)."""
 
 import os
 from pptx import Presentation
@@ -161,7 +160,7 @@ bullets(s, [
  {"tag":"What was done:","tagcolor":NAVY,"text":"walked 20+ scenarios into ~29 new worked messages (4 -> ~33) using C2SIM + the proposed ASX elements, in diff-able workbooks - Initialization 0 -> 6, Orders 2 -> 14, Reports 2 -> 13."},
  {"tag":"What it surfaced:","tagcolor":NAVY,"text":"three structural typing decisions come first - UAV/robot typing (P1), sensor representation (P2), a taskable swarm (P7) - and behind them an attribute layer still to be built (v0.0.1 had 0 datatype properties; v0.0.3 starts it)."},
  {"tag":"The good news:","tagcolor":GREEN,"text":"much of what is missing is re-adopt, not invent - BML WhoMeasuredType for measurements, 446 LOX task verbs, ROE / routes / resources already in the base standard."},
- {"tag":"The ask:","tagcolor":ACCENT,"text":"22 concrete decisions (Q-A..Q-V, log sec 7), plus four plan-semantics decisions (Q-W..Q-Z) from the standards pass - settle the four structural ones (Q-A..Q-D) first; they unblock Initialization."},
+ {"tag":"The ask:","tagcolor":ACCENT,"text":"22 concrete decisions (Q-A..Q-V, log sec 7) - settle the four structural ones (Q-A..Q-D) first; they unblock Initialization."},
  {"tag":"Status:","tagcolor":ORANGE,"text":"everything is a proposal - nothing applied to the OWL or the .xlsx; every RDF-grounded claim was independently re-verified."},
 ], top=1.75, size=14.5, gap=12)
 srcline(s, "Group-Briefing.md is the one-page prose version of this slide")
@@ -514,22 +513,6 @@ notes(s,
  "Part 3 - decisions raised by the sourced scenarios: exploration goals, denied-comms relay, cross-cueing, the generic detection report, locomotion subtypes, decoy/deception, environment conditions, formation geometry, capability self-report.",
  "Several of these re-adopt existing vocabulary (search verbs, lox#COMREL, BML WhoHoldingType) rather than invent - the decision is where to hang the structure, not whether the words exist.")
 
-# ---------------- Plan semantics vs standards (6k) ----------------
-s = slide(); header(s, "Plan semantics vs robotic behavior standards (6k)",
-                    "Independent standards pass + module verification - decisions Q-W..Q-Z")
-bullets(s, [
- {"tag":"Compared:","tagcolor":NAVY,"text":"base C2SIM plan machinery vs BT/Nav2, PDDL, FlexBE, MAVLink, IEEE 1872.1-2024, JAUS AS6062, STANAG 4586 - every C2SIM-side claim verified against the RDF."},
- {"tag":"Base standard:","tagcolor":GREEN,"text":"strong on classical planning (sequencing, hierarchy, an 18-code temporal algebra incl. 6 concurrency codes) - absent on the autonomy-execution half (failure, state conditions, goals, loops, authority)."},
- {"tag":"Module draft:","tagcolor":GREEN,"text":"already covers the core of that half (fallback, state conditions, goals, repetition, authority gate) - the standards pass independently re-derived the same construct set (corroboration, not invention)."},
- {"tag":"v0.0.3 adds:","tagcolor":ACCENT,"text":"plan identity/supersession, suspension state, task accept/reject, lost-link failsafe, keep-in/keep-out areas, structured waypoints - each with JAUS / STANAG / MAVLink prior art."},
- {"tag":"Decisions:","tagcolor":ACCENT,"text":"Q-W review/adopt the module (resolves PL1-PL4, PL6); Q-X plan-lifecycle v-next deltas; Q-Y failsafe/geofence binding; Q-Z STANAG-grade waypoints - plus a consolidated PDG errata package (PL11 + the module's core errata)."},
-], top=1.8, size=14, gap=11)
-srcline(s, "PlanSemantics-Walk.md  -  log sec 6k (PL1-PL11)  -  decisions Q-W..Q-Z (log sec 7)")
-footer(s)
-notes(s,
- "An independent pass compared the base standard's plan machinery with ten robotic/agent standards (BT/Nav2, PDDL, FlexBE, MAVLink, IEEE 1872.1-2024, JAUS AS6062, STANAG 4586, 4D/RCS, HTN, FIPA/BDI); every C2SIM-side claim was verified in the RDF. Result: a strong classical-planning core, and an absent autonomy-execution half - failure, state conditions, goals, loops, authority.",
- "The plan-semantics module draft (branch asx-plan-semantics) already covers the core of that half, and the standards pass independently re-derived the same construct set - corroboration, not invention. Findings PL1-PL11 in log sec 6k; decisions Q-W..Q-Z.")
-
 # ---------------- Proposed fixes (pending buy-in) ----------------
 s = slide(); header(s, "Proposed refinements", "Pending group buy-in - nothing applied to the model")
 bullets(s, [
@@ -598,9 +581,7 @@ table(s, [
  ["W / L / E / R", "fire support / logistics / engineering / rescue findings", "log secs 6e / 6f; FireSupport- / TaskEffect-Batch-Walk.md"],
  ["N", "redundancy-pass findings", "log sec 6g; RedundancyPass-Walk.md"],
  ["G", "sourced-scenario + validation findings", "log secs 6h-6j; SourcedScenarios- / ValidationEvidence-Walk.md"],
- ["PL1 - PL11", "plan-semantics standards findings", "log sec 6k; PlanSemantics-Walk.md"],
  ["Q-A .. Q-V", "the 22 decisions this review puts to the group", "log sec 7 - full text + what each resolves"],
- ["Q-W .. Q-Z", "plan-semantics decisions (module, lifecycle, failsafe, routes)", "log sec 7"],
 ], top=1.6, col_w=[1.9, 5.8, 4.3], size=11.5, hdr_size=12, row_h=0.385)
 bullets(s, [
  {"text":"An unfamiliar ID in any document is a pointer, not jargon - the right column lands on its definition, evidence, and status.","color":NAVY},
@@ -621,13 +602,11 @@ bullets(s, [
  {"tag":"Sensors & swarm (Y / Z series):","tagcolor":NAVY,"text":"NonVideoSensors-Walk.md; Swarm-Walk.md; log sec 6c / 6d."},
  {"tag":"Task / effect & engagement (W / L, Q-K/Q-L):","tagcolor":NAVY,"text":"FireSupport-Walk.md; TaskEffect-Batch-Walk.md; log sec 6e / 6f."},
  {"tag":"Sourced & validation missions:","tagcolor":NAVY,"text":"SourcedScenarios-Walk.md; ValidationEvidence-Walk.md; Documents-Found.md; log sec 6h / 6j."},
- {"tag":"Plan semantics (PL series, Q-W..Q-Z):","tagcolor":NAVY,"text":"PlanSemantics-Walk.md; log sec 6k."},
  {"tag":"Redundancy screen (N1):","tagcolor":NAVY,"text":"RedundancyPass-Walk.md; log sec 6g."},
 ], top=1.65, size=12, gap=5)
 footer(s)
 notes(s,
- "The topic-to-doc map. Everything is on branch asx-diffable-spreadsheets: review docs in Subgroups/ASX/InstantiationReview, workbooks in Subgroups/ASX/Proposed Extension Working Materials. The .md files render directly on GitHub - switch branch and browse; no tooling needed.",
- "The plan-semantics module itself (TTL draft, analysis, validation walks) lives on branch asx-plan-semantics; PlanSemantics-Walk.md here is the independent standards pass that checked it.")
+ "The topic-to-doc map. Everything is on branch asx-diffable-spreadsheets: review docs in Subgroups/ASX/InstantiationReview, workbooks in Subgroups/ASX/Proposed Extension Working Materials. The .md files render directly on GitHub - switch branch and browse; no tooling needed.")
 
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ASX-Instantiation-Findings.pptx")
 prs.save(out)
