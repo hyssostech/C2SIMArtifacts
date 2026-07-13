@@ -716,3 +716,15 @@ group should converge on one canonical version/location.
   Also brought the InstantiationReview docs on this branch up to the
   verification-pass state, including the plan-semantics standards matrix
   (PlanSemantics-Walk.md, log sec 6k) so the deck's references resolve here.
+- 2026-07-13: Reconciled the one lagging file with v0.0.3. The
+  scenario/concept coverage analysis
+  (`LLMExperiments/OntologyConceptCoverage.md`) had still been framed against
+  v0.0.1 (it predated the v0.0.3 re-baseline that updated this folder). Updated
+  its Grounding to note v0.0.3 as the moved-on live model (pointing here to
+  section 9 for the full delta), corrected the report-attribute names to the OWL
+  forms (`AnalysisComment` / `MediaTypeCode`, noting the sample-message data
+  still carries the old `AnalystComment` / `MediaTypeEnum` labels pending a
+  ratified rename), and annotated the Reading-2 expressiveness gaps that v0.0.3
+  now closes (maritime USV/UUV) or partly touches (AutonomyLevelCode; media-based
+  report). No other InstantiationReview file needed changes - the folder was
+  already reconciled and verified against Michael's actual file.

@@ -14,18 +14,34 @@ concept, not by message-workbook sheet.
 
 ## Grounding
 
-- Current ASX ontology (`Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf`, v0.0.1,
-  imports LOX): classes `RoboticSystem` -> `SingleRoboticSystem`,
-  `CollectiveRoboticSystem`, `Swarm`; `Robot`; `UAV`; `UGV`; `Sensor`; `Actuator`;
-  `Device`/`ElectricDevice`; `Artifact`/`ArtificialSystem`; `PhysicalEnvironment`,
-  `RoboticEnvironment`; object property `hasAutonomousRoleCode` with individuals
-  `FullAuto`, `Automated`, `Teleop`, `ReCont`, `ComputerProcess`.
+- This analysis was grounded on ASX ontology **v0.0.1**
+  (`Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf`, imports LOX): classes
+  `RoboticSystem` -> `SingleRoboticSystem`, `CollectiveRoboticSystem`, `Swarm`;
+  `Robot`; `UAV`; `UGV`; `Sensor`; `Actuator`; `Device`/`ElectricDevice`;
+  `Artifact`/`ArtificialSystem`; `PhysicalEnvironment`, `RoboticEnvironment`;
+  object property `hasAutonomousRoleCode` with individuals `FullAuto`,
+  `Automated`, `Teleop`, `ReCont`, `ComputerProcess`.
+- **v0.0.3 update (Michael's `Ontology/C2SIM_ASX-v003.rdf`, on branch
+  `michael_d`; a new file in a new location, not yet merged here - v0.0.1 still
+  exists too).** The live model has moved on since this analysis, and several
+  expressiveness gaps in Reading 2 below are now (partly) addressed. v0.0.3 adds
+  the `UnmannedAerial/Ground/Maritime/UnderwaterVehicle` taxonomy (under
+  `smx#Vehicle`, alongside the retained `UAV`/`UGV` under `Robot`), `Operator`,
+  `SensorObservation`, an `AutonomyLevelCode` class, and the Video Detection
+  Report cluster (`VideoDetectionReportContent`, `MediaReference`,
+  `MediaTypeCode`, `AnalysisComment`, `AnalysisConcept`) plus the first datatype
+  properties; it **removes** the `Swarm` class. Gaps addressed are annotated
+  inline below; the full finding-by-finding delta is
+  `InstantiationReview/Issues-And-Comments-Log.md` section 9.
 - ASX message design (from `InstantiationReview/Message-Instantiation-Coverage.md`):
   ASX `Task` with `hasAffectedEntity` / `DesiredEffectCode`; `Report Base
-  Attributes` (MediaReference, AnalystComment, AnalysisConcept, MediaTypeEnum,
-  SensorObservation); open concepts the team already flagged - machine-to-machine
-  route hand-off, "explainable reasons" reports, on-the-loop status,
-  MediaType/SensorType conflation, collective-entity typing.
+  Attributes` (MediaReference, AnalysisComment, AnalysisConcept, MediaTypeCode,
+  SensorObservation - v0.0.3 formalizes these as OWL classes; the sample-message
+  `.xml`/`.xlsx` still carry the older labels `AnalystComment` / `MediaTypeEnum`,
+  a rename proposed but not yet applied to the data); open concepts the team
+  already flagged - machine-to-machine route hand-off, "explainable reasons"
+  reports, on-the-loop status, MediaType/SensorType conflation, collective-entity
+  typing.
 
 ## Scenarios analyzed
 
@@ -98,7 +114,10 @@ Aspects the scenarios require that the current ASX ontology (v0.0.1) cannot
 represent cleanly - i.e. expressiveness gaps:
 
 1. **Maritime/undersea platform classes** (S2) - no `USV`/`UUV`; the taxonomy stops
-   at `UAV`/`UGV`. S2's detector/neutralizer/CUSV cannot be typed.
+   at `UAV`/`UGV`. S2's detector/neutralizer/CUSV cannot be typed. *[v0.0.3
+   addresses this: adds `UnmannedMaritimeVehicle` / `UnmannedUnderwaterVehicle`
+   under `smx#Vehicle` - though section 9 (V1) flags they may be better
+   re-parented under SMX `SurfaceVessel` / `SubsurfaceVessel`.]*
 2. **Locomotion/role subtypes of UGV** (S1) - wheeled/tracked/legged are all one
    `UGV`; the heterogeneity that drives S1's task allocation is not expressible.
 3. **Coordination as a first-class relation, and machine-to-machine tasking**
@@ -114,11 +133,16 @@ represent cleanly - i.e. expressiveness gaps:
    domain=subterranean/maritime, and time-of-day/illumination cannot be attached.
 6. **Graded / phase-dependent level of autonomy** (S4) - the ontology's
    `hasAutonomousRoleCode` is categorical (FullAuto/Teleop/...); S4 uses graded LoA
-   1/3/6 that varies by mission phase. Alignment/expressiveness gap.
+   1/3/6 that varies by mission phase. Alignment/expressiveness gap. *[v0.0.3
+   adds an `AutonomyLevelCode` class but keeps the same categorical individuals
+   and does not yet wire it as the range of `hasAutonomousRoleCode` - graded LoA
+   still open.]*
 7. **Detection report with confidence / error bound, and generic detection**
    (S1,S2) - reports need a confidence or error-bound attribute and a
    type-agnostic detection form (artifact, naval mine) beyond the media-typed
-   video report.
+   video report. *[v0.0.3 formalized the media-based Video Detection Report but
+   added no confidence/error-bound attribute and no generic detection form -
+   still open (Y1 / G4).]*
 8. **Task-type breadth** (S1,S2,S3) - explore/search-area, neutralize, deliver-
    under-threat, and **decoy** behaviors are not obviously expressible as ASX
    `Task` + `DesiredEffectCode`.
@@ -143,6 +167,9 @@ represent cleanly - i.e. expressiveness gaps:
   but eleven scenario aspects (above) exceed it - most importantly maritime
   platforms, coordination/ machine-to-machine tasking as relations,
   communications, environment conditions, graded LoA, and detection confidence.
+  *(v0.0.3 now closes the maritime-platform gap and begins the attribute layer
+  via the Video Detection Report; the coordination-relation, communications,
+  environment-condition, graded-LoA, and detection-confidence gaps remain.)*
 
 ## Where this points (bidirectional next steps)
 
