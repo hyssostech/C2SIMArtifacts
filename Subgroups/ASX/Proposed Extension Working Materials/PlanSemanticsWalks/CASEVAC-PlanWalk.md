@@ -186,3 +186,56 @@ route") **as a structured message** — the v0.0.1 walk's headline gap X2.
 robot-to-robot *message payload* (which was never a plan-semantics problem), and
 the walk surfaced one genuine vocabulary gap (PC1) plus one convention to write
 down (PC2).
+
+## v0.0.3 addendum - constructs exercised (2026-07-12)
+
+PC1 is resolved by `PayloadOnBoard` (the departure gate now states the actual
+embarkation fact, not a 2 m proximity proxy); PC2 is now normative rule R15.
+PC3 (the route-advertisement message payload) remains inherited/open - but the
+route the scout advertises can now itself be a `StructuredRoute`, which closes
+most of the payload question: the "verified safe route" is an object with
+ordered waypoints, speeds, and a sensor task at the chokepoint, not a bare
+polyline.
+
+```turtle
+:DepartureGate-v3 a asx:StateConditionTrigger ;                # PC1 resolved
+    asx:hasCondition [ a asx:Condition ;
+        asx:hasConditionPredicateCode asx:PayloadOnBoard ;
+        asx:hasConditionSubjectReference "UUID-transport-ugv" ;
+        asx:hasConditionObjectReference "UUID-casualty-1" ] .
+
+:EvacRoute-1 a asx:StructuredRoute ;                           # the scout's product, R15 UUID
+    c2sim:hasUUID "UUID-Route-1" ;                             # binds the PRE-ALLOCATED product UUID
+    asx:hasRouteWaypoint [ a asx:RouteWaypoint ;
+        asx:hasWaypointSequenceNumber 1 ;
+        c2sim:hasLocation [ a c2sim:Location ] ;
+        asx:hasTransitSpeed 8.0 ] ;                            # m/s, leg into WP1
+    asx:hasRouteWaypoint [ a asx:RouteWaypoint ;
+        asx:hasWaypointSequenceNumber 2 ;
+        c2sim:hasLocation [ a c2sim:Location ] ;
+        asx:hasTransitSpeed 3.0 ;                              # slow through the chokepoint
+        asx:hasWaypointTaskReference "UUID-task-sensor-sweep" ; # R19: sweep on arrival
+        asx:hasLoiterDuration [ a c2sim:Duration ] ] ;         # fixed post-sweep hold (R19: the sweep itself blocks until terminal status)
+    asx:hasRouteWaypoint [ a asx:RouteWaypoint ;
+        asx:hasWaypointSequenceNumber 3 ;
+        c2sim:hasLocation [ a c2sim:Location ] ;
+        asx:hasWaypointArrivalTime [ a c2sim:TimeInstant ] ] . # CCP arrival commitment
+
+:TransportMovePhase-v3 a asx:AutonomousPlanPhase ;             # keep-out enforcement added
+    c2sim:hasUUID "UUID-transport-move-v3" ;
+    asx:hasGuardCondition [ a asx:Condition ;
+        asx:hasConditionPredicateCode asx:EntityInsideArea ;
+        asx:hasConditionSubjectReference "UUID-transport-ugv" ;
+        asx:hasConditionObjectReference "UUID-ied-exclusion-zone" ;
+        asx:isNegated true ] ;                                 # never inside the exclusion zone
+    asx:hasOnFailurePhaseReference "UUID-replan-route-phase" .
+
+:TransportAccepts a asx:TaskDispositionReportContent ;         # the tasking handshake
+    c2sim:hasCurrentTask "UUID-task-move-to-casualty" ;
+    c2sim:hasTaskStatusCode asx:TASKACPT .
+```
+
+The X6 amendment loop also completes here: suspend, transmit the amended plan
+with `hasPlanID` new / `hasSupersededPlanReference` old (R16, the IMO relation
+made executable), resume - the transport can now be re-routed mid-evacuation
+with the supersession explicit in data.

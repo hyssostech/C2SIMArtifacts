@@ -185,3 +185,44 @@ naming.
 **Net:** the module carries the scenario's structure and its explanation loop;
 the walk caught the deviation vocabulary being one value too narrow (PD1) and
 sharpened three smaller deltas — exactly what a validation walk is for.
+
+## v0.0.3 addendum - constructs exercised (2026-07-12)
+
+All four PD findings are resolved in TTL v0.0.3: PD1 -> `BehaviorAdjusted`;
+PD2 -> `RemainingEnduranceBelow`; PD3 -> the escalation pattern is named in
+the analysis doc (5.10; hold + deviation report + `OtherOrderReceived`);
+PD4 -> `hasActionTakenReference`. Two standards-matrix additions are exercised
+below: the lost-link floor (the paper's sUAS fly beyond reliable link range)
+and the task-disposition handshake (a vehicle declining a task it cannot
+finish - the refusal the paper's operators today infer from silence).
+
+```turtle
+:SearchPlan-1 a asx:AutonomousPlanBody ;
+    asx:hasPlanID "UUID-plan-search-1" ;                       # R16
+    asx:hasLostLinkBehaviorCode asx:ReturnToBase ;             # R18: RTL floor
+    asx:hasLostLinkTimeout [ a c2sim:Duration ] .              # 60 s
+
+:DevAltitudeChange a asx:PlanDeviationReportContent ;          # PD1 resolved
+    asx:hasDeviationTypeCode asx:BehaviorAdjusted ;
+    lox:hasPlanPhaseReference "UUID-D2" ;
+    asx:hasActionTakenReference "UUID-task-track-victim" ;     # PD4 resolved
+    asx:hasRationaleText "Descended 40->25 m for victim confirmation imagery; track geometry unchanged." ;
+    smx:hasConfidenceLevel 0.83 .
+
+:SUASDeclinesLeg a asx:TaskDispositionReportContent ;          # the 4D/RCS 'cannot do because'
+    c2sim:hasCurrentTask "UUID-task-search-sector-7" ;
+    c2sim:hasTaskStatusCode asx:TASKRJCT ;
+    asx:hasInfeasibilityCondition [ a asx:Condition ;
+        asx:hasConditionPredicateCode asx:RemainingEnduranceBelow ;   # PD2 resolved
+        asx:hasConditionSubjectReference "UUID-suas-3" ;
+        asx:hasThresholdValue 0.25 ] ;
+    asx:hasRationaleText "Sector 7 round trip exceeds remaining endurance at current winds." .
+
+:DevLostLink a asx:PlanDeviationReportContent ;                # reported on link restoration
+    asx:hasDeviationTypeCode asx:LostLinkBehaviorActivated ;
+    asx:hasRationaleText "Link lost 14:02:10Z-14:05:35Z; executed ReturnToBase per plan floor; link restored on approach." .
+```
+
+The belief-correction limitation (7.8) stands - `TASKRJCT` lets the vehicle
+say "cannot", and `BehaviorAdjusted` lets it say "changed how", but nothing
+yet corrects the percept behind a wrong intention.

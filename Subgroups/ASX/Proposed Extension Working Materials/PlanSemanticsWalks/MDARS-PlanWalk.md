@@ -186,3 +186,48 @@ well-formed without it. No new finding; evidence for §7.3's priority.
 classic tasking cannot say at all (the never-finished watch). The walk's real
 catches: no cadence slot (PM1) and the deviation/exception scope question (PM4)
 — both cheap, both evidenced twice in the corpus.
+
+## v0.0.3 addendum - constructs exercised (2026-07-12)
+
+Every PM finding is resolved in TTL v0.0.3: PM1 -> `hasRepetitionInterval`;
+PM2 -> `EntityImmobilized`; PM3 -> filter semantics now stated on
+`hasConditionObjectReference`; PM4 -> `ExceptionRaised` deviation value (one
+explainability channel, decision recorded on the individual). The
+standards-matrix deltas land here too: the plan now has identity, and the
+guard-intervention sequence of section 4 is expressible as reportable state.
+
+```turtle
+:MDARS-Plan-1 a asx:AutonomousPlanBody ;
+    asx:hasPlanID "UUID-plan-mdars-1" ;                        # R16: identity
+    asx:hasGoal :G1-RegionSecure ;
+    asx:hasLostLinkBehaviorCode asx:LoiterInPlace ;            # R18: out-of-contact floor
+    asx:hasLostLinkTimeout [ a c2sim:Duration ] .              # 120 s (value model per platform)
+
+:M1-StandingPatrol-v3 a asx:AutonomousPlanPhase ;              # M1 with the cadence slot
+    c2sim:hasUUID "UUID-M1" ;
+    asx:hasRepetitionPolicyCode asx:MaintainContinuously ;
+    asx:hasRepetitionInterval [ a c2sim:Duration ] .           # 4 h revisit (PM1 resolved)
+
+:M2-Trigger-Trapped a asx:StateConditionTrigger ;              # PM2 resolved: mobility, not health
+    asx:hasCondition [ a asx:Condition ;
+        asx:hasConditionPredicateCode asx:EntityImmobilized ;
+        asx:hasConditionSubjectReference "UUID-mdars-1" ] .
+
+:AlertIntruder a asx:PlanDeviationReportContent ;              # PM4 resolved
+    asx:hasDeviationTypeCode asx:ExceptionRaised ;
+    asx:hasDeviationCondition [ a asx:Condition ;
+        asx:hasConditionPredicateCode asx:ThreatDetectedInArea ;
+        asx:hasConditionSubjectReference "UUID-region-A" ] ;
+    lox:hasPlanPhaseReference "UUID-M1" ;
+    asx:hasActionTakenReference "UUID-M2" ;                    # names the handling phase
+    asx:hasRationaleText "Motion + IR contact warehouse 7 NE; audio challenge; awaiting console." ;
+    smx:hasConfidenceLevel 0.9 .
+
+:StatusDuringIntervention a asx:PlanExecutionStatusContent ;   # R17: the guard's takeover, as state
+    lox:hasPlanPhaseReference "UUID-M1" ;
+    asx:hasPhaseOutcomeCode asx:PhaseSuspended .               # SuspendPlanExecution -> here -> Resume
+```
+
+The suspend/resume verdict of section 4 is unchanged - but the console now
+*sees* the suspension as a reportable state (`PhaseSuspended` / `TASKSUSP`)
+instead of inferring it, and cadence timers provably pause across it (R17).

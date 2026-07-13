@@ -149,7 +149,7 @@ set_run(p.add_run(), "The LOX Plan construct, behavior trees and BDI, and a prop
 p = tf.add_paragraph(); p.space_before = Pt(14)
 set_run(p.add_run(), "C2SIM ASX Sub-group  —  working brief for discussion  —  DRAFT, July 2026", 14, ACCENT)
 p = tf.add_paragraph(); p.space_before = Pt(4)
-set_run(p.add_run(), "Companion artifacts: Plan-Semantics-Analysis.md  +  ASX-PlanSemantics-Draft.ttl (v0.0.2)", 12, MGRAY)
+set_run(p.add_run(), "Companion artifacts: Plan-Semantics-Analysis.md  +  ASX-PlanSemantics-Draft.ttl (v0.0.3)", 12, MGRAY)
 
 # ---------------------------------------------------------------- 2 THE CONCERN
 s = slide()
@@ -305,7 +305,7 @@ footer(s)
 
 # ---------------------------------------------------------------- 9 MODULE AT A GLANCE
 s = slide()
-header(s, "The proposed module at a glance", "asx/plan v0.0.2 draft — OWL (Turtle) + 14 normative execution rules")
+header(s, "The proposed module at a glance", "asx/plan v0.0.3 draft - OWL (Turtle) + 19 normative execution rules")
 panel_text(s, 0.7, 1.65, 3.9, 4.35, "New triggers (⊑ PlanPhaseTrigger)", [
     "StateConditionTrigger — fires on a world-state predicate",
     "CompositeTrigger — ALL / ANY over sub-triggers",
@@ -321,7 +321,7 @@ panel_text(s, 4.75, 1.65, 3.9, 4.35, "Enriched plan constructs", [
     "  phase products, goal link",
     "AutonomousPlanBody ⊑ PlanBody:",
     "  inline Goals + context conditions",
-    "Condition: 12 typed, negatable predicates",
+    "Condition: 16 typed, negatable predicates",
     "Goal: achieve / maintain end states",
 ], size=12.5)
 panel_text(s, 8.8, 1.65, 3.9, 4.35, "Reports & verbs", [
@@ -331,7 +331,7 @@ panel_text(s, 8.8, 1.65, 3.9, 4.35, "Reports & verbs", [
     "ConfigureAutonomy, Suspend/Resume/AbortPlanExecution, OverrideAction, AchieveGoal",
 ], size=12.5)
 panel_text(s, 0.7, 6.15, 12.0, 0.75, "", [
-    ("Layering: C2SIM core → SMX → LOX → asx/plan (owl:imports).  Everything is optional on top of a plain LOX plan; OWL vocabulary + rules R1–R14 together are the proposal.", NAVY),
+    ("Layering: C2SIM core -> SMX -> LOX -> asx/plan (owl:imports).  Everything is optional on top of a plain LOX plan; OWL vocabulary + rules R1-R19 together are the proposal.", NAVY),
 ], size=13)
 footer(s)
 
@@ -363,7 +363,7 @@ bullets(s, [
     {"t": "Repetition (R10): RetryOnFailure (bounded), RepeatUntilCondition (loop closed by a Condition — e.g. route clear), MaintainContinuously (standing watch, N2).", "sz": 14.5},
 ])
 panel_text(s, 0.7, 5.5, 12.0, 1.15, "Why the rules matter", [
-    ("OWL restrictions alone cannot say “failure beats completion when both are satisfiable, judged on event times” (R6). Without R1–R14, two conformant implementations disagree about the same plan.", NAVY),
+    ("OWL restrictions alone cannot say 'failure beats completion when both are satisfiable, judged on event times' (R6). Without R1-R19, two conformant implementations disagree about the same plan.", NAVY),
 ], tcolor=ORANGE, size=13)
 footer(s)
 
@@ -500,20 +500,41 @@ panel_text(s, 0.7, 4.5, 12.0, 1.9, "How this was checked", [
 ], tcolor=NAVY, size=13)
 footer(s)
 
+# ---------------------------------------------------------------- 17b V0.0.3 STATUS
+s = slide()
+header(s, "v0.0.3 - validation + standards verification applied",
+       "Nine walk deltas + six standards-matrix additions; rules R15-R19")
+bullets(s, [
+    {"t": "Three validation walks (CASEVAC, DroneResponse, MDARS) instantiate end-to-end; no structural defects; all nine walk deltas are now applied in TTL v0.0.3.", "sz": 14},
+    {"t": "An independent standards pass (BT/Nav2, PDDL, FlexBE, MAVLink, IEEE, JAUS, STANAG) re-derived the same construct set - convergent corroboration of the module's design, not new invention.", "sz": 14},
+    {"t": "New in v0.0.3 - each with prior art:", "b": True, "sz": 14},
+    {"t": "plan identity + supersession: hasPlanID / hasSupersededPlanReference, rule R16 (JAUS AS6062 mission IDs)", "lvl": 1},
+    {"t": "PhaseSuspended outcome + TASKSUSP, rule R17 (JAUS Pause/Resume Mission)", "lvl": 1},
+    {"t": "TASKACPT / TASKRJCT + TaskDispositionReportContent - per-task accept/reject with a machine-readable infeasibility condition", "lvl": 1},
+    {"t": "lost-link failsafe floor (FailsafeBehaviorCode, rule R18) + EntityInsideArea keep-in/keep-out guards (STANAG lost-link, MAVLink fence/rally)", "lvl": 1},
+    {"t": "StructuredRoute waypoints: explicit sequence, per-point speed / arrival / loiter, task-on-arrival, rule R19 (STANAG 4586 #13002-#13004)", "lvl": 1},
+    {"t": "hasRepetitionInterval (revisit cadence) + predicates PayloadOnBoard, RemainingEnduranceBelow, EntityImmobilized", "lvl": 1},
+], top=1.6)
+panel_text(s, 0.7, 5.55, 12.0, 1.3, "Also settled", [
+    "Correction: standards alignment is IEEE 1872.1-2024 only - 1872.2 verifiably defines no plan constructs.",
+    ("Candidate core errata consolidated for the PDG in PDG-Change-Proposals.md (TASKFAILD, handshake/suspension codes, control verbs, event-occurrence report, LOX errata, plan identity).", MGRAY),
+], size=13)
+footer(s)
+
 # ---------------------------------------------------------------- 18 EVALUATION & NEXT STEPS
 s = slide()
 header(s, "What we ask the group to evaluate", "And the proposed sequence if the direction holds")
 bullets(s, [
     {"t": "1.  Direction — extend the LOX Plan (additive ASX module) rather than a freestanding behavior ontology. Agree?", "b": True, "sz": 15.5},
     {"t": "2.  The interop posture — fail-closed unknown triggers + capability negotiation for gating constructs. Acceptable operationally?", "b": True, "sz": 15.5},
-    {"t": "3.  The condition vocabulary — right size? (typed predicates, no expression language; 12 initial predicates, scenario-driven growth)", "b": True, "sz": 15.5},
+    {"t": "3.  The condition vocabulary - right size? (typed predicates, no expression language; 16 predicates after the v0.0.3 additions, scenario-driven growth)", "b": True, "sz": 15.5},
     {"t": "4.  Core errata to raise with the PDG — TASKFAILD, task cancel/suspend verbs, runtime event-occurrence report.", "b": True, "sz": 15.5},
     {"t": "Proposed sequence: Condition + triggers (Q-D, Q-N)  →  HumanApprovalTrigger + LoA linkage (W1/Q-K)  →  Goal / plan library  →  report contents (X2, X6).", "sz": 14.5},
     {"t": "Prerequisites from the instantiation review: Swarm ⊑ CollectiveEntity (P7); attach hasAutonomousRoleCode (P3).", "sz": 14.5},
     {"t": "Next artifact: instantiation-review-style walks of CASEVAC + DroneResponse + MDARS in the module vocabulary, before advancing the OWL.", "sz": 14.5},
 ])
 panel_text(s, 0.7, 6.0, 12.0, 0.85, "", [
-    ("Artifacts: Plan-Semantics-Analysis.md (analysis, rules, limitations)  •  ASX-PlanSemantics-Draft.ttl v0.0.2 (618 triples, validated)  •  this deck", NAVY),
+    ("Artifacts: Plan-Semantics-Analysis.md (analysis, rules, limitations)  -  ASX-PlanSemantics-Draft.ttl v0.0.3 (800+ triples, validated)  -  this deck", NAVY),
 ], size=13)
 footer(s)
 

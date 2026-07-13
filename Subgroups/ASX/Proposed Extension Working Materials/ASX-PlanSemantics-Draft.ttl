@@ -10,7 +10,7 @@
 @base <http://www.sisostds.org/ontologies/asx#> .
 
 <http://www.sisostds.org/ontologies/asx/plan> rdf:type owl:Ontology ;
-    owl:versionIRI <http://www.sisostds.org/ontologies/asx/plan/0.0.2> ;
+    owl:versionIRI <http://www.sisostds.org/ontologies/asx/plan/0.0.3> ;
     owl:imports <http://www.sisostds.org/ontologies/lox> ;
     rdfs:comment """DRAFT — ASX Plan-Semantics module. Work in progress; not adopted by the ASX subgroup.
 
@@ -23,15 +23,25 @@ It also adds the failure-side dual of the LOX PlanPhaseCompletionCondition code 
 Design rationale and construct-by-construct derivation are in 'Plan-Semantics-Analysis.md'
 in this directory.
 
+v0.0.3 additions, from two validation inputs: (a) the three validation walks in
+PlanSemanticsWalks/ (deviation vocabulary, repetition cadence, embarkation/endurance/mobility
+predicates, late-bound product rule, action-taken reference, object-reference filter semantics);
+(b) the standards-matrix verification pass in
+../InstantiationReview/PlanSemantics-Walk.md against JAUS AS6062, STANAG 4586, MAVLink,
+IEEE 1872.1-2024, FlexBE, and 4D/RCS (plan identity and supersession, suspension state,
+task-disposition reporting, lost-link failsafe defaults with keep-in/keep-out predicate,
+structured waypoints). Rules R15-R19 state the added execution semantics.
+
 Additive REPORTING constructs (status and deviation report contents, new code individuals) degrade
 gracefully for consumers that ignore unknown vocabulary. GATING and RESTRICTING constructs (triggers,
 guards, timeouts, failure handling) are mandatory-to-understand: they narrow when and how a phase may
 execute, so ignoring them removes the safety envelope. See rule R13.
 
 NORMATIVE EXECUTION-SEMANTICS RULES. OWL cannot express execution semantics; the following rules are
-normative for implementations of this module and are referenced from entity comments as R1..R14.
+normative for implementations of this module and are referenced from entity comments as R1..R19.
  R1  (outcomes) A plan phase reaches exactly one terminal outcome: PhaseSucceeded, PhaseFailed,
-     PhaseAborted, or PhaseSkipped. PhasePending and PhaseInProgress are non-terminal states.
+     PhaseAborted, or PhaseSkipped. PhasePending, PhaseInProgress, and PhaseSuspended are
+     non-terminal states.
  R2  (sequencing) A lox:PriorPhaseCompletionTrigger fires only when the referenced phase's outcome
      is PhaseSucceeded or PhaseSkipped. Failure does not fire it; failed chains resolve via
      fallback (R7) or parent failure aggregation (R3), never by silently continuing.
@@ -40,11 +50,12 @@ normative for implementations of this module and are referenced from entity comm
      When the policy is met, the phase fails immediately.
  R4  (implicit failure modes) Declaring hasPhaseTimeout or hasGuardCondition makes the corresponding
      failure mode live regardless of the aggregation policy: timeout expiry or guard violation fails
-     the phase at once. TimeoutExceeded and GuardViolated are used as failure-cause values in reports
+     the phase at once while it is in progress (guards are not evaluated during suspension; see R17).
+     TimeoutExceeded and GuardViolated are used as failure-cause values in reports
      (hasPhaseFailureCauseCode), not as selectable aggregation policies.
  R5  (propagation on termination) When a phase reaches a terminal outcome, its in-flight member tasks
-     are aborted (TASKABRT), in-flight subphases become PhaseAborted, and not-yet-started members
-     become PhaseSkipped.
+     are aborted (TASKABRT), in-flight or suspended subphases become PhaseAborted (a suspended
+     member counts as in-flight for this rule), and not-yet-started members become PhaseSkipped.
  R6  (precedence) Completion and failure conditions are evaluated against event times, not report
      arrival times. If both are satisfiable for the same phase, failure takes precedence.
  R7  (fallback) When a phase fails and declares hasOnFailurePhaseReference, the referenced phase is
@@ -81,8 +92,54 @@ normative for implementations of this module and are referenced from entity comm
      with isToBeExecutedNow = false and only to consumers that have negotiated this module. Context
      conditions are re-evaluated during execution: when the active plan's context becomes false and
      another transmitted plan for the same Goal is applicable, the executing system switches and
-     reports a PlanSwitched deviation.""" ;
-    owl:versionInfo "C2SIM ASX Plan-Semantics module v0.0.2 DRAFT" .
+     reports a PlanSwitched deviation.
+ R15 (late-bound products) A phase product that will not exist until runtime is referenced by a
+     pre-allocated UUID: the tasking side allocates the UUID (in hasPhaseProductReference and in any
+     consuming condition or task references), and the producing system binds that UUID to the actual
+     object when it publishes it. Consumers treat an unbound product reference as not-yet-available,
+     never as an error, until the producing phase reports a terminal outcome.
+ R16 (plan identity and supersession) Every AutonomousPlanBody carries a hasPlanID, distinct from
+     message identity. A plan whose hasSupersededPlanReference names a previously received plan
+     replaces it: the superseded plan MUST NOT be started thereafter, and if it is executing, the
+     receiving system treats the supersession as SuspendPlanExecution on it before starting the
+     superseding plan under its own triggers and isToBeExecutedNow. A superseded plan MUST NOT be
+     resumed; when the superseding plan first activates a phase, the superseded plan's suspended
+     phases become PhaseAborted (with the R5 disposition applied to their members) - until then the
+     superseded plan remains suspended so that abort and status verbs can still address it.
+     Supersession chains MUST be acyclic. A system that does not hold the referenced plan SHOULD
+     report the gap and request retransmission rather than execute the amendment blind.
+ R17 (suspension) On SuspendPlanExecution, in-flight phases move to PhaseSuspended (non-terminal,
+     R1). While a plan is suspended no phase of it may be activated; phase timeouts and
+     repetition-interval timers pause; guard conditions are not evaluated. Discrete trigger events
+     occurring during suspension latch and are honored at resume; state conditions and
+     completion/failure conditions are evaluated afresh at resume, like guards. On
+     ResumePlanExecution, guards are re-evaluated first and top-down - a guard that does not hold
+     fails the phase at resume (R4), and a phase that fails at resume terminates per R5 before its
+     descendants' guards are evaluated - then timeout clocks continue from their paused values.
+     AbortPlanExecution from suspension yields PhaseAborted.
+ R18 (lost-link precedence) When communications with the command node have been lost for longer
+     than hasLostLinkTimeout, the executing system (1) switches to an applicable transmitted plan
+     whose context conditions hold (R14), if one exists; otherwise (2) executes the plan's declared
+     hasLostLinkBehaviorCode; otherwise (3) reverts to its platform-default failsafe. Step (1) IS
+     the R14 switching machinery, with communications loss as the driving context change over the
+     plans already transmitted and held on the platform: if a CommsDenied-gated variant becomes
+     applicable under R14 before hasLostLinkTimeout elapses (a shorter threshold duration), R14
+     governs and the switch occurs then. A switch or behavior made while the link is down is
+     reported on restoration as a single LostLinkBehaviorActivated deviation naming what ran (a
+     separate PlanSwitched deviation is not sent for the same transition). On restoration of
+     communications the system reports the deviation covering the interval.
+ R19 (waypoint traversal) The waypoints of a StructuredRoute are visited in ascending
+     hasWaypointSequenceNumber, which MUST be unique within the route; ordering is normative from
+     the sequence numbers, never from serialization order. On arrival at a waypoint the system
+     first executes the referenced waypoint task (if any) to a terminal status, then loiters for
+     hasLoiterDuration (if given), then proceeds. If the waypoint task ends TASKFAILD, the failure
+     propagates per R3 to the phase executing the movement (traversal does not silently continue);
+     the system proceeds past the waypoint only on task completion, or when no task is referenced.
+     hasTransitSpeed applies to the leg arriving at the waypoint. A hasWaypointArrivalTime is an
+     authoring commitment - the author must reconcile it with upstream waypoint tasks and loiter
+     durations; a projected or actual miss is reported (hasEstimatedPhaseCompletionTime or a
+     deviation report) and does not of itself fail the movement task.""" ;
+    owl:versionInfo "C2SIM ASX Plan-Semantics module v0.0.3 DRAFT" .
 
 #################################################################
 #    External entities referenced (declaration stubs)
@@ -92,19 +149,23 @@ c2sim:C2SIMContent rdf:type owl:Class .
 c2sim:Code rdf:type owl:Class .
 c2sim:DesiredEffectCode rdf:type owl:Class .
 c2sim:Duration rdf:type owl:Class .
+c2sim:Location rdf:type owl:Class .
 c2sim:ReportContent rdf:type owl:Class .
 c2sim:TaskActionCode rdf:type owl:Class .
+c2sim:TaskStatus rdf:type owl:Class .
 c2sim:TaskStatusCode rdf:type owl:Class .
 c2sim:TimeInstant rdf:type owl:Class .
 lox:PlanBody rdf:type owl:Class .
 lox:PlanPhase rdf:type owl:Class .
 lox:PlanPhaseTrigger rdf:type owl:Class .
+smx:Route rdf:type owl:Class .
 
 c2sim:UUIDBase rdf:type rdfs:Datatype .
 
 c2sim:hasCode rdf:type owl:ObjectProperty .
 c2sim:hasDesiredEffectCode rdf:type owl:ObjectProperty .
 c2sim:hasDuration rdf:type owl:ObjectProperty .
+c2sim:hasLocation rdf:type owl:ObjectProperty .
 c2sim:hasTimeInstant rdf:type owl:ObjectProperty .
 
 c2sim:hasActorReference rdf:type owl:DatatypeProperty .
@@ -159,6 +220,12 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:subPropertyOf :hasCondition ;
     rdfs:range :Condition ;
     rdfs:comment "The loop-termination condition of a phase whose repetition policy is RepeatUntilCondition. The inherited LOX completion condition closes each iteration; this condition closes the loop (e.g. repeat detect-and-neutralize passes until the route-clear condition holds)." .
+
+###  http://www.sisostds.org/ontologies/asx#hasInfeasibilityCondition
+:hasInfeasibilityCondition rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasCondition ;
+    rdfs:range :Condition ;
+    rdfs:comment "In a TaskDispositionReportContent whose status is TASKRJCT, the world-state condition that makes the task infeasible for the tasked system - the machine-readable form of the 4D/RCS 'cannot do because of condition xyz' reply. Optional; rationale text carries the human-readable form." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasGoal
 :hasGoal rdf:type owl:ObjectProperty ;
@@ -254,6 +321,41 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:range c2sim:TimeInstant ;
     rdfs:comment "The executing system's current estimate of when the reported plan phase will complete." .
 
+###  http://www.sisostds.org/ontologies/asx#hasRepetitionInterval
+:hasRepetitionInterval rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasDuration ;
+    rdfs:range c2sim:Duration ;
+    rdfs:comment "Cadence between iterations of a phase under a RepeatUntilCondition or MaintainContinuously repetition policy: the interval from the start of one iteration to the start of the next (revisit rate for persistent-watch and periodic-survey behaviors; MDARS revisit cadence, cooperative-MCM repeat-on-cadence search). Paused while the phase is suspended (rule R17). If an iteration overruns the interval, the next begins immediately on completion." .
+
+###  http://www.sisostds.org/ontologies/asx#hasLostLinkTimeout
+:hasLostLinkTimeout rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasDuration ;
+    rdfs:range c2sim:Duration ;
+    rdfs:comment "Duration of continuous communications loss with the command node after which the lost-link disposition of rule R18 applies. STANAG 4586 lost-link and MAVLink failsafe analog." .
+
+###  http://www.sisostds.org/ontologies/asx#hasLoiterDuration
+:hasLoiterDuration rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasDuration ;
+    rdfs:range c2sim:Duration ;
+    rdfs:comment "Time to hold at a RouteWaypoint after any waypoint task completes and before proceeding to the next waypoint (rule R19). STANAG 4586 loiter-duration analog; loiter pattern selection is left to the platform." .
+
+###  http://www.sisostds.org/ontologies/asx#hasWaypointArrivalTime
+:hasWaypointArrivalTime rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasTimeInstant ;
+    rdfs:range c2sim:TimeInstant ;
+    rdfs:comment "Required arrival time at a RouteWaypoint (time-on-target scheduling; STANAG 4586 arrival-time analog). How the platform paces itself to meet it is not modeled." .
+
+###  http://www.sisostds.org/ontologies/asx#hasLostLinkBehaviorCode
+:hasLostLinkBehaviorCode rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf c2sim:hasCode ;
+    rdfs:range :FailsafeBehaviorCode ;
+    rdfs:comment "The failsafe behavior a plan declares for loss of communications with the command node (rule R18: an applicable transmitted contingency plan takes precedence; this code is the declared floor above the platform default). Mandatory-to-understand in effect: a consumer that cannot interpret it retains only its platform default - commanders should confirm module negotiation before relying on it (R13)." .
+
+###  http://www.sisostds.org/ontologies/asx#hasRouteWaypoint
+:hasRouteWaypoint rdf:type owl:ObjectProperty ;
+    rdfs:range :RouteWaypoint ;
+    rdfs:comment "Containment of the ordered waypoints of a StructuredRoute. Ordering is carried by each waypoint's hasWaypointSequenceNumber (rule R19), never by serialization order." .
+
 #################################################################
 #    Data properties
 #################################################################
@@ -304,7 +406,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :hasConditionObjectReference rdf:type owl:DatatypeProperty ;
     rdfs:subPropertyOf c2sim:hasReference ;
     rdfs:range c2sim:UUIDBase ;
-    rdfs:comment "Reference to the second participant of a binary Condition predicate (e.g. the location for EntityAtLocation; the reference entity for EntityWithinRange; the counterpart node for CommsAvailable; the anchor event for TimeElapsedSince)." .
+    rdfs:comment "Reference to the second participant of a binary Condition predicate (e.g. the location for EntityAtLocation; the reference entity for EntityWithinRange; the counterpart node for CommsAvailable; the anchor event for TimeElapsedSince). Where a predicate's documentation says the object reference is a FILTER (e.g. ThreatDetectedInArea), it names an entity-type definition rather than an entity instance - in base C2SIM terms a c2sim:NamedEntityType or c2sim:SISOEntityType structure carrying a UUID; the referenceable form of the type filter is an open item for message-schema definition, tied to review item X4 - and the predicate is restricted to detections matching that type; absent the filter, any qualifying detection satisfies the predicate." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasThresholdValue
 :hasThresholdValue rdf:type owl:DatatypeProperty ;
@@ -341,6 +443,45 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:subPropertyOf c2sim:hasReference ;
     rdfs:range c2sim:UUIDBase ;
     rdfs:comment "Reference to a data product (e.g. a surveyed route, a hazard map, a track) that this phase publishes on completion for consumption by other entities' tasks — the interoperability-visible portion of a producer/consumer handoff, such as a scout advertising a safe route to a transport vehicle. Definition of product object types is left to the ASX message layer." .
+
+###  http://www.sisostds.org/ontologies/asx#hasPlanID
+:hasPlanID rdf:type owl:DatatypeProperty ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "The identity of a plan, distinct from the identity of any message that carries it (rule R16). Follows the OrderBody hasOrderID idiom; JAUS AS6062 mission-ID and STANAG 4586 mission-number precedent. Enables supersession (hasSupersededPlanReference), status reporting against a plan, and holding several concurrent plans." .
+
+###  http://www.sisostds.org/ontologies/asx#hasSupersededPlanReference
+:hasSupersededPlanReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "The hasPlanID of a previously transmitted plan that this plan replaces (rule R16). The plan-granularity activation semantics for the JC3IEDM IMO ('is a modification of') task relation; JAUS Remove/Replace Messages analog. Supports the mid-mission re-tasking pattern: suspend, transmit superseding plan, resume." .
+
+###  http://www.sisostds.org/ontologies/asx#hasRallyPointReference
+:hasRallyPointReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "Reference to a pre-designated safe location (a Location or MapGraphic defined at initialization or in the plan) for the ReturnToRallyPoint failsafe behavior. Repeatable; the system selects the reachable rally point per its own navigation state. MAVLink rally-point analog." .
+
+###  http://www.sisostds.org/ontologies/asx#hasActionTakenReference
+:hasActionTakenReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "In a PlanDeviationReportContent, reference to the task or plan phase the system activated as a result of the deviation (e.g. the fallback phase, the replanned route task), or the task or phase within which the reported adjustment was made (for BehaviorAdjusted). Optional: where no referenceable object exists, the action taken rides in the rationale text." .
+
+###  http://www.sisostds.org/ontologies/asx#hasWaypointTaskReference
+:hasWaypointTaskReference rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf c2sim:hasReference ;
+    rdfs:range c2sim:UUIDBase ;
+    rdfs:comment "Reference to a previously defined Task to be executed on arrival at this waypoint (rule R19): the STANAG 4586 payload-action-waypoint and Nav2 waypoint-task-executor pattern (sensor point/collect, drop, pickup, report). The task's own performing entity must be the platform traversing the route." .
+
+###  http://www.sisostds.org/ontologies/asx#hasWaypointSequenceNumber
+:hasWaypointSequenceNumber rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:comment "Ordering rank of a waypoint within a StructuredRoute; visited in ascending order, unique within the route (rule R19). Explicit because RDF property values are unordered - this replaces the fragile document-order convention of bare location lists." .
+
+###  http://www.sisostds.org/ontologies/asx#hasTransitSpeed
+:hasTransitSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:double ;
+    rdfs:comment "Commanded speed, in meters per second, for the route leg arriving at this waypoint (rule R19). STANAG 4586 waypoint-speed analog." .
 
 ###  http://www.sisostds.org/ontologies/asx#hasConditionText
 :hasConditionText rdf:type owl:DatatypeProperty ;
@@ -474,6 +615,10 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:nonNegativeInteger ] ,
         [ rdf:type owl:Restriction ;
+          owl:onProperty :hasRepetitionInterval ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass c2sim:Duration ] ,
+        [ rdf:type owl:Restriction ;
           owl:onProperty :hasGuardCondition ;
           owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
           owl:onClass :Condition ] ,
@@ -497,11 +642,19 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:onProperty :hasGoalReference ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange c2sim:UUIDBase ] ;
-    rdfs:comment "A lox:PlanPhase enriched with autonomous-execution semantics, all optional: a failure aggregation policy and fallback phase reference (rules R3, R7, R8), guard conditions (R4, R12), an execution policy over subphases, a repetition/persistence policy with loop-termination condition and attempt limit (R10), a timeout (R4), a required level of autonomy, a priority rank under ordered policies, published data products, and a reference to the Goal the phase serves. Reporting additions degrade gracefully; gating additions are mandatory-to-understand (R13)." .
+    rdfs:comment "A lox:PlanPhase enriched with autonomous-execution semantics, all optional: a failure aggregation policy and fallback phase reference (rules R3, R7, R8), guard conditions (R4, R12), an execution policy over subphases, a repetition/persistence policy with loop-termination condition, attempt limit, and iteration cadence (R10, R17), a timeout (R4), a required level of autonomy, a priority rank under ordered policies, published data products (late-bound per R15), and a reference to the Goal the phase serves. Reporting additions degrade gracefully; gating additions are mandatory-to-understand (R13)." .
 
 ###  http://www.sisostds.org/ontologies/asx#AutonomousPlanBody
 :AutonomousPlanBody rdf:type owl:Class ;
     rdfs:subClassOf lox:PlanBody ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasPlanID ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasSupersededPlanReference ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
         [ rdf:type owl:Restriction ;
           owl:onProperty :hasGoal ;
           owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -513,8 +666,20 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
         [ rdf:type owl:Restriction ;
           owl:onProperty :hasContextCondition ;
           owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-          owl:onClass :Condition ] ;
-    rdfs:comment "A lox:PlanBody that may define Goals inline (hasGoal), declare the Goal it is intended to achieve (hasGoalReference), and declare the context conditions under which it is applicable. Several AutonomousPlanBody instances referencing the same Goal with different context conditions constitute a transmitted plan pre-selection library (primary, degraded-comms, contested variants); per rule R14 such variants MUST carry isToBeExecutedNow = false, MUST only be sent to consumers that have negotiated this module, and plan switches are reported via PlanSwitched. Runtime subgoaling and agent reconsideration strategies are deliberately not modeled." .
+          owl:onClass :Condition ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasLostLinkBehaviorCode ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass :FailsafeBehaviorCode ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasLostLinkTimeout ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass c2sim:Duration ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasRallyPointReference ;
+          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ;
+    rdfs:comment "A lox:PlanBody with plan identity (hasPlanID, exactly one - rule R16), optional supersession of a prior plan (hasSupersededPlanReference, R16), inline Goal definitions (hasGoal), the Goal it is intended to achieve (hasGoalReference), applicability context conditions, and a declared lost-link disposition (hasLostLinkBehaviorCode / hasLostLinkTimeout / hasRallyPointReference - rule R18). Several AutonomousPlanBody instances referencing the same Goal with different context conditions constitute a transmitted plan pre-selection library (primary, degraded-comms, contested variants); per rule R14 such variants MUST carry isToBeExecutedNow = false, MUST only be sent to consumers that have negotiated this module, and plan switches are reported via PlanSwitched. Runtime subgoaling and agent reconsideration strategies are deliberately not modeled." .
 
 ###  http://www.sisostds.org/ontologies/asx#Goal
 :Goal rdf:type owl:Class ;
@@ -598,15 +763,79 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:string ] ,
         [ rdf:type owl:Restriction ;
+          owl:onProperty :hasActionTakenReference ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
+        [ rdf:type owl:Restriction ;
           owl:onProperty smx:hasConfidenceLevel ;
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onDataRange xsd:double ] ;
-    rdfs:comment "Report content sent whenever the executing system exercises an autonomous choice not scripted by the operator: what kind of deviation occurred, what event or condition triggered it, the affected plan phase, a human-understandable rationale, and the system's confidence. Follows the explainability schema (event, action, reasoning, operational change, confidence) identified in the ASX reference materials. An additive reporting construct: degrades gracefully." .
+    rdfs:comment "Report content sent whenever the executing system exercises an autonomous choice not scripted by the operator: what kind of deviation occurred, what event or condition triggered it, the affected plan phase, a human-understandable rationale, optionally the task or phase activated in response (hasActionTakenReference), and the system's confidence. Follows the explainability schema (event, action, reasoning, operational change, confidence) identified in the ASX reference materials. An additive reporting construct: degrades gracefully." .
+
+###  http://www.sisostds.org/ontologies/asx#TaskDispositionReportContent
+:TaskDispositionReportContent rdf:type owl:Class ;
+    rdfs:subClassOf c2sim:TaskStatus ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasRationaleText ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:string ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasInfeasibilityCondition ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass :Condition ] ;
+    rdfs:comment "A c2sim:TaskStatus specialized for the tasking handshake: the inherited hasCurrentTask targets the specific task and the inherited hasTaskStatusCode carries its disposition (TASKACPT accepted / TASKRJCT rejected, plus the lifecycle codes), optionally with a rationale and, for rejections, the machine-readable infeasibility condition. Closes the gap that acknowledgment codes (ACKFAIL/ACKSUCC etc.) are message-level and cannot target one task of a multi-task order. FIPA agree/refuse and the 4D/RCS 'cannot do because' reply, in C2SIM idiom. An additive reporting construct: degrades gracefully." .
 
 ###  http://www.sisostds.org/ontologies/asx#AutonomyLevelCode
 :AutonomyLevelCode rdf:type owl:Class ;
     rdfs:subClassOf c2sim:Code ;
     rdfs:comment "Level of autonomy at which a system or plan phase operates. The existing ASX individuals Teleop, ReCont, Automated, and FullAuto are intended to be re-typed as members of this class; anchoring to an external scale (ALFUS / 4D-RCS) is a subgroup decision item." .
+
+###  http://www.sisostds.org/ontologies/asx#FailsafeBehaviorCode
+:FailsafeBehaviorCode rdf:type owl:Class ;
+    rdfs:subClassOf c2sim:Code ;
+    rdfs:comment "Declared default behavior for loss of communications with the command node (rule R18). STANAG 4586 lost-link procedure and MAVLink failsafe/RTL precedent." .
+
+###  http://www.sisostds.org/ontologies/asx#RouteWaypoint
+:RouteWaypoint rdf:type owl:Class ;
+    rdfs:subClassOf c2sim:C2SIMContent ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasWaypointSequenceNumber ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:nonNegativeInteger ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty c2sim:hasLocation ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass c2sim:Location ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasTransitSpeed ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:double ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasWaypointArrivalTime ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass c2sim:TimeInstant ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasLoiterDuration ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass c2sim:Duration ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasWaypointTaskReference ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty c2sim:hasUUID ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange c2sim:UUIDBase ] ;
+    rdfs:comment "One waypoint of a StructuredRoute: an explicit sequence number (rule R19), a location, and optional per-point attributes - transit speed for the arriving leg, required arrival time, post-arrival loiter duration, and a task to execute on arrival. Brings SMX routes to the per-waypoint expressiveness of STANAG 4586 waypoint messages (#13002-#13004) and MAVLink mission items, which the base standard's bare location lists (ordered only by serialization) cannot carry." .
+
+###  http://www.sisostds.org/ontologies/asx#StructuredRoute
+:StructuredRoute rdf:type owl:Class ;
+    rdfs:subClassOf smx:Route ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasRouteWaypoint ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass :RouteWaypoint ] ;
+    rdfs:comment "An smx:Route whose points are RouteWaypoint objects with explicit ordering and per-point attributes (rule R19). Remains a valid smx:Route/MapGraphic for consumers that only understand the base representation; module-aware consumers use the waypoint structure. A movement task references it via hasMapGraphicID exactly as it would a plain Route." .
 
 ###  http://www.sisostds.org/ontologies/asx#LogicalOperatorCode
 :LogicalOperatorCode rdf:type owl:Class ;
@@ -636,7 +865,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 ###  http://www.sisostds.org/ontologies/asx#PhaseOutcomeCode
 :PhaseOutcomeCode rdf:type owl:Class ;
     rdfs:subClassOf c2sim:Code ;
-    rdfs:comment "Execution states (PhasePending, PhaseInProgress) and terminal outcomes (PhaseSucceeded, PhaseFailed, PhaseAborted, PhaseSkipped) of a plan phase — see rule R1." .
+    rdfs:comment "Execution states (PhasePending, PhaseInProgress, PhaseSuspended) and terminal outcomes (PhaseSucceeded, PhaseFailed, PhaseAborted, PhaseSkipped) of a plan phase - see rules R1 and R17." .
 
 ###  http://www.sisostds.org/ontologies/asx#GoalCommitmentCode
 :GoalCommitmentCode rdf:type owl:Class ;
@@ -681,6 +910,9 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 
 :PhaseInProgress rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
     rdfs:comment "The phase has been triggered and is executing." .
+
+:PhaseSuspended rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
+    rdfs:comment "Non-terminal state (rules R1, R17): execution paused by SuspendPlanExecution (or by supersession, R16), state retained. Timeouts and repetition intervals pause; guards are re-evaluated at resume. Exits to PhaseInProgress on ResumePlanExecution or PhaseAborted on AbortPlanExecution. JAUS Pause/Resume Mission analog." .
 
 :PhaseSucceeded rdf:type owl:NamedIndividual , :PhaseOutcomeCode ;
     rdfs:comment "The phase met its completion condition (or its fallback chain ultimately succeeded, rule R7)." .
@@ -771,6 +1003,18 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :WeatherLimitExceeded rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
     rdfs:comment "True when observed environmental conditions exceed the subject platform's declared operating limits (limits taken from the platform's initialization data, not carried in the condition)." .
 
+:PayloadOnBoard rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
+    rdfs:comment "True when the referenced payload, cargo, or person (object reference) is embarked on the subject platform. The embarkation-state predicate the CASEVAC walk found missing: 'casualty loaded' is a load state, for which EntityWithinRange is a false proxy." .
+
+:RemainingEnduranceBelow rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
+    rdfs:comment "True when the subject platform's remaining endurance (battery, fuel) falls below the threshold value (0..1 fraction of full endurance). Distinct from EntityHealthBelow, which conflates damage with depletion. Typical uses: return-to-base guard; bingo-energy loop termination (the STANAG 4586 Bingo Energy loop-limit analog)." .
+
+:EntityImmobilized rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
+    rdfs:comment "True when the subject entity is unable to move (trapped, mired, mechanically disabled), regardless of health state. The mobility-state predicate the MDARS walk found missing: 'trapped intruder' and 'stuck platform' are mobility facts, not health facts." .
+
+:EntityInsideArea rdf:type owl:NamedIndividual , :ConditionPredicateCode ;
+    rdfs:comment "True when the subject entity is inside the referenced area (object reference = TacticalArea/MapGraphic UUID). As a guard: keep-in enforcement (violation fails the phase, routing to a safe-hold fallback); with isNegated true: keep-out enforcement. Gives areas the enforced keep-in/keep-out binding that MAVLink geofences and STANAG 4586 restricted zones provide and base-standard symbology does not." .
+
 ###  Deviation types
 
 :RouteChanged rdf:type owl:NamedIndividual , :DeviationTypeCode ;
@@ -788,10 +1032,45 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
 :TaskReassigned rdf:type owl:NamedIndividual , :DeviationTypeCode ;
     rdfs:comment "A task was autonomously reassigned to a different performing entity (e.g. within a swarm or team). NOTE: this reports a reassignment; constructs for commanding or constraining reassignment (capability declaration, allocation authority) are future work." .
 
+:BehaviorAdjusted rdf:type owl:NamedIndividual , :DeviationTypeCode ;
+    rdfs:comment "The system autonomously adjusted an operating parameter of the current behavior (speed, altitude, standoff, sensor rate) without changing route, plan, or goal. The parameter-level deviation the DroneResponse and MDARS walks found unreportable with the v0.0.2 vocabulary." .
+
+:ExceptionRaised rdf:type owl:NamedIndividual , :DeviationTypeCode ;
+    rdfs:comment "A plan-anticipated exception occurred (an exception trigger fired: intruder detected, casualty found, contact lost) and the system entered its scripted exception handling. Reported as a deviation so the operator sees anticipated-but-unscheduled transitions on the same channel as unscripted ones; hasActionTakenReference names the activated handling phase. (Decision recorded: modeled as a DeviationTypeCode value rather than a sibling alert report type, keeping one explainability channel.)" .
+
+:LostLinkBehaviorActivated rdf:type owl:NamedIndividual , :DeviationTypeCode ;
+    rdfs:comment "Communications loss exceeded hasLostLinkTimeout and the system executed its lost-link disposition (rule R18). Reported on restoration of communications, covering the interval: which behavior ran, from when to when, with rationale." .
+
+###  Failsafe behaviors
+
+:ReturnToBase rdf:type owl:NamedIndividual , :FailsafeBehaviorCode ;
+    rdfs:comment "Return autonomously to the launch point or designated base (MAVLink RTL analog)." .
+
+:ReturnToRallyPoint rdf:type owl:NamedIndividual , :FailsafeBehaviorCode ;
+    rdfs:comment "Proceed autonomously to the nearest reachable location named by hasRallyPointReference (MAVLink rally-point analog)." .
+
+:LoiterInPlace rdf:type owl:NamedIndividual , :FailsafeBehaviorCode ;
+    rdfs:comment "Hold at or near the current position (loiter, station-keep, or stop, per platform type) awaiting link restoration." .
+
+:ContinueMission rdf:type owl:NamedIndividual , :FailsafeBehaviorCode ;
+    rdfs:comment "Continue executing the current plan autonomously without the command link (the STANAG 4586 continue-mission lost-link option). Commanders should pair this with HumanApprovalTrigger gates on any phase that must not proceed unsupervised: per rule R13 an approval gate cannot be satisfied while the link is down, so gated phases hold or take their timeout disposition." .
+
+:TerminateMission rdf:type owl:NamedIndividual , :FailsafeBehaviorCode ;
+    rdfs:comment "Cease mission activity and render the platform safe (land immediately / stop and safe payloads; STANAG 4586 flight-termination analog)." .
+
 ###  Additions to core code lists
 
 :TASKFAILD rdf:type owl:NamedIndividual , c2sim:TaskStatusCode ;
     rdfs:comment "Task failed: the task was attempted and did not achieve its purpose. Distinct from TASKABRT, in which execution was stopped by command or exception. Candidate erratum for the core TaskStatusCode list; carried in ASX until adopted." .
+
+:TASKACPT rdf:type owl:NamedIndividual , c2sim:TaskStatusCode ;
+    rdfs:comment "Task accepted: the tasked entity commits to perform the task (FIPA agree; JAUS/4D-RCS tasking handshake). Reported per task via TaskStatus/TaskDispositionReportContent, closing the gap that acknowledgment codes are message-level only. Candidate erratum for the core TaskStatusCode list; carried in ASX until adopted." .
+
+:TASKRJCT rdf:type owl:NamedIndividual , c2sim:TaskStatusCode ;
+    rdfs:comment "Task rejected: the tasked entity declines or cannot perform the task (FIPA refuse; the 4D/RCS 'cannot do because of condition xyz' reply). Use TaskDispositionReportContent to carry the rationale and the machine-readable infeasibility condition. Candidate erratum for the core TaskStatusCode list; carried in ASX until adopted." .
+
+:TASKSUSP rdf:type owl:NamedIndividual , c2sim:TaskStatusCode ;
+    rdfs:comment "Task suspended: execution paused with state retained, pending resumption (rule R17; JAUS Pause Mission analog). The task-level counterpart of PhaseSuspended. Candidate erratum for the core TaskStatusCode list; carried in ASX until adopted." .
 
 :ConfigureAutonomy rdf:type owl:NamedIndividual , c2sim:TaskActionCode ;
     rdfs:comment "Configure autonomy: to set the autonomy level, permissions, or behavior parameters of an autonomous system." .
@@ -800,7 +1079,7 @@ smx:hasConfidenceLevel rdf:type owl:DatatypeProperty .
     rdfs:comment "Suspend plan execution: to pause execution of the current plan while retaining state, pending resumption or amendment. With ResumePlanExecution, provides the mechanism for mid-mission re-tasking (suspend; transmit amended plan related by IMO 'is a modification of'; resume)." .
 
 :ResumePlanExecution rdf:type owl:NamedIndividual , c2sim:TaskActionCode ;
-    rdfs:comment "Resume plan execution: to resume a suspended plan, or the amended plan that superseded it." .
+    rdfs:comment "Resume plan execution: to resume a suspended plan. Where a suspended plan has been superseded (rule R16), Resume targets the superseding plan; the superseded plan itself MUST NOT be resumed." .
 
 :OverrideAction rdf:type owl:NamedIndividual , c2sim:TaskActionCode ;
     rdfs:comment "Override action: operator override of a specific autonomous action or pending decision, without suspending the whole plan." .

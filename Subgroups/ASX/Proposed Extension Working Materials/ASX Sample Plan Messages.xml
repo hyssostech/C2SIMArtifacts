@@ -21,7 +21,7 @@
   </Style>
  </Styles>
  <Worksheet ss:Name="Plan MessageBody Fields">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="53" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="59" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Element</Data></Cell>
     <Cell><Data ss:Type="String">Field</Data></Cell>
@@ -56,7 +56,7 @@
     <Cell><Data ss:Type="String">ASX (plan module)</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
-    <Cell><Data ss:Type="String">subclass of LOX PlanBody; draft v0.0.2</Data></Cell>
+    <Cell><Data ss:Type="String">subclass of LOX PlanBody; draft v0.0.3</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String"></Data></Cell>
@@ -131,6 +131,51 @@
     <Cell><Data ss:Type="String">plan applicability; plan pre-selection library (R14)</Data></Cell>
    </Row>
    <Row>
+    <Cell><Data ss:Type="String">hasPlanID</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">plan identity - exactly 1 in v0.0.3 (rule R16; JAUS AS6062 mission-ID precedent)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasSupersededPlanReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">mid-mission plan replacement (R16)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasLostLinkBehaviorCode</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">FailsafeBehaviorCode (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">ReturnToBase | ReturnToRallyPoint | LoiterInPlace | ContinueMission | TerminateMission</Data></Cell>
+    <Cell><Data ss:Type="String">lost-link failsafe floor (v0.0.3 rule R18)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasLostLinkTimeout</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Duration (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">link-loss duration before the failsafe activates (R18)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasRallyPointReference</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">required if the failsafe behavior is ReturnToRallyPoint</Data></Cell>
+   </Row>
+   <Row>
     <Cell><Data ss:Type="String">hasPlanPhase</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
     <Cell><Data ss:Type="String">PlanPhase (0..*)</Data></Cell>
@@ -191,7 +236,16 @@
     <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
     <Cell><Data ss:Type="String">ASX</Data></Cell>
     <Cell><Data ss:Type="String">ExecuteOnce | RetryOnFailure | RepeatUntilCondition | MaintainContinuously</Data></Cell>
-    <Cell><Data ss:Type="String">[!] PM1: no cadence/interval slot yet (v0.0.3 delta)</Data></Cell>
+    <Cell><Data ss:Type="String">cadence slot added in v0.0.3 (walk finding PM1): hasRepetitionInterval</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">hasRepetitionInterval</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">Duration (0..1)</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanPhase</Data></Cell>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">revisit cadence (v0.0.3, walk finding PM1); pauses under suspension (R17)</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">hasRepetitionUntilCondition</Data></Cell>
@@ -424,7 +478,7 @@
     <Cell><Data ss:Type="String">ConditionPredicateCode (1)</Data></Cell>
     <Cell><Data ss:Type="String">Condition</Data></Cell>
     <Cell><Data ss:Type="String">ASX</Data></Cell>
-    <Cell><Data ss:Type="String">12 predicates (see module)</Data></Cell>
+    <Cell><Data ss:Type="String">16 predicates (see module)</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
    </Row>
    <Row>
@@ -492,7 +546,7 @@
    </Row>
    <Row>
     <Cell><Data ss:Type="String">Normative rules</Data></Cell>
-    <Cell><Data ss:Type="String">R1-R14</Data></Cell>
+    <Cell><Data ss:Type="String">R1-R19</Data></Cell>
     <Cell><Data ss:Type="String">module ontology header</Data></Cell>
     <Cell><Data ss:Type="String">ASX</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
@@ -502,7 +556,7 @@
   </Table>
  </Worksheet>
  <Worksheet ss:Name="CASEVAC Scout Plan">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="22" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="23" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -538,6 +592,15 @@
     <Cell><Data ss:Type="String">boolean</Data></Cell>
     <Cell><Data ss:Type="String">true</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanID</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-plan-casevac-scout</Data></Cell>
+    <Cell><Data ss:Type="String">plan identity - exactly 1 in v0.0.3 (rule R16)</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">ASX</Data></Cell>
@@ -704,7 +767,7 @@
   </Table>
  </Worksheet>
  <Worksheet ss:Name="CASEVAC Transport Plan">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="16" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="17" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -740,6 +803,15 @@
     <Cell><Data ss:Type="String">boolean</Data></Cell>
     <Cell><Data ss:Type="String">true</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanID</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-plan-casevac-transport</Data></Cell>
+    <Cell><Data ss:Type="String">plan identity - exactly 1 in v0.0.3 (rule R16)</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">ASX</Data></Cell>
@@ -852,7 +924,7 @@
   </Table>
  </Worksheet>
  <Worksheet ss:Name="DroneResponse Search Plan">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="25" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="28" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -888,6 +960,33 @@
     <Cell><Data ss:Type="String">boolean</Data></Cell>
     <Cell><Data ss:Type="String">true</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanID</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-plan-search-1</Data></Cell>
+    <Cell><Data ss:Type="String">plan identity - exactly 1 in v0.0.3 (rule R16); value per walk v0.0.3 addendum</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasLostLinkBehaviorCode</Data></Cell>
+    <Cell><Data ss:Type="String">FailsafeBehaviorCode</Data></Cell>
+    <Cell><Data ss:Type="String">ReturnToBase</Data></Cell>
+    <Cell><Data ss:Type="String">lost-link failsafe floor (rule R18); per walk v0.0.3 addendum</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasLostLinkTimeout</Data></Cell>
+    <Cell><Data ss:Type="String">Duration</Data></Cell>
+    <Cell><Data ss:Type="String">60 s</Data></Cell>
+    <Cell><Data ss:Type="String">per walk v0.0.3 addendum</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">ASX</Data></Cell>
@@ -1081,7 +1180,7 @@
   </Table>
  </Worksheet>
  <Worksheet ss:Name="MDARS Standing Watch Plan">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="24" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="27" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -1117,6 +1216,33 @@
     <Cell><Data ss:Type="String">boolean</Data></Cell>
     <Cell><Data ss:Type="String">true</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasPlanID</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">UUID-plan-mdars-1</Data></Cell>
+    <Cell><Data ss:Type="String">plan identity - exactly 1 in v0.0.3 (rule R16); value per walk v0.0.3 addendum</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasLostLinkBehaviorCode</Data></Cell>
+    <Cell><Data ss:Type="String">FailsafeBehaviorCode</Data></Cell>
+    <Cell><Data ss:Type="String">LoiterInPlace</Data></Cell>
+    <Cell><Data ss:Type="String">out-of-contact failsafe floor (rule R18); per walk v0.0.3 addendum</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomousPlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">PlanBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasLostLinkTimeout</Data></Cell>
+    <Cell><Data ss:Type="String">Duration</Data></Cell>
+    <Cell><Data ss:Type="String">120 s</Data></Cell>
+    <Cell><Data ss:Type="String">per walk v0.0.3 addendum</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">ASX</Data></Cell>

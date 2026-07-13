@@ -1,12 +1,21 @@
 # Plan-Semantics Validation Walks
 
-Validation of the ASX plan-semantics module (`../ASX-PlanSemantics-Draft.ttl`,
-v0.0.2) against three scenarios, in the InstantiationReview walk format:
-instantiate each scenario end-to-end in the module vocabulary, record what fits,
-what does not, and what convention is missing. All Turtle instance blocks in the
-walks parse against the module (checked with rdflib). These walks are review
-input for the subgroup — findings below are **proposed v0.0.3 deltas**, not
-applied changes.
+Validation of the ASX plan-semantics module (`../ASX-PlanSemantics-Draft.ttl`)
+against three scenarios, in the InstantiationReview walk format: instantiate
+each scenario end-to-end in the module vocabulary, record what fits, what does
+not, and what convention is missing. All Turtle instance blocks in the walks
+parse against the module (checked with rdflib). These walks are review input
+for the subgroup.
+
+**Status (2026-07-12):** the walks were run against v0.0.2 and produced the
+nine deltas below; **eight are applied in the module TTL v0.0.3, and delta 8
+(the escalation-pattern naming) is a convention, recorded in
+Plan-Semantics-Analysis.md section 5.10** - together with the deltas from the
+standards-verification pass
+(`../../InstantiationReview/PlanSemantics-Walk.md` section 8: plan identity,
+suspension state, task disposition, lost-link failsafe, keep-in/keep-out,
+structured waypoints). Each walk ends with a "v0.0.3 addendum" exercising the
+constructs that resolve its findings.
 
 | Walk | Scenario | Why chosen |
 |---|---|---|
@@ -25,7 +34,7 @@ per-phase autonomy levels, and the deviation/rationale reports. The walks
 surfaced **no structural defects** — every finding is a vocabulary or
 convention delta, which is what a validation pass at this stage should produce.
 
-## Cross-walk findings — proposed v0.0.3 deltas
+## Cross-walk findings - proposed v0.0.3 deltas (APPLIED in v0.0.3; #8 as a documented convention)
 
 | # | From | Sev | Proposed delta |
 |---|---|---|---|

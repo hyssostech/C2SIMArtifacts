@@ -6,7 +6,7 @@ reference tab plus per-scenario tabs with columns
 Model | C2SIM Object | Parent Type | Field | Type | Value | Notes.
 
 Content instantiates the ASX plan-semantics module (ASX-PlanSemantics-Draft.ttl
-v0.0.2) for the three validated walk scenarios (PlanSemanticsWalks/). Finding
+v0.0.3) for the three validated walk scenarios (PlanSemanticsWalks/). Finding
 tags [Q]/[!] follow the InstantiationReview convention; PC/PD/PM IDs reference
 the walks' findings tables."""
 
@@ -22,7 +22,7 @@ SHEETS = []
 SHEETS.append(("Plan MessageBody Fields", REF_H, [
     ["Plan", "Root Element", "Message", "N/A", "C2SIM", "See hasC2SIMHeader", ""],
     ["hasC2SIMHeader", "C2SIMHeader", "Message", "C2SIM", "", "", "Same header fields as Order/Report workbooks"],
-    ["hasMessageBody", "AutonomousPlanBody", "Message", "ASX (plan module)", "", "", "subclass of LOX PlanBody; draft v0.0.2"],
+    ["hasMessageBody", "AutonomousPlanBody", "Message", "ASX (plan module)", "", "", "subclass of LOX PlanBody; draft v0.0.3"],
     ["", "", "", "", "", "", ""],
     ["AutonomousPlanBody", "Element", "lox:PlanBody", "ASX", "", "", "All additions optional atop a plain LOX plan"],
     ["isFromSender", "", "UUIDBase", "DomainMessageBody", "C2SIM", "", ""],
@@ -31,13 +31,19 @@ SHEETS.append(("Plan MessageBody Fields", REF_H, [
     ["hasGoal", "", "Goal (0..*)", "AutonomousPlanBody", "ASX", "", "inline Goal definition - the transport slot"],
     ["hasGoalReference", "", "UUIDBase (0..1)", "AutonomousPlanBody", "ASX", "", "the Goal this plan pursues"],
     ["hasContextCondition", "", "Condition (0..*)", "AutonomousPlanBody", "ASX", "", "plan applicability; plan pre-selection library (R14)"],
+    ["hasPlanID", "", "UUIDBase (1)", "AutonomousPlanBody", "ASX", "", "plan identity - exactly 1 in v0.0.3 (rule R16; JAUS AS6062 mission-ID precedent)"],
+    ["hasSupersededPlanReference", "", "UUIDBase (0..1)", "AutonomousPlanBody", "ASX", "", "mid-mission plan replacement (R16)"],
+    ["hasLostLinkBehaviorCode", "", "FailsafeBehaviorCode (0..1)", "AutonomousPlanBody", "ASX", "ReturnToBase | ReturnToRallyPoint | LoiterInPlace | ContinueMission | TerminateMission", "lost-link failsafe floor (v0.0.3 rule R18)"],
+    ["hasLostLinkTimeout", "", "Duration (0..1)", "AutonomousPlanBody", "ASX", "", "link-loss duration before the failsafe activates (R18)"],
+    ["hasRallyPointReference", "", "UUIDBase (0..1)", "AutonomousPlanBody", "ASX", "", "required if the failsafe behavior is ReturnToRallyPoint"],
     ["hasPlanPhase", "", "PlanPhase (0..*)", "PlanBody", "LOX", "", "phases may be AutonomousPlanPhase"],
     ["", "", "", "", "", "", ""],
     ["AutonomousPlanPhase", "Element", "lox:PlanPhase", "ASX", "", "", "inherits exactly-1 trigger + exactly-1 completion condition"],
     ["hasPhaseFailureCondition", "", "PhaseFailureCondition (0..1)", "AutonomousPlanPhase", "ASX", "AnyTaskFailed | AllTasksFailed", "aggregation policy only; timeout/guard failures implicit (R4)"],
     ["hasOnFailurePhaseReference", "", "UUIDBase (0..1)", "AutonomousPlanPhase", "ASX", "", "BT Fallback; target trigger MUST be OnPhaseFailureTrigger (R7)"],
     ["hasExecutionPolicyCode", "", "PhaseExecutionPolicyCode (0..1)", "AutonomousPlanPhase", "ASX", "SequentialInOrder | ParallelAll | ParallelAny | PriorityFallback", "subphase control flow; order via hasPhasePriority"],
-    ["hasRepetitionPolicyCode", "", "RepetitionPolicyCode (0..1)", "AutonomousPlanPhase", "ASX", "ExecuteOnce | RetryOnFailure | RepeatUntilCondition | MaintainContinuously", "[!] PM1: no cadence/interval slot yet (v0.0.3 delta)"],
+    ["hasRepetitionPolicyCode", "", "RepetitionPolicyCode (0..1)", "AutonomousPlanPhase", "ASX", "ExecuteOnce | RetryOnFailure | RepeatUntilCondition | MaintainContinuously", "cadence slot added in v0.0.3 (walk finding PM1): hasRepetitionInterval"],
+    ["hasRepetitionInterval", "", "Duration (0..1)", "AutonomousPlanPhase", "ASX", "", "revisit cadence (v0.0.3, walk finding PM1); pauses under suspension (R17)"],
     ["hasRepetitionUntilCondition", "", "Condition (0..1)", "AutonomousPlanPhase", "ASX", "", "closes the loop; LOX completion code closes each iteration"],
     ["hasRepetitionLimit", "", "nonNegativeInteger (0..1)", "AutonomousPlanPhase", "ASX", "", ""],
     ["hasGuardCondition", "", "Condition (0..*)", "AutonomousPlanPhase", "ASX", "", "conjunctive invariants (R12); violation fails phase (R4)"],
@@ -63,7 +69,7 @@ SHEETS.append(("Plan MessageBody Fields", REF_H, [
     ["hasDesiredEffectCode", "", "DesiredEffectCode (0..*)", "Goal", "C2SIM", "", "back-link to existing WHY vocabulary"],
     ["", "", "", "", "", "", ""],
     ["Condition", "Element", "C2SIMContent", "ASX", "", "", "typed parameters; no expression language"],
-    ["hasConditionPredicateCode", "", "ConditionPredicateCode (1)", "Condition", "ASX", "12 predicates (see module)", ""],
+    ["hasConditionPredicateCode", "", "ConditionPredicateCode (1)", "Condition", "ASX", "16 predicates (see module)", ""],
     ["isNegated", "", "boolean (0..1)", "Condition", "ASX", "default false", "guard polarity / else-branches"],
     ["hasConditionSubjectReference / hasConditionObjectReference", "", "UUIDBase (0..1 each)", "Condition", "ASX", "", "[!] PM3: EntityType-filter semantics of object ref to be stated"],
     ["hasThresholdValue / hasThresholdDuration", "", "double / Duration (0..1 each)", "Condition", "ASX", "", "units defined per predicate"],
@@ -71,7 +77,7 @@ SHEETS.append(("Plan MessageBody Fields", REF_H, [
     ["", "", "", "", "", "", ""],
     ["Report contents (see report tabs)", "PlanExecutionStatusContent / PlanDeviationReportContent", "C2SIM ReportContent", "ASX", "", "", "additive - degrade gracefully"],
     ["Control verbs (TaskActionCode)", "ConfigureAutonomy, SuspendPlanExecution, ResumePlanExecution, OverrideAction, AbortPlanExecution, AchieveGoal", "TaskActionCode individuals", "ASX", "", "", "TASKFAILD added to TaskStatusCode (candidate core erratum)"],
-    ["Normative rules", "R1-R14", "module ontology header", "ASX", "", "", "execution semantics OWL cannot carry; vocabulary + rules = the proposal"],
+    ["Normative rules", "R1-R19", "module ontology header", "ASX", "", "", "execution semantics OWL cannot carry; vocabulary + rules = the proposal"],
 ]))
 
 # ---------------------------------------------------------------- CASEVAC scout
@@ -79,6 +85,7 @@ SHEETS.append(("CASEVAC Scout Plan", H, [
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isFromSender", "UUIDBase", "(soldier UUID)", ""],
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isToReceiver", "UUIDBase", "(scout UGV UUID)", ""],
     ["LOX", "AutonomousPlanBody", "PlanBody", "isToBeExecutedNow", "boolean", "true", ""],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasPlanID", "UUIDBase", "UUID-plan-casevac-scout", "plan identity - exactly 1 in v0.0.3 (rule R16)"],
     ["ASX", "AutonomousPlanBody", "PlanBody", "hasGoal", "Goal", "G1 (inline, below)", "goal transported inline - v0.0.2 fix for untransmittable Goal"],
     ["ASX", "Goal G1", "C2SIMContent", "hasUUID", "UUIDBase", "UUID-G1", ""],
     ["ASX", "Goal G1", "Goal", "hasGoalCommitmentCode", "GoalCommitmentCode", "AchieveOnce", ""],
@@ -104,6 +111,7 @@ SHEETS.append(("CASEVAC Transport Plan", H, [
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isFromSender", "UUIDBase", "(soldier UUID)", ""],
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isToReceiver", "UUIDBase", "(transport UGV UUID)", ""],
     ["LOX", "AutonomousPlanBody", "PlanBody", "isToBeExecutedNow", "boolean", "true", ""],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasPlanID", "UUIDBase", "UUID-plan-casevac-transport", "plan identity - exactly 1 in v0.0.3 (rule R16)"],
     ["ASX", "AutonomousPlanBody", "PlanBody", "hasGoalReference", "UUIDBase", "UUID-G1", "same goal as scout plan (defined there)"],
     ["LOX", "AutonomousPlanBody", "PlanBody", "hasPlanPhase", "AutonomousPlanPhase", "T1 Load casualty", ""],
     ["LOX", "Phase T1", "PlanPhase", "hasPlanPhaseTrigger", "OnOrderTrigger", "(execute-plan task UUID)", ""],
@@ -123,6 +131,9 @@ SHEETS.append(("DroneResponse Search Plan", H, [
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isFromSender", "UUIDBase", "(operator UUID)", "one plan per sUAS (Task has exactly one performer); x4 identical shape"],
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isToReceiver", "UUIDBase", "(sUAS-1 UUID)", ""],
     ["LOX", "AutonomousPlanBody", "PlanBody", "isToBeExecutedNow", "boolean", "true", ""],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasPlanID", "UUIDBase", "UUID-plan-search-1", "plan identity - exactly 1 in v0.0.3 (rule R16); value per walk v0.0.3 addendum"],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasLostLinkBehaviorCode", "FailsafeBehaviorCode", "ReturnToBase", "lost-link failsafe floor (rule R18); per walk v0.0.3 addendum"],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasLostLinkTimeout", "Duration", "60 s", "per walk v0.0.3 addendum"],
     ["ASX", "AutonomousPlanBody", "PlanBody", "hasGoal", "Goal", "G1 Victim located", ""],
     ["ASX", "Goal G1", "Goal", "hasGoalCommitmentCode", "GoalCommitmentCode", "AchieveOnce", ""],
     ["ASX", "Goal G1", "Goal", "hasAchievementCondition", "Condition", "EstimateConfidenceAbove(victim-track, 0.7)", "achievement by BELIEF state - 'person detected with sufficient confidence'"],
@@ -151,6 +162,9 @@ SHEETS.append(("MDARS Standing Watch Plan", H, [
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isFromSender", "UUIDBase", "(host console UUID)", "one guard : many platforms; per-platform plan"],
     ["C2SIM", "AutonomousPlanBody", "DomainMessageBody", "isToReceiver", "UUIDBase", "(MDARS-1 UUID)", ""],
     ["LOX", "AutonomousPlanBody", "PlanBody", "isToBeExecutedNow", "boolean", "true", ""],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasPlanID", "UUIDBase", "UUID-plan-mdars-1", "plan identity - exactly 1 in v0.0.3 (rule R16); value per walk v0.0.3 addendum"],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasLostLinkBehaviorCode", "FailsafeBehaviorCode", "LoiterInPlace", "out-of-contact failsafe floor (rule R18); per walk v0.0.3 addendum"],
+    ["ASX", "AutonomousPlanBody", "PlanBody", "hasLostLinkTimeout", "Duration", "120 s", "per walk v0.0.3 addendum"],
     ["ASX", "AutonomousPlanBody", "PlanBody", "hasGoal", "Goal", "G1 Depot region secure", ""],
     ["ASX", "Goal G1", "Goal", "hasGoalCommitmentCode", "GoalCommitmentCode", "Maintain", "never-terminal commitment - unsayable in core tasking or v0.0.1"],
     ["ASX", "Goal G1", "Goal", "hasAchievementCondition", "Condition", "ThreatDetectedInArea(region A), isNegated=true", "maintain: no unresolved threat in region"],

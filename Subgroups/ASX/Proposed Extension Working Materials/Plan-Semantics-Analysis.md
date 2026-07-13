@@ -301,11 +301,12 @@ fragment in the ASX namespace importing LOX — rather than a freestanding ontol
 > [`ASX-PlanSemantics-Draft.ttl`](./ASX-PlanSemantics-Draft.ttl) (Turtle, same serialization
 > conventions as `CSIM_ASX.rdf`; entities in the `asx#` namespace under a separate module
 > ontology IRI importing lox, so it can be merged into the ASX ontology once reviewed).
-> Because OWL cannot express execution semantics, the module's header carries **fourteen
-> normative rules (R1–R14)** — outcome propagation, sequencing over failure, composite-AND
+> Because OWL cannot express execution semantics, the module's header carries **nineteen
+> normative rules (R1-R19)** - outcome propagation, sequencing over failure, composite-AND
 > latching, completion/failure precedence, fallback resolution, one-shot triggers,
-> fail-closed interoperability, and plan-library transmission — that entity comments
-> reference throughout. The vocabulary and the rules together are the proposal; the
+> fail-closed interoperability, plan-library transmission, and (v0.0.3) late-bound
+> products, plan identity/supersession, suspension, lost-link precedence, and waypoint
+> traversal - that entity comments reference throughout. The vocabulary and the rules together are the proposal; the
 > vocabulary alone would be ambiguous in exactly the ways an adversarial review found.
 
 Design rules observed throughout: UpperCamelCase classes; `hasXxx` properties; enumerations
@@ -539,18 +540,88 @@ fallback target with its `OnPhaseFailureTrigger`, without which it either could 
 validly expressed or could fire independently of the failure. If the replan phase succeeds,
 the transport phase counts as succeeded for its parent (R7) — the mission proceeds.
 
+### 5.10 v0.0.3 additions (validation-walk deltas + standards-matrix deltas)
+
+Version 0.0.3 of the TTL applies two evidence streams onto the v0.0.2 base -
+the nine deltas the validation walks demanded, and the deltas from the
+independent standards-verification pass
+(`../InstantiationReview/PlanSemantics-Walk.md`, section 8). Rules R15-R19
+carry the added execution semantics.
+
+**From the validation walks (PlanSemanticsWalks/):**
+
+- Deviation vocabulary rescoped: `BehaviorAdjusted` (operating-parameter
+  change) and `ExceptionRaised` (plan-anticipated exception entered its
+  scripted handling) added to `DeviationTypeCode` - decision recorded: one
+  explainability channel, not a sibling alert report type.
+- `hasRepetitionInterval` (max 1, Duration) on `AutonomousPlanPhase`: revisit
+  cadence for `RepeatUntilCondition`/`MaintainContinuously` (MDARS revisit,
+  MCM repeat-on-cadence); pauses under suspension (R17).
+- Predicates: `PayloadOnBoard` (embarkation state - "casualty loaded"),
+  `RemainingEnduranceBelow` (battery/fuel depletion, distinct from damage;
+  bingo-energy uses), `EntityImmobilized` (mobility state - "trapped").
+- R15 states the late-bound product convention normatively (pre-allocated
+  UUIDs bound by the producer at publication).
+- `hasActionTakenReference` (max 1) on the deviation report names the task or
+  phase activated in response.
+- The EntityType-filter semantics of `hasConditionObjectReference` are now
+  stated on the property.
+- The request-human-assistance chain-end pattern is named here: fallback
+  chain ends in a hold phase + deviation report + `OtherOrderReceived`
+  completion - the operator's new order is the escalation's resolution.
+
+**From the standards-matrix pass (prior art cited per construct):**
+
+- **Plan identity and supersession** (JAUS AS6062 mission IDs;
+  Remove/Replace Messages): `hasPlanID` (exactly 1 on `AutonomousPlanBody`),
+  `hasSupersededPlanReference` (max 1), rule R16. Gives the IMO task relation
+  its plan-granularity activation semantics and completes the mid-mission
+  re-tasking mechanism of sec. 5.7.
+- **Suspension as a state** (JAUS Pause/Resume Mission): `PhaseSuspended`
+  outcome (non-terminal; R1 updated), `TASKSUSP` task status, rule R17
+  (timeouts/cadence pause; guards re-checked at resume).
+- **Task-targeted disposition** (FIPA agree/refuse; 4D/RCS "cannot do
+  because"): `TASKACPT`/`TASKRJCT` task statuses +
+  `TaskDispositionReportContent` (subclass of `TaskStatus`) carrying rationale and a
+  machine-readable `hasInfeasibilityCondition`. Closes the per-task
+  accept/reject gap that message-level acknowledgment codes cannot target.
+- **Lost-link failsafe floor** (STANAG 4586 lost-link/flight termination;
+  MAVLink failsafe/RTL/rally): `FailsafeBehaviorCode` {`ReturnToBase`,
+  `ReturnToRallyPoint`, `LoiterInPlace`, `ContinueMission`,
+  `TerminateMission`}, `hasLostLinkBehaviorCode`/`hasLostLinkTimeout`/
+  `hasRallyPointReference` on the plan body, `LostLinkBehaviorActivated`
+  deviation, rule R18 (precedence: applicable contingency plan (R14) >
+  declared failsafe > platform default).
+- **Keep-in/keep-out enforcement** (MAVLink geofence; STANAG restricted
+  zones): `EntityInsideArea` predicate - as guard for keep-in, with
+  `isNegated` for keep-out; violation routes to a safe-hold fallback.
+- **Structured waypoints** (STANAG 4586 #13002-#13004; MAVLink mission
+  items; Nav2 waypoint task executors): `StructuredRoute` (subclass of `smx:Route`)
+  containing `RouteWaypoint` objects - explicit sequence number (replacing
+  the fragile serialization-order convention), per-point transit speed,
+  arrival time, loiter duration, and task-on-arrival reference; rule R19.
+
+Not adopted into v0.0.3 (still open, tracked in the review log): inter-task
+data flow beyond product references (PL5/Q-E), a Mission/Operation container
+(PL10), and the sec. 7 items (notably reactive cross-phase preemption, commanded
+re-allocation, report roll-up).
+
 ---
 
 ## 6. Recommendations
 
 1. **Adopt the plan-extension route** (module in the ASX namespace importing LOX) rather
    than a freestanding behavior ontology. It reuses proven machinery and matches the
-   standards-survey recommendation to model BT/HTN concepts directly with IEEE 1872.1/
-   1872.2 alignment — with the interoperability qualification of §4 made explicit
+   standards-survey recommendation to model BT/HTN concepts directly with IEEE
+   1872.1-2024 alignment (correction from the verification pass: 1872.2 verifiably
+   defines no Plan/Goal/Mission constructs of its own, so it is not a plan-semantics
+   alignment target) - with the interoperability qualification of sec. 4 made explicit
    (fail-closed unknown triggers, capability negotiation for gating constructs).
-2. **Raise three candidate core errata with the PDG:** a `TASKFAILD` task status,
-   task cancellation/suspension verbs, and (optionally) a runtime event-occurrence report —
-   all broadly useful beyond autonomy.
+2. **Raise the candidate core errata with the PDG** - now consolidated as a
+   six-item package in [`PDG-Change-Proposals.md`](./PDG-Change-Proposals.md):
+   `TASKFAILD`; the `TASKACPT`/`TASKRJCT`/`TASKSUSP` handshake codes; the
+   execution-control verbs; a runtime event-occurrence report; the two LOX
+   PlanPhase errata; and PlanBody identity - all broadly useful beyond autonomy.
 3. **Sequence the work** along the subgroup's decision log: `Condition` + trigger
    subclasses first (feeds Q-D and the Q-N coverage terminator), then
    `HumanApprovalTrigger` + LoA linkage (W1/Q-K — the log's flagged central gap), then
@@ -630,4 +701,7 @@ walk set for instantiation review (§6.5).
 [`PlanSemanticsWalks/`](./PlanSemanticsWalks/). All three scenarios instantiate end-to-end
 in the module vocabulary (Turtle blocks validated against the module); the walks surfaced
 no structural defects and nine vocabulary/convention deltas proposed for v0.0.3 (see the
-walks' README for the consolidated list).
+walks' README for the consolidated list). **Update 2026-07-12:** all nine deltas are now
+applied in TTL v0.0.3 (sec. 5.10), together with the standards-matrix deltas (plan identity,
+suspension, task disposition, lost-link failsafe, keep-in/keep-out, structured waypoints);
+each walk carries a "v0.0.3 constructs exercised" addendum.
