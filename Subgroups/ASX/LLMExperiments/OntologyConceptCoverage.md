@@ -16,11 +16,13 @@ concept, not by message-workbook sheet.
 
 - This analysis was grounded on ASX ontology **v0.0.1**
   (`Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf`, imports LOX): classes
-  `RoboticSystem` -> `SingleRoboticSystem`, `CollectiveRoboticSystem`, `Swarm`;
-  `Robot`; `UAV`; `UGV`; `Sensor`; `Actuator`; `Device`/`ElectricDevice`;
-  `Artifact`/`ArtificialSystem`; `PhysicalEnvironment`, `RoboticEnvironment`;
-  object property `hasAutonomousRoleCode` with individuals `FullAuto`,
-  `Automated`, `Teleop`, `ReCont`, `ComputerProcess`.
+  `RoboticSystem` -> `SingleRoboticSystem`,
+  `CollecticeRoboticSystem` (sic - the misspelling is in the RDF), `Swarm`;
+  `Robot`; `UAV`; `UGV`; `Sensor`; `Actuator`;
+  `Device`/`ElectricDevice`; `Artifact`/`ArtificialSystem`; `PhysicalEnvironment`,
+  `RoboticEnvironment`; object property `hasAutonomousRoleCode` with `Code`
+  individuals `FullAuto`, `Automated`, `Teleop`, `ReCont` (a fifth individual,
+  `ComputerProcess`, is typed `EventCode`, not an autonomy code).
 - **v0.0.3 update (Michael's `Ontology/C2SIM_ASX-v003.rdf`, on branch
   `michael_d`; a new file in a new location, not yet merged here - v0.0.1 still
   exists too).** The live model has moved on since this analysis, and several
@@ -30,9 +32,10 @@ concept, not by message-workbook sheet.
   `SensorObservation`, an `AutonomyLevelCode` class, and the Video Detection
   Report cluster (`VideoDetectionReportContent`, `MediaReference`,
   `MediaTypeCode`, `AnalysisComment`, `AnalysisConcept`) plus the first datatype
-  properties; it **removes** the `Swarm` class. Gaps addressed are annotated
-  inline below; the full finding-by-finding delta is
-  `InstantiationReview/Issues-And-Comments-Log.md` section 9.
+  properties; it **removes** the `Swarm` class (the `CollecticeRoboticSystem`
+  misspelling persists). Gaps addressed are annotated inline below; the full
+  finding-by-finding delta is `InstantiationReview/Issues-And-Comments-Log.md`
+  section 9.
 - ASX message design (from `InstantiationReview/Message-Instantiation-Coverage.md`):
   ASX `Task` with `hasAffectedEntity` / `DesiredEffectCode`; `Report Base
   Attributes` (MediaReference, AnalysisComment, AnalysisConcept, MediaTypeCode,
