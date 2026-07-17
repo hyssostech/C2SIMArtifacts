@@ -88,6 +88,7 @@ renumbered.)
 | C6 | HIGH | INSTANTIATED | Task/effect axis (engagement, manipulation, delivery) not walked | Walked: Fire Support (`FireSupport-Walk.md`) + Logistics/Engineering/USV Rescue (`TaskEffect-Batch-Walk.md`). Tabs: Fire Support Order, BDA Report, Logistics Delivery Order, Engineering Task Order, USV Rescue Order, Delivery Confirmation Report. Surfaced W1-W3 (6e) and L/E/R (6f). Route-clearance / companion / urban examined in the redundancy pass (6g; a Route Clearance Order tab was added). **[deck]** |
 | C7 | HIGH | INSTANTIATED | Sourced scenarios (maritime MCM, subterranean SubT, sustainment) not integrated | Walked in `SourcedScenarios-Walk.md`; 7 tabs added (MCM Init, SubT Team Init, MCM Cross-Cue Neutralize, Explore Area Order, Contested Resupply Order, Naval Mine Detection Report, Generic Detection Report). Corroborated X1/N2/P1/Y; added G1-G10 (6h). (Counter-UAS, HMT, and SAR were un-extracted at this stage; all three were later extracted in the validation pass - see C8/6j.) **[deck]** |
 | C8 | HIGH | EVIDENCED | Validation holes (explainability, CBRN, EW, persistence) unexercised by any sourced mission | The sourcing track extracted all 9 `Documents-Needed` requests; integrated in `ValidationEvidence-Walk.md` (6j). Holes now grounded; Q-Q/Q-F/Q-H gain concrete schemas (BML WhoMeasuredType/ResourceType; Agrawal explanation). Added G13/Q-V; 2 tabs. **[deck]** |
+| C9 | HIGH | INSTANTIATED | SME drone-warfare thread (LIRC baseline, 2024 threat/TTP update, OPFOR targeting) not integrated | Walked in `DroneWarfare-LIRC-OPFOR-Walk.md`; 5 tabs added (LIRC Company Init; LIRC Kill-Box Engagement Order; Counter-UAS Defeat Order; OPFOR Targeting Handoff; LIRC Strike BDA Report). Supplies a concrete candidate answer to W1/Q-K (the kill-box / weapons-control construct); added G14-G19 (6k). Corroborated W1/W2/W3/N1/N2/G3/G7/G8/G11/D1. **[deck]** |
 
 ## 6b. CASEVAC walk findings (from CASEVAC-Walk.md)
 
@@ -276,6 +277,42 @@ neutral/SAR G10/R2/Q-N (SAR_Kim + CBRN + Explainability), formation Q-U
 Two tabs added (`.xml`): `Hazard Area Map Report` (Report), `MUM-T High-Level
 Tasking` (Order).
 
+## 6k. Drone-warfare walk findings (from DroneWarfare-LIRC-OPFOR-Walk.md)
+
+The SME-directed drone-warfare thread - Morris 2018 LIRC baseline, its 2022-2024
+threat/TTP update, and the Rosenberg JPMRC-AK 24-02 OPFOR commercial-sUAS targeting
+run (`LLMExperiments/PaperSummaries/V2Extractions/`) - walked in
+`DroneWarfare-LIRC-OPFOR-Walk.md`. This is the thread that lands on **W1/Q-K**
+(autonomy-to-engagement-authority), the review's most central open finding: the LIRC
+baseline carries a fully worked doctrinal control mechanism for autonomous lethal
+authority, so it supplies a candidate *answer*, not just another instance of the gap.
+
+**Corroborated:** W1/Q-K (engagement authority <- LIRC kill-box mechanism, strongest
+instance in the library), W2/Q-L (weapon/munition typing <- mixed UGV armament +
+loitering munitions), W3 (BDA ReportContent <- LIRC + OPFOR BDA), N1/Q-M (area as
+subject <- kill box as authorization-bearing, civilian-cleared area), G3/Q-P
+(cross-cueing + shared track <- OPFOR sensor-to-shooter handoff), N2 (persistence <-
+OPFOR observer on station through the strike), G7 (MoE <- ~50% attrition; ~7-day drone
+life / ~10% completion), G8/Q-S (decoy <- decoy vehicles defeat discrimination),
+G1/Q-O (denied comms <- GPS-denied operation), G11/Q-T + D1/Q-D (environment
+conditions + graded/phase-varying autonomy), P1 (platform typing <- armed UGV,
+loitering munition, FPV, COTS quadcopter).
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G14 | HIGH | OPEN | Weapons-control-status + kill-box construct | An authorization-bearing area (weapons-control status hold/tight/free x geo bound x time window x civilian-clearance state x permitted target type) that gates autonomous lethal engagement. Grep of C2SIM/SMX/LOX: none of weapons-control-status, kill box, free-fire/no-fire area, FSCM exists. A concrete model that ANSWERS W1/Q-K and unifies it with N1/Q-M. **[deck]** |
+| G15 | MED | OPEN | Graded, phase-varying engagement authority | LIRC shifts weapons hold (movement) -> tight (pre-LD) -> autonomous-in-kill-box; authority is temporal/graded, sharpening D1/Q-D (autonomy varies by mission phase). |
+| G16 | MED | OPEN | Loitering munition / FPV as a platform-munition hybrid | Flies, senses, then is expended; size tiers (mini/tactical/long-range). Extends P1/G5 (platform) and W2/Q-L (munition); neither captures the hybrid. `loiter`/`munition` class absent (grep). |
+| G17 | MED | OPEN | Counter-UAS engagement | Mostly REUSE - `lox#AIRDEF`, `lox#ENGAGE`, `lox#ATTACK`, `lox#DETECT`, `lox#JAM` exist; residual is an sUAS/UAS target class and the detect->defeat + soft-kill(JAM)/hard-kill(ENGAGE) coupling. |
+| G18 | MED | OPEN | Adversarial EW against own autonomy | GPS-denial, control-link jamming, and drone-hijack (control seized in ~25 s) are threats TO friendly autonomy; extends G1/Q-O with a vulnerability + countermeasure (INS fallback, encrypted FH / fiber-optic link). Relates to Y4 (EW sensing). |
+| G19 | MED | OPEN | Targeting construct (target list + sensor-to-shooter) | A high-value/high-payoff target LIST + nomination/prioritization (targeting board) and the cue->validate->grid->fire->BDA->adjust cycle (OPFOR). Target-list/priority object is net-new (grep: absent); the cross-cue part is G3. |
+
+Grounding note: `lox#AIRDEF/ENGAGE/ATTACK/DETECT/JAM`, `RuleOfEngagement`,
+`DesiredEffectCode`, `hasAffectedEntity`, `AuthorizationHeader`, `TacticalArea`/
+`MapGraphic`, and the ASX autonomy individuals all exist and are reused; the
+authority-gating (G14/G15), the weapon/munition and small-UAS typing (G16/G17), the
+EW-vulnerability (G18), and the target-list (G19) do not.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -340,6 +377,21 @@ Tasking` (Order).
   spacing, observation-pose pattern) beyond single `RelativeLocation`. (Resolves G12.)
 - **Q-V** Add **capability self-report** (a robot declares its mounted/reconfigurable
   equipment; tasks assigned by capability) - BML `WhoHoldingType`. (Resolves G13.)
+- **Q-W [deck]** Model a **weapons-control-status + engagement-authorization area**
+  (kill box): an area that carries a weapons-control status (hold/tight/free), a
+  civilian-clearance state, a time window, and permitted target types, and that gates
+  whether an autonomous system may take a lethal action inside it. This unifies Q-K
+  (engagement authority) and Q-M (area as subject) and gives both a concrete,
+  doctrine-grounded shape; the graded/phase-varying form ties to Q-D. (Resolves G14/G15;
+  sharpens Q-K/Q-M.) This is the drone-warfare thread's highest-value contribution: the
+  standard's hardest ASX question (may an autonomous system take a lethal action, and
+  under what approval?) gets a proposed element from real doctrine, not just a restated
+  gap.
+- **Q-X** Type **loitering munitions / FPV** as a platform-munition hybrid with size
+  tiers (mini/tactical/long-range), and add **counter-UAS** as a detect->defeat coupling
+  over the existing air-defense verbs (`AIRDEF`/`ENGAGE`/`JAM`) with an sUAS target
+  class; include an **EW-vulnerability / countermeasure** annotation for adversary
+  GPS-denial and control-link seizure. (Resolves G16/G17/G18; extends Q-L/Q-R/Q-O.)
 - **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
   `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
   (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
@@ -629,3 +681,19 @@ group should converge on one canonical version/location.
   now closes (maritime USV/UUV) or partly touches (AutonomyLevelCode; media-based
   report). No other InstantiationReview file needed changes - the folder was
   already reconciled and verified against Michael's actual file.
+- 2026-07-17: Integrated the SME-directed drone-warfare thread (Morris 2018 LIRC
+  baseline + 2022-2024 Infantry Magazine threat/TTP update + Rosenberg JPMRC-AK 24-02
+  OPFOR commercial-sUAS targeting), extracted in
+  `LLMExperiments/PaperSummaries/V2Extractions/` and walked in
+  `DroneWarfare-LIRC-OPFOR-Walk.md`. Added section 6k (G14-G19), coverage C9, decisions
+  Q-W (weapons-control-status + kill-box authorization area) and Q-X (loitering-munition/
+  FPV typing + counter-UAS + EW vulnerability), and 5 `.xml` tabs (LIRC Company Init;
+  LIRC Kill-Box Engagement Order; Counter-UAS Defeat Order; OPFOR Targeting Handoff;
+  LIRC Strike BDA Report). Headline: the LIRC kill-box / weapons-control mechanism is a
+  concrete candidate answer to the review's most central open finding (W1/Q-K,
+  autonomy-to-engagement-authority) and unifies it with N1/Q-M (area as subject);
+  grounded against C2SIM/SMX/LOX (weapons-control-status, kill box, loiter/munition,
+  target-list all absent; the air-defense/engage/jam verbs and ROE exist and are
+  reused). Corroborated W1/W2/W3/N1/N2/G3/G7/G8/G11/D1. The `.xlsx` originals remain
+  untouched (S4); each `.xml` file's existing line-ending convention was preserved
+  (additions only).

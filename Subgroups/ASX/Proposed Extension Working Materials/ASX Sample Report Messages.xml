@@ -1862,4 +1862,45 @@
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
+ <Worksheet ss:Name="LIRC Strike BDA Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(battle damage assessment)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] W3: no effect-achieved / BDA ReportContent; TaskStatus says the task ran, not that the target was destroyed.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(post-strike: 1 ADA veh, 1 arty, 2 IFV destroyed; 12 casualties KB1)</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - scene observable; effect-achieved has no home.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(own attrition)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">systems lost to countermeasures</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">~50% of autonomous systems failed</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G7: measure-of-effectiveness / attrition attribute (also ~7-day drone life, ~10% mission completion in the 2024 update).</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>

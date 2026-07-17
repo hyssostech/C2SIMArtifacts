@@ -1359,4 +1359,235 @@
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
+ <Worksheet ss:Name="LIRC Kill-Box Engagement Order">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="11" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(autonomous attack UAS / armed UGV)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">hasAuthorizationHeader</Data></Cell>
+    <Cell><Data ss:Type="String">AuthorizationHeader</Data></Cell>
+    <Cell><Data ss:Type="String">(issuer credentials)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] W1: message-sender auth only - NOT the commander's authorization to open the kill box.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM / ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Engage Task</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell><Data ss:Type="String">TaskActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">ENGAGE / ATTACK</Data></Cell>
+    <Cell><Data ss:Type="String">Works - lox#ENGAGE / lox#ATTACK exist.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasAffectedEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(enemy vehicle)</Data></Cell>
+    <Cell><Data ss:Type="String">Materiel target via hasAffectedEntity - works.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasDesiredEffectCode</Data></Cell>
+    <Cell><Data ss:Type="String">DesiredEffectCode</Data></Cell>
+    <Cell><Data ss:Type="String">Destroy / Suppress</Data></Cell>
+    <Cell><Data ss:Type="String">Works - DesiredEffectCode exists.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOX</Data></Cell>
+    <Cell><Data ss:Type="String">(task)</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasRuleOfEngagement</Data></Cell>
+    <Cell><Data ss:Type="String">RuleOfEngagement</Data></Cell>
+    <Cell><Data ss:Type="String">(ROE)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - ROE exists (LOX).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(kill box)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">authority = f(autonomy, area, time, civilian-clear)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">autonomous engagement of humans ONLY inside a confirmed-clear kill box</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G14 (HIGH): the concrete answer to W1/Q-K; authority gated by weapons-control status + bounded area + civilian-clearance + time window + target type. None modeled.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(weapons-control transition)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">hold -&gt; tight -&gt; free by phase</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Hold(move) -&gt; Tight(pre-LD) -&gt; humans only in kill box</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G15: engagement authority varies by mission PHASE - graded/temporal, sharpening D1/Q-D.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(kill box)</Data></Cell>
+    <Cell><Data ss:Type="String">TacticalArea</Data></Cell>
+    <Cell><Data ss:Type="String">(civilian-clearance state)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">zero civilians confirmed</Data></Cell>
+    <Cell><Data ss:Type="String">[+] N1/Q-M: area needs a clear/denied state to carry authority.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(target discrimination)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">thermal/shape; decoy risk</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">military-vs-civilian vehicle; ~50% defeated by decoys</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G8/Q-S: decoy vehicles defeat discrimination.</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="Counter-UAS Defeat Order">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(squad counter-UAS team)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM / ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Detect Task</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell><Data ss:Type="String">TaskActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">DETECT</Data></Cell>
+    <Cell><Data ss:Type="String">Works - lox#DETECT exists (cue the counter-UAS engagement).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM / ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Defeat Task</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell><Data ss:Type="String">TaskActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">AIRDEF / ENGAGE / JAM</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G17: mostly REUSE - lox#AIRDEF/ENGAGE/ATTACK/JAM exist; residual is soft-kill (JAM) vs hard-kill (ENGAGE) choice + the detect-&gt;defeat coupling.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">hostile sUAS</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">target class</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">FPV drone / quadcopter</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G17: sUAS/UAS as a TARGET class is absent; hasAffectedEntity carries a UUID but no small-UAS target type.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(own UAS)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">EW vulnerability / countermeasure</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">GPS-denied; control-link jam; hijack in ~25 s</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G18: adversary EW that denies GPS or SEIZES a friendly drone extends G1/Q-O; needs a vulnerability + countermeasure (INS fallback, encrypted FH / fiber-optic link).</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="OPFOR Targeting Handoff">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">isFromSender / isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(drone operator -&gt; S2 -&gt; fires cell)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] X1/G3: sensor-to-shooter handoff; a sensor cues a shooter via a shared target.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">COTS quadcopter</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">DJI Phantom 4 Pro (COTS, low autonomy)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] P1/D1: COTS commercial platform, RemoteControl autonomy.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">validated target</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">shared track/contact</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">10-digit grid + HPT type</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G3/G19: no track/contact object to carry a validated target from sensor to shooter (reuses M1 inline def).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">HPT list / target board</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">target nomination + priority</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">at least one of everything on the HVT list</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G19: no high-value/high-payoff target-list or prioritization construct (grep: absent).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">(drone on station)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">persistent observation through strike</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">observe -&gt; BDA -&gt; adjust fire</Data></Cell>
+    <Cell><Data ss:Type="String">[+] N2: persistence - the observer stays on station through the strike to adjust.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(rotational unit)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">survivability / signature</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">disperse; displace ~24h; terrain-tied camo; overhead cover</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G11/Q-T + G12/Q-U: signature-management + dispersion/displacement posture as a constraint; no survivability-posture construct.</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>

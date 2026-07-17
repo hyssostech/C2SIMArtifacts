@@ -61,6 +61,13 @@ in the `.xlsx` changed.
   validation holes to evidenced and captures concrete report schemas to adopt -
   most importantly BML `WhoMeasuredType`, prior art in C2SIM's lineage for the
   measurement report (Q-Q).
+- [DroneWarfare-LIRC-OPFOR-Walk.md](./DroneWarfare-LIRC-OPFOR-Walk.md) - the
+  SME-directed drone-warfare thread (Morris 2018 LIRC baseline, its 2022-2024
+  threat/TTP update, and the Rosenberg JPMRC-AK 24-02 OPFOR commercial-sUAS targeting
+  run). Lands on W1/Q-K: the LIRC kill-box / weapons-control mechanism is a concrete
+  candidate answer to autonomous engagement authority (G14, decision Q-W), unifying it
+  with N1/Q-M; adds G15-G19 (graded/phase authority, loitering-munition typing,
+  counter-UAS, adversarial EW, target-list). 5 tabs added to the `.xml`.
 - [Documents-Needed.md](./Documents-Needed.md) / [Documents-Found.md](./Documents-Found.md)
   - the sourcing brief and the sourcing track's point-by-point response.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,

@@ -809,4 +809,90 @@
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
+ <Worksheet ss:Name="LIRC Company Init">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="9" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">armed combat UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Armed-UGV</Data></Cell>
+    <Cell><Data ss:Type="String">[+] P1: same Robot-vs-Platform double-typing as every platform.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(armed UGV)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">autonomy level</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">FullAuto / Teleop</Data></Cell>
+    <Cell><Data ss:Type="String">[+] D1/P6: which autonomy vocabulary; here it must also bind to engagement authority (W1).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">weapon (30mm/Javelin/Stinger)</Data></Cell>
+    <Cell><Data ss:Type="String">Equipment / Payload</Data></Cell>
+    <Cell><Data ss:Type="String">(armament)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">gun / ATGM / SAM</Data></Cell>
+    <Cell><Data ss:Type="String">[+/!] W2: weapon/munition not typed; one UGV carries gun + antitank + air-defense weapons.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">autonomous attack UAS</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Loitering-munition (Switchblade-class)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G16: a loitering munition is a platform AND a munition (flies, senses, then is expended).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">loitering munition</Data></Cell>
+    <Cell><Data ss:Type="String">Robot/Platform + Payload</Data></Cell>
+    <Cell><Data ss:Type="String">tier</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">mini / tactical / long-range</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G16: size tiers have no typing; extends P1/G5 (platform) + W2/Q-L (munition).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">FPV attack drone</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">autonomy</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">RemoteControl / FPV</Data></Cell>
+    <Cell><Data ss:Type="String">[+] D1/P6: the FPV autonomy value shows up concretely; cheap expendable strike.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">kill box 1/2/3</Data></Cell>
+    <Cell><Data ss:Type="String">TacticalArea / MapGraphic</Data></Cell>
+    <Cell><Data ss:Type="String">(engagement-authorization area)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">geo bound + time window + civilian-clear + weapons-status</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G14: no weapons-control-status and no kill-box/authorization-area construct; unifies N1 (area as subject) + W1 (engagement authority).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">weapons-control status</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">hold / tight / free</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Hold (at movement)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G14: hold/tight/free is absent from the ontology (grep: none).</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
 </Workbook>
