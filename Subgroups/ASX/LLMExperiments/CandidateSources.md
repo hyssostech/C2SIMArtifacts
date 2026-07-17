@@ -81,3 +81,28 @@ Open access, genuinely extractable, and each fills a distinct gap:
 Adding these three alone extends the library into subterranean, undersea, and
 logistics/CASEVAC missions while keeping the same source pedigree as the existing
 set.
+
+## Added since drafting (SME-directed, 2026-07)
+
+An SME provided a baseline scenario plus four update sources, now extracted/enhanced in
+[PaperSummaries/V2Extractions](./PaperSummaries/V2Extractions) and saved under
+[References](./References). These fill coverage the gap list above did not name:
+
+- **Company-scale combined-arms manned-unmanned movement to contact** (Morris 2018 LIRC)
+  - a full offensive with integrated autonomous fires, short-range air defense,
+  contested logistics, and CASEVAC under kill-box weapons-control. The library's prior
+  land scenarios were ISR/escort/point-defense/breach/convoy, not a combined-arms
+  assault. Record:
+  [LIRC_MovementToContact_Morris2018.md](./PaperSummaries/V2Extractions/LIRC_MovementToContact_Morris2018.md).
+- **Small-drone-warfare threat environment** (FPV drones, loitering munitions, modified
+  COTS, one-way attackers, kamikaze UGV) with **dense EW / GPS denial** and **organic
+  counter-UAS** - modeled as an explicit scenario constraint, plus the cost-exchange
+  inversion (cheap drones vs expensive platforms). This partially closes the
+  counter-UAS and human-machine-teaming gaps above from the receiving/red side. Record:
+  [LIRC_MovementToContact_Updated2024.md](./PaperSummaries/V2Extractions/LIRC_MovementToContact_Updated2024.md).
+
+- **RED / OPFOR reconnaissance-strike targeting** (Rosenberg JPMRC-AK 24-02) - the
+  library's first red-perspective scenario and first find-fix-target-BDA targeting
+  cycle: COTS sUAS cueing indirect fires against high-payoff targets, plus the
+  reciprocal counter-UAS survivability behavior. Record:
+  [OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md](./PaperSummaries/V2Extractions/OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md).
