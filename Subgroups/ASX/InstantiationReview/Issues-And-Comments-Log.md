@@ -697,3 +697,20 @@ group should converge on one canonical version/location.
   reused). Corroborated W1/W2/W3/N1/N2/G3/G7/G8/G11/D1. The `.xlsx` originals remain
   untouched (S4); each `.xml` file's existing line-ending convention was preserved
   (additions only).
+- 2026-07-17: Reconciled the drone-warfare thread across all shared artifacts (overall
+  consistency pass). Extended the sourcing session's concept bridge
+  (`LLMExperiments/OntologyConceptCoverage.md`) with S7-S9 (LIRC baseline / update /
+  OPFOR) - a compact concept-x-scenario matrix plus both readings updated (they close
+  the task/effect + graded-LoA + ROE/C2 validation holes and add the engagement-authority
+  / kill-box expressiveness gap). Synced every count that the integration changed:
+  message instantiations 4 -> ~38 (Init 0 -> 7, Orders 2 -> 17, Reports 2 -> 14);
+  decisions ~22 (Q-A..Q-V) -> ~24 (Q-A..Q-X); coverage C1-C8 -> C1-C9; sourced-record
+  corpus 12 -> 15 - across Group-Briefing.md, this log, the InstantiationReview README,
+  Presenter-Notes.md, and Anticipated-QA.md. Regenerated the findings deck from
+  `build_findings_deck.py` (counts + the kill-box/Q-W candidate answer on the Fire
+  Support slide + Q-W/Q-X in the decision register + decoder ring); verified it
+  programmatically (still 28 slides; new anchors present, stale ones gone). Corrected a
+  pre-existing stale slide count in the briefing / presenter notes (the deck is and was
+  28 slides, not 29; committed and regenerated .pptx both 28) and the matching
+  reading-guide slide-number references. No verified finding changed; this pass only
+  propagates the drone-warfare additions and fixes the counts they touched.

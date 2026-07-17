@@ -18,13 +18,13 @@ in the `.xlsx` changed.
 ## Start here
 
 - [Group-Briefing.md](./Group-Briefing.md) - one-page bearings for the sub-group:
-  what this is, what was found, the ~22 decisions, and where the ball is now.
+  what this is, what was found, the ~24 decisions, and where the ball is now.
 
 ## Contents
 
 - [Message-Instantiation-Coverage.md](./Message-Instantiation-Coverage.md) -
   the pre-walk `.xlsx` baseline snapshot (2026-06-10) that motivated the review;
-  the current instantiation state is tracked in the log (C1-C8).
+  the current instantiation state is tracked in the log (C1-C9).
 - [Initialization-Walk.md](./Initialization-Walk.md) - a proposed walk of the
   three named-but-not-yet-filled Initialization scenarios
   (`UAV with Video Init`, `UAV Patrol Initialization`, `Swarm Initialization`),

@@ -13,7 +13,7 @@ several things came back as "already exists" (rules of engagement,
 task verbs BREACH / ENGAGE / ATTACK / RESCUE / RECOVR) and two would-be gaps were
 withdrawn (Route and phased
 planning already exist). The genuinely-missing items are the message/attribute
-layer and the ~22 decisions. (The re-check also surfaced one base-standard nit
+layer and the ~24 decisions. (The re-check also surfaced one base-standard nit
 we offer upstream: `AuthorizationHeader`'s two cardinality restrictions use
 `owl:onDataRange C2SIM#angle` - almost certainly unintended.)
 
@@ -86,7 +86,7 @@ autonomous-CASEVAC coordination mission. The rest of the remaining work is
 modeling, not sourcing.
 
 **Q. What would you need from us to move forward?**
-The ~22 decisions, structure first. Once Q-A..Q-D are settled, the content-type
+The ~24 decisions, structure first. Once Q-A..Q-D are settled, the content-type
 decisions and the attribute layer follow. We can turn any decision into concrete
 message instances quickly, since the walks already show the shape.
 

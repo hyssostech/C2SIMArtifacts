@@ -2,7 +2,7 @@
 
 One-page bearings on what this review is, what it found, and what the group needs
 to decide. Detail is in the other files in this folder; the deck
-(`ASX-Instantiation-Findings.pptx`, 29 slides) is the presentation version - its
+(`ASX-Instantiation-Findings.pptx`, 28 slides) is the presentation version - its
 last three slides ("How to use this material" / the finding-ID decoder ring /
 "Where to dig deeper") are the navigation aids for everything below, and every
 slide carries speaker notes with the talk track.
@@ -23,13 +23,14 @@ been applied to the OWL model or to Elizabeth's message workbooks.
 - Walked scenarios into concrete message tabs across Init/Order/Report: the named
   Init cases, CASEVAC, sensing (video / CBRN / EW / GPR), swarm, fire support,
   logistics / engineering / rescue, maritime MCM, subterranean SubT, sustainment,
+  the SME drone-warfare thread (LIRC baseline / 2024 update / OPFOR targeting),
   plus a redundancy pass.
 - Integrated a parallel scenario-sourcing effort that **grounded every gap in a
   real mission** (nine sourced missions).
 - Took the instantiation from **4 worked message instances (0 Initialization) to
-  ~33** across Init / Order / Report (~29 drafted in this review), spanning 20+
+  ~38** across Init / Order / Report (~34 drafted in this review), spanning 20+
   scenarios - all on the branch, pending group review.
-- Produced a 29-slide findings deck (a one-slide summary and process +
+- Produced a 28-slide findings deck (a one-slide summary and process +
   contributions slides up front; a reading guide by time budget, a finding-ID
   decoder ring, and a "Where to dig deeper" reference map at the end; a
   per-slide "Dig deeper" pointer to the doc behind each finding; and speaker
@@ -54,9 +55,11 @@ Recurring themes (all normal for a v0.0.x model being built out):
   the spreadsheet tracks are at different stages and need reconciling.
 - The **report model started from a camera**; extending it to other sensors
   (CBRN/EW/measurements) is still to do.
-- Not yet defined: **autonomous engagement authority**, **robot-to-robot
-  coordination**, **"explainable reasons"**, and an **area** as the subject of a
-  task/report.
+- Being defined: **robot-to-robot coordination**, **"explainable reasons"**, and an
+  **area** as the subject of a task/report. For **autonomous engagement authority**,
+  the SME drone-warfare thread now supplies a concrete candidate model - the LIRC
+  weapons-control / kill-box construct (G14, decision Q-W) - rather than only naming
+  the gap.
 
 ## Where the model is now (v0.0.3)
 
@@ -85,7 +88,7 @@ decisions are *re-adopt*, not *invent*:
 
 ## What the group needs to decide
 
-The review distills to ~22 decisions (Q-A..Q-V in `Issues-And-Comments-Log.md`),
+The review distills to ~24 decisions (Q-A..Q-X in `Issues-And-Comments-Log.md`),
 in two groups:
 - **Model structure (decide first):** UAV/robot typing (Q-A), swarm ->
   CollectiveEntity (Q-B), one sensor model (Q-C), one autonomy vocabulary (Q-D).
@@ -101,7 +104,7 @@ in two groups:
   grounded in a real mission (one nice-to-have remains: a dedicated
   autonomous-CASEVAC mission).
 - **The ball is on the modeling side.** The remaining work - building the OWL
-  property/message layer, reconciling the two tracks, and making the ~22
+  property/message layer, reconciling the two tracks, and making the ~24
   decisions - is not a document problem; more scenarios will not fill it. It needs
   the sub-group's decisions and modeling.
 

@@ -54,6 +54,15 @@ concept, not by message-workbook sheet.
 - **S4 Urban C-UAxS** - urban defense vs hostile UAAV swarms (Corona/Biagini, Biagini 2017).
 - **S5 Brutzman** - village-defense MUM-T ISR and fires.
 - **S6 Langerwisch** - heterogeneous UGV/UAV MOVE (formation/convoy) and OBSERVE (POI).
+- **S7 LIRC (Morris 2018)** - company-scale manned-unmanned movement to contact with
+  lethal autonomous weapons under kill-box weapons-control (SME-designated baseline; new).
+- **S8 LIRC-Updated (2024)** - the baseline revised for 2022-2024 drone warfare: FPV /
+  loitering-munition / COTS threat, EW / GPS denial, organic counter-UAS (new).
+- **S9 OPFOR targeting (Rosenberg 2024)** - RED-perspective reconnaissance-strike:
+  COTS sUAS cueing indirect fires onto high-payoff targets (new).
+
+(S7-S9 are analyzed as an addendum below - "Drone-warfare thread additions" - rather than
+re-drawn into the 6-column matrix above; they were contributed after it was built.)
 
 ## Concept x scenario matrix
 
@@ -174,6 +183,60 @@ represent cleanly - i.e. expressiveness gaps:
   via the Video Detection Report; the coordination-relation, communications,
   environment-condition, graded-LoA, and detection-confidence gaps remain.)*
 
+## Drone-warfare thread additions (S7-S9)
+
+Three SME-directed scenarios added after the matrix above was built. They were walked
+into messages in `InstantiationReview/DroneWarfare-LIRC-OPFOR-Walk.md` (findings G14-G19,
+decisions Q-W/Q-X, log sec 6k). Compact concept x scenario read (`S`/`p`/`-` as above):
+
+| # | Ontology concept / aspect | S7 LIRC | S8 Updated | S9 OPFOR |
+|---|---|---|---|---|
+| 1 | Platform/agent typing | S | S | p |
+| 2 | Collective/swarm typing | p | p | - |
+| 3 | Sensor & payload-device typing | S | p | p |
+| 4 | Autonomous role / level of autonomy | S | S | p |
+| 5 | Multi-system coordination & machine-to-machine tasking | S | p | S |
+| 6 | Task & effect representation (incl. kinetic) | S | S | S |
+| 7 | Detection & reporting (confidence, explainability) | p | p | S |
+| 8 | Operating environment & conditions | p | S | p |
+| 9 | Spatial & geometric constructs | S | p | p |
+| 10 | Temporal & persistence | p | p | S |
+| 11 | Communications & networking (relay, denied comms) | p | S | - |
+| 12 | Actors, sides & ROE / C2 relations | S | S | S |
+| 13 | Measures (MOP/MOE) | S | S | p |
+
+**Effect on Reading 1 (validation).** These three add strong, non-redundant evidence
+exactly where the six-case set was thin:
+- **Task & effect (kinetic)** - was "moderate, could use one more" (only S4 rich). S7-S9
+  supply three kinetic cases (kill-box engagement, counter-UAS defeat, drone-cued fires),
+  closing that hole.
+- **Actors, sides & ROE / C2** - S7 (weapons-control status + kill box + civilians present)
+  and S9 (RED perspective, HVT/HPT target lists) are the richest ROE/C2 cases in the corpus.
+- **Graded / phase-dependent LoA** - was single-case (S4). S7 adds a second, sharper case:
+  authority shifts weapons-hold -> tight -> autonomous-in-kill-box by mission phase.
+- **Measures (MOP/MOE)** - S7/S8 add attrition (~50%; ~7-day drone life, ~10% completion)
+  and a cost-exchange ratio.
+They do **not** touch the remaining Reading-1 holes (explainability, CBRN/EW sensing,
+CASEVAC coordination), so those sourcing priorities stand.
+
+**Effect on Reading 2 (expressiveness).** They add one top-priority ASX-specific gap and
+four supporting ones, none representable in v0.0.1 or v0.0.3:
+- **12. Engagement authority + weapons-control / kill-box construct (S7)** - the single
+  most central ASX gap: an authorization-bearing area (weapons-control status x geo bound
+  x time window x civilian-clearance state x target type) that gates whether an autonomous
+  system may take a lethal action. Absent from C2SIM/SMX/LOX (grep-verified). Unifies the
+  engagement-authority question (W1/Q-K) with area-as-subject (N1/Q-M). This is a concrete
+  candidate *answer* the six-case set never surfaced, from real doctrine. (New decision Q-W.)
+- **1/6. Loitering-munition / FPV as a platform-munition hybrid (S8)** - flies, senses,
+  then is expended; size tiers. Extends platform typing and the (absent) munition typing.
+- **6/12. Counter-UAS (S8)** - mostly reuse (air-defense/engage/jam verbs exist); residual
+  is an sUAS target class + detect->defeat coupling.
+- **11. Adversarial EW against own autonomy (S8)** - GPS-denial / link-jam / drone-hijack
+  as threats *to* friendly autonomy; extends the denied-comms gap (#4) with a
+  vulnerability + countermeasure.
+- **5/12. Targeting construct (S9)** - a high-value/high-payoff target list + sensor-to-
+  shooter cue->grid->fire->BDA->adjust cycle; the list/priority object is net-new.
+
 ## Where this points (bidirectional next steps)
 
 - **To finish validating existing concepts** (close Reading-1 holes): source or
@@ -185,7 +248,10 @@ represent cleanly - i.e. expressiveness gaps:
   highest-leverage ontology additions are USV/UUV + UGV locomotion subtypes,
   a coordination/relationship construct with machine-to-machine tasking, a
   communications/relay concept, environment-condition attributes, graded
-  autonomous role, and a detection-confidence attribute.
+  autonomous role, a detection-confidence attribute, and - added by the
+  drone-warfare thread (S7-S9) - an engagement-authority / weapons-control
+  kill-box construct (the top ASX-specific item; decision Q-W), plus
+  loitering-munition/counter-UAS typing.
 - The two lists are complementary: S2 (MCM) is the single richest *expressiveness*
   stressor (maritime, cross-cueing, persistence, neutral actors, measures), while
   the *validation* holes point away from more combat-ISR cases toward
