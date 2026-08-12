@@ -16,6 +16,8 @@ messages are built on it) / **HIGH** / **MED** / **LOW** / **TYPO**. Status:
 states used in the tables (all variants of in-progress or partially-resolved):
 **PARTIAL**, **NARROWED**, **MOSTLY COVERED**, **MOSTLY REUSE**, **WALKED**,
 **INSTANTIATED**, **EVIDENCED**, **DECIDED**, **DONE**, **FOLDS INTO Q-x**.
+**PROPOSED** marks a *slice* item - work scoped and grounded but not yet
+performed (the grounding is verified; the work is what is being proposed).
 Items marked **[deck]** are candidates for the findings presentation.
 
 ## 1. Repo sync & process
@@ -313,6 +315,81 @@ Grounding note: `lox#AIRDEF/ENGAGE/ATTACK/DETECT/JAM`, `RuleOfEngagement`,
 authority-gating (G14/G15), the weapon/munition and small-UAS typing (G16/G17), the
 EW-vulnerability (G18), and the target-list (G19) do not.
 
+## 6l. Sensor characterization (PROPOSED slice)
+
+A **proposed slice** - work scoped for the future, not yet performed - from an
+item suggested by Curt: look into the characterization of sensors; it may be a
+whole extension worth on its own, and could be based on existing standards.
+Scoped in `Sensor-Characterization-Slice.md`. Nothing instantiated; the grounding
+is verified (no `Sensor` class or measurement property in base C2SIM/SMX/LOX; six
+Observation subtypes only; no capability/performance property anywhere).
+
+Both halves of the suggestion hold up. **Extension-sized:** 15 open findings and
+6 open decisions already cluster here, comparable in weight to the entire current
+ASX OWL; structurally a sensor model must answer four separable questions -
+device / capability / observation / configuration - and ASX has a partial first
+and nothing else. **Buildable from existing standards:** three independent
+lineages already agree on the observation shape.
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G20 | HIGH | PROPOSED | Sensor characterization is extension-sized | Core (11): D2, P2, M3, M4, M5, Y1-Y5, G4. Adjacent (4): X4, G3, G13, G18. Decisions (6): Q-C, Q-F, Q-I, Q-P, Q-Q, Q-V. Compare the whole ASX OWL: v0.0.1 = 15 classes / 1 object / 0 datatype props; v0.0.3 = 26 classes / 4 object / 2 datatype. The four-question split (device / capability / observation / configuration) is what makes it too big to patch into the report model. **[deck]** |
+| G21 | MED | PROPOSED | Three lineages converge on one observation shape | BML `WhoMeasuredType` {value, UOM, phenomenon, sensor, time, place} (C2SIM's own ancestry, already flagged in 6j as re-adopt-not-invent), W3C/OGC SOSA `Observation` {hasResult, observedProperty, madeBySensor, resultTime, hasFeatureOfInterest}, and the DIS emission parameter records. Three communities, three purposes, one shape - re-deriving it a fourth time inside ASX would be a modeling error. |
+| G22 | MED | PROPOSED | The capability layer is entirely absent, and has an off-the-shelf vocabulary | No range / accuracy / resolution / FOV / detection-limit / operating-condition property exists anywhere in ASX or the base standard. The SSN-System module supplies exactly this: `SystemCapability`, `SystemProperty`, `MeasurementRange`, `Accuracy`, `Precision`, `Resolution`, `DetectionLimit`, `Latency`, `Sensitivity`, `ResponseTime`, `Drift`, `OperatingRange`, `SurvivalRange`, `Condition`. Also what G13 (capability self-report) needs. |
+
+## 6m. DIS enumerations as a source for ASX (PROPOSED slice)
+
+A separate **proposed slice**, independent of 6l - from an item suggested by
+Curt: look into the DIS enumeration materials, extract the organizing principles
+behind that mass of data, reduce it to a succinct categorization, and see what it
+offers ASX. Scoped in `DIS-Enumerations-Slice.md`.
+
+**Framing, stated precisely because it is easy to get wrong.** DIS is examined as
+a **design source that may inform ASX in general** - not as an input to any one
+ASX question, and **not as a proposal to use the DIS codes more directly**. The
+codes are already carried: C2SIM entities have had the seven-field DIS record all
+along, so "should ASX carry DIS codes?" is settled, not open. What is open is
+whether ASX is learning anything from the thirty years of reasoning behind them -
+how to partition the world into kinds, when a component earns its own type, where
+type ends and instance begins, how to grow a vocabulary without it collapsing.
+The proposition is to mine that reasoning, plus the evidence in DIS's taxonomy
+about what needs modeling at all. Whether any septuplet is ever written into a
+message is a separate question this slice does not raise.
+
+**The succinct categorization:** SISO-REF-010 reduces to **four table shapes** -
+`enum` (value-description pairs), `bitmask` (bitfields), `cet` (entity types),
+`cot` (object types) - plus metadata, over a 64-bit septuplet
+`Kind.Domain.Country.Category.SubCategory.Specific.Extra` (bit widths
+8/8/16/8/8/8/8, unsigned). The original document had 279 tables; the volume comes
+from the entity-type category, not from structural variety. Five governance
+principles are adoptable for ASX's own code lists (D1, Y2, M5) without touching a
+single DIS code - most usefully *implicit types are legal on the wire*, which is
+how the catalogue stays finite while the space stays open.
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G23 | MED | **OPEN** | The walks type entities with a property that does not exist | `hasEntityType` / `EntityType` (8 rows Init, 6 Order, 1 Report, carrying free text) - and **neither `C2SIM#hasEntityType` nor a bare `EntityType` class exists in C2SIM, SMX, or LOX**. The standard already defines two real hooks: `hasNamedEntityType` (namespaced string) and `hasSISOEntityType` (the DIS record, already standard machinery on every `Entity`). Self-inflicted: the first committed conversion (`cb42d5a`) had no entity-type field at all. **A workbook hygiene defect, not a DIS-adoption question** - fix by using a real property, most likely `hasNamedEntityType`. Independent of anything the sub-group decides about DIS. |
+| G24 | HIGH | PROPOSED | DIS is a general-purpose design source, not a single-purpose one | At least **eight of nine Entity Kinds** bear on open ASX findings, and the value is the carve-up and its reasoning rather than the code values: Platform -> P1/G5/G6/G16/G17/V1 (its Domain field *is* the land/air/surface/subsurface partition ASX keeps re-deriving); Munition -> W2/Q-L (fuse+warhead as the decomposition axis; loadout ruled to be state, not type); Life form -> P7/P10/Z1 (Subcategory encodes number of individuals: one-type-many-individuals); Environmental -> G11/Q-T (DIS types environmental *conditions* such as sea state, not just objects); Cultural feature -> X4/N1/Q-M/E-series; Supply -> L-series/Q-L (class of supply as a typing axis, AR 710-2); Radio -> G1/Q-O (evidence the relay node is a first-class entity, not a network attribute); Expendable -> G8/Q-S (expendability as a typing axis, decoys inside it). **[deck]** |
+| G25 | HIGH | PROPOSED | DIS's component/whole criterion is portable to Q-C/P2/D2 | OPMAN 7.4.2.1/7.4.2.9: subsystems that "strictly support only a particular platform system" are enumerated inside that platform; those that "can operate in a stand-alone manner or that can support multiple systems" get their own entity type. Worked example: Patriot's AN/MPQ-53 radar is Kind 9; the ZSU-23-4's welded-in "Gun Dish" is not. A tested criterion ASX can restate in its own terms to settle "is a sensor an entity or an attribute?", generalizing to any component typing decision (payloads, effectors, relays). Cross-ref 6l. |
+| G26 | MED | PROPOSED | DIS emission records are a worked precedent for the measurement layer | Sensing modeled as system identity + a parameter record of typed values with declared units - Fundamental Parameter Data record: Frequency (Hz), Frequency Range (Hz), ERP (dB), PRF (Hz), Pulse Width (us), beam azimuth/elevation center+sweep (rad), sweep sync (%) - with modality selecting the parameter set. **The transferable content is the shape**, not the record: Y5/Q-I says ASX has no such layer at all, and this demonstrates one is necessary and tractable (the EW Emitter Report in `NonVideoSensors-Walk.md` wanted "243.0 MHz / 25 kHz" - a frequency-plus-range pair). The four modality families (EE 23 / Designator 24 / IFF 28 / UA 29) are evidence for Y2 that modality is the right partition; the separate `Emitter Function` enumeration is evidence for Y4 that *what an emitter is for* is a typing axis distinct from *what it is*. Which vocabulary ASX adopts is 6l's question. **Limits:** no confidence, error bound, or false-positive rate - G4/Q-Q still needs SOSA/BML. Only the EM row is verified field-by-field. Cross-ref 6l. |
+| G27 | MED | PROPOSED | DIS separates type from instance, deliberately | OPMAN 7.4.5: unique identification is explicitly *not* the entity type's job - only naval ships and oil platforms get unique types, life forms and most platforms are "explicitly disallowed"; unique ID happens via the Entity Marking field or a Variable Parameter record. ASX faces the same line in M1 (`actorReference` must define a not-yet-known entity) and Q-E (inline entity definition). Worth reading before ASX draws it differently by accident. |
+| G28 | LOW | OPEN | `C2SIM.rdf` mis-cites the DIS standard | All seven `hasDIS*` properties carry `rdfs:comment` "...from the DIS standard IEEE 1516-2010". IEEE 1516 is **HLA**; DIS application protocols are **IEEE 1278.1**; the enumerated values live in **SISO-REF-010**, not in the IEEE standard at all. Both halves wrong. Base-standard defect (lines ~916-990) - for the parent group, not ASX. |
+| G29 | MED | OPEN | `C2SIM.rdf` under-ranges six DIS fields | `hasDISKind/Domain/Category/SubCategory/Specific/Extra` typed `xsd:byte` (signed, -128..127); the fields are 8-bit **unsigned**, 0-255 (ISO/IEC 19775-1, which carries the same fields normatively, declares each `[0,255]` and country `[0,65535]`). Legal values 128-255 unrepresentable. Should be `xsd:unsignedByte`. A genuine interoperability bug. Base-standard defect - for the parent group. |
+
+Honest limits (the "nothing" column, first draft): DIS types **things**, not
+behavior, authority, or intent - it offers nothing for W1/Q-K (engagement
+authority), G14/Q-W (weapons-control status / kill box), X2/Q-H (rationale), or
+X1/Q-G (robot-to-robot coordination), several of which are this review's
+highest-value findings; its reach stops at the typing half of ASX. And its
+purpose shapes its carve-up: DIS boundaries exist to let a **simulation** render
+and interact, while ASX answers to what a **commander** must state or be told, so
+some boundaries will be artifacts of rendering fidelity rather than of command
+meaning (the country-code field is the clearest example - it answers a question
+ASX has not asked). The kind-by-kind map is a list of places to *look*; each
+transfer must be argued on ASX's own terms. **That is also this slice's
+falsifier:** if the placement exercise shows DIS's boundaries consistently fail
+to survive translation, G24 shrinks to a much shorter list.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -392,9 +469,38 @@ EW-vulnerability (G18), and the target-list (G19) do not.
   over the existing air-defense verbs (`AIRDEF`/`ENGAGE`/`JAM`) with an sUAS target
   class; include an **EW-vulnerability / countermeasure** annotation for adversary
   GPS-denial and control-link seizure. (Resolves G16/G17/G18; extends Q-L/Q-R/Q-O.)
+- **Q-Y [deck]** Decide whether **sensor characterization becomes its own
+  extension** (a sibling to ASX) or stays a section inside ASX. For: the finding
+  count (G20) and the four-question structure - device / capability / observation
+  / configuration - that no single current ASX element addresses. Against: it
+  fragments the standard, and the sensor model's main consumer is ASX itself.
+  Decide **explicitly and early**, because the answer changes *where* Y1-Y5, D2,
+  P2, M3-M5, G4, G13, Q-C, Q-F, Q-I, Q-P, Q-Q and Q-V get resolved. (Scopes
+  G20-G22; see `Sensor-Characterization-Slice.md`.)
+- **Q-Z** Decide **which lessons ASX draws from DIS as a design source**. This is
+  *not* a question about using the codes - C2SIM entities already carry the DIS
+  record, and nothing proposed here changes how or whether it is populated. Three
+  independent options, takeable in any combination: **(a) vocabulary governance**
+  - apply the SISO-REF-010 management principles to ASX's own code lists (D1,
+  `SensorType`, `MediaTypeCode`); touches no DIS content at all. **(b) carving
+  criteria as ASX modeling rules** - restate the component/whole criterion (G25)
+  and the type/instance line (G27) in ASX's terms, applied to Q-C/P2/D2 and
+  M1/Q-E. **(c) taxonomic content as evidence** - use DIS's kinds as a checklist
+  of what a mature vocabulary found it needed, and ask which ASX is missing
+  (relay node, environment condition, decoy, class of supply) (G24).
+  Recommended: **(a) and (b) now** - cheap, self-contained, and they sharpen open
+  decisions; **(c) as the placement exercise**, the only part producing a
+  testable result. Each transfer under (c) argued on ASX's own terms, since DIS's
+  boundaries answer a simulation's questions, not a commander's. (Scopes G24-G27;
+  see `DIS-Enumerations-Slice.md`.) G23 is separate - a workbook fix worth making
+  regardless.
+- *The Q-series is exhausted at Q-Z. Continue at Q-AA.*
 - **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
   `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
   (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
+  Corroborated by the sensor slice (6l/G21): W3C/OGC SOSA `Observation` lands on
+  the same shape from an independent lineage, and the DIS parameter records
+  (6m/G26) supply the units.
 
 ## 8. Why the identified gaps are not yet filled
 
@@ -714,3 +820,35 @@ group should converge on one canonical version/location.
   28 slides, not 29; committed and regenerated .pptx both 28) and the matching
   reading-guide slide-number references. No verified finding changed; this pass only
   propagates the drone-warfare additions and fixes the counts they touched.
+- 2026-08-12: Added **two proposed slices** (scoping only; nothing instantiated)
+  from two items suggested by Curt, kept as **separate, independent** documents
+  because the items are independent - DIS was raised as a rich source that might
+  inform ASX in general, not as an input to the sensor question:
+  `Sensor-Characterization-Slice.md` (log section 6l, G20-G22, decision Q-Y) and
+  `DIS-Enumerations-Slice.md` (section 6m, G23-G29, decision Q-Z). Where DIS
+  genuinely bears on sensors it is cross-referenced (G25/G26), not merged. New
+  status value **PROPOSED** added to the legend. The Q-series is now exhausted at
+  Q-Z; continue at Q-AA.
+  The DIS slice is explicitly framed as **inspiration, not code adoption**: the
+  codes are already carried by C2SIM entities, so what is open is whether ASX
+  learns from the reasoning and taxonomy behind them - not whether to populate
+  septuplets. Q-Z is scoped accordingly (governance principles / carving criteria
+  / taxonomy-as-evidence), and section 3.4 records the counterweight: DIS's
+  boundaries were drawn so a simulation can render and interact, ASX answers to
+  what a commander must state or be told, and some boundaries will not survive
+  that translation.
+  Grounding results worth recording independently of whether either slice runs:
+  (a) the walks type entities with `hasEntityType` / `EntityType`, which exists
+  in **no** C2SIM/SMX/LOX file, while the standard already defines
+  `hasNamedEntityType` and `hasSISOEntityType` (G23 - a workbook hygiene defect,
+  self-inflicted, independent of the DIS question); (b) SISO-REF-010 reduces to
+  four table shapes - `enum`, `bitmask`, `cet`, `cot` - plus metadata, over a
+  `Kind.Domain.Country.Category.SubCategory.Specific.Extra` septuplet, and at
+  least eight of its nine Entity Kinds bear on open ASX findings (G24);
+  (c) the sensor cluster is extension-sized by the log's own count - 15 findings
+  and 6 decisions (G20) - and the capability layer is entirely absent with an
+  off-the-shelf vocabulary available (G22); (d) two base-standard defects found
+  in passing - the `hasDIS*` properties mis-cite DIS as IEEE 1516 (it is IEEE
+  1278.1 / SISO-REF-010; G28) and type six unsigned 0-255 fields as signed
+  `xsd:byte` (G29). Both are for the parent group, not ASX. Deck not regenerated
+  - G20/G23/G24 are marked [deck] for the next deck pass.

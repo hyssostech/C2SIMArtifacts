@@ -68,6 +68,32 @@ in the `.xlsx` changed.
   candidate answer to autonomous engagement authority (G14, decision Q-W), unifying it
   with N1/Q-M; adds G15-G19 (graded/phase authority, loitering-munition typing,
   counter-UAS, adversarial EW, target-list). 5 tabs added to the `.xml`.
+
+Proposed slices (future work - scoped and grounded, but **not** performed; no
+workbook tabs). Two independent items suggested by Curt, kept as separate
+documents because the items are independent:
+
+- [Sensor-Characterization-Slice.md](./Sensor-Characterization-Slice.md) - is
+  sensor characterization worth an extension of its own, built on existing
+  standards? Both halves hold up: 15 open findings + 6 decisions already cluster
+  here, and a sensor model must answer four separable questions (device /
+  capability / observation / configuration) where ASX has a partial first and
+  nothing else. Candidates surveyed: SOSA/SSN + the SSN-System capability module
+  (tier 1), SensorML and ISO 19156 (tier 2), STANAG 4586 / MISB / IEEE 1451 and
+  DIS (tier 3). Adds G20-G22, decision Q-Y (log section 6l).
+- [DIS-Enumerations-Slice.md](./DIS-Enumerations-Slice.md) - what the DIS
+  enumeration materials offer ASX **in general, as inspiration rather than as
+  codes to use**. C2SIM entities already carry the seven-field DIS record, so
+  that question is settled; what is open is whether ASX learns from the reasoning
+  behind it. The mass of data reduces to four table shapes over a septuplet; at
+  least eight of the nine Entity Kinds bear on open ASX findings (several telling
+  ASX that something it treats as an afterthought - the comms relay, environment
+  *conditions*, expendability, class of supply - deserves first-class typing);
+  and five vocabulary-governance principles apply to ASX's own code lists without
+  touching any DIS content. Counterweight recorded: DIS boundaries were drawn for
+  a simulation, not a commander, and not all will survive translation. Adds
+  G23-G29, decision Q-Z (log section 6m).
+
 - [Documents-Needed.md](./Documents-Needed.md) / [Documents-Found.md](./Documents-Found.md)
   - the sourcing brief and the sourcing track's point-by-point response.
 - [Issues-And-Comments-Log.md](./Issues-And-Comments-Log.md) - running,
