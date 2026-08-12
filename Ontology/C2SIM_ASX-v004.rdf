@@ -6,24 +6,21 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://www.sisostds.org/ontologies/asx"
-     versionIRI="http://www.sisostds.org/ontologies/asx/0.0.3">
+     versionIRI="http://www.sisostds.org/ontologies/asx/0.0.4">
     <Prefix name="" IRI="http://www.sisostds.org/ontologies/asx#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Import>http://www.sisostds.org/ontologies/C2SIM</Import>
     <Import>http://www.sisostds.org/ontologies/lox</Import>
-    <Import>http://www.sisostds.org/ontologies/smx</Import>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <Literal>This ontology is work in progress.</Literal>
     </Annotation>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
-        <Literal>C2SIM Autonomous Systems Extrension v0.0.3
-This version introduces concepts for Video Detection Report.</Literal>
+        <Literal>This version introduced the object properties: hasAutonomousParameters, hasSensorCapability, hasControlMode, hasAutonomousMissionFuction, hasPassengerCapability</Literal>
     </Annotation>
     <Declaration>
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ActorEntity"/>
@@ -54,6 +51,9 @@ This version introduces concepts for Video Detection Report.</Literal>
     </Declaration>
     <Declaration>
         <Class IRI="#Actuator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Algorithm"/>
     </Declaration>
     <Declaration>
         <Class IRI="#AnalysisComment"/>
@@ -107,6 +107,9 @@ This version introduces concepts for Video Detection Report.</Literal>
         <Class IRI="#SensorObservation"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#SensorTypeCode"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#SingleRoboticSystem"/>
     </Declaration>
     <Declaration>
@@ -128,6 +131,9 @@ This version introduces concepts for Video Detection Report.</Literal>
         <Class IRI="#UnmannedUnderwaterVehicle"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#VehicleTypeCode"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#VideoDetectionReportContent"/>
     </Declaration>
     <Declaration>
@@ -146,7 +152,16 @@ This version introduces concepts for Video Detection Report.</Literal>
         <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasTimeInstant"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#hasAutonomousMissionFunction"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#hasAutonomousRoleCode"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasAutonomusParameters"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasControlMode"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasCreationTime"/>
@@ -158,6 +173,9 @@ This version introduces concepts for Video Detection Report.</Literal>
         <ObjectProperty IRI="#hasMediaTypeCode"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#hasSensorCapability"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasName"/>
     </Declaration>
     <Declaration>
@@ -165,6 +183,9 @@ This version introduces concepts for Video Detection Report.</Literal>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasAnalystName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPassengerCapability"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasRepositoryReference"/>
@@ -208,6 +229,10 @@ This version introduces concepts for Video Detection Report.</Literal>
     <SubClassOf>
         <Class IRI="#Actuator"/>
         <Class IRI="#ElectricDevice"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#AbstractObject"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#AnalysisComment"/>
@@ -295,6 +320,10 @@ This version introduces concepts for Video Detection Report.</Literal>
         </ObjectExactCardinality>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#MediaTypeCode"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#Operator"/>
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Person"/>
     </SubClassOf>
@@ -321,6 +350,10 @@ This version introduces concepts for Video Detection Report.</Literal>
     <SubClassOf>
         <Class IRI="#SensorObservation"/>
         <Class IRI="http://www.sisostds.org/ontologies/smx#ActivityObservation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SensorTypeCode"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#SingleRoboticSystem"/>
@@ -351,8 +384,19 @@ This version introduces concepts for Video Detection Report.</Literal>
         <Class IRI="http://www.sisostds.org/ontologies/smx#Vehicle"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#VehicleTypeCode"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#VideoDetectionReportContent"/>
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ReportContent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#Vehicle"/>
+        <ObjectMinCardinality cardinality="0">
+            <ObjectProperty IRI="#hasControlMode"/>
+            <Class IRI="#AutonomyLevelCode"/>
+        </ObjectMinCardinality>
     </SubClassOf>
     <ClassAssertion>
         <Class IRI="#MediaTypeCode"/>
@@ -403,6 +447,10 @@ This version introduces concepts for Video Detection Report.</Literal>
         <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasControlMode"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasCreationTime"/>
         <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasTimeInstant"/>
     </SubObjectPropertyOf>
@@ -415,8 +463,20 @@ This version introduces concepts for Video Detection Report.</Literal>
         <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
     </SubObjectPropertyOf>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAutonomousMissionFunction"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#TaskActionCode"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="#hasAutonomousRoleCode"/>
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAutonomusParameters"/>
+        <Class IRI="#Algorithm"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasControlMode"/>
+        <Class IRI="#AutonomyLevelCode"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasCreationTime"/>
@@ -430,6 +490,10 @@ This version introduces concepts for Video Detection Report.</Literal>
         <ObjectProperty IRI="#hasMediaTypeCode"/>
         <Class IRI="#MediaTypeCode"/>
     </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSensorCapability"/>
+        <Class IRI="#MediaTypeCode"/>
+    </ObjectPropertyRange>
     <SubDataPropertyOf>
         <DataProperty IRI="#hasAnalystName"/>
         <DataProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasName"/>
@@ -441,6 +505,10 @@ This version introduces concepts for Video Detection Report.</Literal>
     <DataPropertyRange>
         <DataProperty IRI="#hasAnalystName"/>
         <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasPassengerCapability"/>
+        <Datatype abbreviatedIRI="xsd:unsignedInt"/>
     </DataPropertyRange>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
