@@ -2,10 +2,12 @@
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     <uri id="Imports Wizard Entry" name="http://www.sisostds.org/ontologies/smx" uri="C2SIM_SMX.rdf"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1783673259019" name="http://www.sisostds.org/ontologies/C2SIM" uri="C2SIM.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1783673259019" name="http://www.sisostds.org/ontologies/asx" uri="C2SIM_ASX-v003.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1783673259019" name="http://www.sisostds.org/ontologies/asx_merge" uri="C2SIM_smx_lox_asx_merge.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1783673259019" name="http://www.sisostds.org/ontologies/lox" uri="C2SIM_LOX.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1783673259019" name="http://www.sisostds.org/ontologies/smx" uri="C2SIM_SMX.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="http://www.sisostds.org/ontologies/C2SIM" uri="C2SIM.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="http://www.sisostds.org/ontologies/C2SIM_smx_lox_merge" uri="C2SIM_smx_lox_merge.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="duplicate:http://www.sisostds.org/ontologies/asx" uri="C2SIM_ASX-v003.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="duplicate:http://www.sisostds.org/ontologies/asx" uri="C2SIM_ASX-v004.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="http://www.sisostds.org/ontologies/asx_merge" uri="C2SIM_smx_lox_asx_merge.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="http://www.sisostds.org/ontologies/lox" uri="C2SIM_LOX.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1786523446856" name="http://www.sisostds.org/ontologies/smx" uri="C2SIM_SMX.rdf"/>
     </group>
 </catalog>
