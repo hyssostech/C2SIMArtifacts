@@ -1,7 +1,19 @@
-"""Builds ASX-Instantiation-Findings.pptx (28 slides) - findings from
+"""Builds ASX-Instantiation-Findings.pptx (23 slides) - findings from
 instantiating the proposed ASX extension against 20+ scenarios. Every slide
 carries speaker notes with the talk track (team-facing; Presenter-Notes.md is
-the section-level view of the same track)."""
+the section-level view of the same track).
+
+Structure (2026-08-11 revision, per Paulo's review): one consolidated
+model-state slide (was three); the method slide dropped (old news to the
+group - the one-sentence version lives on slide 2 and in the process slide's
+notes); a P2 slide alongside P1/P7, all three detail slides on the same
+four-beat skeleton (problem / consequence / current state / decision); the
+findings block organized by theme (re-adopt / content types / typing /
+authority), each theme slide on the same geometry (one full-width flagship
+box + tagged bullets), with scenarios cited as evidence instead of by
+scenario/provenance. The old M-series and coverage-recap slides are gone -
+their unique content lives on the scenario, content-types, and refinements
+slides."""
 
 import os
 from pptx import Presentation
@@ -151,8 +163,8 @@ accent = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(2.35), Inch
 accent.fill.solid(); accent.fill.fore_color.rgb = ACCENT; accent.line.fill.background()
 notes(s,
  "What this is: for each scenario, we tried to write the actual messages it needs, using C2SIM plus the proposed ASX elements. Where a message would not build cleanly, that is a concrete item to define. The review builds on the proposed extension and Elizabeth's sample-message work; everything in it is a proposal - nothing has been applied to the model or the workbooks.",
- "Time plan for a 30-minute slot: opening (slides 1-2) ~3 min; method and deliverables (3-5) ~5 min; where the instantiation stands (6-7) ~4 min; the structural block (8-12) ~7 min; findings by domain (13-19) ~6 min; v0.0.3 and the decision register (20-24) ~4 min; close (25) ~1 min. Slides 26-28 are the reading guide - point at them, do not present them.",
- "If the slot is 20 minutes: slides 1-2, 5, 8-12, the decisions grouping (21), and next steps (25); everything else is handout material.")
+ "Time plan for a 30-minute slot: opening (slides 1-2) ~3 min; how it was produced + deliverables (3-4) ~4 min; where the instantiation stands (5-6) ~4 min; model state + the structural block (7-11) ~7 min; findings by theme (12-15) ~6 min; the decision register (16-19) ~4 min; close (20) ~1 min. Slides 21-23 are the reading guide - point at them, do not present them.",
+ "If the slot is 20 minutes: slides 1-2, 4, 7-11, the decisions grouping (16), and next steps (20); everything else is handout material.")
 
 # ---------------- The whole review in one slide ----------------
 s = slide(); header(s, "The whole review in one slide", "The 90-second version - everything after this is detail")
@@ -166,22 +178,8 @@ bullets(s, [
 srcline(s, "Group-Briefing.md is the one-page prose version of this slide")
 footer(s)
 notes(s,
- "The one-slide version of the talk. If discussion takes over later, this slide plus the decision register (slides 21-23) is the minimum to land.",
+ "The one-slide version of the talk. If discussion takes over later, this slide plus the decision register (slides 16-18) is the minimum to land.",
  "Grounding for the numbers: the counts are the coverage rows in log sec 6 (C1-C9). The re-adopt items were verified against the RDF, not recalled: WhoMeasuredType is in C2SIM's BML lineage; LOX carries 446 TaskActionCode verbs; ROE, routes, resources, and a neutral hostility value (smx#NEUTRL) exist in the base standard.")
-
-# ---------------- Approach ----------------
-s = slide(); header(s, "The method", "Building on the sample-message work")
-bullets(s, [
- {"text":"Walk each scenario and instantiate real Initialization / Order / Report messages using C2SIM + the proposed ASX elements."},
- {"text":"The ASX model is an early work-in-progress (v0.0.x) and the message instances are still being put in place - instantiation is how we build those instances and surface what is still to be defined."},
- {"text":"Where a proposed element is not yet defined enough to instantiate cleanly, that marks a concrete thing to specify next - not a defect."},
- {"text":"Everything here is decisions and to-define items for the group; the approach is working."},
-], top=1.7, size=17, gap=13)
-footer(s)
-notes(s,
- "Section budget: slides 3-5, about 5 minutes.",
- "The method in one sentence: write the messages each scenario actually needs; where an element is not yet defined enough to instantiate cleanly, that marks a concrete thing to specify next - not a defect. The model is early (v0.0.x) and the message layer is still being built; instantiation is how those instances get built and how the to-define list surfaces.",
- "Scope note: the sample-message workbooks were converted to a diff-able .xml format so instantiations can be reviewed in git; the original .xlsx are untouched.")
 
 # ---------------- Process: three sessions + verification ----------------
 s = slide(); header(s, "How this was produced: three sessions + a verification pass",
@@ -198,6 +196,8 @@ bullets(s, [
 srcline(s, "Documents-Needed/Found.md (mining)  -  PromptV2.md + V2-HeadToHead.md (extraction)  -  the walk docs (application)  -  log change-log 2026-07-12 (verification)")
 footer(s)
 notes(s,
+ "Section budget: slides 3-4, about 4 minutes.",
+ "The method in one sentence (the dedicated method slide was dropped as familiar ground): write the messages each scenario actually needs; where an element is not yet defined enough to instantiate cleanly, that marks a concrete thing to specify next - not a defect. Scope note: the sample-message workbooks were converted to a diff-able .xml format so instantiations can be reviewed in git; the original .xlsx are untouched.",
  "Three coordinated sessions plus an independent check: document mining hunts primary mission documents; scenario extraction distills each into a standardized record with the locked v2.2 prompt; ontology application walks each scenario into concrete messages against the proposed elements. The verification pass then re-checked every RDF-grounded claim, the workbook fidelity, and the citations, with corrections logged (issues log change log, 2026-07-12).",
  "The stages iterate: the walk writes the sourcing brief (Documents-Needed), mining answers it (Documents-Found), extraction feeds the walk. Nothing rests on an LLM's memory - every claim is grounded in the RDF, the workbooks, or a named source, and was independently re-verified.")
 
@@ -229,7 +229,7 @@ bullets(s, [
 srcline(s, "Message-Instantiation-Coverage.md (the pre-walk baseline)  -  log sec 6 rows C1-C9 (current state)  -  the three ASX Sample *.xml workbooks (the messages themselves)")
 footer(s)
 notes(s,
- "Section budget: slides 6-7, about 4 minutes.",
+ "Section budget: slides 5-6, about 4 minutes.",
  "The baseline was 4 worked instances (2 Reports, 2 Orders, 0 Initialization) - Elizabeth's sample-message workbooks. This review drafted ~34 more, to ~38: Initialization 0 -> 7, Orders 2 -> 17, Reports 2 -> 14. The breadth - not any single message - is what surfaced the to-define items.",
  "CASEVAC, the one contributed (human-authored) scenario, had no messages; it is now walked end to end: Init -> tasking Order -> robot-to-robot hand-off -> status / threat / explainable Reports.")
 
@@ -244,29 +244,34 @@ bullets(s, [
  {"text":"Cooperative MCM (maritime), Subterranean SubT, contested sustainment - plus nine documented missions that grounded the validation holes: explainability (DroneResponse), CBRN (UGV), EW geolocation, persistence (MDARS), counter-UAS, human-machine teaming (MUM-T), SAR, formation, robotic breach.","lvl":1},
  {"text":"Screened for redundancy:","bold":True},
  {"text":"route-clearance / companion / urban - confirmed ~80% redundant, but still yielded N1 (an area as the subject of a task/report).","lvl":1},
+ {"tag":"Evidence pedigree:","tagcolor":GREEN,"text":"every gap raised is grounded in a documented real mission - 15 sourced extraction records; the validation pass closed the asserted-but-untested holes (explainability, CBRN, EW, persistence)."},
 ], top=1.7, size=13, gap=7)
-srcline(s, "one walk doc per scenario family (see final slide)  -  the 15 sourced records: LLMExperiments/PaperSummaries/V2Extractions/")
+srcline(s, "one walk doc per scenario family (see final slide)  -  the 15 sourced records: LLMExperiments/PaperSummaries/V2Extractions/  -  ValidationEvidence-Walk.md")
 footer(s)
 notes(s,
  "Four groups: named + contributed scenarios instantiated end to end; capability stress-tests (non-video sensors, swarm, task/effect); missions sourced from real documents by the parallel sourcing effort (Cooperative MCM, SubT, sustainment, plus nine documented missions that closed the validation holes); and a redundancy screen that still yielded one new finding (N1).",
+ "The pedigree line matters: every gap the findings slides raise is grounded in a documented mission - the 15 sourced extraction records - and the validation pass turned the asserted-but-untested holes (explainability via DroneResponse, CBRN, EW geolocation, persistence via MDARS) into evidenced ones.",
  "Provenance, stated precisely: the MUTT-derived scenarios are LLM-generated; CASEVAC is human-authored; the sourced missions come from real papers - two carry fidelity caveats (EW and the robotic breach), noted in their extraction records.")
 
-# ---------------- Two tracks out of sync ----------------
-s = slide(); header(s, "The OWL and the spreadsheets are at different stages")
-rbox(s, 0.8, 1.9, 5.5, 1.5, "OWL model  (CSIM_ASX.rdf)\nlast updated  Jan 2026", NAVY, size=15)
-rbox(s, 7.0, 1.9, 5.5, 1.5, "Spreadsheets  (Concept Mapping,\nsample messages)  updated  Jun 2026", ACCENT, size=15)
-arrow(s, 6.3, 2.65, 7.0, 2.65, ORANGE)
+# ---------------- Where the model stands (consolidated state) ----------------
+s = slide(); header(s, "Where the model stands", "Two tracks, one early model - moving, with a known catch-up list")
+rbox(s, 0.7, 1.75, 3.7, 1.35, "OWL v0.0.1  (Jan 2026)\n15 classes, 1 object property,\n0 datatype properties", NAVY, size=12)
+rbox(s, 4.8, 1.75, 3.7, 1.35, "Spreadsheets  (Feb-Jun 2026)\nthe attribute layer: Payload,\nMobility, VehicleType, ...", ACCENT, size=12)
+rbox(s, 8.9, 1.75, 3.7, 1.35, "OWL v0.0.3  (Jul 2026, Michael)\nfirst datatype properties, Video\nDetection Report, AutonomyLevelCode", GREEN, size=12)
+arrow(s, 4.4, 2.4, 4.8, 2.4, ORANGE); arrow(s, 8.5, 2.4, 8.9, 2.4, GREEN)
 bullets(s, [
- {"tag":"Where things stand:","tagcolor":ORANGE,"text":"the OWL has not yet caught up to ~5 months of attribute work in the spreadsheets - expected for a v0.0.x model that is still being built."},
- {"text":"Autonomy is currently described three different ways across the two tracks - to reconcile.","lvl":1},
- {"text":"Sensors are described three different ways - to reconcile.","lvl":1},
- {"text":"The attribute layer (Payload, Mobility, VehicleType, ...) is in the spreadsheets, not yet in the OWL.","lvl":1},
-], top=3.8, size=16, gap=10)
-srcline(s, "log sec 1-2 (S2, D1-D5)")
+ {"tag":"Outlook:","tagcolor":GREEN,"text":"an early (v0.0.x) model whose two tracks evolved separately for ~5 months - expected at this stage. v0.0.3 shows the OWL moving, and puts the key typing choice (P1) concretely in the model to settle."},
+ {"tag":"Catching up - attribute layer:","tagcolor":ORANGE,"text":"Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, mission/swarm parameters are in the spreadsheets, not yet in the OWL (D3); v0.0.3 begins the layer, for the Video Detection Report only."},
+ {"tag":"Catching up - one autonomy vocabulary:","tagcolor":ORANGE,"text":"three today - OWL {Automated, FullAuto, ReCont, Teleop} vs ControlMode {Piloted, Unpiloted-Autonomous, Swarm} vs NavigationAutonomy {FPV, Autonomous, RemoteControl} (D1 -> Q-D)."},
+ {"tag":"Catching up - one sensor model:","tagcolor":ORANGE,"text":"three today - Sensor class vs SensorType enum vs SensorCapability equipment (D2 -> Q-C); this is structural decision P2, next section."},
+ {"tag":"Wiring to settle deliberately:","tagcolor":MGRAY,"text":"AutonomyLevelCode is not yet the range of hasAutonomousRoleCode (still generic Code); the v0.0.3 branch adds owl:imports smx/lox to base C2SIM.rdf - a circular import (C2SIM <-> smx)."},
+], top=3.35, size=13, gap=8)
+srcline(s, "log secs 1-2 (S2, D1-D5)  -  sec 9 (v0.0.3 reconciliation, finding by finding)  -  Ontology/C2SIM_ASX-v003.rdf on branch michael_d")
 footer(s)
 notes(s,
- "Section budget: slides 8-12, about 7 minutes - the core of the talk.",
- "Why several findings look like drift rather than gaps: the OWL model (last updated January) and the spreadsheets (updated June) evolved separately, so autonomy and sensors are each currently described three different ways. Reconciling the two tracks is one of the first decisions. Worth establishing early - it explains a lot of the later slides.")
+ "Section budget: slides 7-11, about 7 minutes - the core of the talk.",
+ "The outlook in one line: the OWL (v0.0.1, January) and the spreadsheets (June) evolved separately, so several findings look like drift rather than gaps; v0.0.3 (July) shows the model moving - first datatype properties (v0.0.1 had none), the Video Detection Report folded into the OWL, an AutonomyLevelCode model - and brings P1 concretely into the model by declaring both typing trees.",
+ "The catch-up list is short and known: the attribute layer, one autonomy vocabulary (three today), one sensor model (three today - that is P2, next section), and two wiring items (the hasAutonomousRoleCode range, the circular owl:imports). Everything else v0.0.3 still lacks - taskable collective, generic Detection Report, rationale / robot-to-robot / area content, the two typos - appears on its own slide later. Full finding-by-finding reconciliation: log sec 9.")
 
 # ---------------- 3 decide-first typing decisions ----------------
 s = slide(); header(s, "First to settle: three structural typing decisions")
@@ -280,7 +285,7 @@ srcline(s, "Initialization-Walk.md  -  log sec 5 (P-series)")
 footer(s)
 notes(s,
  "The three foundational decisions, all entity-typing: P1 - a UAV/UGV is typed two incompatible ways (ASX Robot tree vs SMX Platform tree); P2 - a sensor has no agreed representation (class vs enum vs equipment); P7 - a swarm is not yet taskable as modeled.",
- "The point to land: because all three are typing decisions, Initialization - not Reports - is where the model has to be settled first. The next two slides take P1 and P7 one at a time.")
+ "The point to land: because all three are typing decisions, Initialization - not Reports - is where the model has to be settled first. The next three slides take P1, P2, and P7 one at a time.")
 
 # ---------------- P1 diagram ----------------
 s = slide(); header(s, "P1  -  A UAV is typed twice", "Entity-typing decision")
@@ -293,16 +298,34 @@ arrow(s, 6.2, 2.45, 3.9, 3.0); arrow(s, 3.9, 3.75, 3.9, 4.2)
 arrow(s, 7.2, 2.45, 9.5, 3.0); arrow(s, 9.5, 3.75, 9.5, 4.2)
 bullets(s, [
  {"text":"Two parallel sibling trees under ActorEntity model the same real drone."},
- {"text":"Type it as Robot -> it loses all existing SMX Platform / LOX machinery.","lvl":1},
- {"text":"Type it as Aircraft -> the ASX Robot / UAV classes go unused.","lvl":1},
- {"tag":"Now live in v0.0.3:","tagcolor":ORANGE,"text":"v0.0.3 declares both - UAV/UGV under Robot AND UnmannedAerial/Ground/Maritime/UnderwaterVehicle under SMX Vehicle - so this choice is now in the model to settle."},
+ {"text":"Type it as Robot and it loses all existing SMX Platform / LOX machinery; type it as Aircraft and the ASX Robot / UAV classes go unused.","lvl":1},
+ {"tag":"Now in v0.0.3:","tagcolor":ORANGE,"text":"both trees are declared - UAV/UGV under Robot AND UnmannedAerial/Ground/Maritime/UnderwaterVehicle under SMX Vehicle - so this choice is now in the model to settle."},
  {"tag":"Decision (Q-A):","tagcolor":ACCENT,"text":"make ASX autonomy a role/facet on the existing Platform subtree instead of a parallel Robot tree?"},
-], top=4.85, size=13, gap=5)
+], top=4.85, size=13, gap=6)
 srcline(s, "Initialization-Walk.md  -  log P1 (sec 5) + sec 9 (v0.0.3 makes it concrete)  -  decision Q-A (log sec 7)")
 footer(s)
 notes(s,
  "The proposed Robot class tree runs parallel to the existing SMX Platform tree, both under ActorEntity - two incompatible types for the same real drone. Type it as Robot and it loses the Platform machinery; type it as Aircraft or Vehicle and the ASX classes go unused.",
- "v0.0.3 declares both trees, so the choice is now concretely in the model to settle. Decision Q-A proposes autonomy as a role/facet on the existing Platform subtree.")
+ "v0.0.3 declares both trees, so the choice is now concretely in the model to settle (note: its maritime classes sit under Vehicle rather than SurfaceVessel/SubsurfaceVessel). Decision Q-A proposes autonomy as a role/facet on the existing Platform subtree.")
+
+# ---------------- P2 diagram ----------------
+s = slide(); header(s, "P2  -  A sensor is modeled three ways", "Representation decision")
+rbox(s, 4.4, 1.7, 4.5, 0.75, "the same physical sensor\n(EO camera, CBRN sniffer, GPR)", NAVY, size=12)
+rbox(s, 0.9, 3.3, 3.6, 0.85, "Sensor class\n(OWL)", ORANGE, size=13)
+rbox(s, 4.85, 3.3, 3.6, 0.85, "SensorType enum\n(Concept Mapping)", ORANGE, size=13)
+rbox(s, 8.8, 3.3, 3.6, 0.85, "SensorCapability as equipment\n(Concept Mapping)", ORANGE, size=12)
+arrow(s, 5.6, 2.45, 2.7, 3.3); arrow(s, 6.65, 2.45, 6.65, 3.3); arrow(s, 7.7, 2.45, 10.6, 3.3)
+bullets(s, [
+ {"text":"Three incompatible representations of the same device across the two tracks (D2)."},
+ {"text":"An Initialization message must declare what a platform carries - it has to pick one representation; the Report side only consumes sensor output (log P2).","lvl":1},
+ {"tag":"Same pattern downstream:","tagcolor":ORANGE,"text":"weapon (W2), manipulator (E2), cargo (L1) hang off the same carried-equipment choice (Q-L); non-imaging sensor reports (Y1) need the sensor typed to say what measured (Q-I/Q-Q)."},
+ {"tag":"Decision (Q-C):","tagcolor":ACCENT,"text":"is a sensor a first-class entity/equipment, a class, or an attribute? Pick one model and apply it in Init, Report, and Concept Mapping."},
+], top=4.85, size=13, gap=6)
+srcline(s, "Initialization-Walk.md + NonVideoSensors-Walk.md  -  log P2 (sec 5) + D2 (sec 2)  -  decision Q-C (log sec 7)")
+footer(s)
+notes(s,
+ "The sensor has no agreed representation: an OWL Sensor class, a SensorType enum, and SensorCapability as associated equipment - three incompatible models of the same physical device (D2).",
+ "Initialization is what forces the choice: an Init message must declare what a platform carries, so it has to pick one representation; the Report side only consumes sensor output (log P2). The same carried-equipment pattern returns in weapon / manipulator / cargo typing (W2/E2/L1 -> Q-L) and in non-imaging sensor reports (Y1 -> Q-I/Q-Q). Decision Q-C: pick one model and apply it everywhere.")
 
 # ---------------- P7 diagram ----------------
 s = slide(); header(s, "P7  -  A swarm is not yet taskable", "Entity-typing decision")
@@ -312,159 +335,89 @@ rbox(s, 8.2, 2.0, 3.4, 0.7, "... PhysicalEntity", RED, size=13)
 arrow(s, 4.0, 2.35, 4.3, 2.35, RED); arrow(s, 7.9, 2.35, 8.2, 2.35, RED)
 tb, tf = box(s, 8.2, 2.75, 3.6, 0.4); p=tf.paragraphs[0]
 set_run(p.add_run(), "not yet taskable (under PhysicalEntity)", 12, ORANGE, italic=True)
-rbox(s, 0.9, 4.0, 3.1, 0.7, "Swarm  (proposed)", GREEN, size=13)
-rbox(s, 4.3, 4.0, 3.6, 0.7, "CollectiveEntity  (C2SIM)", GREEN, size=12)
-rbox(s, 8.2, 4.0, 3.4, 0.7, "ActorEntity", GREEN, size=13)
-arrow(s, 4.0, 4.35, 4.3, 4.35, GREEN); arrow(s, 7.9, 4.35, 8.2, 4.35, GREEN)
-tb, tf = box(s, 8.2, 4.75, 3.6, 0.4); p=tf.paragraphs[0]
+rbox(s, 0.9, 3.55, 3.1, 0.7, "Swarm  (proposed)", GREEN, size=13)
+rbox(s, 4.3, 3.55, 3.6, 0.7, "CollectiveEntity  (C2SIM)", GREEN, size=12)
+rbox(s, 8.2, 3.55, 3.4, 0.7, "ActorEntity", GREEN, size=13)
+arrow(s, 4.0, 3.9, 4.3, 3.9, GREEN); arrow(s, 7.9, 3.9, 8.2, 3.9, GREEN)
+tb, tf = box(s, 8.2, 4.3, 3.6, 0.4); p=tf.paragraphs[0]
 set_run(p.add_run(), "taskable - receives orders, reports", 12, GREEN, italic=True)
 bullets(s, [
  {"text":"A swarm is what orders are addressed to and what sends reports - so it needs to be an ActorEntity."},
- {"text":"Membership and command already exist in the base standard (C2SIM hasSubordinate, SMX hasCommandRelation), so the residual swarm work is small. (v0.0.3 dropped the Swarm class; CollecticeRoboticSystem is still under PhysicalEntity.)","lvl":1},
+ {"text":"Membership and command already exist in the base standard (C2SIM hasSubordinate, SMX hasCommandRelation), so the residual swarm work is small.","lvl":1},
+ {"tag":"Now in v0.0.3:","tagcolor":ORANGE,"text":"the Swarm class was dropped; CollecticeRoboticSystem (sic) remains under PhysicalEntity - still not taskable."},
  {"tag":"Decision (Q-B):","tagcolor":ACCENT,"text":"derive the collective/Swarm from CollectiveEntity (already an ActorEntity) rather than the device/artifact tree."},
-], top=5.3, size=13, gap=5)
+], top=4.85, size=13, gap=6)
 srcline(s, "Swarm-Walk.md  -  log P7 (secs 5, 6d)  -  decision Q-B (log sec 7)")
 footer(s)
 notes(s,
  "The swarm classes derive from the device/artifact side (PhysicalEntity), but orders are addressed to - and reports come from - an ActorEntity. The fix is already in the base standard: derive the collective from CollectiveEntity. Membership and command relations already exist (C2SIM hasSubordinate, SMX hasCommandRelation), so the residual swarm work is small.",
  "Note the current state: v0.0.3 dropped the Swarm class, and CollecticeRoboticSystem (the typo is in the model - O1) is still under PhysicalEntity. Decision Q-B.")
 
-# ---------------- Model drift detail ----------------
-s = slide(); header(s, "The OWL is still catching up to the spreadsheets", "v0.0.x - expected at this stage")
+# ---------------- Findings 1: already in the standard ----------------
+s = slide(); header(s, "Already in the standard - re-adopt, not invent", "Verified in the RDF - the gap list is shorter than it looks")
+rbox(s, 0.8, 1.85, 11.75, 1.4, "The headline discovery: the measurement report already exists\n\nBML lineage WhoMeasuredType {value, unit, phenomenon, sensor, time, place} - flagged as missing, found in C2SIM's own lineage. Re-adopt, not invent (Q-Q).", GREEN, size=13)
 bullets(s, [
- {"tag":"Autonomy - 3 vocabularies to reconcile:","tagcolor":ORANGE,"text":"OWL {Automated, FullAuto, ReCont, Teleop}  vs  ControlMode {Piloted, Unpiloted-Autonomous, Swarm}  vs  NavigationAutonomy {FPV, Autonomous, RemoteControl}."},
- {"tag":"Sensor - 3 models to reconcile:","tagcolor":ORANGE,"text":"OWL Sensor class  vs  SensorType enum  vs  SensorCapability as associated equipment."},
- {"tag":"Not yet in the OWL:","tagcolor":ORANGE,"text":"Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters. (v0.0.1 had 0 datatype properties; v0.0.3 begins the layer, for the Video Detection Report only.)"},
- {"tag":"Decisions (Q-C, Q-D):","tagcolor":ACCENT,"text":"pick one normative sensor model and one normative autonomy vocabulary; express the rest as derived."},
-], top=1.8, size=15, gap=13)
-srcline(s, "log sec 2 (D1-D3)  -  ASX Concept Mapping.xlsx (the spreadsheet-side vocabularies)")
+ {"tag":"Task verbs:","tagcolor":GREEN,"text":"LOX already carries 446 TaskActionCode verbs - ENGAGE, ATTACK, BREACH, CONSTR, CLROBS, MINLAY, TRANS, RESUPL, RESCUE, RECOVR, ESCRT, RECCE, PATROL, COMREL + search verbs. Not a missing-verb problem."},
+ {"tag":"Order machinery:","tagcolor":GREEN,"text":"effects (DesiredEffectCode), targets (hasAffectedEntity), ROE (RuleOfEngagement, WeaponRuleOfEngagementCode), resources + quantities, routes + phased planning (PlanBody/PlanPhase), position reporting."},
+ {"tag":"Structure:","tagcolor":GREEN,"text":"membership + command exist (C2SIM hasSubordinate, SMX hasCommandRelation) - the swarm residual is small; platform types (Vehicle / Aircraft / SurfaceVessel); a neutral hostility value (smx#NEUTRL)."},
+ {"tag":"Capability declaration:","tagcolor":GREEN,"text":"BML WhoHoldingType already covers the capability self-report pattern (Q-V)."},
+ {"tag":"What this means:","tagcolor":NAVY,"text":"a large share of the 24 decisions is where to hang existing vocabulary, not what to invent."},
+], top=3.45, size=13, gap=8)
+srcline(s, "verified against the RDF, not recalled (log change log 2026-07-12)  -  the 'checked - already exist' rows across log sec 6  -  OntologyConceptCoverage.md")
 footer(s)
 notes(s,
- "The concrete reconciliation list: three autonomy vocabularies, three sensor models, and the attribute layer (Payload, Mobility, VehicleType, ...) that exists in the spreadsheets but not yet in the OWL.",
- "Why so much is still to define: the v0.0.1 baseline is 15 classes, 1 object property, 0 datatype properties - a taxonomy of things; the layer that says what you actually send had not been built yet. v0.0.3 begins it (datatype properties for the Video Detection Report). Most gaps are simply not-yet-built - which is why writing messages surfaces them. Decisions Q-C / Q-D: pick one normative sensor model and one autonomy vocabulary, express the rest as derived.")
+ "Section budget: slides 12-15, about 6 minutes - one beat per theme: re-adopt, missing content types, missing typing, missing authority. Each slide's Dig deeper line names the walk docs and log sections with the full detail.",
+ "Open the findings block with the good news, aggregated: the measurement report flagged as missing already exists in C2SIM's own BML lineage (WhoMeasuredType); LOX already carries 446 task verbs; effects, targets, ROE, resources, routes, phased planning, and position reporting all exist; membership and command relations exist; a neutral hostility value exists (smx#NEUTRL; an untyped NeutralSide individual too); and the capability-declaration pattern exists (WhoHoldingType). All verified in the RDF, not recalled.",
+ "The framing to land: the gap list is shorter than it looks - a large share of the 24 decisions is re-adopt / where-to-hang, not invent.")
 
-# ---------------- Sample-message open items ----------------
-s = slide(); header(s, "Open items in the current instantiations", "small things to tidy as the model firms up")
+# ---------------- Findings 2: missing content types ----------------
+s = slide(); header(s, "Missing content types - what a message cannot yet say", "Each gap named by every scenario that hit it")
+rbox(s, 0.8, 1.85, 11.75, 1.4, "The biggest content gap: one generic Detection Report\n\nconfidence + error-bound + false-positive - needed by the video, CBRN, EW, GPR, and naval-mine walks (Y1/M3/M4/G4); one report subsumes all five (Q-I/Q-Q).", RED, size=13)
 bullets(s, [
- {"tag":"M1:","tagcolor":ORANGE,"text":"actorReference is a string, but it needs to define an entity not yet in the database - an inline entity-definition mechanism for observed entities is still to be added."},
- {"tag":"M5:","tagcolor":ORANGE,"text":"MediaTypeCode {VID/AUD/IMG/DOC/TXT/NOS} mixes media format with sensor modality - the sample sheets' MediaTypeEnum already used its 'Not Otherwise Specified' value for 'thermal scan' (a sensor type) - worth separating."},
- {"tag":"M7:","tagcolor":ORANGE,"text":"in an Order sheet hasStartTime is typed UUIDBase while hasEndTime is TimeInstant - looks like a copy/paste slip."},
- {"tag":"Typos:","tagcolor":ORANGE,"text":"class 'CollecticeRoboticSystem' (should be 'CollectiveRoboticSystem') and versionInfo 'Extrension' - both still in v0.0.3; easiest to fix before messages are built on them."},
-], top=1.8, size=15, gap=13)
-srcline(s, "log sec 4 (M-series, sample messages)  -  sec 3 (typos & naming)")
+ {"tag":"Rationale / explanation report:","tagcolor":RED,"text":"systems report WHAT (TaskStatus) but not WHY a route changed or a mission failed - CASEVAC (X2) + the DroneResponse explainability mission; schema in hand {event, action, reasoning, change, confidence} (Q-H)."},
+ {"tag":"Robot-to-robot coordination:","tagcolor":RED,"text":"no content type for one robot to hand a verified safe route to another (envelope addressing exists; the content does not) - CASEVAC (X1) + maritime cross-cue with a shared track (G3) + MUM-T; extends to system-to-system tasking (Q-G/Q-P)."},
+ {"tag":"Effect-achieved / BDA report:","tagcolor":RED,"text":"TaskStatus says the task ran, not that the target was destroyed - fire support (W3) + LIRC strike BDA."},
+ {"tag":"Capability self-report:","tagcolor":RED,"text":"a robot declares its mounted equipment so tasks can be assigned by capability - MUM-T (G13 -> Q-V)."},
+ {"tag":"Inline entity definition:","tagcolor":RED,"text":"a report cannot introduce a newly-observed (uncooperative) entity it references (M1 -> Q-E)."},
+ {"tag":"Media identity / modality split:","tagcolor":RED,"text":"MediaReference identity is undecided, and MediaTypeCode mixes media format with sensor modality - a 'thermal scan' rode the NOS value (M2/M5 -> Q-F)."},
+], top=3.45, size=12.5, gap=6)
+srcline(s, "CASEVAC-Walk.md, NonVideoSensors-Walk.md, FireSupport-Walk.md, SourcedScenarios-Walk.md, ValidationEvidence-Walk.md  -  log secs 6b/6c/6e/6h/6j  -  decisions Q-E/G/H/I/P/Q/V")
 footer(s)
 notes(s,
- "Section budget: slides 13-19, about 6 minutes - one beat per domain; each slide's Dig deeper line names the walk doc and log section with the full detail.",
- "M-series: small instantiation-level items - inline entity definition for observed entities (M1), media format vs sensor modality (M5), a UUIDBase/TimeInstant copy-paste slip (M7), and two typos still in v0.0.3 (CollecticeRoboticSystem, Extrension). All cheapest to fix before messages are built on them.")
+ "The content-type gaps, each named by every scenario that hit it rather than by the scenario that happened to surface it first. The generic detection report carries the most evidence - five sensor modalities converge on it. The rationale report and robot-to-robot coordination each carry two independent sources (CASEVAC plus a documented mission).",
+ "Also from MUM-T: collective-task decomposition and report aggregation (Z1 -> Q-J). The CASEVAC end-to-end story itself is on slides 5-6 and in CASEVAC-Walk.md - here it appears as two evidence citations (X1, X2).")
 
-# ---------------- Coverage gaps ----------------
-s = slide(); header(s, "Coverage: what is still to instantiate")
+# ---------------- Findings 3: missing typing ----------------
+s = slide(); header(s, "Missing typing - what a platform is and carries", "One pattern, several instances")
+rbox(s, 0.8, 1.85, 11.75, 1.4, "The core gap: nothing typed for what a platform carries or wields\n\nCargo (L1), manipulator (E2), weapon/munition (W2) are one missing piece - the typed payload / effector / weapon (Q-L). The verbs already exist in LOX.", RED, size=13)
 bullets(s, [
- {"text":"Initialization: 0 of 3 named scenarios were instantiated (now drafted in this review).","bold":True},
- {"text":"CASEVAC: walked end-to-end in this review - surfaces two gaps with no element (next slide).","bold":True},
- {"text":"Non-video sensors (CBRN, EW, GPR): walked - the media-based report model does not generalize; non-imaging sensors have no measurement type (Y1/Y5).","bold":True},
- {"text":"Task/effect scenarios: engagement, delivery, manipulation, rescue walked - the gap is mainly payload/effector/weapon typing (most task verbs already exist in LOX)."},
- {"text":"Redundancy pass (route-clearance, companion, urban): confirmed - plus one new finding, N1 (an area is not yet able to be the subject of a task/report)."},
- {"text":"Sourced scenarios (subterranean, maritime MCM, sustainment): integrated from the parallel scenario-sourcing effort - corroborate P1/X1/N2/Y and add G1-G10 (incl. a generic Detection Report)."},
-], top=1.6, size=14.5, gap=8)
-srcline(s, "log sec 6 (C1-C9) - each coverage row names the walk doc and tabs behind it")
+ {"tag":"Platform-munition hybrids:","tagcolor":ORANGE,"text":"a loitering munition / FPV is platform + munition at once; counter-UAS needs the detect->defeat chain over existing air-defense verbs + an EW-vulnerability annotation (Q-X)."},
+ {"tag":"Locomotion / role subtypes:","tagcolor":ORANGE,"text":"wheeled / tracked / legged UGV; detector / neutralizer USV (Q-R, extends Q-A)."},
+ {"tag":"Area as a subject:","tagcolor":ORANGE,"text":"an area cannot yet be the subject of a task or report (N1 -> Q-M) - surfaced by the redundancy screen, needed by the hazard-area, kill-box, and area-coverage walks; plus an explore-until-covered goal (G2 -> Q-N, search verbs exist)."},
+ {"tag":"Environment + geometry:","tagcolor":ORANGE,"text":"operating-environment conditions (GPS-denied, illumination, sea-state, terrain - G11 -> Q-T); formation / relative geometry beyond a single RelativeLocation (G12 -> Q-U)."},
+ {"tag":"Small residual:","tagcolor":MGRAY,"text":"a general-purpose tow/salvage verb (TOWTGT covers gunnery targets only)."},
+], top=3.45, size=13, gap=8)
+srcline(s, "TaskEffect-Batch-Walk.md, RedundancyPass-Walk.md, SourcedScenarios-Walk.md  -  log secs 6f/6g/6h/6k  -  decisions Q-L/M/N/R/T/U/X")
 footer(s)
 notes(s,
- "The coverage map: what was still to instantiate, and what this review drafted for each row. Initialization had 0 of 3 named scenarios instantiated - now drafted. Non-video sensors show the media-based report model does not generalize (Y1/Y5). The task/effect gap is mainly payload/effector/weapon typing - the verbs already exist. The redundancy pass confirmed ~80% overlap but still yielded N1 (an area as the subject of a task/report).",
- "Each row on this slide resolves to a C-row in log sec 6, which names the walk doc and the workbook tabs behind it.")
+ "The typing gaps share one pattern: the model can name the action (the verbs exist) but not the thing - what is carried or wielded (Q-L), what a hybrid platform-munition is (Q-X), what subtype of platform (Q-R), or an area as the object of tasking (Q-M). Environment and formation attributes (Q-T/Q-U) round it out.",
+ "This slide is the counterpart of the re-adopt slide: the verbs and order machinery exist; the typed nouns do not. The validation pass also supplied a concrete schema here: an area map with per-cell value + variance (Q-M/Q-Q).")
 
-# ---------------- CASEVAC walk ----------------
-s = slide(); header(s, "CASEVAC walk: two gaps with no element", "The flagship contributed scenario")
+# ---------------- Findings 4: missing authority semantics ----------------
+s = slide(); header(s, "Missing authority semantics - who may do what", "The safety-critical block - and doctrine already supplies the answer")
+rbox(s, 0.8, 1.85, 11.75, 1.4, "W1  -  No link between autonomy level and permission to engage\n\nThe standard can say WHAT effect and WHICH ROE - but not WHO authorized the engagement, nor whether a FullAuto system may take lethal action unsupervised (AuthorizationHeader is sender authentication, not command authorization of fires).", RED, size=13)
 bullets(s, [
- {"text":"Walked end-to-end: Initialization -> tasking Order -> robot-to-robot route hand-off -> status/threat Reports -> explainable-reasons Report."},
-], top=1.55, size=14, height=0.85)
-rbox(s, 0.8, 2.45, 5.75, 1.75, "X1  -  No robot-to-robot content\n\nScout has no content type yet to hand a verified safe Route to the transport UGV (envelope addressing exists; a content type does not)", RED, size=13)
-rbox(s, 6.8, 2.45, 5.75, 1.75, "X2  -  No rationale report\n\nSystems can report WHAT (TaskStatus) but not WHY a route changed or a mission failed", RED, size=13)
-bullets(s, [
- {"tag":"Decision (Q-G):","tagcolor":ACCENT,"text":"define a robot-to-robot coordination content type (safe-route advertisement) and the issuing-authority model."},
- {"tag":"Decision (Q-H):","tagcolor":ACCENT,"text":"add a rationale/explanation ReportContent so systems can report why, not just what."},
- {"tag":"Checked:","tagcolor":GREEN,"text":"Route, phased planning (PlanBody/PlanPhase), and position reporting already exist - not gaps."},
-], top=4.5, size=14, gap=9)
-srcline(s, "CASEVAC-Walk.md  -  log sec 6b (X1-X6)  -  5 CASEVAC tabs in the .xml workbooks")
+ {"tag":"The doctrine-grounded answer (Q-W):","tagcolor":GREEN,"text":"weapons-control status (hold / tight / free) + kill-box - an authorization-bearing area (geo + time window + civilian-clearance + permitted target types) gating autonomous lethal action; from the SME LIRC scenario (G14). Unifies Q-K with area-as-subject (Q-M)."},
+ {"tag":"On-the-loop control:","tagcolor":ORANGE,"text":"supervision verbs - configure / suspend / acknowledge / override - as engagement authority becomes a function of autonomy level (Q-K)."},
+ {"tag":"Denied-comms operation:","tagcolor":ORANGE,"text":"an operating mode + deployable relay entity for comms-denied autonomy - SubT + sustainment (G1 -> Q-O; the relay verb lox#COMREL exists)."},
+ {"tag":"Deception:","tagcolor":ORANGE,"text":"decoy role + threat-aware order annotations - sustainment + OPFOR targeting (G8 -> Q-S; deception verbs exist)."},
+], top=3.45, size=13, gap=8)
+srcline(s, "FireSupport-Walk.md + DroneWarfare-LIRC-OPFOR-Walk.md  -  log secs 6e (W1-W3) / 6k (G14)  -  decisions Q-K/O/S/W  -  Fire Support Order + LIRC Kill-Box Engagement Order tabs")
 footer(s)
 notes(s,
- "The flagship contributed scenario, walked end to end. Two gaps have no element at all: X1 - no content type for one robot to hand a verified safe route to another (envelope addressing exists; the content does not); X2 - systems can report WHAT (TaskStatus) but not WHY a route changed or a mission failed. Decisions Q-G / Q-H.",
- "Also checked, and not gaps: Route, phased planning (PlanBody/PlanPhase), and position reporting already exist in the base standard.")
-
-# ---------------- Fire Support / engagement authority ----------------
-s = slide(); header(s, "Fire Support: autonomous engagement authority", "The task/effect axis")
-rbox(s, 0.8, 1.95, 11.75, 1.6, "W1  -  No link between autonomy level and permission to engage\n\nThe standard can say WHAT effect and WHICH ROE - but not WHO (which commander) authorized the engagement, nor whether a FullAuto system may take a lethal action without a human in / on the loop.", RED, size=15)
-bullets(s, [
- {"tag":"Checked - already exist (not gaps):","tagcolor":GREEN,"text":"rules of engagement (RuleOfEngagement, WeaponRuleOfEngagementCode - LOX), desired effect (DesiredEffectCode), target (hasAffectedEntity), and the engage/attack verbs (lox#ENGAGE / lox#ATTACK)."},
- {"tag":"Note:","tagcolor":ORANGE,"text":"AuthorizationHeader is message-sender authentication, not command authorization of fires - so who-approved-the-engagement is part of W1, not covered."},
- {"tag":"Also gaps:","tagcolor":ORANGE,"text":"W2 weapon/munition not typed; W3 no battle-damage / effect-achieved report (TaskStatus = the task ran, not the target destroyed)."},
- {"tag":"Decision (Q-K):","tagcolor":ACCENT,"text":"model engagement authority as a function of autonomy level - may this system take this action unsupervised?"},
- {"tag":"Candidate answer (Q-W):","tagcolor":GREEN,"text":"the SME LIRC scenario supplies a concrete model - a weapons-control status + kill-box (an authorization-bearing area: geo + time window + civilian-clearance + target type) that gates autonomous lethal action (G14). Unifies W1 with area-as-subject (N1/Q-M)."},
-], top=3.7, size=13, gap=8)
-srcline(s, "FireSupport-Walk.md + DroneWarfare-LIRC-OPFOR-Walk.md  -  log sec 6e (W1-W3) / 6k (G14, Q-W)  -  Fire Support Order + LIRC Kill-Box Engagement Order tabs")
-footer(s)
-notes(s,
- "W1: the standard can express WHAT effect and WHICH ROE, but not WHO authorized an engagement, nor whether a FullAuto system may take a lethal action without a human in or on the loop. AuthorizationHeader was checked: it is message-sender authentication, not command authorization of fires - so who-approved-the-engagement is part of the gap.",
- "Also W2 (weapon/munition not typed) and W3 (no battle-damage / effect-achieved report - TaskStatus says the task ran, not that the target was destroyed). Decision Q-K: engagement authority as a function of autonomy level.",
- "Candidate answer (Q-W): the SME drone-warfare thread's LIRC scenario supplies a concrete model from real doctrine - a weapons-control status (hold/tight/free) plus a kill box, an authorization-bearing area gated by geography, a time window, a civilian-clearance state, and permitted target types. That construct (G14) is what W1 was missing, and it unifies engagement authority (Q-K) with area-as-subject (N1/Q-M).")
-
-# ---------------- Task/effect summary ----------------
-s = slide(); header(s, "The task/effect axis is mostly already there", "Across engagement, delivery, manipulation, rescue, search")
-rbox(s, 0.8, 2.0, 5.75, 1.75, "Action verbs already exist\n\nLOX has 446 TaskActionCode verbs - ENGAGE, ATTACK, BREACH, CONSTR, CLROBS, MINLAY, TRANS, RESUPL, RESCUE, RECOVR, NTRCOM, ESCRT, RECCE, PATROL. Not a missing-verb problem.", GREEN, size=13)
-rbox(s, 6.8, 2.0, 5.75, 1.75, "The real gap: payload / effector / weapon typing\n\nCargo (L1), manipulator (E2), weapon (W2) are one gap: no typed thing carried or wielded.", NAVY, size=13)
-bullets(s, [
- {"tag":"Also already there (checked):","tagcolor":GREEN,"text":"effects (DesiredEffectCode), targets (hasAffectedEntity), resources + quantities, ROE, platform types (Vehicle / Aircraft / SurfaceVessel)."},
- {"tag":"Small residuals:","tagcolor":ORANGE,"text":"an area is not yet a possible task/report subject (N1 / Q-M); an area-coverage exploration goal (G2); a general-purpose tow/salvage verb (TOWTGT covers gunnery targets only); a decoy role."},
- {"tag":"Decision (Q-L):","tagcolor":ACCENT,"text":"add the typed payload / effector / weapon - the verbs are already in LOX."},
-], top=4.0, size=14, gap=9)
-srcline(s, "TaskEffect-Batch-Walk.md  -  RedundancyPass-Walk.md  -  log secs 6f / 6g (L, E, R, N series)")
-footer(s)
-notes(s,
- "The counterweight slide of the domain block: LOX already carries 446 task verbs (ENGAGE, BREACH, RESUPL, RESCUE, ...), plus effects, targets, resources, and ROE - all verified in the RDF. The task/effect work is not invent-verbs.",
- "The real gap is one pattern: nothing typed for what a platform carries or wields - cargo (L1), manipulator (E2), weapon (W2) are the same missing piece. Decision Q-L. Small residuals: area as task subject (N1/Q-M), area-coverage goal (G2), a general tow/salvage verb, a decoy role.")
-
-# ---------------- Sourced scenarios (SubT / MCM / Sustainment) ----------------
-s = slide(); header(s, "Integrated from the parallel scenario-sourcing effort", "SubT (subterranean) + Cooperative MCM (maritime) + Sustainment")
-bullets(s, [
- {"tag":"Corroborated (fresh domains):","tagcolor":GREEN,"text":"platform typing P1, robot-to-robot X1 (-> cross-cueing), persistent tasking N2, and the sensor-report problem Y1."},
- {"tag":"Best contribution (G4):","tagcolor":ACCENT,"text":"one generic Detection Report (confidence + error-bound + false-positive) subsumes Video/CBRN/EW/GPR/naval-mine - resolves Y1 (and M3/M4); the measurement/taxonomy side (Y2/Y5) folds into Q-I."},
- {"tag":"New gaps:","tagcolor":ORANGE,"text":"area-coverage/exploration goal (G2, search verbs exist); denied-comms mode + relay entity (G1, the relay verb COMREL exists); decoy role (G8, deception verbs exist); maritime cross-cue with a shared track (G3); environment conditions (G11); formation geometry (G12)."},
- {"text":"Neutral-actor framing is mostly covered (smx#NEUTRL hostility value; an untyped NeutralSide individual also exists). Counter-UAS, human-machine teaming, and SAR were all extracted in the later validation pass.","color":MGRAY},
-], top=1.75, size=15, gap=13)
-srcline(s, "SourcedScenarios-Walk.md  -  OntologyConceptCoverage.md  -  log secs 6h / 6i (G-series)  -  7 tabs in the .xml workbooks")
-footer(s)
-notes(s,
- "The parallel sourcing effort grounded this review's gaps in real missions and added its own findings (the G-series). Best contribution: one generic Detection Report (confidence + error bound + false positive) that subsumes the video / CBRN / EW / GPR / naval-mine reports - it resolves Y1 and folds into Q-I / Q-Q.",
- "New gaps from fresh domains: area-coverage goal, denied-comms mode + relay entity, decoy role, maritime cross-cueing with a shared track, environment conditions, formation geometry. Several re-use existing verbs (search verbs, lox#COMREL) - the gap is the surrounding structure, not the vocabulary.")
-
-# ---------------- Validation evidence ----------------
-s = slide(); header(s, "Validation: the gaps are now evidenced", "Nine sourced missions closed the document holes")
-bullets(s, [
- {"tag":"Now grounded by a real mission:","tagcolor":GREEN,"text":"explainability (Agrawal DroneResponse), CBRN (UGV-CBRN), EW (UAV emitter geolocation), persistence (MDARS) - all previously asserted-but-untested."},
- {"tag":"Prior art, not invention (Q-Q):","tagcolor":ACCENT,"text":"the measurement report flagged as missing already existed in C2SIM's BML lineage - WhoMeasuredType {value, unit, phenomenon, sensor, time, place}. Re-adopt it."},
- {"tag":"Concrete schemas:","tagcolor":ORANGE,"text":"explanation report {event, action, reasoning, change, confidence} (Q-H); area map w/ per-cell value+variance (Q-M/Q-Q); on-the-loop verbs configure/suspend/ack/override (Q-K)."},
- {"text":"New: capability self-report (G13/Q-V) and collective-task decomposition + report aggregation (Z1), from BML MUM-T tasking.","color":MGRAY},
-], top=1.75, size=14.5, gap=12)
-srcline(s, "ValidationEvidence-Walk.md  -  Documents-Needed/Found.md  -  log sec 6j  -  the 15 records in V2Extractions/")
-footer(s)
-notes(s,
- "The validation holes are now evidenced: explainability (DroneResponse), CBRN, EW geolocation, and persistence (MDARS) are each grounded in a documented mission rather than asserted.",
- "The headline discovery is prior art: WhoMeasuredType, in C2SIM's own BML lineage, already defines the measurement report this review flagged as missing - value, unit, phenomenon, sensor, time, place. Re-adopt rather than invent (Q-Q).")
-
-# ---------------- v0.0.3 status ----------------
-s = slide(); header(s, "Where the OWL is now (v0.0.3)", "Michael's update - the model is moving")
-bullets(s, [
- {"tag":"Started (good):","tagcolor":GREEN,"text":"v0.0.3 begins the attribute layer (first datatype properties - v0.0.1 had none; plus further object properties) and folds the Video Detection Report into the OWL (MediaReference, MediaTypeCode, SensorObservation, VideoDetectionReportContent) + an AutonomyLevelCode model."},
- {"tag":"Brings a decision to a head:","tagcolor":ORANGE,"text":"P1 is now in the model, not yet settled - v0.0.3 declares both UAV/UGV (under Robot) and UnmannedAerial/Ground/Maritime/UnderwaterVehicle (under SMX Vehicle), so the group still picks one; the maritime ones sit under Vehicle rather than SurfaceVessel/SubsurfaceVessel."},
- {"tag":"Still to define:","tagcolor":ACCENT,"text":"the broader attribute set, a taskable collective (Swarm was removed; CollecticeRoboticSystem still non-actor), the generic Detection Report, and the rationale / robot-to-robot / area content - plus the two typos."},
- {"tag":"Coordination notes:","tagcolor":ORANGE,"text":"the branch also adds owl:imports smx/lox to base C2SIM.rdf - a circular import (C2SIM <-> smx) worth a deliberate decision; and AutonomyLevelCode is not yet wired as the range of hasAutonomousRoleCode (still generic Code)."},
-], top=1.8, size=14, gap=11)
-srcline(s, "log sec 9 (full reconciliation, finding by finding)  -  Ontology/C2SIM_ASX-v003.rdf on branch michael_d")
-footer(s)
-notes(s,
- "Section budget: slides 20-24, about 4 minutes; the decision slides are presented as a grouping, not read row by row.",
- "v0.0.3 moves the model: first datatype properties, the Video Detection Report folded into the OWL, an AutonomyLevelCode model. It also brings P1 to a head by declaring both trees - the group still picks one.",
- "Coordination notes worth a deliberate decision: the branch adds owl:imports smx/lox to base C2SIM.rdf (a circular import C2SIM <-> smx), and AutonomyLevelCode is not yet wired as the range of hasAutonomousRoleCode. The full finding-by-finding reconciliation is log sec 9.")
+ "The authority block: W1 is the safety-critical gap - the standard cannot express who authorized an engagement, or whether a FullAuto system may act unsupervised. AuthorizationHeader was checked: it is message-sender authentication, not command authorization of fires - so who-approved-the-engagement is part of the gap, not covered.",
+ "The answer came from doctrine, not invention: the SME drone-warfare thread's LIRC scenario supplies a weapons-control status (hold/tight/free) plus the kill box - an authorization-bearing area gated by geography, a time window, a civilian-clearance state, and permitted target types (G14 -> Q-W). It unifies engagement authority (Q-K) with area-as-subject (Q-M).",
+ "Around it: on-the-loop supervision verbs (configure / suspend / acknowledge / override), the denied-comms operating mode + relay entity, and the decoy / threat-aware annotations.")
 
 # ---------------- Decisions 1: model structure ----------------
 s = slide(); header(s, "Decisions (1/3): model structure", "Full register - all 24, with what each resolves: log section 7")
@@ -476,6 +429,7 @@ bullets(s, [
 ], top=1.9, size=18, gap=18)
 footer(s)
 notes(s,
+ "Section budget: slides 16-19, about 4 minutes; the decision slides are presented as a grouping, not read row by row.",
  "The ask, part 1 - structure: Q-A UAV/robot typing, Q-B a taskable swarm, Q-C one sensor model, Q-D one autonomy vocabulary. These four settle the shape of the model and unblock Initialization.",
  "The full text of all 24 decisions, each with what it resolves, is log sec 7 - present the grouping and point at the log rather than reading the register out.")
 
@@ -528,8 +482,9 @@ bullets(s, [
 srcline(s, "log secs 3-4 (the safe corrections)  -  sec 7 (every decision, with what it resolves)")
 footer(s)
 notes(s,
- "Section budget: slides 24-25, about 1 minute - the close.",
- "The same decisions, grouped by commitment level: safe corrections (typos, the UUIDBase slip) are unambiguous; structural decisions need the group; content types need design. Nothing has been applied to the model or the workbooks - all items are proposals pending buy-in.")
+ "Section budget: slides 19-20, about 1 minute - the close.",
+ "The same decisions, grouped by commitment level: safe corrections (typos, the UUIDBase slip) are unambiguous; structural decisions need the group; content types need design. Nothing has been applied to the model or the workbooks - all items are proposals pending buy-in.",
+ "The M-series instantiation items fold in here and into the decisions: the typos and the UUIDBase slip (M7) are safe corrections; M1 and M2/M5 resolve via Q-E and Q-F. All cheapest to fix before messages are built on them.")
 
 # ---------------- Next steps ----------------
 s = slide(); header(s, "Recommended next steps")
@@ -573,7 +528,7 @@ notes(s,
  "Every ID on these slides resolves to exactly one log row - the decoder ring on the next slide maps each family.")
 
 # ---------------- Finding-ID decoder ring ----------------
-s = slide(); header(s, "Finding-ID decoder ring", "Every ID resolves to one row or section - nothing is free-floating")
+s = slide(); header(s, "Finding-ID decoder ring - Issues-And-Comments-Log.md", "Every ID resolves to one row or section - nothing is free-floating")
 table(s, [
  ["ID family", "What it names", "Where it resolves"],
  ["P1 - P7", "entity-typing findings: UAV (P1), sensor (P2), swarm (P7)", "log sec 5; Initialization-Walk.md"],
