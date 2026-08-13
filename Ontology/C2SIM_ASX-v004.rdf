@@ -53,7 +53,7 @@
         <Class IRI="#Actuator"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Algorithm"/>
+        <Class IRI="#AlgorithmTypeCode"/>
     </Declaration>
     <Declaration>
         <Class IRI="#AnalysisComment"/>
@@ -161,6 +161,9 @@
         <ObjectProperty IRI="#hasAutonomusParameters"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#hasAutonomyLevelCode"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#hasControlMode"/>
     </Declaration>
     <Declaration>
@@ -227,12 +230,19 @@
         <Datatype IRI="http://www.sisostds.org/ontologies/C2SIM#UUIDBase"/>
     </Declaration>
     <SubClassOf>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Task"/>
+        <ObjectMinCardinality cardinality="0">
+            <ObjectProperty IRI="#hasAutonomyLevelCode"/>
+            <Class IRI="#AutonomyLevelCode"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#Actuator"/>
         <Class IRI="#ElectricDevice"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Algorithm"/>
-        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#AbstractObject"/>
+        <Class IRI="#AlgorithmTypeCode"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#AnalysisComment"/>
@@ -447,6 +457,10 @@
         <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasAutonomyLevelCode"/>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasControlMode"/>
         <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
     </SubObjectPropertyOf>
@@ -471,8 +485,8 @@
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasAutonomusParameters"/>
-        <Class IRI="#Algorithm"/>
+        <ObjectProperty IRI="#hasAutonomyLevelCode"/>
+        <Class IRI="#AutonomyLevelCode"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasControlMode"/>
