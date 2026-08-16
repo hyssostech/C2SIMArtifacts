@@ -1,0 +1,1906 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Elizabeth Hosang</Author>
+  <LastAuthor>Paulo Barthelmess</LastAuthor>
+  <Created>2025-10-08T12:49:40Z</Created>
+  <LastSaved>2026-06-09T17:07:50Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>12460</WindowHeight>
+  <WindowWidth>23260</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ActiveSheet>5</ActiveSheet>
+  <FirstVisibleSheet>3</FirstVisibleSheet>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s16">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+  </Style>
+  <Style ss:ID="s17">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s18">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="14"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s19">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Interior ss:Color="#FFCC66" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s20">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFCC66" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s21">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s22">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s23">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s24">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Italic="1"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Report MessageBody Fields">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="68" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="135.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="162.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="150.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5" ss:Span="1"/>
+   <Column ss:Index="6" ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="209"/>
+   <Row ss:Height="37" ss:StyleID="s18">
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Class that Defines Field</Data></Cell>
+    <Cell><Data ss:Type="String">Model that defines attribute</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Report</Data></Cell>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">See hasC2SIMHeader</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">SeeMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasCommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">CommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">See JC3IEDM</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasSecurityClassificationCode</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">SecurityClassificationCode</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasSendingTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasProtocol</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s23"><Data ss:Type="String">SISO-STD-C2SIM </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasProtocolVersion</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">1.0.0</Data></Cell>
+    <Cell><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConversationId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSendingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceivingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isReplyToMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">None</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">MessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">See hasReportContent</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasReportId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasReportingEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+   </Row>
+   <Row ss:Index="27">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ObservationReportContent</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasTimeOfObservation</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasDuration</Data></Cell>
+    <Cell><Data ss:Type="String">Duration</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">see hasObservation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="33.625">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">See individual message examples.</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Observed Entity likely does not already exist in database, so the entity needs to be defined in the report.</Data></Cell>
+   </Row>
+   <Row ss:Index="34">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ActivityObservation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasActorReference</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Observation</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:Index="7"><Data ss:Type="String">Proposed attribute on class</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasUncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">ActionCode</Data></Cell>
+    <Cell><Data ss:Type="String">ActivityObservation</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">May be based on location of </Data></Cell>
+   </Row>
+   <Row ss:Index="40">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">LocationObservation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasActorReference</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Observation</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:Index="7"><Data ss:Type="String">Proposed attribute on class</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasUncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s21"/>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to repository of media files</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasDirectionOfMovement</Data></Cell>
+    <Cell><Data ss:Type="String">Orientation</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasSpeed</Data></Cell>
+    <Cell><Data ss:Type="String">Float</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="7"><Data ss:Type="String">Link to actual file.</Data></Cell>
+   </Row>
+   <Row ss:Index="49" ss:Height="29">
+    <Cell ss:StyleID="s21"/>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to repository that contains text document or other unstructured data. </Data></Cell>
+   </Row>
+   <Row ss:Index="53">
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to repository. String may be better.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to item within the repository.</Data></Cell>
+   </Row>
+   <Row ss:Height="29">
+    <Cell ss:Index="7"><Data ss:Type="String">May use either repositoryReference and reportReference or URL</Data></Cell>
+   </Row>
+   <Row ss:Index="58">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="62" ss:Height="29">
+    <Cell ss:Index="7"><Data ss:Type="String">For future expansions, other sensor types, e.g. thermal scan</Data></Cell>
+   </Row>
+   <Row ss:Index="64">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="68">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>31</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>39</ActiveRow>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Order MessageBody Fields">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="68" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="135.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="162.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="150.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5" ss:Span="1"/>
+   <Column ss:Index="6" ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="209"/>
+   <Row ss:Height="37" ss:StyleID="s18">
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Class that Defines Field</Data></Cell>
+    <Cell><Data ss:Type="String">Model that defines attribute</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Report</Data></Cell>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">See hasC2SIMHeader</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">SeeMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">OrderBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasCommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">CommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">See JC3IEDM</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasSecurityClassificationCode</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">SecurityClassificationCode</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasSendingTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasProtocol</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s23"><Data ss:Type="String">SISO-STD-C2SIM </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasProtocolVersion</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">1.0.0</Data></Cell>
+    <Cell><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConversationId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSendingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceivingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasReplyToSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isReplyToMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">OrderBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasEntity</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell><Data ss:Type="String">Task</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasIssuedTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasTaskReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasOrderID</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasRequestingEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">OrderBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:Index="3" ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Height="29">
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">This varies for individual use cases.</Data></Cell>
+   </Row>
+   <Row ss:Index="31">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="21.625">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="34">
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:Index="3" ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="3" ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="38">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="44">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="49">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="58">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="64">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="68">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>3</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Initialization MessageBody Fiel">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="68" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="135.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="162.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="150.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="116"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="209"/>
+   <Row ss:Height="37" ss:StyleID="s18">
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Class that Defines Field</Data></Cell>
+    <Cell><Data ss:Type="String">Model that defines attribute</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Report</Data></Cell>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">See hasC2SIMHeader</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">SeeMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasCommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">CommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">See JC3IEDM</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasSecurityClassificationCode</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">SecurityClassificationCode</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasSendingTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasProtocol</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s23"><Data ss:Type="String">SISO-STD-C2SIM </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasProtocolVersion</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">1.0.0</Data></Cell>
+    <Cell><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConversationId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSendingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceivingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasReplyToSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isReplyToMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasInitializationFile </Data></Cell>
+    <Cell><Data ss:Type="String">InitializationDataFile</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">ObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasSystemEntityList</Data></Cell>
+    <Cell><Data ss:Type="String">SystemEntityList</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">hasScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">ScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row ss:Index="27">
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:Index="3" ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Height="29">
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">This varies for individual use cases.</Data></Cell>
+   </Row>
+   <Row ss:Index="31">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="21.625">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="34">
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:Index="3" ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="3" ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="38">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="44">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="49">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="58">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="64">
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="68">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>3</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Report Base Attributes">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="65" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="118"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="138"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="117.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="94.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="209"/>
+   <Row ss:Height="18.5" ss:StyleID="s18">
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">MessageConcept</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">MessageBody</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">MessageConcept</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">MessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">isFromSender</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell><Data ss:Type="String">isToReceiver</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">ReportingEntity</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">ObservationReportContent</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportingEntity</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="16">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="25">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ActivityObservation</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Height="43.5">
+    <Cell ss:Index="4"><Data ss:Type="String">actorReference</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Observed Entity likely does not already exist in database, so the entity needs to be defined in the report.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">confidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">uncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">media</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">MediaReference</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Proposed attribute on class</Data></Cell>
+   </Row>
+   <Row ss:Index="32">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:Index="7"><Data ss:Type="String">May be based on location of </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">actorReference</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">confidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">uncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row ss:Index="37">
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">C2SIM_ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">MediaReference</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">AnalysisConcept</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to repository of media files</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">effectiveTime</Data></Cell>
+    <Cell><Data ss:Type="String">IntervalTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">mediaType</Data></Cell>
+    <Cell><Data ss:Type="String">MediaTypeEnum</Data></Cell>
+    <Cell><Data ss:Type="String">Video</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">url</Data></Cell>
+    <Cell><Data ss:Type="String">URL</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Link to actual file.</Data></Cell>
+   </Row>
+   <Row ss:Index="43" ss:Height="29">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">C2SIM_ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">AnalystComment</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">AnalysisConcept</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to repository that contains text document or other unstructured data. </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">analystName</Data></Cell>
+    <Cell><Data ss:Type="String">Name</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">createdTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">lastModifiedTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">repositoryReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUID</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to repository. String may be better.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">reportReference</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Reference to item within the repository.</Data></Cell>
+   </Row>
+   <Row ss:Height="29">
+    <Cell ss:Index="4"><Data ss:Type="String">url</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">May use either repositoryReference and reportReference or URL</Data></Cell>
+   </Row>
+   <Row ss:Index="52">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">C2SIM_ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">MediaTypeEnum</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">Video</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">Audio</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">Image</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">Document</Data></Cell>
+   </Row>
+   <Row ss:Height="29">
+    <Cell ss:Index="4"><Data ss:Type="String">Not Otherwise Specified</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">For future expansions, other sensor types, e.g. thermal scan</Data></Cell>
+   </Row>
+   <Row ss:Index="58">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">C2SIM_ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">AnalysisConcept</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMContent</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">Sub-type of C2SIMContent</Data></Cell>
+   </Row>
+   <Row ss:Index="62">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMContent</Data></Cell>
+   </Row>
+   <Row ss:Index="65">
+    <Cell><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell><Data ss:Type="String">IntervalTime</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">ext_ref13</Data></Cell>
+    <Cell><Data ss:Type="String">Duration[0..1]</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>12</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Swarm Detection">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="129.5"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5" ss:StyleID="s18">
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportingEntity</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(swarm UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P7: a ReportingEntity must be an ActorEntity; ASX Swarm derives from PhysicalEntity -&gt; cannot report</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(aggregated detections)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Z1: no aggregation construct - one collective report or N member reports?</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(targets detected by members)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(detected target location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">member UAV #1</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(swarm UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">Membership via hasSuperior/hasSubordinate (base) - works IF the swarm is an ActorEntity (P7)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>0</ActiveRow>
+     <RangeSelection>R1</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Video Detection Report">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="54" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="148"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="138"/>
+   <Column ss:StyleID="s16" ss:Hidden="1" ss:AutoFitWidth="0" ss:Width="66.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="138"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5" ss:Span="1"/>
+   <Column ss:Index="7" ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="453.5"/>
+   <Row ss:Height="18.5" ss:StyleID="s18">
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">ReportingEntity</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">ObservationReportContent</Data></Cell>
+   </Row>
+   <Row ss:Index="5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportingEntity</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:Index="7"><Data ss:Type="String">Unit with Sensor</Data></Cell>
+   </Row>
+   <Row ss:Index="7">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ReportContent</Data></Cell>
+   </Row>
+   <Row ss:Index="10">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Observation</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Sensors's  location</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">actorReference</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">confidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">uncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row ss:Index="15" ss:Height="29">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Observation</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Observed entity's location (optional)</Data></Cell>
+    <Cell><Data ss:Type="String">May be based on location of sensor.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">actorReference</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">confidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">uncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ActivityObservation</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Observation</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18">
+    <Cell ss:Index="5"><Data ss:Type="String">actorReference</Data></Cell>
+    <Cell><Data ss:Type="String">string </Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Observed Entity likely does not already exist in database, so the entity needs to be defined in the report.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">confidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">uncertaintyInterval</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">SensorObservation</Data></Cell>
+    <Cell ss:StyleID="s20"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">ActivityObservation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">media</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">MediaReference</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Proposed attribute on class</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">analystComment</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">AnalystComment</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Proposed attribute on class</Data></Cell>
+   </Row>
+   <Row ss:Index="28">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">AnalysisConcept</Data></Cell>
+    <Cell ss:StyleID="s20"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMContent</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Sub-type of C2SIMContent</Data></Cell>
+   </Row>
+   <Row ss:Index="30">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">MediaReference</Data></Cell>
+    <Cell ss:StyleID="s20"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">AnalysisConcept</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Reference to repository of media files</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">effectiveTime</Data></Cell>
+    <Cell><Data ss:Type="String">IntervalTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">mediaType</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">MediaTypeEnum</Data></Cell>
+    <Cell><Data ss:Type="String">Video</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">url</Data></Cell>
+    <Cell><Data ss:Type="String">URL</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Link to actual file.</Data></Cell>
+   </Row>
+   <Row ss:Index="35">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">AnalystComment</Data></Cell>
+    <Cell ss:StyleID="s20"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">AnalysisConcept</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Reference to repository that contains text document or other unstructured data. </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">analystName</Data></Cell>
+    <Cell><Data ss:Type="String">Name</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">createdTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">lastModifiedTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">repositoryReference</Data></Cell>
+    <Cell><Data ss:Type="String">UUID</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Reference to repository. String may be better.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">reportReference</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">Reference to item within the repository.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">url</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">May use either repositoryReference and reportReference or URL</Data></Cell>
+   </Row>
+   <Row ss:Index="43">
+    <Cell ss:StyleID="s20"><Data ss:Type="String">ASX</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">MediaTypeEnum</Data></Cell>
+    <Cell ss:StyleID="s20"/>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">Video</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">Audio</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">Image</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="String">Document</Data></Cell>
+   </Row>
+   <Row ss:Height="29">
+    <Cell ss:Index="5"><Data ss:Type="String">Not Otherwise Specified</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">For future expansions, other sensor types, e.g. thermal scan</Data></Cell>
+   </Row>
+   <Row ss:Index="51">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIMContent</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row ss:Index="54">
+    <Cell><Data ss:Type="String">C2SIM_SMX_LOX</Data></Cell>
+    <Cell><Data ss:Type="String">IntervalTime</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">ext_ref13</Data></Cell>
+    <Cell><Data ss:Type="String">Duration[0..1]</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>19</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>42</ActiveRow>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="CASEVAC Status+Threat">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">PositionReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(scout position)</Data></Cell>
+    <Cell><Data ss:Type="String">Base-covered - PositionReportContent exists (SMX)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(suspected IED / broken bridge)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] X4: no obstacle/threat observation subtype</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(observed hazard)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">IED / Obstacle</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] X4: how is a detected hazard that triggers replanning typed?</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="CASEVAC Explainable">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(rationale)</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent?</Data></Cell>
+    <Cell><Data ss:Type="String">why route changed</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(free text / structured?)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] X2: no rationale/explanation ReportContent exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">task outcome</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">Incomplete</Data></Cell>
+    <Cell><Data ss:Type="String">Reports the state, not the reason</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(comment)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Candidate: new ASX RationaleReportContent to report WHY (route change, mission failure)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="CBRN Detection Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(CBRN detection)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(contamination location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - where is expressible</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(agent detection)</Data></Cell>
+    <Cell><Data ss:Type="String">Observation?</Data></Cell>
+    <Cell><Data ss:Type="String">detected agent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Chemical agent (e.g. GB)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y3: no hazard/detection Observation subtype fits</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(reading)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">concentration</Data></Cell>
+    <Cell><Data ss:Type="String">value + unit</Data></Cell>
+    <Cell><Data ss:Type="String">5 mg/m3</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y5: no sensor-reading value+unit property exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(sensor)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">CBRN-Chemical</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y2: SensorType enum has no CBRN / radiological / nuclear / biological</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">SensorObservation</Data></Cell>
+    <Cell><Data ss:Type="String">ActivityObservation</Data></Cell>
+    <Cell><Data ss:Type="String">media</Data></Cell>
+    <Cell><Data ss:Type="String">MediaReference</Data></Cell>
+    <Cell><Data ss:Type="String">(none)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y1: media-based model does not apply - a CBRN reading is not a media file; MediaTypeEnum cannot represent a measurement</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="EW Emitter Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(emitter intercept)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(emitter bearing/location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works - direction-finding location</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(emitter/signal)</Data></Cell>
+    <Cell><Data ss:Type="String">Observation?</Data></Cell>
+    <Cell><Data ss:Type="String">detected emitter</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Hostile radio, 243.0 MHz</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y3/Y4: no emitter/signal observation type; JAM is a LOX TaskActionCode (the action), not a sensing report</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(reading)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">frequency / bandwidth</Data></Cell>
+    <Cell><Data ss:Type="String">value + unit</Data></Cell>
+    <Cell><Data ss:Type="String">243.0 MHz / 25 kHz</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y5: no measurement value+unit property</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(sensor)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">EW</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType has EW - the sensor is typable; the observation of an intercept is not</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="GPR Mine Detection Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">(mine detection)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">LocationObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasLocation</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">(mine location)</Data></Cell>
+    <Cell><Data ss:Type="String">Works</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectTypeObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">observed type</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectType</Data></Cell>
+    <Cell><Data ss:Type="String">Mine / IED</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - identity is expressible IF a Mine/IED entity type exists (ties to X4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectTypeObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">0.85</Data></Cell>
+    <Cell><Data ss:Type="String">Works - confidence exists</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX?</Data></Cell>
+    <Cell><Data ss:Type="String">(reading)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">depth / burial</Data></Cell>
+    <Cell><Data ss:Type="String">value + unit</Data></Cell>
+    <Cell><Data ss:Type="String">0.3 m</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y5: no measurement value+unit for subsurface depth</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(sensor)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">SensorType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">GPR / Radar</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y2: SensorType enum has no GPR / radar / metal-detector</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="BDA Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(battle damage assessment)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] W3: no effect-achieved / BDA ReportContent; TaskStatus says the task ran, not that the target was destroyed</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(post-strike observation)</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - the scene is observable, but 'desired effect achieved: yes/no' has no home</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">task outcome</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">Complete</Data></Cell>
+    <Cell><Data ss:Type="String">Reports task state, not effect on the target</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="Delivery Confirmation Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(delivery confirmation)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] L2: no delivery-confirmation ReportContent - what was delivered, and received by whom</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">task outcome</Data></Cell>
+    <Cell><Data ss:Type="String">TaskStatus</Data></Cell>
+    <Cell><Data ss:Type="String">Complete</Data></Cell>
+    <Cell><Data ss:Type="String">Says the task ran, not what/how much was delivered or who received it</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">(received)</Data></Cell>
+    <Cell><Data ss:Type="String">ResourceObservation</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(received: 500 rounds)</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - ResourceObservation can report resources; handover/receipt semantics unclear</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="Naval Mine Detection Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(classified mine)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Y-series: another per-sensor detection report - motivates the generic one (G4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">(detection)</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">0.9</Data></Cell>
+    <Cell><Data ss:Type="String">Works</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(MoE)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">pct neutralized / active time</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">85% / 6 h</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G7: no measure-of-effectiveness attribute for campaign reporting</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="Generic Detection Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(detected object)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G4: this ONE parameterized report subsumes Video / CBRN / EW / GPR / naval-mine / artifact</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">(detection)</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectTypeObservation</Data></Cell>
+    <Cell><Data ss:Type="String">detected type</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectType</Data></Cell>
+    <Cell><Data ss:Type="String">backpack / survivor / mine</Data></Cell>
+    <Cell><Data ss:Type="String">Object identity</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">(detection)</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">hasConfidenceLevel</Data></Cell>
+    <Cell><Data ss:Type="String">double</Data></Cell>
+    <Cell><Data ss:Type="String">0.8</Data></Cell>
+    <Cell><Data ss:Type="String">Works</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(detection)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">error bound / uncertainty</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">+/- 1.5 m</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G4/Y5: position error-bound has no attribute</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(detection)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">modality + false-positive</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">lidar-vision; FP=false</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G4: sensor modality + false-positive flag - unify with Q-I sensor-reading</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="Hazard Area Map Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(hazard area map)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] N1/Q-M: report whose subject is an AREA - a per-cell hazard map</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">area</Data></Cell>
+    <Cell><Data ss:Type="String">TacticalArea / MapGraphic</Data></Cell>
+    <Cell><Data ss:Type="String">(map extent)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">The mapped area</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(map cell)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">value + variance</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">radiation estimate + variance</Data></Cell>
+    <Cell><Data ss:Type="String">[!] Q-Q/Y5: per-cell value + variance(confidence); grounded by CBRN radiation map (Muster2024)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">(detected)</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectTypeObservation</Data></Cell>
+    <Cell><Data ss:Type="String">hazard type</Data></Cell>
+    <Cell><Data ss:Type="String">SubjectType</Data></Cell>
+    <Cell><Data ss:Type="String">Radiation source / Chemical</Data></Cell>
+    <Cell><Data ss:Type="String">Detected-hazard identity (X4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(prior art)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">measurement structure</Data></Cell>
+    <Cell><Data ss:Type="String">BML WhoMeasuredType</Data></Cell>
+    <Cell><Data ss:Type="String">value + UOM + phenomenon + sensor + time + place</Data></Cell>
+    <Cell><Data ss:Type="String">[+] adopt the BML measurement structure (Remmersmann 2015)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="LIRC Strike BDA Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(battle damage assessment)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] W3: no effect-achieved / BDA ReportContent; TaskStatus says the task ran, not that the target was destroyed.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(post-strike: 1 ADA veh, 1 arty, 2 IFV destroyed; 12 casualties KB1)</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - scene observable; effect-achieved has no home.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(own attrition)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">systems lost to countermeasures</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">~50% of autonomous systems failed</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G7: measure-of-effectiveness / attrition attribute (also ~7-day drone life, ~10% mission completion in the 2024 update).</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+</Workbook>

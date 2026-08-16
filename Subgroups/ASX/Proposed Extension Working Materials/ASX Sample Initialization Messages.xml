@@ -1,0 +1,898 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Elizabeth Hosang</Author>
+  <LastAuthor>Paulo Barthelmess</LastAuthor>
+  <Created>2025-10-08T12:49:40Z</Created>
+  <LastSaved>2026-05-15T19:08:19Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>8880</WindowHeight>
+  <WindowWidth>17280</WindowWidth>
+  <WindowTopX>5860</WindowTopX>
+  <WindowTopY>3170</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s16">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+  </Style>
+  <Style ss:ID="s17">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="14"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s18">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s19">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s20">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Italic="1"/>
+  </Style>
+  <Style ss:ID="s21">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s22">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s23">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFFF00" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Initialization Message Body">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="68" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="49"
+   ss:DefaultRowHeight="14.5">
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="135.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="162.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="150.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="116"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="107.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="164.5"/>
+   <Column ss:StyleID="s16" ss:AutoFitWidth="0" ss:Width="209"/>
+   <Row ss:Height="37" ss:StyleID="s17">
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Class that Defines Field</Data></Cell>
+    <Cell><Data ss:Type="String">Model that defines attribute</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Report</Data></Cell>
+    <Cell><Data ss:Type="String">Root Element</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">N/A</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">See hasC2SIMHeader</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">SeeMessageBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">hasC2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasCommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">CommunicativeActTypeCode</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMHeader</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">See JC3IEDM</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasSecurityClassificationCode</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="String">SecurityClassificationCode</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasSendingTime</Data></Cell>
+    <Cell><Data ss:Type="String">DateTime</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasProtocol</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s19"><Data ss:Type="String">SISO-STD-C2SIM </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasProtocolVersion</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">(hardcoded)</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">1.0.0</Data></Cell>
+    <Cell><Data ss:Type="String">See C2SIM Object Below</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasConversationId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isFromSendingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isToReceivingSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasReplyToSystem</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">isReplyToMessageId</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell ss:StyleID="s18"><Data ss:Type="String">hasMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">Element</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">Message</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasInitializationFile </Data></Cell>
+    <Cell><Data ss:Type="String">InitializationDataFile</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">ObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">hasSystemEntityList</Data></Cell>
+    <Cell><Data ss:Type="String">SystemEntityList</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s18"/>
+    <Cell><Data ss:Type="String">hasScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">ScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+   </Row>
+   <Row ss:Index="27">
+    <Cell ss:StyleID="s18"/>
+    <Cell ss:Index="3" ss:StyleID="s18"/>
+   </Row>
+   <Row ss:Height="29">
+    <Cell><Data ss:Type="String">hasTask</Data></Cell>
+    <Cell ss:StyleID="s20"><Data ss:Type="String">This varies for individual use cases.</Data></Cell>
+   </Row>
+   <Row ss:Index="31">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="21.625">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+   <Row ss:Index="34">
+    <Cell ss:StyleID="s18"/>
+    <Cell ss:Index="3" ss:StyleID="s18"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="3" ss:StyleID="s21"/>
+    <Cell ss:StyleID="s21"/>
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row ss:Index="38">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+   <Row ss:Index="44">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="49">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="58">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="64">
+    <Cell ss:StyleID="s22"/>
+   </Row>
+   <Row ss:Index="68">
+    <Cell ss:StyleID="s18"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>9</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="UAV with Video Init">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="13" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="138.5"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Model</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Field</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Value</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">(the UAV)</Data></Cell>
+    <Cell><Data ss:Type="String">Container for scenario entity definitions</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Aircraft or UAV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">UAV</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P1 DECIDE-FIRST: ASX UAV(subClassOf Robot) vs SMX Aircraft(subClassOf Platform) - conflicting parallel trees under ActorEntity. Which is normative?</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Scout-UAV-1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasMarking</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">UAV1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(C2 unit UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">Tasking unit</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">hasAutonomousRoleCode</Data></Cell>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">FullAuto</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] P3: no attachment point defined on entity / EntityDescriptor</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">ControlMode</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">Unpiloted-Autonomous</Data></Cell>
+    <Cell><Data ss:Type="String">[!] D1/P6: duplicates hasAutonomousRoleCode; three autonomy vocabularies exist</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">VehicleType</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">Drone-Hover</Data></Cell>
+    <Cell><Data ss:Type="String">From ConceptMapping; absent from OWL (D3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">Mobility/Propulsion</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">MultiRotor</Data></Cell>
+    <Cell><Data ss:Type="String">From ConceptMapping; absent from OWL (D3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">onboard video sensor</Data></Cell>
+    <Cell><Data ss:Type="String">Sensor / Equipment</Data></Cell>
+    <Cell><Data ss:Type="String">SensorCapability</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">SensorVideo</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P2 DECIDE-FIRST: sensor as entity vs class vs attribute - pick one model (D2)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">C2 unit</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity (Unit)</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">HOTL-Cmd</Data></Cell>
+    <Cell><Data ss:Type="String">Receives the reports</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ScenarioSetting</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">(force side, time, CRS)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Standard scenario settings</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="UAV Patrol Initialization">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="5" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="124"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Model</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Field</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Value</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX/ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">(see UAV with Video Init)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Same entity typing as Scenario A (P1, P3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">PatrolRoute</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic (PhysicalEntity)</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Patrol-Route-A</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P5: baseline route must be declared at init; the Order only references it</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">PatrolArea</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic (PhysicalEntity)</Data></Cell>
+    <Cell><Data ss:Type="String">(geometry)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Baseline area of operations</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(UAV entity)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">NavigationAutonomy</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">Autonomous</Data></Cell>
+    <Cell><Data ss:Type="String">[!] D1/P6: third autonomy vocabulary (FPV / Autonomous / RemoteControl)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Swarm Initialization">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="8" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="121.5"
+   ss:DefaultRowHeight="14.5">
+   <Row ss:Height="18.5">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Model</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Field</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Type</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Value</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:StyleID="s17"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX or C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">Swarm or CollectiveEntity</Data></Cell>
+    <Cell><Data ss:Type="String">CollecticeRoboticSystem (sic) / ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Swarm</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P7 DECIDE-FIRST: OWL Swarm derives from PhysicalEntity (inert) but a swarm is tasked and reports -&gt; needs ActorEntity. Base C2SIM has CollectiveEntity subClassOf ActorEntity</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(Swarm)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Swarm-1</Data></Cell>
+    <Cell><Data ss:Type="String">Must be taskable</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">member UAV #1</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(Swarm UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] P8: is hasSuperior the intended membership link?</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">member UGV #2</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(Swarm UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">[Q] P10: heterogeneous (UAV+UGV) members in one collective</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(Swarm)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">Leader</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase / Boolean</Data></Cell>
+    <Cell><Data ss:Type="String">(member #1 UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P8: no leader / membership property in OWL</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(Swarm)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">Network</Data></Cell>
+    <Cell><Data ss:Type="String">Network</Data></Cell>
+    <Cell><Data ss:Type="String">(comms parms)</Data></Cell>
+    <Cell><Data ss:Type="String">ConceptMapping Swarm Parameters; absent from OWL (D3)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(note)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P9/O1: class is spelled CollecticeRoboticSystem in CSIM_ASX.rdf - typo will propagate into instance data</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>1</SplitHorizontal>
+   <TopRowBottomPane>1</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="CASEVAC Init">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="13" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ObjectDefinitions</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIMInitializationBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">(the UGVs)</Data></Cell>
+    <Cell><Data ss:Type="String">Container for scenario entity definitions</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Vehicle or UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">UGV-Scout</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P1: SMX Vehicle(subClassOf Platform) vs ASX UGV(subClassOf Robot) - conflicting trees</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(scout entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Scout-UGV-1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(scout entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasSuperior</Data></Cell>
+    <Cell><Data ss:Type="String">UUIDBase</Data></Cell>
+    <Cell><Data ss:Type="String">(soldier UUID)</Data></Cell>
+    <Cell><Data ss:Type="String">Tasking unit</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Vehicle or UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">UGV-Transport</Data></Cell>
+    <Cell><Data ss:Type="String">Second UGV; carries the casualty</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(transport entity)</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">Transport-UGV-1</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">soldier / C2 unit</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity (Unit)</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">HOTL-Soldier</Data></Cell>
+    <Cell><Data ss:Type="String">On-the-loop tasker; receives reports</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">Route</Data></Cell>
+    <Cell><Data ss:Type="String">(SMX)</Data></Cell>
+    <Cell><Data ss:Type="String">hasName</Data></Cell>
+    <Cell><Data ss:Type="String">string</Data></Cell>
+    <Cell><Data ss:Type="String">CASEVAC-Route-0</Data></Cell>
+    <Cell><Data ss:Type="String">[!] X3: use existing SMX Route class, not free text</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">CollectionPoint</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic (PhysicalEntity)</Data></Cell>
+    <Cell><Data ss:Type="String">(geometry)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Casualty pickup point</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">EvacPoint</Data></Cell>
+    <Cell><Data ss:Type="String">MapGraphic (PhysicalEntity)</Data></Cell>
+    <Cell><Data ss:Type="String">(geometry)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Medical evacuation point</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">scout sensors</Data></Cell>
+    <Cell><Data ss:Type="String">Sensor / Equipment</Data></Cell>
+    <Cell><Data ss:Type="String">SensorCapability</Data></Cell>
+    <Cell><Data ss:Type="String">enum</Data></Cell>
+    <Cell><Data ss:Type="String">(obstacle/threat sensing)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P2: sensor typing unresolved; scout needs hazard detection</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(both UGVs)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">ControlMode / autonomy</Data></Cell>
+    <Cell><Data ss:Type="String">enum / Code</Data></Cell>
+    <Cell><Data ss:Type="String">Unpiloted-Autonomous</Data></Cell>
+    <Cell><Data ss:Type="String">[!] D1/P6: three autonomy vocabularies exist</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="MCM Init">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="5" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">SurfaceVessel or USV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Detector-USV</Data></Cell>
+    <Cell><Data ss:Type="String">[+/!] P1 (maritime): SMX SurfaceVessel vs ASX USV/Robot</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Detector-USV</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">role subtype</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">detector (TSAS)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G5: no platform role/locomotion subtype (detector vs neutralizer vs CUSV); extends P1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">commercial vessel</Data></Cell>
+    <Cell><Data ss:Type="String">ActorEntity</Data></Cell>
+    <Cell><Data ss:Type="String">hasHostilityStatusCode</Data></Cell>
+    <Cell><Data ss:Type="String">HostilityStatusCode</Data></Cell>
+    <Cell><Data ss:Type="String">NeutralSide</Data></Cell>
+    <Cell><Data ss:Type="String">[+] neutral affiliation exists; [!] G10: neutral traffic as a behavioral constraint on search path is not modeled</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">sea line of communication</Data></Cell>
+    <Cell><Data ss:Type="String">TacticalArea / MapGraphic</Data></Cell>
+    <Cell><Data ss:Type="String">(operating area)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">Reuse area object; ties to N1 (area as subject)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="SubT Team Init">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX or ASX</Data></Cell>
+    <Cell><Data ss:Type="String">Vehicle or UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Platform / Robot</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Wheeled / Tracked / Legged UGV</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G5: no locomotion subtype axis (wheeled/tracked/legged); extends P1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">comms relay</Data></Cell>
+    <Cell><Data ss:Type="String">Equipment / Entity</Data></Cell>
+    <Cell><Data ss:Type="String">deployable relay</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">relay node</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G1: relay as a deployable taskable entity is not modeled (CommunicationNetwork is a network, not a droppable node/behavior)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">(mission)</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">force sides</Data></Cell>
+    <Cell><Data ss:Type="String">-</Data></Cell>
+    <Cell><Data ss:Type="String">(none hostile)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G10: a mission with no hostile ForceSide - allowed by omission, but the model tends to assume a hostile side</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="LIRC Company Init">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="9" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">armed combat UGV</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Armed-UGV</Data></Cell>
+    <Cell><Data ss:Type="String">[+] P1: same Robot-vs-Platform double-typing as every platform.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(armed UGV)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">autonomy level</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">FullAuto / Teleop</Data></Cell>
+    <Cell><Data ss:Type="String">[+] D1/P6: which autonomy vocabulary; here it must also bind to engagement authority (W1).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">weapon (30mm/Javelin/Stinger)</Data></Cell>
+    <Cell><Data ss:Type="String">Equipment / Payload</Data></Cell>
+    <Cell><Data ss:Type="String">(armament)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">gun / ATGM / SAM</Data></Cell>
+    <Cell><Data ss:Type="String">[+/!] W2: weapon/munition not typed; one UGV carries gun + antitank + air-defense weapons.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">autonomous attack UAS</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">hasEntityType</Data></Cell>
+    <Cell><Data ss:Type="String">EntityType</Data></Cell>
+    <Cell><Data ss:Type="String">Loitering-munition (Switchblade-class)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G16: a loitering munition is a platform AND a munition (flies, senses, then is expended).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">loitering munition</Data></Cell>
+    <Cell><Data ss:Type="String">Robot/Platform + Payload</Data></Cell>
+    <Cell><Data ss:Type="String">tier</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">mini / tactical / long-range</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G16: size tiers have no typing; extends P1/G5 (platform) + W2/Q-L (munition).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">FPV attack drone</Data></Cell>
+    <Cell><Data ss:Type="String">Robot / Platform</Data></Cell>
+    <Cell><Data ss:Type="String">autonomy</Data></Cell>
+    <Cell><Data ss:Type="String">AutonomyLevelCode</Data></Cell>
+    <Cell><Data ss:Type="String">RemoteControl / FPV</Data></Cell>
+    <Cell><Data ss:Type="String">[+] D1/P6: the FPV autonomy value shows up concretely; cheap expendable strike.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">kill box 1/2/3</Data></Cell>
+    <Cell><Data ss:Type="String">TacticalArea / MapGraphic</Data></Cell>
+    <Cell><Data ss:Type="String">(engagement-authorization area)</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">geo bound + time window + civilian-clear + weapons-status</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G14: no weapons-control-status and no kill-box/authorization-area construct; unifies N1 (area as subject) + W1 (engagement authority).</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">weapons-control status</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">hold / tight / free</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">Hold (at movement)</Data></Cell>
+    <Cell><Data ss:Type="String">[!] G14: hold/tight/free is absent from the ontology (grep: none).</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+</Workbook>
