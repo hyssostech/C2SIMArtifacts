@@ -2,7 +2,7 @@
 
 One-page bearings on what this review is, what it found, and what the group needs
 to decide. Detail is in the other files in this folder; the deck
-(`ASX-Instantiation-Findings.pptx`, 28 slides) is the presentation version - its
+(`ASX-Instantiation-Findings.pptx`, 23 slides) is the presentation version - its
 last three slides ("How to use this material" / the finding-ID decoder ring /
 "Where to dig deeper") are the navigation aids for everything below, and every
 slide carries speaker notes with the talk track.
@@ -30,7 +30,7 @@ been applied to the OWL model or to Elizabeth's message workbooks.
 - Took the instantiation from **4 worked message instances (0 Initialization) to
   ~38** across Init / Order / Report (~34 drafted in this review), spanning 20+
   scenarios - all on the branch, pending group review.
-- Produced a 28-slide findings deck (a one-slide summary and process +
+- Produced a 23-slide findings deck (a one-slide summary and process +
   contributions slides up front; a reading guide by time budget, a finding-ID
   decoder ring, and a "Where to dig deeper" reference map at the end; a
   per-slide "Dig deeper" pointer to the doc behind each finding; and speaker
@@ -40,12 +40,20 @@ been applied to the OWL model or to Elizabeth's message workbooks.
 
 This is an early WIP ontology, so the findings are things *still to be defined*,
 not defects. Three of them are foundational typing decisions worth settling
-first, because Initialization is hard to build cleanly until they are settled:
-- **P1** - a UAV/UGV is currently typed two ways: the proposed ASX `Robot` tree
-  runs parallel to the existing SMX `Platform` tree (v0.0.3 declares both).
-- **P7** - a swarm derives from `PhysicalEntity`, so it isn't yet taskable / able
-  to report; deriving it from the existing `CollectiveEntity` would fix that.
-- **P2** - a sensor's representation isn't settled yet (class vs enum vs equipment).
+first, because Initialization is hard to build cleanly until they are settled -
+**and the sub-group has now settled them** (decisions recorded 2026-10-14):
+- **P1** - a UAV/UGV was typed two ways: the proposed ASX `Robot` tree ran
+  parallel to the existing SMX `Platform` tree (v0.0.3/v0.0.4 declare both).
+  **Decided: ASX autonomy becomes a role/facet on the existing `Platform`
+  subtree.** v0.0.4 already has that shape on the Vehicle side (`hasControlMode`
+  on `smx#Vehicle`); the `Robot` tree still has to be retired.
+- **P7** - a swarm derived from `PhysicalEntity`, so it wasn't taskable / able to
+  report. **Decided: derive the collective/Swarm from the existing
+  `CollectiveEntity`.** Not yet in v0.0.4.
+- **P2** - a sensor's representation wasn't settled (class vs enum vs
+  equipment). **Decided in direction: sensors are being reworked based on
+  existing standards** (the premise of the sensor-characterization slice);
+  v0.0.4 holds placeholders (`SensorTypeCode`, `hasSensorCapability`).
 
 Recurring themes (all normal for a v0.0.x model being built out):
 - The OWL is still mostly a **taxonomy of things**; the attribute layer that says
@@ -61,19 +69,23 @@ Recurring themes (all normal for a v0.0.x model being built out):
   weapons-control / kill-box construct (G14, decision Q-W) - rather than only naming
   the gap.
 
-## Where the model is now (v0.0.3)
+## Where the model is now (v0.0.4)
 
-Michael's v0.0.3 (on branch `michael_d`) shows the model moving in this
-direction: it begins the
-attribute layer and folds the Video Detection Report into the OWL. It also brings
-the P1 typing question to a head rather than settling it - v0.0.3 now declares
-*both* the Robot-tree and the SMX-Vehicle-tree names, so the group still has to
-pick one. Still to define: a taskable collective (the `Swarm` class was dropped;
-`CollecticeRoboticSystem` is still non-actor), the broader attribute set, and the
-new content types above - plus two typos to fix. One coordination item: that
-branch also adds `owl:imports smx`/`lox` to the *base* `C2SIM.rdf`, creating a
-circular import (C2SIM <-> smx) worth a deliberate decision. (Detail in
-section 9 of the log.)
+Michael's v0.0.4 (on branch `michael_d`, 2026-08-13; v0.0.3 archived) keeps the
+model moving in this direction. It brings five of the spreadsheet attributes
+into the OWL (Control Mode, SensorCapability, AutonomousMissionFunction,
+Autonomous Parameters, PassengerCapability) plus three empty code lists
+(SensorType / VehicleType / AlgorithmType), attaches a per-task autonomy level
+to `Task`, fixes the circular import flagged in July, and the Concept Mapping
+workbook now tracks per attribute what is "done" in 0.0.4. Against the three
+decisions: P1 is half-applied (the facet exists on `Vehicle`; the `Robot` /
+`UAV` / `UGV` tree is still declared, and the derived XSD still offers `Robot`
+beside `Platform`); P7 is not yet applied (`CollecticeRoboticSystem` still
+non-actor, no `Swarm`); P2 has placeholders only. Also still to define: Payload /
+Mobility / Swarm Parameters, the new content types above, and four of the six
+new properties have no attachment point yet. One typo fixed, three new ones
+(`hasAutonomusParameters`, a mis-naming `versionInfo`, the `Operator` comment).
+(Detail in section 10 of the log; section 9 is the July v0.0.3 record.)
 
 ## The good news
 
@@ -90,8 +102,11 @@ decisions are *re-adopt*, not *invent*:
 
 The review distills to ~24 decisions (Q-A..Q-X in `Issues-And-Comments-Log.md`),
 in two groups:
-- **Model structure (decide first):** UAV/robot typing (Q-A), swarm ->
-  CollectiveEntity (Q-B), one sensor model (Q-C), one autonomy vocabulary (Q-D).
+- **Model structure (decide first) - now decided:** UAV/robot typing (Q-A:
+  autonomy as a facet on the Platform subtree), swarm -> CollectiveEntity (Q-B:
+  yes), one sensor model (Q-C: rework on existing standards). One autonomy
+  vocabulary (Q-D) is settled in practice by v0.0.4 (`AutonomyLevelCode` is the
+  range of both new autonomy properties) and only needs stating.
 - **New content types / attributes:** generic detection report with confidence,
   rationale report, robot-to-robot + cross-cue, engagement authority,
   payload/effector/weapon typing (the task verbs already exist in LOX),
@@ -103,10 +118,14 @@ in two groups:
 - **Sourcing is essentially complete** - every gap this review raised is now
   grounded in a real mission (one nice-to-have remains: a dedicated
   autonomous-CASEVAC mission).
-- **The ball is on the modeling side.** The remaining work - building the OWL
-  property/message layer, reconciling the two tracks, and making the ~24
-  decisions - is not a document problem; more scenarios will not fill it. It needs
-  the sub-group's decisions and modeling.
+- **The structural decisions are made; the ball is on applying them in the
+  OWL.** In order: re-parent (and re-spell) the collective class under
+  `CollectiveEntity` (P7); retire the `Robot` tree, pick Vehicle-vs-Platform for
+  the autonomy facet, and give the new properties a home (P1); run the sensor
+  standards survey and re-point `hasSensorCapability` from it (P2); then re-cut
+  the Initialization tabs. The remaining ~20 content-type decisions and the
+  unbuilt attribute layer (Payload / Mobility / Swarm Parameters) are modeling
+  work; more scenarios will not fill it.
 
 ## Where to look
 

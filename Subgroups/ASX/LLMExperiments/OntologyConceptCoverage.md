@@ -36,6 +36,17 @@ concept, not by message-workbook sheet.
   misspelling persists). Gaps addressed are annotated inline below; the full
   finding-by-finding delta is `InstantiationReview/Issues-And-Comments-Log.md`
   section 9.
+- **v0.0.4 update (`Ontology/C2SIM_ASX-v004.rdf`, 2026-08-13; v0.0.3 archived)
+  and the sub-group's decisions (2026-10-14).** v0.0.4 adds five platform
+  attributes from the Concept Mapping (`hasControlMode` on `smx#Vehicle`,
+  `hasSensorCapability`, `hasAutonomousMissionFunction`, `hasAutonomusParameters`
+  (sic), `hasPassengerCapability`), a per-task `hasAutonomyLevelCode` on
+  `C2SIM#Task`, and three empty code lists (`SensorTypeCode`, `VehicleTypeCode`,
+  `AlgorithmTypeCode`); the `Robot`/`UAV`/`UGV` tree and the misspelled
+  collective class are unchanged. The group decided: autonomy is a role/facet on
+  the existing `Platform` subtree (P1), the collective/Swarm derives from
+  `CollectiveEntity` (P7), and sensors are reworked on existing standards (P2).
+  Full delta and decisions: log section 10.
 - ASX message design (from `InstantiationReview/Message-Instantiation-Coverage.md`):
   ASX `Task` with `hasAffectedEntity` / `DesiredEffectCode`; `Report Base
   Attributes` (MediaReference, AnalysisComment, AnalysisConcept, MediaTypeCode,
@@ -148,7 +159,9 @@ represent cleanly - i.e. expressiveness gaps:
    1/3/6 that varies by mission phase. Alignment/expressiveness gap. *[v0.0.3
    adds an `AutonomyLevelCode` class but keeps the same categorical individuals
    and does not yet wire it as the range of `hasAutonomousRoleCode` - graded LoA
-   still open.]*
+   still open. v0.0.4 attaches `hasAutonomyLevelCode` to `C2SIM#Task`, so a
+   per-task (hence per-phase) level is now expressible; the scale is still the
+   four categorical values.]*
 7. **Detection report with confidence / error bound, and generic detection**
    (S1,S2) - reports need a confidence or error-bound attribute and a
    type-agnostic detection form (artifact, naval mine) beyond the media-typed
@@ -180,8 +193,11 @@ represent cleanly - i.e. expressiveness gaps:
   platforms, coordination/ machine-to-machine tasking as relations,
   communications, environment conditions, graded LoA, and detection confidence.
   *(v0.0.3 now closes the maritime-platform gap and begins the attribute layer
-  via the Video Detection Report; the coordination-relation, communications,
-  environment-condition, graded-LoA, and detection-confidence gaps remain.)*
+  via the Video Detection Report; v0.0.4 adds the platform attributes and a
+  per-task autonomy level, and the group has decided the platform / collective /
+  sensor typing directions; the coordination-relation, communications,
+  environment-condition, and detection-confidence gaps remain, and graded LoA
+  is only partly addressed.)*
 
 ## Drone-warfare thread additions (S7-S9)
 
@@ -220,7 +236,7 @@ They do **not** touch the remaining Reading-1 holes (explainability, CBRN/EW sen
 CASEVAC coordination), so those sourcing priorities stand.
 
 **Effect on Reading 2 (expressiveness).** They add one top-priority ASX-specific gap and
-four supporting ones, none representable in v0.0.1 or v0.0.3:
+four supporting ones, none representable in v0.0.1, v0.0.3 or v0.0.4:
 - **12. Engagement authority + weapons-control / kill-box construct (S7)** - the single
   most central ASX gap: an authorization-bearing area (weapons-control status x geo bound
   x time window x civilian-clearance state x target type) that gates whether an autonomous

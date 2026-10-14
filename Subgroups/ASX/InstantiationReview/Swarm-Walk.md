@@ -26,6 +26,12 @@ PhysicalEntity` (an inert object). Both messages below need the swarm to be an
 **ActorEntity** (to be ordered, and to be a ReportingEntity). As modeled it is
 neither. Recommended fix: `Swarm subClassOf CollectiveEntity` (base C2SIM).
 
+**Decided (sub-group, recorded 2026-10-14): derive the collective/Swarm from
+`CollectiveEntity`.** Not yet applied in v0.0.4 (`CollecticeRoboticSystem` is
+still under `RoboticSystem` -> `PhysicalEntity`, and there is no `Swarm` class),
+so the `[!] P7` rows below still describe the file as it stands; they become
+plain `CollectiveEntity` rows once the re-parenting lands. Log section 10.
+
 ## 1. Swarm Detection Report (fills the `Swarm Detection` stub)
 
 The swarm collectively reports targets detected by its members.
@@ -58,7 +64,7 @@ member rotation/resupply (from the June robotics-concepts discussion).
 
 | ID | Sev | Status | One-line |
 |---|---|---|---|
-| P7 | DECIDE-FIRST | gap | Swarm derives from PhysicalEntity - not yet orderable or a ReportingEntity. Fix: derive from `CollectiveEntity` (ActorEntity). |
+| P7 | DECIDE-FIRST | **decided** (not yet applied) | Swarm derives from PhysicalEntity - not yet orderable or a ReportingEntity. Fix: derive from `CollectiveEntity` (ActorEntity) - **decided by the sub-group**; v0.0.4 does not yet carry it. |
 | P8 | HIGH | **narrowed** | Membership + command are partially expressible via `hasSubordinate`/`hasSuperior`/`hasCommandRelation`; residual gap is network params + leader-as-role + dynamic handover. |
 | P10 | MED | question | Heterogeneous (mixed UAV+UGV) membership in one collective - confirm. |
 | Z1 | MED | gap | No aggregation construct for a collective report built from member observations. |
@@ -75,6 +81,7 @@ ActorEntity.
 Every swarm message runs into the same wall: as modeled, a swarm is a
 PhysicalEntity, so it is not yet able to receive an order or sign a report. Fixing
 P7 (`Swarm subClassOf CollectiveEntity`) unlocks most of this - membership and
-command relations are already in the base standard. The genuinely new swarm
+command relations are already in the base standard. That fix is now the
+sub-group's decision; applying it in the OWL is the first implementation step. The genuinely new swarm
 needs are small: network/comms parameters, a leader role, aggregation (Z1), and
 member-lifecycle (Z2).

@@ -13,6 +13,15 @@ Everything below is anchored to real classes in `Ontology/C2SIM.rdf` and
 items in the current proposal are marked **[!]**. None of this is a decision - it is
 input for the sub-group.
 
+**Status (2026-10-14).** The walk below is kept as written against v0.0.1 (it
+is the record of what instantiation exposed). The three items it put first have
+since been **decided by the sub-group** - P1 (autonomy as a role/facet on the
+`Platform` subtree), P7 (collective/Swarm from `CollectiveEntity`), P2 (sensors
+reworked on existing standards) - and the live model is v0.0.4; see the summary
+table at the end and the log's section 10. The `[!] P1 / P2 / P7` rows become
+`hasControlMode` / sensor-capability / `CollectiveEntity` rows once the
+decisions are applied in the OWL; the tabs are re-cut then.
+
 ## Shared envelope (all three)
 
 Same as the filled envelope template in the workbook: a `Message` with
@@ -160,16 +169,17 @@ Problems this exposes:
 
 | ID | Type | One-line |
 |---|---|---|
-| P1 | [!] | UAV/Robot (ASX) vs Aircraft/Platform (SMX) - conflicting parallel entity trees |
-| P2 | [!] | Sensor modeled 3 ways (class / enum / equipment) - init needs one |
-| P3 | [Q] | hasAutonomousRoleCode has no attachment point on the entity |
+| P1 | [!] -> **decided** | UAV/Robot (ASX) vs Aircraft/Platform (SMX) - conflicting parallel entity trees. Decided: autonomy is a facet on the Platform subtree; v0.0.4 has `hasControlMode` on `smx#Vehicle`, the Robot tree still to retire. |
+| P2 | [!] -> **decided (direction)** | Sensor modeled 3 ways (class / enum / equipment) - init needs one. Decided: rework on existing standards; v0.0.4 placeholders (`SensorTypeCode`, `hasSensorCapability`). |
+| P3 | [Q] -> partial | hasAutonomousRoleCode has no attachment point on the entity; v0.0.4 attaches `hasControlMode` (Vehicle) and `hasAutonomyLevelCode` (Task) instead, `hasAutonomousRoleCode` itself still floats. |
 | P5 | [!] | Patrol route/area not modeled as an init object (also missing on Order side) |
-| P6 | [!] | Three competing autonomy vocabularies |
-| P7 | [!] | Swarm is under PhysicalEntity, so it is not yet taskable or able to report |
+| P6 | [!] -> narrowed | Three competing autonomy vocabularies; v0.0.4's `hasControlMode` takes the OWL `AutonomyLevelCode` values. |
+| P7 | [!] -> **decided** | Swarm is under PhysicalEntity, so it is not yet taskable or able to report. Decided: derive the collective/Swarm from `CollectiveEntity`; not yet applied in v0.0.4. |
 | P8 | [Q] | Swarm membership + leader - narrowed: base `hasSubordinate`/`hasSuperior`/`hasCommandRelation` cover it; residual is network params, leader-as-role, dynamic handover |
 | P9 | [!] | "CollecticeRoboticSystem" misspelling will propagate to instances |
 | P10 | [Q] | Heterogeneous (mixed-type) swarm membership unconfirmed |
 
-The three to settle before a message can be built cleanly are **P1**, **P2**,
+The three to settle before a message can be built cleanly were **P1**, **P2**,
 and **P7**. They are all entity-typing decisions - which is why Initialization,
-not Reports, is where the proposal most needs to be exercised.
+not Reports, is where the proposal most needed to be exercised. All three are
+now decided (log section 10); what remains is applying them in the OWL.

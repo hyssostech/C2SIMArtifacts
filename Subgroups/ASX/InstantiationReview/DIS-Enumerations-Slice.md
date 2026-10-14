@@ -351,9 +351,12 @@ result rather than a document.
   rather than command meaning - then G24 shrinks from "eight kinds bear on ASX"
   to a much shorter list, and (c) drops out. **That is the falsifier for this
   slice's central claim, and step 2 is what tests it.**
-- If P1/Q-A resolves in a way that makes the platform-tree question moot, the
-  Kind 1 row loses most of its force - though the other seven kinds and the
-  criteria are unaffected.
+- P1/Q-A has since resolved (2026-10: autonomy is a role/facet on the existing
+  `Platform` subtree), so the which-tree half of the Kind 1 row is moot; what
+  survives is the how-to-subtype half - DIS's Domain field as the
+  land/air/surface/subsurface partition and its platform categories bear on how
+  the Platform subtree is sub-typed (G5/G16/V1, Q-R). The other seven kinds and
+  the criteria are unaffected.
 - **G23 is independent of all of this.** It is a workbook fix worth making
   whatever the sub-group decides about DIS, because the current property does not
   exist in the model.

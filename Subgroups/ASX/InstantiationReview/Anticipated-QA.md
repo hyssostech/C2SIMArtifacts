@@ -22,16 +22,29 @@ Yes, and we treat it exactly as that. It is an early v0.0.x work-in-progress, an
 the findings are things *still to be defined*, not defects. The finding is not
 "it's wrong" - it's "the v0.0.1 baseline is a taxonomy of things (15 classes, 0
 datatype properties) whose message/attribute layer hadn't been built yet, and
-here is exactly what that layer needs." Michael's v0.0.3 already starts that layer
-(it adds datatype properties for the Video Detection Report), which is the model
-moving in the direction this review points to. It's a to-do list derived by
-instantiation, not a critique.
+here is exactly what that layer needs." Michael's v0.0.3 already started that
+layer (datatype properties for the Video Detection Report) and v0.0.4 extends it
+(five platform attributes from the Concept Mapping, a per-task autonomy level),
+which is the model moving in the direction this review points to. It's a to-do
+list derived by instantiation, not a critique.
+
+**Q. The group already decided P1 / P7 / P2 - why are they still in the deck?**
+Because the decisions are not yet in the OWL. The three structural slides now
+show the decided state and what remains to apply: P7 (collective from
+`CollectiveEntity`) is not in v0.0.4 at all; P1 (autonomy as a facet on the
+Platform subtree) is half there - `hasControlMode` sits on `smx#Vehicle`, but the
+`Robot` / `UAV` / `UGV` tree is still declared and the derived XSD still offers
+`Robot` beside `Platform`; P2 (sensors reworked on existing standards) has
+placeholders only. The slides are the implementation checklist now, not the
+ask.
 
 **Q. You say a swarm isn't yet taskable - can't we just add a property?**
 It's a class-tree issue, not a missing property. `Swarm` currently derives from
 `PhysicalEntity` (an inert object), and orders/reports are addressed to an
 `ActorEntity`. The clean fix is to derive `Swarm` from `CollectiveEntity`, which
-is already an `ActorEntity` in the base standard (C2SIM). That is decision Q-B.
+is already an `ActorEntity` in the base standard (C2SIM). That is decision Q-B -
+**now decided by the group**; the residual is applying it (re-parent and
+re-spell `CollecticeRoboticSystem`).
 Membership and command already exist (`hasSubordinate` / `hasCommandRelation`).
 
 **Q. Strictly speaking, `hasReportingEntity` is a UUID datatype property - a
@@ -70,14 +83,20 @@ the originals (no data lost). Elizabeth can keep authoring in Excel - the format
 is Excel's own "XML Spreadsheet 2003".
 
 **Q. What is the single first thing to do?**
-Settle the entity-typing decisions Q-A (UAV/robot) and Q-B (swarm). They unblock
-Initialization, which is the message type with zero worked examples and the one
-that forces the model's hardest choices.
+Apply the decided entity-typing decisions in the OWL - Q-B first (re-parent the
+collective under `CollectiveEntity`; one axiom plus the spelling fix), then Q-A
+(retire the `Robot` tree and give the new v0.0.4 properties a home on the
+Platform subtree). They unblock Initialization, which is the message type that
+forces the model's hardest choices; the Init tabs get re-cut once they land.
 
 **Q. Why do the OWL and the spreadsheets disagree?**
-They are two tracks at different stages: the OWL was last updated in January, the
-spreadsheets in June. So autonomy and sensors are each defined three different
-ways. Reconciling the two is part of decision Q-C / Q-D.
+They were two tracks at different stages: the OWL was last updated in January,
+the spreadsheets in June. So autonomy and sensors were each defined three
+different ways. v0.0.4 (August) started reconciling from the OWL side - five
+spreadsheet attributes are now properties, Control Mode takes the OWL's
+`AutonomyLevelCode` values, and the Concept Mapping tracks per attribute what is
+done. What is left is stating the one autonomy vocabulary (Q-D) and the sensor
+rework (Q-C, direction decided).
 
 **Q. Is the sourcing/scenario work done?**
 Essentially, yes - every gap the review raised now has at least one real sourced
@@ -86,13 +105,14 @@ autonomous-CASEVAC coordination mission. The rest of the remaining work is
 modeling, not sourcing.
 
 **Q. What would you need from us to move forward?**
-The ~24 decisions, structure first. Once Q-A..Q-D are settled, the content-type
-decisions and the attribute layer follow. We can turn any decision into concrete
+The structural ones are settled (Q-A..Q-C decided, Q-D settled in practice);
+next is applying them in the OWL, then the ~20 content-type decisions and the
+rest of the attribute layer. We can turn any decision into concrete
 message instances quickly, since the walks already show the shape.
 
 **Q. How confident are you in the specific findings?**
 The structural findings (P1, P7, the typos, "0 datatype properties" in the v0.0.1
 baseline, what exists vs. doesn't) were verified directly against the RDF files
-(and re-checked against v0.0.3), and the workbook
+(and re-checked against v0.0.3 and v0.0.4), and the workbook
 conversions were verified by round-trip. The design *recommendations* (e.g. which
 way to resolve P1) are proposals for the group, not conclusions.
