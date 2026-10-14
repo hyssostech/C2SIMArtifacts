@@ -81,8 +81,9 @@ state and the residual.
   counter-UAS, adversarial EW, target-list). 5 tabs added to the `.xml`.
 
 Proposed slices (future work - scoped and grounded, but **not** performed; no
-workbook tabs). Two independent items suggested by Curt, kept as separate
-documents because the items are independent:
+workbook tabs). Three independent items, kept as separate documents because
+the items are independent - the first two suggested by Curt, the third from a
+question raised in October:
 
 - [Sensor-Characterization-Slice.md](./Sensor-Characterization-Slice.md) - is
   sensor characterization worth an extension of its own, built on existing
@@ -104,6 +105,17 @@ documents because the items are independent:
   touching any DIS content. Counterweight recorded: DIS boundaries were drawn for
   a simulation, not a commander, and not all will survive translation. Adds
   G23-G29, decision Q-Z (log section 6m).
+- [STANAG4817-CATL-Slice.md](./STANAG4817-CATL-Slice.md) - what the NATO
+  multi-domain unmanned-systems C2 standard (STANAG 4817) and its public basis
+  CATL (CMRE's Collaborative Autonomy Tasking Layer) offer ASX's *coordination*
+  content. Caveat first: AEP-4817 is not public, so the concrete claims are
+  CATL claims. Grounding: C2SIM already has the request / acknowledge / status
+  triad and lacks exactly the multi-node machinery - control handover, a
+  control-station entity, allocation among candidates, state synchronization.
+  Bears on X1/Q-G, G3/Q-P, Z1/Q-J, G13/Q-V, Q-O; does not touch P1 / P2 or the
+  engagement-authority thread. States the layering point (commander-to-system vs
+  station-to-vehicle) as a round-trip requirement. Adds G30-G33, decision Q-AA
+  (log section 6n).
 
 - [Documents-Needed.md](./Documents-Needed.md) / [Documents-Found.md](./Documents-Found.md)
   - the sourcing brief and the sourcing track's point-by-point response.
