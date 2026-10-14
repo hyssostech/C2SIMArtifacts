@@ -15,6 +15,17 @@ Both halves of that suggestion hold up under grounding, and this document sets
 out the evidence for each so the sub-group can judge the slice rather than take
 it on faith.
 
+**Update (2026-10-14).** The sub-group has since decided the direction for the
+sensor question (P2 / Q-C): **sensors are being reworked based on existing
+standards** - i.e. the premise of this slice is adopted, and the survey below
+(section 5, steps 1-2 first) is the candidate way to do it. Michael's v0.0.4
+holds placeholders only: an empty `SensorTypeCode` code list (the Concept Mapping
+still says "Individuals have to be done" and "***Check Robotics Standard for
+categories of sensor types"), and `hasSensorCapability` with range
+`MediaTypeCode` and no domain (log V2/V3) - so nothing in the file yet says
+*which* standard. Q-Y (own extension vs ASX section) is still open. Log
+section 10.
+
 *Companion slice:* `DIS-Enumerations-Slice.md` scopes a separate, independent
 item (what the DIS enumeration materials offer ASX in general). The two are
 **not** the same slice and can be run in either order or alone. Where the DIS
@@ -34,7 +45,7 @@ Verified before proposing anything, to avoid inventing gaps or overselling reuse
 | Emitter / radar / acoustic / thermal / optical observation classes | **Absent** from all three base files. |
 | Generic measurement value+unit property | **Absent.** Only `hasSpatialMeasure`, `hasCoordinateValue`, logistics quantities, and `smx#hasConfidenceLevel`. |
 | Sensor capability / performance properties | **Absent.** No range, accuracy, resolution, field-of-view, detection limit, or operating-condition property anywhere. |
-| Proposed enums | `SensorType` (ConceptMapping) = {Visual, EW, Counter EW, Audio}; `MediaTypeEnum` / v0.0.3 `MediaTypeCode` = {VID, AUD, IMG, DOC, TXT, NOS}. |
+| Proposed enums | `SensorType` (ConceptMapping) = {Visual, EW, Counter EW, Audio}; `MediaTypeEnum` / v0.0.3 `MediaTypeCode` = {VID, AUD, IMG, DOC, TXT, NOS}. v0.0.4 adds `SensorTypeCode subClassOf C2SIM#Code` with **no individuals**, and `hasSensorCapability` whose range is `MediaTypeCode` (not `SensorTypeCode`). |
 
 So the sensing half of ASX is currently a bare class, a four-value enum, and one
 media-based report. Everything else a sensor model needs has yet to be built.
@@ -68,7 +79,9 @@ G13 (dynamic capability self-report), G18 (adversarial EW against own autonomy).
 Fifteen findings and six decisions is not a property or two bolted onto the
 report model. It is comparable in weight to everything the ASX OWL currently
 contains (v0.0.1: 15 classes, 1 object property, 0 datatype properties; v0.0.3:
-26 ASX classes, 4 object + 2 datatype properties).
+26 ASX classes, 4 object + 2 datatype properties; v0.0.4: 29 classes, 9 object +
+3 datatype properties, of which one class and one property are sensor-related
+placeholders).
 
 ### 2.2 The structural argument
 
