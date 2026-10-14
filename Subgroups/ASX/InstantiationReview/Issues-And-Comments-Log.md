@@ -211,7 +211,7 @@ reports <- SubT/MCM detections, + the generic-report answer G4).
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| G1 | MED | OPEN | Denied-comms mode + deployable relay entity | SubT. A relay task verb `lox#COMREL` exists; missing is a comms-degraded operating MODE and a droppable relay ENTITY/node (`CommunicationNetwork` is a network, not a node). **[deck]** |
+| G1 | MED | OPEN | Denied-comms mode + deployable relay entity | SubT. A relay task verb `lox#COMREL` exists; missing is a comms-degraded operating MODE and a droppable relay ENTITY/node (`CommunicationNetwork` is a network, not a node). **[deck]** Third residual from 6n: control *handover* between stations when a link degrades (G30). |
 | G2 | MED | OPEN | Area-coverage / exploration goal | SubT. Search/recce verbs (`RECCE`, `RECONS`, `PATROL`, `SWEEP`, `DETECT`) exist; missing is the coverage-*goal* semantics (explore-until-covered), tied to N1. **[deck]** |
 | G3 | MED | OPEN | Cross-cueing: system-to-system task + shared classified track | MCM. Reuses X1 + M1; no Track/Contact object type. |
 | G4 | HIGH | OPEN | Generic parameterized Detection Report | confidence + error-bound + false-positive + modality; subsumes Video/CBRN/EW/GPR/naval-mine/artifact. **Resolves Y1/M3/M4.** **[deck]** |
@@ -401,6 +401,47 @@ transfer must be argued on ASX's own terms. **That is also this slice's
 falsifier:** if the placement exercise shows DIS's boundaries consistently fail
 to survive translation, G24 shrinks to a much shorter list.
 
+## 6n. STANAG 4817 / CATL as a source for coordination content (PROPOSED slice)
+
+A third **proposed slice**, independent of 6l and 6m - from a question raised
+2026-10-14: what can the STANAG 4817 work contribute to ASX? Scoped in
+`STANAG4817-CATL-Slice.md`. Nothing instantiated. **Caveat first:** the
+ratifying text (AEP-4817, NATO multi-domain C2 of unmanned systems) is not
+public and its status is disputed between sources; the publicly documented
+artifact in its lineage is **CATL** (CMRE's Collaborative Autonomy Tasking
+Layer, SCI-288 / SCI-343, "a basis for STANAG 4817"), so the concrete claims
+are CATL claims and the two CATL papers are the sources to obtain.
+
+The RDF grounding stands on its own: C2SIM **already has** the
+request / acknowledge / status triad a tasking layer needs
+(`TaskRequestContent`; `AcknowledgementBody` + `AcknowledgeTypeCode` incl.
+`ACKREQGRT` / `ACKREQDEN`; `TaskStatus` + `TaskStatusCode`), and SMX has
+`CommandRelation` with OPCON-style codes - and it **lacks** exactly the
+multi-node machinery a federated tasking layer provides: control handover, a
+control-station entity, allocation among candidates, state synchronization.
+Where 4817 bears on open findings: X1/Q-G and G3/Q-P (node-to-node tasking),
+G13/Q-V (allocation by capability), P7/Z1/Q-J (federation tasking + roll-up),
+G1/Q-O (denied comms, plus a new handover residual), G3/G19 (shared
+track - fielded at Task Force X Baltic). Where it does not: P1 / P2 (not a
+taxonomy) and W1 / Q-K / Q-W (no authority semantics - the same gap the
+critical commentary on 4817 notes). Layering point: C2SIM/ASX is the
+commander-to-system language, 4817/CATL the station-to-vehicle one; the ASX
+question is whether task and status concepts must **round-trip**, a
+translation requirement rather than an import.
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G30 | HIGH | PROPOSED | No control-handover construct | C2SIM can state a command relation (SMX `CommandRelation`, codes written for organisations) but has no transfer event, acceptance, effective time, or control-station entity to transfer between (grep: no handover / transfer / relief / release IRI in C2SIM, SMX, or LOX; ASX v0.0.4 has `Operator`, a Person, only). CATL lists handover of control between stations as a core function; SubT denied-comms and MCM need it. New residual for Q-O. With P1 decided, it attaches to a Platform with `hasControlMode` as the state that changes hands. |
+| G31 | MED | PROPOSED | No task allocation among candidates | `TaskRequestContent` names one performer; no one-to-many solicitation or assign step. The existing request / `ACKREQGRT` / `ACKREQDEN` pair is a usable shape for offer-and-answer. Consumer of Q-V's capability self-report; the node-to-node half of Q-G/Q-P. |
+| G32 | MED | PROPOSED | No data-synchronization content | Reporting is one-way; nothing lets two nodes reconcile tasks / tracks / status after a comms gap. CATL names synchronization among its four message purposes (names and fields not yet obtained). |
+| G33 | MED | PROPOSED | Round-trip (translation) requirement with the station-to-vehicle layer | If a C2SIM Order becomes a 4817/CATL task and a CATL status a C2SIM `TaskStatus`, then task identity, status values, performer identity, handover state, and vehicle identifiers (cf. G23) must be mappable. A stated constraint on ASX's coordination content, not an import - worth one paragraph now regardless of the slice. |
+
+Honest limits: the AEP is unavailable; the four CATL message names are
+unobtained; CATL's choices are shaped by acoustic-comms AUV operations and may
+not all transfer to a land UGV on a radio link; and 4817 answers a control
+station's questions, so some of its boundaries will be artifacts of that layer
+- the same counterweight 6m recorded for DIS.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
@@ -458,7 +499,8 @@ to survive translation, G24 shrinks to a much shorter list.
   (Resolves G2.)
 - **Q-O [deck]** Model **denied-comms operation**: a comms-degraded operating
   mode and a deployable relay entity/node (the relay verb `lox#COMREL` already
-  exists). (Resolves G1.)
+  exists). (Resolves G1.) Extended by 6n: control handover between stations
+  on link loss (G30, Q-AA).
 - **Q-P** Extend robot-to-robot (Q-G) with **cross-cueing**: system-to-system
   tasking plus a shared classified **track/contact** object. (Resolves G3.)
 - **Q-Q [deck]** Define one **generic parameterized Detection Report**
@@ -515,7 +557,19 @@ to survive translation, G24 shrinks to a much shorter list.
   boundaries answer a simulation's questions, not a commander's. (Scopes G24-G27;
   see `DIS-Enumerations-Slice.md`.) G23 is separate - a workbook fix worth making
   regardless.
-- *The Q-series is exhausted at Q-Z. Continue at Q-AA.*
+- **Q-AA** Decide **what ASX learns from STANAG 4817 / CATL** - as a design
+  source for the *coordination* content (Q-G, Q-P, Q-J, Q-V, Q-O), not as
+  messages to adopt. Three options, takeable in any combination: **(a)** adopt
+  the *shape* of CATL's task-administration set over C2SIM's existing
+  request / acknowledge / status triad (G31, G33); **(b)** add the two
+  constructs C2SIM has no shape for at all - control handover (G30) and state
+  synchronization (G32); **(c)** write the round-trip requirement into ASX as
+  a stated constraint (G33) so a later 4817 gateway is buildable. Recommended:
+  **(c) now** (one paragraph, no model change), **(a)** once the CATL papers
+  are in hand, **(b)** after P7 is applied. Touches neither P1 / P2 nor the
+  engagement-authority thread. (Scopes G30-G33; see
+  `STANAG4817-CATL-Slice.md`.)
+- *The Q-series continues at Q-AB.*
 - **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
   `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
   (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
@@ -1001,3 +1055,21 @@ Swarm Parameters, and the second SensorType / VehicleType rows.
   (structural slides now show decided state + residual; model-state slide gains a
   v0.0.4 stage; next steps are the implementation order). The `.xml` workbooks and
   the `.xlsx` originals are untouched (S4).
+- 2026-10-14: Added a **third proposed slice** (scoping only; nothing
+  instantiated) from the question "what can STANAG 4817 contribute?":
+  `STANAG4817-CATL-Slice.md` (section 6n, G30-G33, decision Q-AA; Q-series
+  continues at Q-AB). Framed like 6m: a design source argued on ASX's terms,
+  not messages to adopt. Grounding recorded independently of whether the slice
+  runs: C2SIM already has the request / acknowledge / status triad
+  (`TaskRequestContent`, `AcknowledgementBody` + `AcknowledgeTypeCode`,
+  `TaskStatus` + `TaskStatusCode`) and SMX the `CommandRelation` codes, and
+  none of the three base files has a control-handover, control-station,
+  task-allocation, or synchronization construct. Caveats stated up front:
+  AEP-4817 is not public and its status is disputed; the concrete claims are
+  about CATL, whose four message types are named in no reachable source (the
+  two CATL papers are the slice's gating step). Also: a request 10 added to
+  `Documents-Needed.md` (the CATL papers + AEP-4817 access), the STANAG 4817
+  entry in `Reference Materials/Standards-for-Autonomous-Systems-Behavior.md`
+  expanded with the lineage and sources, G1/Q-O cross-referenced to the new
+  handover residual, README updated. Deck not regenerated - G30 is a [deck]
+  candidate for the next deck pass alongside G20/G23/G24.
