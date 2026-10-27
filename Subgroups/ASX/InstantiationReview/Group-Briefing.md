@@ -85,7 +85,8 @@ non-actor, no `Swarm`); P2 has placeholders only. Also still to define: Payload 
 Mobility / Swarm Parameters, the new content types above, and four of the six
 new properties have no attachment point yet. One typo fixed, three new ones
 (`hasAutonomusParameters`, a mis-naming `versionInfo`, the `Operator` comment);
-all four open typos (O1, O4-O6) are now fixed in PR #9, pending merge.
+all four open typos (O1, O4-O6) are now fixed (PR #9, merged into `main`
+2026-10-27).
 (Detail in section 10 of the log; section 9 is the July v0.0.3 record.)
 
 ## The good news

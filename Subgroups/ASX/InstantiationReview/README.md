@@ -136,7 +136,7 @@ question raised in October:
   branch, merged in #11 on 2026-10-27)
   (`Ontology/C2SIM_ASX-v004.rdf`, 2026-08-13; v0.0.3 archived at
   `Ontology/Archive/C2SIM_ASX-v003.rdf`; derived `Derived products/ASX_Schema.xsd`).
-  Pending on top of it: PR #9 (branch `asx-ontology-typos` -> `main`) fixes
+  Applied on top of it: PR #9 (merged into `main` 2026-10-27) fixes
   the typos O1 / O3-O6 (e.g. `CollectiveRoboticSystem`, `hasAutonomousParameters`)
   and removes two duplicate Concept Mapping rows; the review docs already use the
   corrected names where they refer to the live model.
