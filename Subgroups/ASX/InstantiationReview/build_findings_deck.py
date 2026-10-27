@@ -494,7 +494,7 @@ bullets(s, [
  {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"typos fixed in PR #9 - CollectiveRoboticSystem (O1), hasAutonomousParameters (O4), versionInfo (O5), Operator comment (O6), pointer to the live file (O3); O2 already gone in v0.0.4. Still to apply: hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
  {"tag":"Structural (decided - apply in the OWL):","tagcolor":GREEN,"text":"autonomy as a facet on the Platform subtree, Robot tree retired (Q-A); collective -> CollectiveEntity (Q-B); sensors reworked on existing standards (Q-C); state the one autonomy vocabulary (Q-D). Plus the four floating properties (V2)."},
  {"tag":"New content (design):","tagcolor":ACCENT,"text":"inline entity def (Q-E), MediaReference (Q-F), robot-to-robot + cross-cue (Q-G/Q-P), rationale report (Q-H), generic detection report (Q-I/Q-Q), swarm residuals (Q-J), engagement authority (Q-K), payload/effector/weapon typing (Q-L), area subject (Q-M), explore order (Q-N), denied-comms/relay (Q-O), locomotion subtypes (Q-R), decoy/threat-aware (Q-S), environment conditions (Q-T), formation geometry (Q-U), weapons-control/kill-box authority (Q-W), loitering-munition + counter-UAS typing (Q-X)."},
- {"text":"Only the typo fixes are written (PR #9, pending merge into michael_d); everything else is a proposal for group buy-in.","bold":True},
+ {"text":"Only the typo fixes are written (PR #9, pending merge into main); everything else is a proposal for group buy-in.","bold":True},
 ], top=1.7, size=14, gap=13)
 srcline(s, "log secs 3-4 (the safe corrections)  -  sec 7 (every decision, with what it resolves)")
 footer(s)

@@ -2,7 +2,8 @@
 
 These are **review / analysis notes**, contributed for discussion. They are
 **not** authoritative model changes; the proposed ASX OWL (`CSIM_ASX.rdf` /
-v0.0.4 on `michael_d`) is untouched. The intent is to add
+v0.0.4, now on `main`) is not changed by these notes - the only model edits
+are the typo fixes in PR #9. The intent is to add
 *coverage* (walking scenarios into concrete message instances) and to surface
 *problems* that instantiation reveals in the proposed ASX elements - phrased
 as questions for the sub-group, not as decisions.
@@ -24,7 +25,7 @@ in the `.xlsx` changed.
 the review put first: **P1** - ASX autonomy is a role/facet on the existing
 `Platform` subtree; **P7** - the collective/Swarm derives from
 `CollectiveEntity`; **P2** - sensors are being reworked on existing standards.
-The live model is now **v0.0.4** (`Ontology/C2SIM_ASX-v004.rdf` on `michael_d`,
+The live model is now **v0.0.4** (`Ontology/C2SIM_ASX-v004.rdf`, merged from `michael_d` into `main` in #11,
 2026-08-13), which already carries the P1 shape on the Vehicle side
 (`hasControlMode` on `smx#Vehicle`) and placeholders for P2, but not yet P7.
 The log's section 10 has the v0.0.4 reconciliation, the decisions, and the
@@ -131,17 +132,18 @@ question raised in October:
 
 ## Source of truth
 
-- Proposed OWL model: **v0.0.4** on branch `michael_d`
+- Proposed OWL model: **v0.0.4** on `main` (Michael Dembach's `michael_d`
+  branch, merged in #11 on 2026-10-27)
   (`Ontology/C2SIM_ASX-v004.rdf`, 2026-08-13; v0.0.3 archived at
   `Ontology/Archive/C2SIM_ASX-v003.rdf`; derived `Derived products/ASX_Schema.xsd`).
-  Pending on top of it: PR #9 (branch `asx-ontology-typos` -> `michael_d`) fixes
+  Pending on top of it: PR #9 (branch `asx-ontology-typos` -> `main`) fixes
   the typos O1 / O3-O6 (e.g. `CollectiveRoboticSystem`, `hasAutonomousParameters`)
   and removes two duplicate Concept Mapping rows; the review docs already use the
   corrected names where they refer to the live model.
   The v0.0.1 file `Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf` (2026-01-20)
   still exists on every branch and is the one the early walks cite.
 - Attribute concepts: `Subgroups/ASX/Proposed Extension Working Materials/ASX Concept Mapping.xlsx`
-  (the `michael_d` copy carries an "ASX 0.0.4" status column per attribute).
+  (the v0.0.4 copy, now on `main`, carries an "ASX 0.0.4" status column per attribute).
 - Worked message examples (Elizabeth's, untouched): the three
   `ASX Sample * Messages.xlsx` workbooks (created 2026-06-10).
 - Review working copies (diff-able, where the instantiation tabs live): the three
