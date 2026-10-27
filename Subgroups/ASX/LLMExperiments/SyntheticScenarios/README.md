@@ -4,7 +4,7 @@ The main Assistant developed to explore the generation of synthetic scenarios - 
 
 Files in this folder present GPT-4 results using the prompt describe in the next section.
 
-To provide opportunities for direct comparison, the `Objectives` and `Context` extracted from the Corona & Biaginni (2019) paper were used as input to the synthesizer assistant. The [synthetic results](./SyntheticCorona&Biaginni2019) can be contrasted to the [summary produced from the paper itself](../PaperSummaries/Corona&Biaginni2019.md). 
+To provide opportunities for direct comparison, the `Objectives` and `Context` extracted from the Corona & Biaginni (2019) paper were used as input to the synthesizer assistant. The [synthetic results](./SyntheticCorona&Biaginni2019.md) can be contrasted to the [summary produced from the paper itself](../PaperSummaries/Corona&Biaginni2019.md). 
 
 
 **NOTE**: GPT-4 runs with default parameters may generate different results for the same inputs. The files contained in here represent one of these runs, evaluated as having successfully met the evaluation criteria to a large extent. 
