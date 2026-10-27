@@ -20,7 +20,7 @@
     </Annotation>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
-        <Literal>This version introduced the object properties: hasAutonomousParameters, hasSensorCapability, hasControlMode, hasAutonomousMissionFuction, hasPassengerCapability</Literal>
+        <Literal>This version introduced the object properties: hasAutonomousParameters, hasSensorCapability, hasControlMode, hasAutonomousMissionFunction, hasAutonomyLevelCode; and the data property: hasPassengerCapability</Literal>
     </Annotation>
     <Declaration>
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ActorEntity"/>
@@ -71,7 +71,7 @@
         <Class IRI="#AutonomyLevelCode"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#CollecticeRoboticSystem"/>
+        <Class IRI="#CollectiveRoboticSystem"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Device"/>
@@ -158,7 +158,7 @@
         <ObjectProperty IRI="#hasAutonomousRoleCode"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#hasAutonomusParameters"/>
+        <ObjectProperty IRI="#hasAutonomousParameters"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasAutonomyLevelCode"/>
@@ -293,7 +293,7 @@
         <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#CollecticeRoboticSystem"/>
+        <Class IRI="#CollectiveRoboticSystem"/>
         <Class IRI="#RoboticSystem"/>
     </SubClassOf>
     <SubClassOf>
@@ -532,7 +532,7 @@
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#Operator</IRI>
-        <Literal>A person performing remote control, teleoperation of semi,autonomous operations.</Literal>
+        <Literal>A person performing remote control, teleoperation of semi-autonomous operations.</Literal>
     </AnnotationAssertion>
 </Ontology>
 
