@@ -1,0 +1,460 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.sisostds.org/ontologies/asx"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.sisostds.org/ontologies/asx"
+     versionIRI="http://www.sisostds.org/ontologies/asx/0.0.3">
+    <Prefix name="" IRI="http://www.sisostds.org/ontologies/asx#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://www.sisostds.org/ontologies/C2SIM</Import>
+    <Import>http://www.sisostds.org/ontologies/lox</Import>
+    <Import>http://www.sisostds.org/ontologies/smx</Import>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal>This ontology is work in progress.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
+        <Literal>C2SIM Autonomous Systems Extrension v0.0.3
+This version introduces concepts for Video Detection Report.</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ActorEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#C2SIMContent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#DateTime"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#EnvironmentalObject"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#EventCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#PhysicalEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ReportContent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#TimeInstant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Actuator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AnalysisComment"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AnalysisConcept"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Artifact"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ArtificialSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AutonomyLevelCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CollecticeRoboticSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Device"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ElectricDevice"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MediaReference"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MediaTypeCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Operator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PhysicalEnvironment"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Robot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RoboticEnvironment"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RoboticSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Sensor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SensorObservation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SingleRoboticSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UAV"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UGV"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnmannedAerialVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnmannedGroundVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnmannedMaritimeVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnmannedUnderwaterVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#VideoDetectionReportContent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#ActivityObservation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasEndTime"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasStartTime"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasTimeInstant"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasAutonomousRoleCode"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasCreationTime"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLastModifiedTime"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMediaTypeCode"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasReference"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasAnalystName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRepositoryReference"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AUD"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Automated"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ComputerProcess"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DOC"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FullAuto"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#IMG"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NOS"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ReCont"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TXT"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Teleop"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#VID"/>
+    </Declaration>
+    <Declaration>
+        <Datatype IRI="http://www.sisostds.org/ontologies/C2SIM#UUIDBase"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Actuator"/>
+        <Class IRI="#ElectricDevice"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnalysisComment"/>
+        <Class IRI="#AnalysisConcept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnalysisComment"/>
+        <ObjectMinCardinality cardinality="0">
+            <ObjectProperty IRI="#hasCreationTime"/>
+            <Class IRI="http://www.sisostds.org/ontologies/C2SIM#DateTime"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnalysisComment"/>
+        <ObjectMinCardinality cardinality="0">
+            <ObjectProperty IRI="#hasLastModifiedTime"/>
+            <Class IRI="http://www.sisostds.org/ontologies/C2SIM#DateTime"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnalysisComment"/>
+        <DataMinCardinality cardinality="0">
+            <DataProperty IRI="#hasAnalystName"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnalysisComment"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#hasRepositoryReference"/>
+            <Datatype IRI="http://www.sisostds.org/ontologies/C2SIM#UUIDBase"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnalysisConcept"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#C2SIMContent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Artifact"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#PhysicalEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ArtificialSystem"/>
+        <Class IRI="#Artifact"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AutonomyLevelCode"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollecticeRoboticSystem"/>
+        <Class IRI="#RoboticSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Device"/>
+        <Class IRI="#Artifact"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ElectricDevice"/>
+        <Class IRI="#Device"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MediaReference"/>
+        <Class IRI="#AnalysisConcept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MediaReference"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasEndTime"/>
+            <Class IRI="http://www.sisostds.org/ontologies/C2SIM#TimeInstant"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MediaReference"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasStartTime"/>
+            <Class IRI="http://www.sisostds.org/ontologies/C2SIM#TimeInstant"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MediaReference"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#hasMediaTypeCode"/>
+            <Class IRI="#MediaTypeCode"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Operator"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PhysicalEnvironment"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#EnvironmentalObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Robot"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ActorEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RoboticEnvironment"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#EnvironmentalObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RoboticSystem"/>
+        <Class IRI="#Device"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Sensor"/>
+        <Class IRI="#ElectricDevice"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SensorObservation"/>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#ActivityObservation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SingleRoboticSystem"/>
+        <Class IRI="#RoboticSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UAV"/>
+        <Class IRI="#Robot"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UGV"/>
+        <Class IRI="#Robot"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnmannedAerialVehicle"/>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#Vehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnmannedGroundVehicle"/>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#Vehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnmannedMaritimeVehicle"/>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#Vehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnmannedUnderwaterVehicle"/>
+        <Class IRI="http://www.sisostds.org/ontologies/smx#Vehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#VideoDetectionReportContent"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#ReportContent"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#MediaTypeCode"/>
+        <NamedIndividual IRI="#AUD"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AutonomyLevelCode"/>
+        <NamedIndividual IRI="#Automated"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#EventCode"/>
+        <NamedIndividual IRI="#ComputerProcess"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediaTypeCode"/>
+        <NamedIndividual IRI="#DOC"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AutonomyLevelCode"/>
+        <NamedIndividual IRI="#FullAuto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediaTypeCode"/>
+        <NamedIndividual IRI="#IMG"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediaTypeCode"/>
+        <NamedIndividual IRI="#NOS"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AutonomyLevelCode"/>
+        <NamedIndividual IRI="#ReCont"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediaTypeCode"/>
+        <NamedIndividual IRI="#TXT"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AutonomyLevelCode"/>
+        <NamedIndividual IRI="#Teleop"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediaTypeCode"/>
+        <NamedIndividual IRI="#VID"/>
+    </ClassAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasAutonomousRoleCode"/>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasCreationTime"/>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasTimeInstant"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasLastModifiedTime"/>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasTimeInstant"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasMediaTypeCode"/>
+        <ObjectProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasCode"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAutonomousRoleCode"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#Code"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasCreationTime"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#DateTime"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasLastModifiedTime"/>
+        <Class IRI="http://www.sisostds.org/ontologies/C2SIM#DateTime"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMediaTypeCode"/>
+        <Class IRI="#MediaTypeCode"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasAnalystName"/>
+        <DataProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasName"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasRepositoryReference"/>
+        <DataProperty IRI="http://www.sisostds.org/ontologies/C2SIM#hasReference"/>
+    </SubDataPropertyOf>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasAnalystName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#NOS</IRI>
+        <Literal>Not Otherwise Specified</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Operator</IRI>
+        <Literal>A person performing remote control, teleoperation of semi,autonomous operations.</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
