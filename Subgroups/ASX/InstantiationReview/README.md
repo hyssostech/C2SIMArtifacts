@@ -133,7 +133,8 @@ question raised in October:
 ## Source of truth
 
 - Proposed OWL model: **v0.0.4** on `main` (Michael Dembach's `michael_d`
-  branch, merged in #11 on 2026-10-27)
+  branch, merged in #11 on 2026-10-27; the branch is kept locked read-only as
+  the record of his work, tagged `archive/michael_d-v0.0.4`)
   (`Ontology/C2SIM_ASX-v004.rdf`, 2026-08-13; v0.0.3 archived at
   `Ontology/Archive/C2SIM_ASX-v003.rdf`; derived `Derived products/ASX_Schema.xsd`).
   Applied on top of it: PR #9 (merged into `main` 2026-10-27) fixes
