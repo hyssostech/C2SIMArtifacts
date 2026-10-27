@@ -1,5 +1,14 @@
 # Sourced-Scenarios Walk: MCM, SubT, Sustainment
 
+**Status (2026-10-27).** This walk is kept as written. **P1** has since been
+**decided by the sub-group** (2026-10): ASX autonomy is a role/facet on the
+existing `Platform` subtree, and the `Robot` / `UAV` / `UGV` tree is retired.
+It is not yet applied in the OWL (v0.0.4), so the `Platform / Robot` rows
+below still show the double typing as walked; they become plain `Platform`
+subtype rows (autonomy via `hasControlMode`) once it is applied, when the
+workbook tabs are re-cut. G5 (locomotion / role subtypes) and the
+maritime pair (V1) now re-parent *within* that subtree. Log section 10.
+
 These three scenarios came from the parallel **scenario-sourcing session**
 (`LLMExperiments/PaperSummaries/V2Extractions/`), which explicitly handed them
 off to this review in `LLMExperiments/OntologyConceptCoverage.md`. This walk

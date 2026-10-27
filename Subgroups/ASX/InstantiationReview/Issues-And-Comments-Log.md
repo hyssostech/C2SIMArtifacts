@@ -40,6 +40,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | D3 | HIGH | PARTIAL | Attribute layer not yet in the OWL | Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters are in ConceptMapping but not yet in the OWL (v0.0.1: 0 datatype / 1 object property; v0.0.3 adds a few, for the Video Detection Report only - see section 9). **[deck]** v0.0.4 (section 10) brings five Concept-Mapping attributes into the OWL - Control Mode, SensorCapability, AutonomousMissionFunction, Autonomous Parameters, PassengerCapability - plus `VehicleTypeCode` / `SensorTypeCode` / `AlgorithmTypeCode` as (still empty) code lists. Still absent: Payload, PayloadCapability, Payload Quantity, Mobility / Propulsion, AutonomousMission Parameters, Swarm Parameters (all marked `x` in the workbook's status column). |
 | D4 | MED | RESOLVED | Deck (June) proposes `Sensors subClassOf RobotPart`; OWL has `Sensor subClassOf ElectricDevice`, no RobotPart class | Slide 6 of 2026-06 status deck vs `CSIM_ASX.rdf`. Robotics-concept discussion not captured in model. **Superseded (2026-10-27):** P1 retires the Robot tree, so `RobotPart` has no home (v0.0.4 has no such class), and P2 sends sensors to the standards-based rework. |
 | D5 | LOW | RESOLVED | Deck frames robotics subclass axioms as an open question, but OWL already committed them | UAV/UGV subClassOf Robot etc. asked as "Do we want to add...?" in June yet present in Jan OWL. **Superseded (2026-10-27):** answered by P1 (retire the Robot tree). The June deck stays as a historical record. |
+| D6 | MED | OPEN | Concept Mapping still lists "Swarm" as a **Control Mode value**, not only as an entity | `ASX Concept Mapping.xlsx` (`All Concepts`, Control Mode row): {Piloted, Unpiloted - Autonomous, Swarm}, alongside the separate "Swarm Parameters" entity row. That is a third representation of swarm - a *mode* of control - beside the collective entity P7 decided on (`CollectiveEntity`). Under P7 being in a swarm is membership in a collective, not a control mode, so "Swarm" should leave the Control Mode value list (v0.0.4's `hasControlMode` already ranges over `AutonomyLevelCode`, which has no Swarm value). Only indirectly covered by D1 / Q-D so far. For Michael's next Concept Mapping revision (issue #6). |
 
 ## 3. OWL typos & naming (`CSIM_ASX.rdf`)
 
@@ -836,7 +837,10 @@ as duplicates in PR #9).
   become `hasControlMode` / sensor-capability / `CollectiveEntity` rows.
 - **Workbook note:** the `.xml` instantiation tabs are left as walked; their
   `[!]`/`[Q]` flags are pointers to log IDs, and the status now lives in the
-  rows above. They are re-cut after step (5), not before.
+  rows above. They are re-cut after step (5), not before. Since 2026-10-27
+  each of the 12 tabs that carries a P1 or P7 flag has a STATUS row under its
+  header saying the decision is made but not yet applied, and the three
+  DECIDE-FIRST flags read DECIDED (issue #6).
 
 ## Change log
 
@@ -1090,3 +1094,12 @@ as duplicates in PR #9).
   CLOSING; D2 note updated. Docs that name the live model now use the corrected
   names (the walks keep the old names where they record the v0.0.1 / v0.0.4
   state); the deck is regenerated (P7, refinements, and next-steps slides).
+- 2026-10-27: **P1 / P7 decisions propagated (issue #6).** The 12 `.xml`
+  workbook tabs carrying P1 / P7 flags (Init: UAV with Video, UAV Patrol,
+  Swarm, CASEVAC, MCM, SubT, LIRC; Orders: Swarm Coordination, Logistics
+  Delivery, USV Rescue, OPFOR Targeting Handoff; Reports: Swarm Detection) gain
+  a STATUS row under the header (decided, not yet applied; rows re-cut once the
+  OWL changes), and the three DECIDE-FIRST flags (P1, P2, P7) now read DECIDED.
+  Rows themselves unchanged. The three July walks without a status note
+  (DroneWarfare-LIRC-OPFOR, SourcedScenarios, TaskEffect-Batch) gain one. New
+  item D6: "Swarm" as a Control Mode value in the Concept Mapping, against P7.

@@ -716,7 +716,7 @@
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
  <Worksheet ss:Name="Swarm Coordination">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="8" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -725,6 +725,9 @@
     <Cell><Data ss:Type="String">Type</Data></Cell>
     <Cell><Data ss:Type="String">Value</Data></Cell>
     <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STATUS (2026-10-27, review log section 10): P7 DECIDED (sub-group, 2026-10): the collective/Swarm derives from CollectiveEntity (an ActorEntity). Not yet applied in the OWL (v0.0.4), so the [!] P7 rows below still show the walked state; they are re-cut once it is applied.</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
@@ -879,7 +882,7 @@
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
  <Worksheet ss:Name="Logistics Delivery Order">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="8" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -888,6 +891,9 @@
     <Cell><Data ss:Type="String">Type</Data></Cell>
     <Cell><Data ss:Type="String">Value</Data></Cell>
     <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STATUS (2026-10-27, review log section 10): P1 DECIDED (sub-group, 2026-10): autonomy is a role/facet on the existing Platform subtree; the ASX Robot/UAV/UGV tree is retired. Not yet applied in the OWL (v0.0.4), so the [!] P1 rows below still show the walked state; they are re-cut once it is applied.</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
@@ -1015,7 +1021,7 @@
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
  <Worksheet ss:Name="USV Rescue Order">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -1024,6 +1030,9 @@
     <Cell><Data ss:Type="String">Type</Data></Cell>
     <Cell><Data ss:Type="String">Value</Data></Cell>
     <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STATUS (2026-10-27, review log section 10): P1 DECIDED (sub-group, 2026-10): autonomy is a role/facet on the existing Platform subtree; the ASX Robot/UAV/UGV tree is retired. Not yet applied in the OWL (v0.0.4), so the [!] P1 rows below still show the walked state; they are re-cut once it is applied.</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
@@ -1523,7 +1532,7 @@
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
  </Worksheet>
  <Worksheet ss:Name="OPFOR Targeting Handoff">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="8" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
    <Row>
     <Cell><Data ss:Type="String">Model</Data></Cell>
     <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
@@ -1532,6 +1541,9 @@
     <Cell><Data ss:Type="String">Type</Data></Cell>
     <Cell><Data ss:Type="String">Value</Data></Cell>
     <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STATUS (2026-10-27, review log section 10): P1 DECIDED (sub-group, 2026-10): autonomy is a role/facet on the existing Platform subtree; the ASX Robot/UAV/UGV tree is retired. Not yet applied in the OWL (v0.0.4), so the [!] P1 rows below still show the walked state; they are re-cut once it is applied.</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
