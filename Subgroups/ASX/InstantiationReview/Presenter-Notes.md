@@ -77,33 +77,49 @@ and next steps (20); the rest is handout.
 
 - One consolidated state slide: the OWL (v0.0.1, Jan) and the spreadsheets
   (Jun) evolved separately for ~5 months, so several findings look like drift
-  rather than gaps - expected for a v0.0.x model. v0.0.3 (Jul, Michael) shows
+  rather than gaps - expected for a v0.0.x model. v0.0.3 (Jul, Michael) showed
   the model moving: first datatype properties (v0.0.1 had none - it was a
   taxonomy of *things*; the layer that says what you *send* hadn't been built),
-  the Video Detection Report folded in, an AutonomyLevelCode model.
-- The catch-up list is short and known: the attribute layer (Payload, Mobility,
-  VehicleType, ...), one autonomy vocabulary (three today), one sensor model
-  (three today - that is P2), and two wiring items (the hasAutonomousRoleCode
-  range, the circular owl:imports).
+  the Video Detection Report folded in, an AutonomyLevelCode model. v0.0.4
+  (Aug) brings five spreadsheet attributes into the OWL, puts the autonomy facet
+  on `smx#Vehicle` and a per-task autonomy level on `Task`, fixes the circular
+  import, and the Concept Mapping now tracks per attribute what is done.
+- The catch-up list is short and known: the rest of the attribute layer
+  (Payload, Mobility, Swarm Parameters), stating the one autonomy vocabulary
+  (v0.0.4 uses `AutonomyLevelCode` for both new properties, so this is nearly
+  done), the sensor rework (P2, now a direction), and the wiring items - four of
+  the six new properties have no attachment point, `hasAutonomousRoleCode` still
+  ranges over generic Code.
 
 ## The three foundational decisions (slides 8-11 - the core of the talk)
 
-- **P1 - a UAV/UGV is typed two incompatible ways.** The proposed `Robot` class
-  tree runs parallel to the existing SMX `Platform` tree, both under
+The sub-group has decided all three (recorded 2026-10-14). Present each as
+*decided + what remains to apply*, not as a question.
+
+- **P1 - a UAV/UGV was typed two incompatible ways.** The proposed `Robot` class
+  tree ran parallel to the existing SMX `Platform` tree, both under
   `ActorEntity`. Pick `Robot` and you lose the Platform machinery; pick
-  `Aircraft`/`Vehicle` and the ASX classes go unused. v0.0.3 declares both
-  trees, so the choice is now concretely in the model.
-- **P2 - a sensor has no agreed representation.** The same physical device is
+  `Aircraft`/`Vehicle` and the ASX classes go unused. **Decided: autonomy is a
+  role/facet on the existing Platform subtree.** v0.0.4 already has that shape
+  on one side (`hasControlMode` on `smx#Vehicle`); the `Robot`/`UAV`/`UGV` tree
+  is still declared (and still a fourth ActorEntity choice in the derived XSD),
+  so the residual is to retire it, pick Vehicle-vs-Platform for the facet, and
+  re-parent the maritime pair.
+- **P2 - a sensor had no agreed representation.** The same physical device is
   an OWL `Sensor` class, a `SensorType` enum, and `SensorCapability` as
-  associated equipment. Initialization forces the choice - an Init message must
-  declare what a platform carries; and the same carried-equipment pattern
-  returns in weapon / manipulator / cargo typing.
-- **P7 - a swarm isn't yet taskable or able to report.** `Swarm` derives from
+  associated equipment. **Decided in direction: sensors are being reworked on
+  existing standards** - which is the sensor-characterization slice's premise.
+  v0.0.4 holds placeholders only (an empty `SensorTypeCode`, and
+  `hasSensorCapability` typed by media format); the same carried-equipment
+  pattern still returns in weapon / manipulator / cargo typing.
+- **P7 - a swarm wasn't taskable or able to report.** `Swarm` derived from
   `PhysicalEntity` (an inert object), but orders and reports need an
-  `ActorEntity`. The fix is already in the base standard: derive from
-  `CollectiveEntity`.
-- Key point: "all three are typing decisions - so Initialization, not Reports,
-  is where the model has to be settled."
+  `ActorEntity`. **Decided: derive the collective/Swarm from `CollectiveEntity`**
+  (already in the base standard). Not yet in v0.0.4 - `CollecticeRoboticSystem`
+  is still under PhysicalEntity, so this is the first thing to apply.
+- Key point: "all three were typing decisions - so Initialization, not Reports,
+  is where the model gets pinned down; the Init tabs get re-cut once the three
+  are applied in the OWL."
 
 ## Findings by theme (slides 12-15)
 
@@ -141,8 +157,10 @@ and next steps (20); the rest is handout.
   "Where to dig deeper" (topic -> doc map). Close on those so the group leaves
   knowing exactly where to start.
 - ~24 decisions, listed in the log. Present the grouping, not all 24:
-  - **Structure first:** UAV/robot typing (Q-A), swarm -> CollectiveEntity (Q-B),
-    one sensor model (Q-C), one autonomy vocabulary (Q-D).
+  - **Structure first - decided:** UAV/robot typing (Q-A: facet on the Platform
+    subtree), swarm -> CollectiveEntity (Q-B: yes), one sensor model (Q-C: rework
+    on existing standards); one autonomy vocabulary (Q-D) is settled in practice
+    by v0.0.4 and only needs stating.
   - **Then content types:** generic detection report (re-adopt BML), rationale
     report, robot-to-robot, engagement authority, payload/effector/weapon typing
     (the task verbs already exist in LOX), area as a task/report subject, and
@@ -153,8 +171,9 @@ and next steps (20); the rest is handout.
 - Sourcing is essentially complete - every gap this review raised is now grounded
   in a real mission (one nice-to-have left: a dedicated autonomous-CASEVAC
   mission).
-- The remaining work - build the attribute layer, reconcile the tracks, make the
-  ~24 decisions - is ours. More scenarios won't fill it.
+- The structural decisions are made; the remaining work - apply them in the OWL
+  (P7, then P1, then the sensor survey), build the rest of the attribute layer,
+  make the ~20 content-type decisions - is ours. More scenarios won't fill it.
 
 ## Framing and provenance (keep claims precise)
 

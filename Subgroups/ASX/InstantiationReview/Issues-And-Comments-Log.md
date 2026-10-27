@@ -25,7 +25,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | S1 | HIGH | RESOLVED | Local clone was 52 commits behind origin/main | Fixed by pull on 2026-07-09; now level with origin (`021e715`). |
-| S2 | HIGH | OPEN | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** |
+| S2 | HIGH | NARROWED | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** Narrowed by v0.0.4 (2026-08-13): the `ASX Concept Mapping.xlsx` on `michael_d` now carries an "ASX 0.0.4" status column (done / x / comment per attribute) and five of its attributes are in the OWL - the tracks are being reconciled from the OWL side. See section 10. |
 | S3 | MED | DONE (branch) | Workbooks are `.xlsx` (zipped XML), git cannot merge | All 3 sample-message workbooks converted to diff-able SpreadsheetML 2003 `.xml` (fidelity verified, 0 mismatches) and committed on branch `asx-diffable-spreadsheets`. NOTE: `.xml` and `.xlsx` now coexist - see S4. |
 | S4 | HIGH | DECIDED | Dual source of truth: `.xml` vs `.xlsx` | Decision (2026-07-10): the `.xml` workbooks are the working copy for this review; Elizabeth's `.xlsx` files are left untouched for now. All new instantiation work (Init rows, CASEVAC tabs) goes into the `.xml` only. The `.xlsx` will diverge by design until the group reconciles. |
 
@@ -33,9 +33,9 @@ Items marked **[deck]** are candidates for the findings presentation.
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| D1 | HIGH | OPEN | Autonomy vocabulary defined three incompatible ways | OWL individuals {Automated, FullAuto, ReCont, Teleop}; ConceptMapping `Control Mode` {Piloted, Unpiloted-Autonomous, Swarm}; `NavigationAutonomy` {FPV, Autonomous, RemoteControl}. Which is normative? **[deck]** |
-| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. (ConceptMapping also has internal value disagreements - not in `SensorType`, whose two rows are identical duplicates, but in `Payload` (row 12 adds `SensorType` to the value list) and `VehicleType` (`DroneFixedWing, DroneHover` vs `Drone - Fixed Wing, Drone - Hover`).) **[deck]** |
-| D3 | HIGH | OPEN | Attribute layer not yet in the OWL | Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters are in ConceptMapping but not yet in the OWL (v0.0.1: 0 datatype / 1 object property; v0.0.3 adds a few, for the Video Detection Report only - see section 9). **[deck]** |
+| D1 | HIGH | NARROWED | Autonomy vocabulary defined three incompatible ways | OWL individuals {Automated, FullAuto, ReCont, Teleop}; ConceptMapping `Control Mode` {Piloted, Unpiloted-Autonomous, Swarm}; `NavigationAutonomy` {FPV, Autonomous, RemoteControl}. Which is normative? **[deck]** v0.0.4 answers in practice: `hasControlMode` (on `smx#Vehicle`) and `hasAutonomyLevelCode` (on `C2SIM#Task`) both range over `AutonomyLevelCode` - so the OWL's four individuals are the vocabulary Control Mode now uses - and the Concept Mapping marks `NavigationAutonomy` "covered by control mode?". The three-way split is collapsing to one; what is left for Q-D is to say so explicitly and retire the two spreadsheet value lists (or map them). |
+| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. (ConceptMapping also has internal value disagreements - not in `SensorType`, whose two rows are identical duplicates, but in `Payload` (row 12 adds `SensorType` to the value list) and `VehicleType` (`DroneFixedWing, DroneHover` vs `Drone - Fixed Wing, Drone - Hover`).) **[deck]** v0.0.4 adds a `SensorTypeCode` code list (no individuals yet - the Concept Mapping says "Individuals have to be done" and still carries "***Check Robotics Standard for categories of sensor types") and `hasSensorCapability`, whose range is `MediaTypeCode`, not `SensorTypeCode` - so the three representations persist and the new property inherits the M5 conflation. The group has since decided the direction (P2 / section 10): sensors are being reworked on existing standards. |
+| D3 | HIGH | PARTIAL | Attribute layer not yet in the OWL | Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters are in ConceptMapping but not yet in the OWL (v0.0.1: 0 datatype / 1 object property; v0.0.3 adds a few, for the Video Detection Report only - see section 9). **[deck]** v0.0.4 (section 10) brings five Concept-Mapping attributes into the OWL - Control Mode, SensorCapability, AutonomousMissionFunction, Autonomous Parameters, PassengerCapability - plus `VehicleTypeCode` / `SensorTypeCode` / `AlgorithmTypeCode` as (still empty) code lists. Still absent: Payload, PayloadCapability, Payload Quantity, Mobility / Propulsion, AutonomousMission Parameters, Swarm Parameters (all marked `x` in the workbook's status column). |
 | D4 | MED | OPEN | Deck (June) proposes `Sensors subClassOf RobotPart`; OWL has `Sensor subClassOf ElectricDevice`, no RobotPart class | Slide 6 of 2026-06 status deck vs `CSIM_ASX.rdf`. Robotics-concept discussion not captured in model. |
 | D5 | LOW | OPEN | Deck frames robotics subclass axioms as an open question, but OWL already committed them | UAV/UGV subClassOf Robot etc. asked as "Do we want to add...?" in June yet present in Jan OWL. |
 
@@ -43,9 +43,12 @@ Items marked **[deck]** are candidates for the findings presentation.
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| O1 | TYPO | OPEN | Class name misspelled `CollecticeRoboticSystem` (should be "Collective") | Line 44-45; `Swarm subClassOf` the misspelled class. Will propagate into instance data once messages exist. **[deck]** |
-| O2 | TYPO | OPEN | `versionInfo` says "Autonomous Systems Extrension" | Line 13. |
-| O3 | LOW | OPEN | File named `CSIM_ASX.rdf` (missing the "2") | Inconsistent with every other C2SIM artifact; expected `C2SIM_ASX.rdf`. |
+| O1 | TYPO | OPEN | Class name misspelled `CollecticeRoboticSystem` (should be "Collective") | Line 44-45; `Swarm subClassOf` the misspelled class. Will propagate into instance data once messages exist. **[deck]** Still present in v0.0.4, and now also in the derived `ASX_Schema.xsd` (`CollecticeRoboticSystemType`). Natural moment to fix it: when the class is re-parented under `CollectiveEntity` (P7, decided). |
+| O2 | TYPO | RESOLVED | `versionInfo` says "Autonomous Systems Extrension" | Line 13. Gone in v0.0.4 - the `versionInfo` literal was replaced by a change note (the title line is no longer there at all). The new literal has its own problems: O5. |
+| O4 | TYPO | OPEN | Property IRI misspelled `hasAutonomusParameters` (should be "Autonomous") | New in v0.0.4; already propagated into the derived `ASX_Schema.xsd` as element `AutonomusParameters` (typed `xs:string`). Same shape as O1: cheap now, painful once instance data exists. |
+| O5 | TYPO | OPEN | v0.0.4 `versionInfo` mis-names two of the properties it announces | Says `hasAutonomousParameters` (the IRI is `hasAutonomusParameters`) and `hasAutonomousMissionFuction` (the IRI is `hasAutonomousMissionFunction`); it also omits `hasAutonomyLevelCode`, which is new in v0.0.4 too. Copied verbatim into the XSD header. |
+| O6 | TYPO | OPEN | `Operator` comment "teleoperation of semi,autonomous operations" | Present since v0.0.3 (noted in section 9 without an ID); unchanged in v0.0.4 and copied into the XSD. |
+| O3 | LOW | NARROWED | File named `CSIM_ASX.rdf` (missing the "2") | Inconsistent with every other C2SIM artifact; expected `C2SIM_ASX.rdf`. The live file is now correctly named (`Ontology/C2SIM_ASX-v004.rdf`; v0.0.3 moved to `Ontology/Archive/`); the residual is the stale v0.0.1 `CSIM_ASX.rdf` still sitting in `Subgroups/ASX/Proposed Extension/` with no pointer to the live version. |
 
 ## 4. Sample-message instantiation - open items
 
@@ -55,7 +58,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | M2 | MED | OPEN | `MediaReference` identity triple-defined | repositoryReference(UUID) + reportReference(string) + url(string), note "String may be better." Unresolved. |
 | M3 | MED | OPEN | Same concept modeled two ways across two report sheets | media/analystComment placed on ActivityObservation/LocationObservation in one sheet vs. a new `SensorObservation` subclass in another. Which is normative? |
 | M4 | MED | OPEN | `SensorObservation subClassOf ActivityObservation` is questionable | A sensor location fix is a LocationObservation; sensor output is not inherently an activity. |
-| M5 | MED | OPEN | `MediaTypeCode` conflates media format with sensor modality | Sample-message `MediaTypeEnum` = {Video, Audio, Image, Document, Not Otherwise Specified} - the NOS value's own note says "other sensor types, e.g. thermal scan" (a sensor modality, not a media format). v0.0.3 carries the same five values plus TXT as `MediaTypeCode` {VID/AUD/IMG/DOC/TXT/NOS}. Category error either way. **[deck]** |
+| M5 | MED | OPEN | `MediaTypeCode` conflates media format with sensor modality | Sample-message `MediaTypeEnum` = {Video, Audio, Image, Document, Not Otherwise Specified} - the NOS value's own note says "other sensor types, e.g. thermal scan" (a sensor modality, not a media format). v0.0.3 carries the same five values plus TXT as `MediaTypeCode` {VID/AUD/IMG/DOC/TXT/NOS}. Category error either way. **[deck]** v0.0.4 extends the conflation to the platform side: `hasSensorCapability` ranges over `MediaTypeCode`, so a sensor *capability* is declared as a media format (V3, section 10) even though a `SensorTypeCode` class now exists. |
 | M6 | MED | OPEN | Order task payload not modeled | "New Route Pattern" / "New Location" appear as bare rows with no type under the UAV Change Patrol Route Task. |
 | M7 | HIGH | OPEN | `hasStartTime` typed `UUIDBase` | Both Order sheets; `hasEndTime` is `TimeInstant`. Almost certainly a copy-paste error. **[deck]** |
 | M8 | LOW | OPEN | Namespace label inconsistency | `C2SIM_ASX` (Order, Report Base) vs `ASX` (Video Detection Report) for the same model. |
@@ -66,17 +69,25 @@ Items marked **[deck]** are candidates for the findings presentation.
 during the walk. The P-IDs are stable cross-reference handles and are not
 renumbered.)
 
+**Group decisions (recorded 2026-10-14; detail in section 10).** The sub-group
+settled the three DECIDE-FIRST items: **P1** - ASX autonomy becomes a
+role/facet on the existing `Platform` subtree (Q-A, yes); **P7** - the
+collective/Swarm derives from `CollectiveEntity` (Q-B, yes); **P2** - sensors
+are being reworked on existing standards (Q-C, direction set). They are marked
+DECIDED below; each still has an implementation residual in the OWL, since
+v0.0.4 (2026-08-13) predates or only begins them.
+
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| P1 | DECIDE-FIRST | OPEN | UAV typed twice, incompatibly: ASX `UAV subClassOf Robot subClassOf ActorEntity` vs SMX `Aircraft subClassOf Platform subClassOf ActorEntity` | Parallel (non-overlapping) sibling trees. `Robot` orphans the drone from Platform machinery; `Aircraft` leaves ASX classes unused. **[deck]** |
-| P2 | DECIDE-FIRST | OPEN | Sensor: separately-declared entity, or attribute on platform? | Init must pick one; Report side only consumed sensor output. Ties to D2. **[deck]** |
-| P3 | HIGH | OPEN | `hasAutonomousRoleCode` has no attachment point on the entity | Defined in OWL, but no Init field and not on EntityDescriptor. |
+| P1 | DECIDE-FIRST | DECIDED | UAV typed twice, incompatibly: ASX `UAV subClassOf Robot subClassOf ActorEntity` vs SMX `Aircraft subClassOf Platform subClassOf ActorEntity` | Parallel (non-overlapping) sibling trees. `Robot` orphans the drone from Platform machinery; `Aircraft` leaves ASX classes unused. **[deck]** **Decided (group): autonomy is a role/facet on the existing Platform subtree, not a parallel Robot tree.** v0.0.4 already carries the decided shape on one side - `smx#Vehicle` gets `hasControlMode min 0 AutonomyLevelCode`, and the four `Unmanned*Vehicle` classes sit under `Vehicle` - but the other side is untouched: `Robot` / `UAV` / `UGV` are still declared, and the derived `ASX_Schema.xsd` still offers `Robot` as a fourth `ActorEntity` choice beside `Platform`. Residual = implementation: retire (or demote to a non-entity role) the Robot tree; re-parent the maritime pair (V1); decide whether the facet hangs on `Vehicle` only (v0.0.4) or on `Platform` (the Concept Mapping says Platform - otherwise `Aircraft` / `SurfaceVessel` never carry it); attach `hasAutonomousRoleCode` (P3). |
+| P2 | DECIDE-FIRST | DECIDED (direction) | Sensor: separately-declared entity, or attribute on platform? | Init must pick one; Report side only consumed sensor output. Ties to D2. **[deck]** **Decided (group): sensors are being reworked based on existing standards** - the premise of the sensor-characterization slice (6l), which is the candidate survey. v0.0.4 stakes placeholders only: an empty `SensorTypeCode` code list and `hasSensorCapability` (range `MediaTypeCode`, no domain) - i.e. leaning to the *attribute-on-platform* reading, but the rework itself (which standard, which of the four questions in 6l it answers) is not yet in the file. Residual: run the standards survey (6l steps 1-2), then re-point `hasSensorCapability` at `SensorTypeCode` (or the adopted vocabulary) and fill the individuals; Q-Y (own extension vs ASX section) is still open. |
+| P3 | HIGH | PARTIAL | `hasAutonomousRoleCode` has no attachment point on the entity | Defined in OWL, but no Init field and not on EntityDescriptor. v0.0.4 attaches two autonomy properties - `hasControlMode` to `smx#Vehicle`, `hasAutonomyLevelCode` to `C2SIM#Task` - so an entity-level and a task-level autonomy value now have homes; `hasAutonomousRoleCode` itself is still unattached (range still generic `Code`). Four of the six new v0.0.4 properties have the same no-home shape (V2, section 10). |
 | P5 | HIGH | OPEN | Patrol route/area not modeled as an init object | Order references a route to change; nothing declares the baseline. Can host as MapGraphic. Gap on both Init and Order sides. Ties to M6. |
-| P6 | HIGH | OPEN | Three competing autonomy vocabularies at init time | Same as D1, surfaced concretely when declaring an entity. |
-| P7 | DECIDE-FIRST | OPEN | Swarm not yet taskable as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity`, but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. (v0.0.3 removed the Swarm class; CollecticeRoboticSystem is still non-actor.) **[deck]** |
+| P6 | HIGH | NARROWED | Three competing autonomy vocabularies at init time | Same as D1, surfaced concretely when declaring an entity. Narrowed with D1: at init time the entity's `hasControlMode` now takes an `AutonomyLevelCode` individual. |
+| P7 | DECIDE-FIRST | DECIDED | Swarm not yet taskable as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity`, but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. (v0.0.3 removed the Swarm class; CollecticeRoboticSystem is still non-actor.) **[deck]** **Decided (group): derive the collective/Swarm from `CollectiveEntity`.** Not yet in v0.0.4 - `CollecticeRoboticSystem subClassOf RoboticSystem` (-> Device -> Artifact -> PhysicalEntity) is unchanged and there is still no `Swarm` class. Residual = implementation: re-parent (and re-spell, O1) the collective class under `CollectiveEntity`; then the Q-J residuals. |
 | P8 | HIGH | NARROWED | Swarm membership + leader partially covered | `hasSubordinate`/`hasSuperior` (C2SIM) and `hasCommandRelation` (SMX) cover membership + command; residual gap is network params, leader-as-role, and dynamic handover. See section 6d. |
 | P9 | TYPO | OPEN | Misspelling O1 propagates into swarm instance data | Same root as O1. |
-| P10 | MED | OPEN | Heterogeneous (mixed UAV+UGV) swarm membership unconfirmed | MUTT-style mixed swarms; confirm members of different platform types can share one collective. |
+| P10 | MED | OPEN | Heterogeneous (mixed UAV+UGV) swarm membership unconfirmed | MUTT-style mixed swarms; confirm members of different platform types can share one collective. Simplified by P1 + P7 as decided: members are `Platform` subtypes and the collective is a `CollectiveEntity`, so mixed membership is just `hasSubordinate` over Platforms of different subtypes - the only thing left to confirm is that nothing in SMX restricts a CollectiveEntity's members to one type. |
 
 ## 6. Coverage gaps (scenario x message type)
 
@@ -127,7 +138,7 @@ chemical/biological/nuclear *sampling* task verbs.
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| P7 | DECIDE-FIRST | OPEN | Swarm not yet taskable or able to report | Both swarm messages show it: an OrderBody recipient and a ReportBody `hasReportingEntity` need to be an ActorEntity; ASX Swarm derives from PhysicalEntity. (Precision: `hasPerformingEntity`/`hasReportingEntity` are datatype properties carrying UUID references, so nothing fails an OWL reasoner - the ActorEntity requirement is stated in their annotations: "the unique identifier of an individual of the ActorEntity class". The semantic mismatch stands.) Proposed: `Swarm subClassOf CollectiveEntity` (C2SIM; re-declared in SMX). **[deck]** |
+| P7 | DECIDE-FIRST | DECIDED | Swarm not yet taskable or able to report | Both swarm messages show it: an OrderBody recipient and a ReportBody `hasReportingEntity` need to be an ActorEntity; ASX Swarm derives from PhysicalEntity. (Precision: `hasPerformingEntity`/`hasReportingEntity` are datatype properties carrying UUID references, so nothing fails an OWL reasoner - the ActorEntity requirement is stated in their annotations: "the unique identifier of an individual of the ActorEntity class". The semantic mismatch stands.) Proposed: `Swarm subClassOf CollectiveEntity` (C2SIM; re-declared in SMX). **[deck]** **DECIDED by the group (2026-10): derive the collective/Swarm from `CollectiveEntity`; not yet applied in v0.0.4 - see P7 in section 5 and section 10.** |
 | Z1 | MED | OPEN | No aggregation construct | A swarm detection built from multiple members' observations - one collective report or N member reports? No aggregation model. |
 | Z2 | MED | OPEN | No swarm-lifecycle construct | Dynamic member rotation / resupply / replacement (June deck) has no construct. |
 | P8 | HIGH | NARROWED | Membership + command mostly covered | `hasSubordinate`/`hasSuperior`/`hasCommandRelation` exist; residual is network params, leader-as-role, dynamic handover. |
@@ -141,7 +152,7 @@ reporting linkage (`hasReportingEntity`) - all conditional on fixing P7.
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| W1 | HIGH | OPEN | No link between autonomy level and engagement authority | ROE (`RuleOfEngagement`, `WeaponRuleOfEngagementCode` - LOX) and `AuthorizationHeader` (C2SIM) exist, but nothing states whether an autonomous system at a given autonomy level may take a lethal action without a human in/on the loop. The central ASX policy gap. **[deck]** |
+| W1 | HIGH | OPEN | No link between autonomy level and engagement authority | ROE (`RuleOfEngagement`, `WeaponRuleOfEngagementCode` - LOX) and `AuthorizationHeader` (C2SIM) exist, but nothing states whether an autonomous system at a given autonomy level may take a lethal action without a human in/on the loop. The central ASX policy gap. **[deck]** v0.0.4 supplies the first half of the hook: `C2SIM#Task` now carries `hasAutonomyLevelCode min 0 AutonomyLevelCode`, so the autonomy level a task is to be executed at is expressible per task (hence per phase, G15). The link from that level to engagement permission is still absent. |
 | W2 | MED | OPEN | Weapon/munition not typed | ConceptMapping Payload = Armiture/Ammunition; absent from OWL. Ties to D3/P2. |
 | W3 | MED | OPEN | No effect-achieved / BDA ReportContent | `TaskStatus` reports the task ran, not whether the target was destroyed. |
 
@@ -200,7 +211,7 @@ reports <- SubT/MCM detections, + the generic-report answer G4).
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| G1 | MED | OPEN | Denied-comms mode + deployable relay entity | SubT. A relay task verb `lox#COMREL` exists; missing is a comms-degraded operating MODE and a droppable relay ENTITY/node (`CommunicationNetwork` is a network, not a node). **[deck]** |
+| G1 | MED | OPEN | Denied-comms mode + deployable relay entity | SubT. A relay task verb `lox#COMREL` exists; missing is a comms-degraded operating MODE and a droppable relay ENTITY/node (`CommunicationNetwork` is a network, not a node). **[deck]** Third residual from 6n: control *handover* between stations when a link degrades (G30). |
 | G2 | MED | OPEN | Area-coverage / exploration goal | SubT. Search/recce verbs (`RECCE`, `RECONS`, `PATROL`, `SWEEP`, `DETECT`) exist; missing is the coverage-*goal* semantics (explore-until-covered), tied to N1. **[deck]** |
 | G3 | MED | OPEN | Cross-cueing: system-to-system task + shared classified track | MCM. Reuses X1 + M1; no Track/Contact object type. |
 | G4 | HIGH | OPEN | Generic parameterized Detection Report | confidence + error-bound + false-positive + modality; subsumes Video/CBRN/EW/GPR/naval-mine/artifact. **Resolves Y1/M3/M4.** **[deck]** |
@@ -303,7 +314,7 @@ loitering munition, FPV, COTS quadcopter).
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | G14 | HIGH | OPEN | Weapons-control-status + kill-box construct | An authorization-bearing area (weapons-control status hold/tight/free x geo bound x time window x civilian-clearance state x permitted target type) that gates autonomous lethal engagement. Grep of C2SIM/SMX/LOX: none of weapons-control-status, kill box, free-fire/no-fire area, FSCM exists. A concrete model that ANSWERS W1/Q-K and unifies it with N1/Q-M. **[deck]** |
-| G15 | MED | OPEN | Graded, phase-varying engagement authority | LIRC shifts weapons hold (movement) -> tight (pre-LD) -> autonomous-in-kill-box; authority is temporal/graded, sharpening D1/Q-D (autonomy varies by mission phase). |
+| G15 | MED | OPEN | Graded, phase-varying engagement authority | LIRC shifts weapons hold (movement) -> tight (pre-LD) -> autonomous-in-kill-box; authority is temporal/graded, sharpening D1/Q-D (autonomy varies by mission phase). v0.0.4's task-level `hasAutonomyLevelCode` is the natural carrier for a per-phase level (one value per task/phase); the graded scale itself is still the four categorical individuals. |
 | G16 | MED | OPEN | Loitering munition / FPV as a platform-munition hybrid | Flies, senses, then is expended; size tiers (mini/tactical/long-range). Extends P1/G5 (platform) and W2/Q-L (munition); neither captures the hybrid. `loiter`/`munition` class absent (grep). |
 | G17 | MED | OPEN | Counter-UAS engagement | Mostly REUSE - `lox#AIRDEF`, `lox#ENGAGE`, `lox#ATTACK`, `lox#DETECT`, `lox#JAM` exist; residual is an sUAS/UAS target class and the detect->defeat + soft-kill(JAM)/hard-kill(ENGAGE) coupling. |
 | G18 | MED | OPEN | Adversarial EW against own autonomy | GPS-denial, control-link jamming, and drone-hijack (control seized in ~25 s) are threats TO friendly autonomy; extends G1/Q-O with a vulnerability + countermeasure (INS fallback, encrypted FH / fiber-optic link). Relates to Y4 (EW sensing). |
@@ -390,16 +401,66 @@ transfer must be argued on ASX's own terms. **That is also this slice's
 falsifier:** if the placement exercise shows DIS's boundaries consistently fail
 to survive translation, G24 shrinks to a much shorter list.
 
+## 6n. STANAG 4817 / CATL as a source for coordination content (PROPOSED slice)
+
+A third **proposed slice**, independent of 6l and 6m - from a question raised
+2026-10-14: what can the STANAG 4817 work contribute to ASX? Scoped in
+`STANAG4817-CATL-Slice.md`. Nothing instantiated. **Caveat first:** the
+ratifying text (AEP-4817, NATO multi-domain C2 of unmanned systems) is not
+public and its status is disputed between sources; the publicly documented
+artifact in its lineage is **CATL** (CMRE's Collaborative Autonomy Tasking
+Layer, SCI-288 / SCI-343, "a basis for STANAG 4817"), so the concrete claims
+are CATL claims and the two CATL papers are the sources to obtain.
+
+The RDF grounding stands on its own: C2SIM **already has** the
+request / acknowledge / status triad a tasking layer needs
+(`TaskRequestContent`; `AcknowledgementBody` + `AcknowledgeTypeCode` incl.
+`ACKREQGRT` / `ACKREQDEN`; `TaskStatus` + `TaskStatusCode`), and SMX has
+`CommandRelation` with OPCON-style codes - and it **lacks** exactly the
+multi-node machinery a federated tasking layer provides: control handover, a
+control-station entity, allocation among candidates, state synchronization.
+Where 4817 bears on open findings: X1/Q-G and G3/Q-P (node-to-node tasking),
+G13/Q-V (allocation by capability), P7/Z1/Q-J (federation tasking + roll-up),
+G1/Q-O (denied comms, plus a new handover residual), G3/G19 (shared
+track - fielded at Task Force X Baltic). Where it does not: P1 / P2 (not a
+taxonomy) and W1 / Q-K / Q-W (no authority semantics - the same gap the
+critical commentary on 4817 notes). Layering point: C2SIM/ASX is the
+commander-to-system language, 4817/CATL the station-to-vehicle one; the ASX
+question is whether task and status concepts must **round-trip**, a
+translation requirement rather than an import.
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| G30 | HIGH | PROPOSED | No control-handover construct | C2SIM can state a command relation (SMX `CommandRelation`, codes written for organisations) but has no transfer event, acceptance, effective time, or control-station entity to transfer between (grep: no handover / transfer / relief / release IRI in C2SIM, SMX, or LOX; ASX v0.0.4 has `Operator`, a Person, only). CATL lists handover of control between stations as a core function; SubT denied-comms and MCM need it. New residual for Q-O. With P1 decided, it attaches to a Platform with `hasControlMode` as the state that changes hands. |
+| G31 | MED | PROPOSED | No task allocation among candidates | `TaskRequestContent` names one performer; no one-to-many solicitation or assign step. The existing request / `ACKREQGRT` / `ACKREQDEN` pair is a usable shape for offer-and-answer. Consumer of Q-V's capability self-report; the node-to-node half of Q-G/Q-P. |
+| G32 | MED | PROPOSED | No data-synchronization content | Reporting is one-way; nothing lets two nodes reconcile tasks / tracks / status after a comms gap. CATL names synchronization among its four message purposes (names and fields not yet obtained). |
+| G33 | MED | PROPOSED | Round-trip (translation) requirement with the station-to-vehicle layer | If a C2SIM Order becomes a 4817/CATL task and a CATL status a C2SIM `TaskStatus`, then task identity, status values, performer identity, handover state, and vehicle identifiers (cf. G23) must be mappable. A stated constraint on ASX's coordination content, not an import - worth one paragraph now regardless of the slice. |
+
+Honest limits: the AEP is unavailable; the four CATL message names are
+unobtained; CATL's choices are shaped by acoustic-comms AUV operations and may
+not all transfer to a land UGV on a radio link; and 4817 answers a control
+station's questions, so some of its boundaries will be artifacts of that layer
+- the same counterweight 6m recorded for DIS.
+
 ## 7. Open decisions for the sub-group (comments)
 
 - **Q-A [deck]** Should ASX autonomy be a *role/facet on the existing Platform
   subtree* rather than a parallel `Robot` class tree? (Resolves P1, D-tree split.)
+  **DECIDED (group, 2026-10): yes.** Implementation residual in section 10.
 - **Q-B [deck]** Should `Swarm` derive from `CollectiveEntity` (ActorEntity)
   instead of the device/artifact tree? (Resolves P7.)
+  **DECIDED (group, 2026-10): yes** - derive the collective/Swarm from
+  `CollectiveEntity`. Not yet in v0.0.4; implementation residual in section 10.
 - **Q-C** Is a sensor a first-class Entity/Equipment, a class, or an attribute?
   Pick one model and apply it in Init, Report, and ConceptMapping. (Resolves D2/P2.)
+  **DECIDED in direction (group, 2026-10): sensors are being reworked on
+  existing standards** (the 6l slice's premise); the concrete model follows
+  from that survey. v0.0.4 placeholders: `SensorTypeCode`, `hasSensorCapability`.
 - **Q-D** Choose one normative autonomy vocabulary and express the others as
-  derived/orthogonal. (Resolves D1/P6.)
+  derived/orthogonal. (Resolves D1/P6.) Largely settled in practice by v0.0.4
+  (`AutonomyLevelCode` is the range of both `hasControlMode` and
+  `hasAutonomyLevelCode`; the workbook marks `NavigationAutonomy` as covered);
+  remaining ask is to state it and retire/map the two spreadsheet lists.
 - **Q-E** Define an inline entity-definition mechanism for newly-observed
   (uncooperative) entities so a report can introduce an entity it references.
   (Resolves M1.)
@@ -438,14 +499,16 @@ to survive translation, G24 shrinks to a much shorter list.
   (Resolves G2.)
 - **Q-O [deck]** Model **denied-comms operation**: a comms-degraded operating
   mode and a deployable relay entity/node (the relay verb `lox#COMREL` already
-  exists). (Resolves G1.)
+  exists). (Resolves G1.) Extended by 6n: control handover between stations
+  on link loss (G30, Q-AA).
 - **Q-P** Extend robot-to-robot (Q-G) with **cross-cueing**: system-to-system
   tasking plus a shared classified **track/contact** object. (Resolves G3.)
 - **Q-Q [deck]** Define one **generic parameterized Detection Report**
   (confidence + error-bound + false-positive + modality) that subsumes the
   per-sensor reports. Extends Q-I. (Resolves G4 / Y1 / M3 / M4.)
 - **Q-R** Add **platform locomotion/role subtypes** (wheeled/tracked/legged UGV;
-  detector/neutralizer USV). Extends Q-A. (Resolves G5.)
+  detector/neutralizer USV). Extends Q-A - now concretely: subtypes of the
+  `Platform` subtree, since Q-A is decided. (Resolves G5.)
 - **Q-S** Add **decoy/deception** as a taskable behavior and **threat-aware**
   order annotations (risk, low-signature, level-of-autonomy). (Resolves G8/G9.)
 - **Q-T** Add **operating-environment condition** attributes (GPS-denied,
@@ -494,7 +557,19 @@ to survive translation, G24 shrinks to a much shorter list.
   boundaries answer a simulation's questions, not a commander's. (Scopes G24-G27;
   see `DIS-Enumerations-Slice.md`.) G23 is separate - a workbook fix worth making
   regardless.
-- *The Q-series is exhausted at Q-Z. Continue at Q-AA.*
+- **Q-AA** Decide **what ASX learns from STANAG 4817 / CATL** - as a design
+  source for the *coordination* content (Q-G, Q-P, Q-J, Q-V, Q-O), not as
+  messages to adopt. Three options, takeable in any combination: **(a)** adopt
+  the *shape* of CATL's task-administration set over C2SIM's existing
+  request / acknowledge / status triad (G31, G33); **(b)** add the two
+  constructs C2SIM has no shape for at all - control handover (G30) and state
+  synchronization (G32); **(c)** write the round-trip requirement into ASX as
+  a stated constraint (G33) so a later 4817 gateway is buildable. Recommended:
+  **(c) now** (one paragraph, no model change), **(a)** once the CATL papers
+  are in hand, **(b)** after P7 is applied. Touches neither P1 / P2 nor the
+  engagement-authority thread. (Scopes G30-G33; see
+  `STANAG4817-CATL-Slice.md`.)
+- *The Q-series continues at Q-AB.*
 - **Adopt (evidence-backed), not just decide:** Q-Q should re-adopt BML
   `WhoMeasuredType` (measurement report) and Q-F align to BML `ResourceType`
   (media report) - both prior art in C2SIM's BML lineage (Remmersmann 2015).
@@ -511,8 +586,9 @@ separable buckets, and only the third is about sources:
    `CSIM_ASX.rdf` v0.0.1 was "work in progress": ~15 classes, **1 object
    property, 0 datatype properties** - a taxonomy of *things* whose message
    layer had not been built yet. (v0.0.3 has now begun that layer for the Video
-   Detection Report - see section 9 - so this is being addressed, not a
-   standing defect.) The classes are imported robotics
+   Detection Report - see section 9 - and v0.0.4 extends it to five platform
+   attributes - section 10 - so this is being addressed, not a standing
+   defect.) The classes are imported robotics
    upper-ontology terms (Robot, Sensor, Actuator, Device - CORA/ORA/SUMO
    lineage), i.e. a *taxonomy of things*. The *message layer* - the attributes
    you actually need to send - was never derived. So most "gaps" are simply
@@ -521,7 +597,8 @@ separable buckets, and only the third is about sources:
 
 2. **Deferred decisions and track desync (information already in hand).**
    P1 (UAV double-typed vs SMX Platform), P7 (swarm typing), D1/D2 (autonomy and
-   sensor each defined three ways) are unresolved *choices*, plus the OWL track
+   sensor each defined three ways) were unresolved *choices* (P1/P7 and the
+   direction for P2 are now decided - section 10), plus the OWL track
    (Jan) and the spreadsheet track (Jun) being at different stages. Cross-cutting
    abstractions - generic Detection Report (G4), area-as-subject (N1),
    engagement-authority-vs-autonomy (W1) - are modeling insights reachable from
@@ -550,7 +627,7 @@ track desync, and cross-cutting abstractions (buckets 1-2) - are not document
 problems and no amount of new scenarios fills them. It takes bottom-up
 instantiation to see which is which.
 
-## 9. Reconciliation with C2SIM_ASX v0.0.3 (Michael's update)
+## 9. Reconciliation with C2SIM_ASX v0.0.3 (Michael's July update)
 
 Michael committed a v0.0.3 ASX ontology on branch `michael_d` (OWL/XML,
 `Ontology/C2SIM_ASX-v003.rdf`, annotated "introduces concepts for Video
@@ -651,6 +728,112 @@ cardinality restrictions use `owl:onDataRange C2SIM#angle` - `C2SIM.rdf` lines
 **Coordination note:** two ASX ontology files now exist (v0.0.1 in
 `Subgroups/ASX/Proposed Extension/`, v0.0.3 in `Ontology/`) on two branches; the
 group should converge on one canonical version/location.
+
+*(Section 9 is kept as the July record. Several of its observations have since
+moved - the circular import and the `MediaTypeCode` superclass are fixed in
+v0.0.4, O2 is gone - see section 10b for the item-by-item re-check.)*
+
+## 10. Reconciliation with C2SIM_ASX v0.0.4 + the group's P1 / P2 / P7 decisions
+
+Two inputs land here. **(a) Michael's v0.0.4** (branch `michael_d`, commits
+`b409328` / `4d07791` / `2e254e3`, 2026-08-12..13): `Ontology/C2SIM_ASX-v004.rdf`
+(v0.0.3 moved to `Ontology/Archive/C2SIM_ASX-v003.rdf`), a merged
+`Ontology/asx004_merge.rdf`, a derived `Derived products/ASX_Schema.xsd`, the
+base `C2SIM.rdf` import fix, and an `ASX Concept Mapping.xlsx` whose
+`All Concepts` sheet gained an **"ASX 0.0.4" status column**. `main` has no
+ontology commits since `021e715`; nothing on `main` moved. **(b) The
+sub-group's decisions** on the three DECIDE-FIRST items (recorded 2026-10-14):
+
+- **P1 / Q-A - decided:** make ASX autonomy a **role/facet on the existing
+  `Platform` subtree** (not a parallel `Robot` tree).
+- **P7 / Q-B - decided:** derive the **collective/Swarm from
+  `CollectiveEntity`**.
+- **P2 / Q-C - direction decided:** **sensors are being reworked based on
+  existing standards**; the details are expected to land in the ontology as
+  that rework proceeds (v0.0.4 holds placeholders only - below).
+
+### 10a. What v0.0.4 contains (verified against the file)
+
+Counts: v0.0.3 = 26 ASX classes / 4 object / 2 datatype properties; **v0.0.4 =
+29 classes / 9 object / 3 datatype properties**, 11 individuals (unchanged).
+The `versionInfo` announces five properties; six are new (it omits
+`hasAutonomyLevelCode`).
+
+| Element (v0.0.4) | What it is | Review items it touches |
+|---|---|---|
+| `smx#Vehicle subClassOf (hasControlMode min 0 AutonomyLevelCode)` | **The first autonomy facet on the Platform subtree** - exactly the P1 / Q-A shape, placed on `Vehicle` (a direct `Platform` sibling of `Aircraft` / `SurfaceVessel`), under which the four `Unmanned*Vehicle` classes sit. | P1 (decided side), D1/P6, V1 |
+| `C2SIM#Task subClassOf (hasAutonomyLevelCode min 0 AutonomyLevelCode)`; `hasAutonomyLevelCode subPropertyOf hasCode` | A **per-task autonomy level**. In the XSD: `Task` gains `AutonomyLevelCode 0..n`. | W1/Q-K (half the hook), G15/Q-D (per-phase level), P3 |
+| `hasControlMode` (range `AutonomyLevelCode`; `subPropertyOf owl:topObjectProperty`) | Concept Mapping "Control Mode", now valued from the OWL's four individuals rather than {Piloted, Unpiloted-Autonomous, Swarm}. | D1 (collapsing to one vocabulary), V4 |
+| `hasSensorCapability` (range **`MediaTypeCode`**; no domain) | Concept Mapping "SensorCapability". Typed by media format, not by `SensorTypeCode`. | P2, D2, M5, V2, V3 |
+| `hasAutonomousMissionFunction` (range `C2SIM#TaskActionCode`; no domain) | Concept Mapping "AutonomousMission Function" - answers its own note ("is this different from TaskActionCode?") by ranging over TaskActionCode. | D3, V2 |
+| `hasAutonomusParameters` (sic; no range, no domain) | Concept Mapping "Autonomous Parameters". XSD: `AutonomusParameters` as `xs:string`. | D3, O4/O5, V2 |
+| `hasPassengerCapability` (datatype, `xsd:unsignedInt`; no domain) | Concept Mapping "Passenger Capability". | D3, V2 |
+| `SensorTypeCode`, `VehicleTypeCode`, `AlgorithmTypeCode subClassOf C2SIM#Code` | Three new code lists, **no individuals** (workbook: "Individuals have to be done"). | P2/Y2 (SensorType), D2's VehicleType disagreement, D3 |
+| `MediaTypeCode subClassOf C2SIM#Code` | Fixes the section-9 nit (it had no superclass). | section 9 |
+| Imports: `lox` only (v0.0.3 imported C2SIM + lox + smx); base `C2SIM.rdf` no longer imports smx/lox (`4d07791`) | **The circular import flagged in section 9 is resolved**; the chain is asx -> lox -> smx -> C2SIM. | section 9 |
+| Unchanged: `Robot` / `UAV` / `UGV` tree; `CollecticeRoboticSystem subClassOf RoboticSystem` (-> PhysicalEntity); no `Swarm`; `hasAutonomousRoleCode` unattached, range `Code`; `SensorObservation subClassOf smx#ActivityObservation`; `VideoDetectionReportContent` bare; `Operator` + its typo; vacuous min-0 axioms | | P1 (undecided side), P7, P3, M4, O1, O6 |
+
+**Concept Mapping "ASX 0.0.4" column** (the spreadsheet track's own
+reconciliation): *done* - Autonomous Parameters, SensorCapability (range
+MediaTypeCode), Control Mode (range AutonomyLevelCode, restriction on Vehicle),
+AutonomousMission Function (range TaskActionCode), Passenger Capability
+(unsignedInt), SensorType -> `SensorTypeCode` and VehicleType ->
+`VehicleTypeCode` (individuals pending); *comment* - NavigationAutonomy "covered
+by control mode?"; *x* (not done) - AutonomousMission Parameters, Mobility,
+Mobility/Propulsion, Payload (both rows), Payload Quantity, PayloadCapability,
+Swarm Parameters, and the second SensorType / VehicleType rows.
+
+### 10b. Section-9 observations, re-checked against v0.0.4
+
+| Section-9 item | v0.0.4 |
+|---|---|
+| Circular import (base `C2SIM.rdf` imports smx/lox) | **Resolved** (`4d07791` removes both; v0.0.4 imports `lox` only). |
+| `MediaTypeCode` has no superclass | **Resolved** (`subClassOf C2SIM#Code`). |
+| O2 `versionInfo` "Extrension" | **Gone** (literal replaced) - but see O5. |
+| `AutonomyLevelCode` not wired as a range | **Partly** - it is now the range of `hasControlMode` and `hasAutonomyLevelCode`; `hasAutonomousRoleCode` still ranges over generic `Code` (P3). |
+| Derived schema misnamed `.xml` | A correctly named `ASX_Schema.xsd` now exists; the old `Schema_C2SIM_smx_lox_asx.xml` is still in `Derived products/` beside it. |
+| `catalog-v001.xml` duplicate smx mapping | Still there, and the asx IRI is now mapped twice (v003 and v004, both marked `duplicate:`). |
+| Two ASX files on two branches (coordination note) | Still true: v0.0.1 `CSIM_ASX.rdf` in `Subgroups/ASX/Proposed Extension/`, v0.0.4 in `Ontology/`, on different branches (O3). |
+| `Operator` typo; bare `VideoDetectionReportContent`; vacuous min-0 axioms; M4 parent | Unchanged. |
+
+### 10c. New observations (v0.0.4)
+
+| ID | Sev | Status | Item | Evidence / note |
+|---|---|---|---|---|
+| V2 | HIGH | OPEN | Four of the six new properties have no attachment point | `hasSensorCapability`, `hasAutonomusParameters`, `hasPassengerCapability`, `hasAutonomousMissionFunction` have no domain and no class restriction uses them - the same shape as P3. Visible in the XSD: all four are declared as elements but **referenced by no complex type**, so no message can carry them yet (only `ControlMode` -> `VehicleGroup` and `AutonomyLevelCode` -> `Task` attach). The decided P1 answer says where they go: on the `Platform` subtree (Vehicle, or Platform). |
+| V3 | MED | OPEN | `hasSensorCapability` ranges over `MediaTypeCode` rather than `SensorTypeCode` | A capability declared as a media format (M5's conflation moved onto the platform). `SensorTypeCode` exists in the same file, empty. Expected to be overtaken by the P2 standards rework; worth not building Init rows on it meanwhile. |
+| V4 | LOW | OPEN | `hasControlMode` is `subPropertyOf owl:topObjectProperty`, not `hasCode` | Its sibling `hasAutonomyLevelCode` (same range) is `subPropertyOf C2SIM#hasCode`, as are `hasMediaTypeCode` / `hasAutonomousRoleCode`. Inconsistent with the C2SIM code-property pattern; the XSD still emits it as an `AutonomyLevelCodeType` element, so harmless today. |
+| V5 | MED | OPEN | The derived XSD makes P1's dual typing concrete on the wire | `ActorEntityType` is a choice of `CollectiveEntity` / `Person` / `Platform` / **`Robot`**, and `VehicleType` is a choice of the four `Unmanned*Vehicle`s - two places to put the same drone in one schema. Retiring the Robot tree (P1, decided) removes the fourth choice. |
+| V6 | LOW | OPEN | `Operator` is the only `Person` subtype the XSD offers | `PersonType` = choice of `Operator` alone - a generation artifact of ASX being the only extension declaring a Person subclass, but it means a generated Person *must* be an Operator. Parent-group / generator question rather than ASX. |
+
+### 10d. What the decisions change in this review
+
+- **Closed as decisions, open as implementation:** P1, P7 (and Q-A, Q-B) move
+  to DECIDED; P2 / Q-C to DECIDED-in-direction. The findings deck's three
+  structural slides now show the decided state and the residual, not the
+  question. Nothing in the OWL yet reflects P7; P1 is half-reflected (the
+  Vehicle side); P2 is placeholders.
+- **Findings that simplify as a consequence:** P10 (mixed membership is
+  `hasSubordinate` over Platform subtypes), Q-R / G5 / G16 (locomotion / role /
+  hybrid subtypes are now *Platform* subtypes), DIS Kind-1 (6m; the
+  which-tree question is moot, the how-to-subtype question is not), V1 (the
+  maritime pair re-parents *within* the decided subtree), and the Swarm-walk
+  residuals Q-J (unblocked once the class moves).
+- **Findings that do not move:** everything on the content side (X, Y, G4,
+  W1/Q-K/Q-W, N1/Q-M, Q-E..Q-H) and the attribute layer still marked `x` in the
+  workbook (Payload / Mobility / Swarm Parameters).
+- **Implementation order this suggests (replaces the deck's old "settle Q-A /
+  Q-B" next step):** (1) apply P7 - re-parent and re-spell the collective class
+  under `CollectiveEntity`; (2) apply P1 - retire the `Robot` / `UAV` / `UGV`
+  tree, decide Vehicle-vs-Platform for the facet, re-parent the maritime pair,
+  and give the V2 properties their domain; (3) run the sensor standards survey
+  (6l, steps 1-2) and re-point `hasSensorCapability` / fill `SensorTypeCode`
+  from it; (4) fix O1 / O4 / O5 / O6 while the classes are being touched;
+  (5) only then re-cut the Initialization tabs, whose `[!] P1 / P2 / P7` flags
+  become `hasControlMode` / sensor-capability / `CollectiveEntity` rows.
+- **Workbook note:** the `.xml` instantiation tabs are left as walked; their
+  `[!]`/`[Q]` flags are pointers to log IDs, and the status now lives in the
+  rows above. They are re-cut after step (5), not before.
 
 ## Change log
 
@@ -852,3 +1035,41 @@ group should converge on one canonical version/location.
   1278.1 / SISO-REF-010; G28) and type six unsigned 0-255 fields as signed
   `xsd:byte` (G29). Both are for the parent group, not ASX. Deck not regenerated
   - G20/G23/G24 are marked [deck] for the next deck pass.
+- 2026-10-14: Re-baselined against Michael's **v0.0.4** (`Ontology/C2SIM_ASX-v004.rdf`
+  on `origin/michael_d`, 2026-08-13; v0.0.3 archived) and recorded the sub-group's
+  **decisions on the three DECIDE-FIRST items**: P1 / Q-A - autonomy becomes a
+  role/facet on the existing Platform subtree; P7 / Q-B - the collective/Swarm
+  derives from `CollectiveEntity`; P2 / Q-C - sensors are being reworked on existing
+  standards (direction). Added section 10 (what v0.0.4 contains, verified; the
+  Concept Mapping's new "ASX 0.0.4" status column; section-9 items re-checked - the
+  circular import and the `MediaTypeCode` superclass are fixed, O2 is gone; new
+  observations V2-V6; what the decisions change and the implementation order they
+  imply). Status moves: P1, P7, Q-A, Q-B -> DECIDED; P2, Q-C -> DECIDED (direction);
+  D1/P6/S2/O3 -> NARROWED; D3/P3 -> PARTIAL; O2 -> RESOLVED; new typos O4/O5/O6;
+  notes on D2, M5, P10, W1, G15, Q-D, Q-R, section 8. Verified in passing: base
+  `C2SIM.rdf` on `michael_d` differs from `main` only by re-serialization plus the
+  import fix (identical IRI set), and `main` carries no ontology commits since
+  `021e715`. Propagated to the briefing, presenter notes, Q&A, README, the
+  Initialization / Swarm / CASEVAC walks, both slices, and the sourcing session's
+  `OntologyConceptCoverage.md`; deck regenerated from `build_findings_deck.py`
+  (structural slides now show decided state + residual; model-state slide gains a
+  v0.0.4 stage; next steps are the implementation order). The `.xml` workbooks and
+  the `.xlsx` originals are untouched (S4).
+- 2026-10-14: Added a **third proposed slice** (scoping only; nothing
+  instantiated) from the question "what can STANAG 4817 contribute?":
+  `STANAG4817-CATL-Slice.md` (section 6n, G30-G33, decision Q-AA; Q-series
+  continues at Q-AB). Framed like 6m: a design source argued on ASX's terms,
+  not messages to adopt. Grounding recorded independently of whether the slice
+  runs: C2SIM already has the request / acknowledge / status triad
+  (`TaskRequestContent`, `AcknowledgementBody` + `AcknowledgeTypeCode`,
+  `TaskStatus` + `TaskStatusCode`) and SMX the `CommandRelation` codes, and
+  none of the three base files has a control-handover, control-station,
+  task-allocation, or synchronization construct. Caveats stated up front:
+  AEP-4817 is not public and its status is disputed; the concrete claims are
+  about CATL, whose four message types are named in no reachable source (the
+  two CATL papers are the slice's gating step). Also: a request 10 added to
+  `Documents-Needed.md` (the CATL papers + AEP-4817 access), the STANAG 4817
+  entry in `Reference Materials/Standards-for-Autonomous-Systems-Behavior.md`
+  expanded with the lineage and sources, G1/Q-O cross-referenced to the new
+  handover residual, README updated. Deck not regenerated - G30 is a [deck]
+  candidate for the next deck pass alongside G20/G23/G24.
