@@ -1,5 +1,15 @@
 # Task/Effect Batch Walk: Logistics, Engineering, USV Rescue
 
+**Status (2026-10-27).** This walk is kept as written. **P1** has since been
+**decided by the sub-group** (2026-10): ASX autonomy is a role/facet on the
+existing `Platform` subtree, and the `Robot` / `UAV` / `UGV` tree is retired.
+It is not yet applied in the OWL (v0.0.4), so the `Platform / Robot` rows
+below still show the double typing as walked; they become plain `Platform`
+subtype rows (autonomy via `hasControlMode`) once it is applied, when the
+workbook tabs are re-cut. The USV conflict (R1) resolves the same
+way: the USV is typed within the Platform subtree (whether under
+`SurfaceVessel` or v0.0.4's `Vehicle`-side maritime class is V1). Log section 10.
+
 Purpose: cover three more task/effect scenarios in one pass to test what
 autonomous systems *do* beyond movement and sensing - carry-and-deliver,
 physically manipulate, and recover. Batched because they share a shape: the

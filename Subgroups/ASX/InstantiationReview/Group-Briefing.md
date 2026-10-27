@@ -80,11 +80,12 @@ to `Task`, fixes the circular import flagged in July, and the Concept Mapping
 workbook now tracks per attribute what is "done" in 0.0.4. Against the three
 decisions: P1 is half-applied (the facet exists on `Vehicle`; the `Robot` /
 `UAV` / `UGV` tree is still declared, and the derived XSD still offers `Robot`
-beside `Platform`); P7 is not yet applied (`CollecticeRoboticSystem` still
+beside `Platform`); P7 is not yet applied (the collective class is still
 non-actor, no `Swarm`); P2 has placeholders only. Also still to define: Payload /
 Mobility / Swarm Parameters, the new content types above, and four of the six
 new properties have no attachment point yet. One typo fixed, three new ones
-(`hasAutonomusParameters`, a mis-naming `versionInfo`, the `Operator` comment).
+(`hasAutonomusParameters`, a mis-naming `versionInfo`, the `Operator` comment);
+all four open typos (O1, O4-O6) are now fixed in PR #9, pending merge.
 (Detail in section 10 of the log; section 9 is the July v0.0.3 record.)
 
 ## The good news

@@ -1,5 +1,15 @@
 # Drone-Warfare Walk: LIRC baseline, 2024 update, OPFOR targeting
 
+**Status (2026-10-27).** This walk is kept as written. **P1** has since been
+**decided by the sub-group** (2026-10): ASX autonomy is a role/facet on the
+existing `Platform` subtree, and the `Robot` / `UAV` / `UGV` tree is retired.
+It is not yet applied in the OWL (v0.0.4), so the `Platform / Robot` rows
+below still show the double typing as walked; they become plain `Platform`
+subtype rows (autonomy via `hasControlMode`) once it is applied, when the
+workbook tabs are re-cut. G16 (loitering munition / FPV as
+platform-munition hybrids) becomes a question of subtyping *within* that
+subtree. Log section 10.
+
 These three scenarios came from the SME-directed drone-warfare thread of the
 scenario-sourcing session
 (`LLMExperiments/PaperSummaries/V2Extractions/`): the Morris 2018 Light

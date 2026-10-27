@@ -19,7 +19,11 @@ slides.
 a fourth stage) and on the sub-group's decisions for P1 / P7 / P2 - the three
 structural slides now show the decided state plus the residual to apply in the
 OWL, the decision register marks Q-A..Q-C decided, and next steps are the
-implementation order (log section 10). Still 23 slides."""
+implementation order (log section 10). Still 23 slides.
+
+2026-10-27 revision: the O1 / O3-O6 typo fixes (PR #9, pending merge into
+michael_d) reflected on the P7, refinements, and next-steps slides. Still 23
+slides."""
 
 import os
 from pptx import Presentation
@@ -342,7 +346,7 @@ notes(s,
 # ---------------- P7 diagram ----------------
 s = slide(); header(s, "P7  -  A swarm is not yet taskable", "Entity-typing decision")
 rbox(s, 0.9, 2.0, 3.1, 0.7, "Swarm  (ASX)", ORANGE, size=13)
-rbox(s, 4.3, 2.0, 3.6, 0.7, "CollecticeRoboticSystem (sic)", ORANGE, size=12)
+rbox(s, 4.3, 2.0, 3.6, 0.7, "CollectiveRoboticSystem", ORANGE, size=12)
 rbox(s, 8.2, 2.0, 3.4, 0.7, "... PhysicalEntity", RED, size=13)
 arrow(s, 4.0, 2.35, 4.3, 2.35, RED); arrow(s, 7.9, 2.35, 8.2, 2.35, RED)
 tb, tf = box(s, 8.2, 2.75, 3.6, 0.4); p=tf.paragraphs[0]
@@ -357,14 +361,14 @@ bullets(s, [
  {"text":"A swarm is what orders are addressed to and what sends reports - so it needs to be an ActorEntity."},
  {"text":"Membership and command already exist in the base standard (C2SIM hasSubordinate, SMX hasCommandRelation), so the residual swarm work is small.","lvl":1},
  {"tag":"DECIDED (Q-B):","tagcolor":GREEN,"text":"derive the collective/Swarm from CollectiveEntity (already an ActorEntity) rather than the device/artifact tree."},
- {"tag":"Now in v0.0.4:","tagcolor":ORANGE,"text":"not yet applied - no Swarm class (dropped in v0.0.3); CollecticeRoboticSystem (sic) still under RoboticSystem -> Device -> Artifact -> PhysicalEntity, and now also in the derived XSD."},
- {"tag":"To apply:","tagcolor":ACCENT,"text":"re-parent (and re-spell, O1) the collective class under CollectiveEntity - one axiom - then the small residuals (Q-J: network params, leader role, aggregation Z1, lifecycle Z2); mixed membership (P10) becomes hasSubordinate over Platform subtypes."},
+ {"tag":"Now in v0.0.4:","tagcolor":ORANGE,"text":"not yet applied - no Swarm class (dropped in v0.0.3); the collective class is still under RoboticSystem -> Device -> Artifact -> PhysicalEntity (its O1 misspelling is fixed in PR #9)."},
+ {"tag":"To apply:","tagcolor":ACCENT,"text":"re-parent the collective class under CollectiveEntity - one axiom - then the small residuals (Q-J: network params, leader role, aggregation Z1, lifecycle Z2); mixed membership (P10) becomes hasSubordinate over Platform subtypes."},
 ], top=4.8, size=11.5, gap=3)
 srcline(s, "Swarm-Walk.md  -  log P7 (secs 5, 6d) + sec 10  -  Q-B (log sec 7, decided)")
 footer(s)
 notes(s,
  "The swarm classes derive from the device/artifact side (PhysicalEntity), but orders are addressed to - and reports come from - an ActorEntity. The fix is already in the base standard: derive the collective from CollectiveEntity. Membership and command relations already exist (C2SIM hasSubordinate, SMX hasCommandRelation), so the residual swarm work is small.",
- "Decided by the sub-group: derive the collective/Swarm from CollectiveEntity. Current state: v0.0.3 dropped the Swarm class and v0.0.4 leaves CollecticeRoboticSystem (the typo is in the model - O1, now also in the XSD) under PhysicalEntity - so this is the first thing to apply, and the cheapest: one re-parenting axiom plus the spelling fix. Membership and command relations already exist, so the residual swarm work after that is small (Q-J).")
+ "Decided by the sub-group: derive the collective/Swarm from CollectiveEntity. Current state: v0.0.3 dropped the Swarm class and v0.0.4 leaves the collective class under PhysicalEntity (its O1 misspelling is fixed in PR #9) - so this is the first thing to apply, and the cheapest: one re-parenting axiom. Membership and command relations already exist, so the residual swarm work after that is small (Q-J).")
 
 # ---------------- Findings 1: already in the standard ----------------
 s = slide(); header(s, "Already in the standard - re-adopt, not invent", "Verified in the RDF - the gap list is shorter than it looks")
@@ -485,34 +489,34 @@ notes(s,
  "Several of these re-adopt existing vocabulary (search verbs, lox#COMREL, BML WhoHoldingType) rather than invent - the decision is where to hang the structure, not whether the words exist.")
 
 # ---------------- Proposed fixes (pending buy-in) ----------------
-s = slide(); header(s, "Proposed refinements", "Pending group buy-in - nothing applied to the model")
+s = slide(); header(s, "Proposed refinements", "Pending group buy-in - only the typo fixes are written (PR #9)")
 bullets(s, [
- {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"class typo CollecticeRoboticSystem -> CollectiveRoboticSystem (O1); versionInfo Extrension -> Extension (O2); file CSIM_ASX -> C2SIM_ASX (O3); hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
- {"tag":"Structural (decided - apply in the OWL):","tagcolor":GREEN,"text":"autonomy as a facet on the Platform subtree, Robot tree retired (Q-A); collective -> CollectiveEntity (Q-B); sensors reworked on existing standards (Q-C); state the one autonomy vocabulary (Q-D). Plus the new v0.0.4 typos (hasAutonomusParameters O4, versionInfo O5, Operator comment O6) and the four floating properties (V2)."},
+ {"tag":"Safe corrections (unambiguous):","tagcolor":GREEN,"text":"typos fixed in PR #9 - CollectiveRoboticSystem (O1), hasAutonomousParameters (O4), versionInfo (O5), Operator comment (O6), pointer to the live file (O3); O2 already gone in v0.0.4. Still to apply: hasStartTime UUIDBase -> TimeInstant (M7); unify namespace label ASX / C2SIM_ASX (M8)."},
+ {"tag":"Structural (decided - apply in the OWL):","tagcolor":GREEN,"text":"autonomy as a facet on the Platform subtree, Robot tree retired (Q-A); collective -> CollectiveEntity (Q-B); sensors reworked on existing standards (Q-C); state the one autonomy vocabulary (Q-D). Plus the four floating properties (V2)."},
  {"tag":"New content (design):","tagcolor":ACCENT,"text":"inline entity def (Q-E), MediaReference (Q-F), robot-to-robot + cross-cue (Q-G/Q-P), rationale report (Q-H), generic detection report (Q-I/Q-Q), swarm residuals (Q-J), engagement authority (Q-K), payload/effector/weapon typing (Q-L), area subject (Q-M), explore order (Q-N), denied-comms/relay (Q-O), locomotion subtypes (Q-R), decoy/threat-aware (Q-S), environment conditions (Q-T), formation geometry (Q-U), weapons-control/kill-box authority (Q-W), loitering-munition + counter-UAS typing (Q-X)."},
- {"text":"Nothing here is applied to the model - all items are proposals for group buy-in.","bold":True},
+ {"text":"Only the typo fixes are written (PR #9, pending merge into main); everything else is a proposal for group buy-in.","bold":True},
 ], top=1.7, size=14, gap=13)
 srcline(s, "log secs 3-4 (the safe corrections)  -  sec 7 (every decision, with what it resolves)")
 footer(s)
 notes(s,
  "Section budget: slides 19-20, about 1 minute - the close.",
- "The same decisions, grouped by commitment level: safe corrections (typos, the UUIDBase slip) are unambiguous; the structural decisions are now made and need applying in the OWL; content types need design. Nothing has been applied to the model or the workbooks by this review - the structural items are the group's decisions, the rest are proposals pending buy-in.",
+ "The same decisions, grouped by commitment level: safe corrections (typos, the UUIDBase slip) are unambiguous; the structural decisions are now made and need applying in the OWL; content types need design. Apart from the typo fixes (PR #9, pending merge), nothing has been applied to the model or the workbooks by this review - the structural items are the group's decisions, the rest are proposals pending buy-in.",
  "The M-series instantiation items fold in here and into the decisions: the typos and the UUIDBase slip (M7) are safe corrections; M1 and M2/M5 resolve via Q-E and Q-F. All cheapest to fix before messages are built on them.")
 
 # ---------------- Next steps ----------------
 s = slide(); header(s, "Recommended next steps")
 bullets(s, [
- {"text":"Apply P7 in the OWL: re-parent (and re-spell) the collective class under CollectiveEntity - one axiom.","bold":True},
+ {"text":"Apply P7 in the OWL: re-parent the collective class under CollectiveEntity - one axiom (its re-spelling is in PR #9).","bold":True},
  {"text":"Apply P1: retire the Robot/UAV/UGV tree, pick Vehicle-vs-Platform for the autonomy facet, re-parent the maritime pair, give the four floating v0.0.4 properties a domain.","bold":True},
  {"text":"Run the sensor standards survey (slice 6l, steps 1-2) and re-point hasSensorCapability / fill SensorTypeCode from it; settle Q-Y."},
- {"text":"Fix the typos while the classes are open (O1, O4, O5, O6); finish the attribute layer still marked x in the Concept Mapping (Payload, Mobility, Swarm Parameters)."},
+ {"text":"Merge the typo fixes (PR #9: O1, O4, O5, O6); finish the attribute layer still marked x in the Concept Mapping (Payload, Mobility, Swarm Parameters)."},
  {"text":"Then re-cut the Initialization tabs (the [!] P1/P2/P7 rows become real rows) and add the two CASEVAC content types (Q-G robot-to-robot, Q-H rationale)."},
  {"text":"Optional: adopt the diff-able (.xml) workbooks so edits can be reviewed and merged in git."},
 ], top=1.7, size=15, gap=10)
 srcline(s, "Group-Briefing.md ('Status and next step')  -  log sec 10d (implementation order)  -  sec 7 for the full decision register")
 footer(s)
 notes(s,
- "The recommended order now that the structural decisions are made: apply P7 (cheapest, one axiom), apply P1 (retire the Robot tree and home the new properties), run the sensor survey, fix the typos and finish the attribute layer, then re-cut the Initialization tabs and add the two CASEVAC content types; optionally adopt the diff-able workbooks so message edits can be reviewed in git.",
+ "The recommended order now that the structural decisions are made: apply P7 (cheapest, one axiom), apply P1 (retire the Robot tree and home the new properties), run the sensor survey, merge the typo fixes (PR #9) and finish the attribute layer, then re-cut the Initialization tabs and add the two CASEVAC content types; optionally adopt the diff-able workbooks so message edits can be reviewed in git.",
  "Where the ball is: sourcing is essentially complete - every gap this review raised is grounded in a real mission (one nice-to-have left: a dedicated autonomous-CASEVAC mission). The structural decisions are made; the remaining work - applying them, the attribute layer, the ~20 content-type decisions - is modeling work; more scenarios will not fill it.")
 
 # ---------------- How to use this material (reading guide) ----------------

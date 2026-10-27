@@ -20,7 +20,9 @@ since been **decided by the sub-group** - P1 (autonomy as a role/facet on the
 reworked on existing standards) - and the live model is v0.0.4; see the summary
 table at the end and the log's section 10. The `[!] P1 / P2 / P7` rows become
 `hasControlMode` / sensor-capability / `CollectiveEntity` rows once the
-decisions are applied in the OWL; the tabs are re-cut then.
+decisions are applied in the OWL; the tabs are re-cut then. The
+`CollecticeRoboticSystem` misspelling (P9 / O1) is fixed in PR #9
+(`CollectiveRoboticSystem`).
 
 ## Shared envelope (all three)
 
@@ -176,7 +178,7 @@ Problems this exposes:
 | P6 | [!] -> narrowed | Three competing autonomy vocabularies; v0.0.4's `hasControlMode` takes the OWL `AutonomyLevelCode` values. |
 | P7 | [!] -> **decided** | Swarm is under PhysicalEntity, so it is not yet taskable or able to report. Decided: derive the collective/Swarm from `CollectiveEntity`; not yet applied in v0.0.4. |
 | P8 | [Q] | Swarm membership + leader - narrowed: base `hasSubordinate`/`hasSuperior`/`hasCommandRelation` cover it; residual is network params, leader-as-role, dynamic handover |
-| P9 | [!] | "CollecticeRoboticSystem" misspelling will propagate to instances |
+| P9 | [!] -> **fixed (PR #9)** | "CollecticeRoboticSystem" misspelling would propagate to instances; renamed `CollectiveRoboticSystem` |
 | P10 | [Q] | Heterogeneous (mixed-type) swarm membership unconfirmed |
 
 The three to settle before a message can be built cleanly were **P1**, **P2**,

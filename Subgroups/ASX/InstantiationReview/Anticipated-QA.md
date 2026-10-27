@@ -43,8 +43,8 @@ It's a class-tree issue, not a missing property. `Swarm` currently derives from
 `PhysicalEntity` (an inert object), and orders/reports are addressed to an
 `ActorEntity`. The clean fix is to derive `Swarm` from `CollectiveEntity`, which
 is already an `ActorEntity` in the base standard (C2SIM). That is decision Q-B -
-**now decided by the group**; the residual is applying it (re-parent and
-re-spell `CollecticeRoboticSystem`).
+**now decided by the group**; the residual is applying it (re-parent the collective class; its re-spelling
+to `CollectiveRoboticSystem` is in PR #9).
 Membership and command already exist (`hasSubordinate` / `hasCommandRelation`).
 
 **Q. Strictly speaking, `hasReportingEntity` is a UUID datatype property - a

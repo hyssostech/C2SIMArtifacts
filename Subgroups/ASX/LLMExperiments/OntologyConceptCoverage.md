@@ -46,7 +46,9 @@ concept, not by message-workbook sheet.
   collective class are unchanged. The group decided: autonomy is a role/facet on
   the existing `Platform` subtree (P1), the collective/Swarm derives from
   `CollectiveEntity` (P7), and sensors are reworked on existing standards (P2).
-  Full delta and decisions: log section 10.
+  Full delta and decisions: log section 10. The v0.0.4 misspellings
+  (`CollecticeRoboticSystem`, `hasAutonomusParameters`) are fixed in PR #9
+  (`CollectiveRoboticSystem`, `hasAutonomousParameters`).
 - ASX message design (from `InstantiationReview/Message-Instantiation-Coverage.md`):
   ASX `Task` with `hasAffectedEntity` / `DesiredEffectCode`; `Report Base
   Attributes` (MediaReference, AnalysisComment, AnalysisConcept, MediaTypeCode,
