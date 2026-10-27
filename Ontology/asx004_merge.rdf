@@ -13,7 +13,7 @@
         <owl:versionInfo>C2SIM Core Ontology version CWIX2025</owl:versionInfo>
         <owl:versionInfo>C2SIM Land Operations Extension v1.0.0</owl:versionInfo>
         <owl:versionInfo>C2SIM Standard Military Extension vCWIX-2024</owl:versionInfo>
-        <owl:versionInfo>This version introduced the object properties: hasAutonomousParameters, hasSensorCapability, hasControlMode, hasAutonomousMissionFuction, hasPassengerCapability</owl:versionInfo>
+        <owl:versionInfo>This version introduced the object properties: hasAutonomousParameters, hasSensorCapability, hasControlMode, hasAutonomousMissionFunction, hasAutonomyLevelCode; and the data property: hasPassengerCapability</owl:versionInfo>
     </owl:Ontology>
     
 
@@ -808,9 +808,9 @@
     
 
 
-    <!-- http://www.sisostds.org/ontologies/asx#hasAutonomusParameters -->
+    <!-- http://www.sisostds.org/ontologies/asx#hasAutonomousParameters -->
 
-    <owl:ObjectProperty rdf:about="http://www.sisostds.org/ontologies/asx#hasAutonomusParameters"/>
+    <owl:ObjectProperty rdf:about="http://www.sisostds.org/ontologies/asx#hasAutonomousParameters"/>
     
 
 
@@ -4721,9 +4721,9 @@ WHY may be represented by hasDesiredEffect.</rdfs:comment>
     
 
 
-    <!-- http://www.sisostds.org/ontologies/asx#CollecticeRoboticSystem -->
+    <!-- http://www.sisostds.org/ontologies/asx#CollectiveRoboticSystem -->
 
-    <owl:Class rdf:about="http://www.sisostds.org/ontologies/asx#CollecticeRoboticSystem">
+    <owl:Class rdf:about="http://www.sisostds.org/ontologies/asx#CollectiveRoboticSystem">
         <rdfs:subClassOf rdf:resource="http://www.sisostds.org/ontologies/asx#RoboticSystem"/>
     </owl:Class>
     
@@ -4784,7 +4784,7 @@ WHY may be represented by hasDesiredEffect.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.sisostds.org/ontologies/asx#Operator">
         <rdfs:subClassOf rdf:resource="http://www.sisostds.org/ontologies/C2SIM#Person"/>
-        <rdfs:comment>A person performing remote control, teleoperation of semi,autonomous operations.</rdfs:comment>
+        <rdfs:comment>A person performing remote control, teleoperation of semi-autonomous operations.</rdfs:comment>
     </owl:Class>
     
 
