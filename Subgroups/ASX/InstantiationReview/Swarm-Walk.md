@@ -27,8 +27,8 @@ PhysicalEntity` (an inert object). Both messages below need the swarm to be an
 neither. Recommended fix: `Swarm subClassOf CollectiveEntity` (base C2SIM).
 
 **Decided (sub-group, recorded 2026-10-14): derive the collective/Swarm from
-`CollectiveEntity`.** Not yet applied in v0.0.4 (`CollecticeRoboticSystem` is
-still under `RoboticSystem` -> `PhysicalEntity`, and there is no `Swarm` class),
+`CollectiveEntity`.** Not yet applied in v0.0.4 (the collective class - re-spelled
+`CollectiveRoboticSystem` in PR #9 - is still under `RoboticSystem` -> `PhysicalEntity`, and there is no `Swarm` class),
 so the `[!] P7` rows below still describe the file as it stands; they become
 plain `CollectiveEntity` rows once the re-parenting lands. Log section 10.
 

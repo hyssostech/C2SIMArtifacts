@@ -134,6 +134,10 @@ question raised in October:
 - Proposed OWL model: **v0.0.4** on branch `michael_d`
   (`Ontology/C2SIM_ASX-v004.rdf`, 2026-08-13; v0.0.3 archived at
   `Ontology/Archive/C2SIM_ASX-v003.rdf`; derived `Derived products/ASX_Schema.xsd`).
+  Pending on top of it: PR #9 (branch `asx-ontology-typos` -> `michael_d`) fixes
+  the typos O1 / O3-O6 (e.g. `CollectiveRoboticSystem`, `hasAutonomousParameters`)
+  and removes two duplicate Concept Mapping rows; the review docs already use the
+  corrected names where they refer to the live model.
   The v0.0.1 file `Subgroups/ASX/Proposed Extension/CSIM_ASX.rdf` (2026-01-20)
   still exists on every branch and is the one the early walks cite.
 - Attribute concepts: `Subgroups/ASX/Proposed Extension Working Materials/ASX Concept Mapping.xlsx`

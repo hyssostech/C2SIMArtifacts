@@ -15,7 +15,9 @@ messages are built on it) / **HIGH** / **MED** / **LOW** / **TYPO**. Status:
 **OPEN** / **RESOLVED**, plus qualified
 states used in the tables (all variants of in-progress or partially-resolved):
 **PARTIAL**, **NARROWED**, **MOSTLY COVERED**, **MOSTLY REUSE**, **WALKED**,
-**INSTANTIATED**, **EVIDENCED**, **DECIDED**, **DONE**, **FOLDS INTO Q-x**.
+**INSTANTIATED**, **EVIDENCED**, **DECIDED**, **DONE**, **FOLDS INTO Q-x**,
+**CLOSING**, **FIXED IN PR** (fix written and its PR open, not yet merged into
+the ontology branch).
 **PROPOSED** marks a *slice* item - work scoped and grounded but not yet
 performed (the grounding is verified; the work is what is being proposed).
 Items marked **[deck]** are candidates for the findings presentation.
@@ -25,7 +27,7 @@ Items marked **[deck]** are candidates for the findings presentation.
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | S1 | HIGH | RESOLVED | Local clone was 52 commits behind origin/main | Fixed by pull on 2026-07-09; now level with origin (`021e715`). |
-| S2 | HIGH | NARROWED | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** Narrowed by v0.0.4 (2026-08-13): the `ASX Concept Mapping.xlsx` on `michael_d` now carries an "ASX 0.0.4" status column (done / x / comment per attribute) and five of its attributes are in the OWL - the tracks are being reconciled from the OWL side. See section 10. |
+| S2 | HIGH | CLOSING | Two work tracks are out of sync: OWL/RDF vs spreadsheets | OWL `CSIM_ASX.rdf` last updated 2026-01-20; spreadsheets updated 2026-06-10. Different tools, different altitudes. **[deck]** Narrowed by v0.0.4 (2026-08-13): the `ASX Concept Mapping.xlsx` on `michael_d` now carries an "ASX 0.0.4" status column (done / x / comment per attribute) and five of its attributes are in the OWL - the tracks are being reconciled from the OWL side. See section 10. **Closing (2026-10-27):** that status column is now the OWL <-> spreadsheet reconciliation mechanism; what is left is D1-D3, each tracked on its own. |
 | S3 | MED | DONE (branch) | Workbooks are `.xlsx` (zipped XML), git cannot merge | All 3 sample-message workbooks converted to diff-able SpreadsheetML 2003 `.xml` (fidelity verified, 0 mismatches) and committed on branch `asx-diffable-spreadsheets`. NOTE: `.xml` and `.xlsx` now coexist - see S4. |
 | S4 | HIGH | DECIDED | Dual source of truth: `.xml` vs `.xlsx` | Decision (2026-07-10): the `.xml` workbooks are the working copy for this review; Elizabeth's `.xlsx` files are left untouched for now. All new instantiation work (Init rows, CASEVAC tabs) goes into the `.xml` only. The `.xlsx` will diverge by design until the group reconciles. |
 
@@ -34,21 +36,21 @@ Items marked **[deck]** are candidates for the findings presentation.
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
 | D1 | HIGH | NARROWED | Autonomy vocabulary defined three incompatible ways | OWL individuals {Automated, FullAuto, ReCont, Teleop}; ConceptMapping `Control Mode` {Piloted, Unpiloted-Autonomous, Swarm}; `NavigationAutonomy` {FPV, Autonomous, RemoteControl}. Which is normative? **[deck]** v0.0.4 answers in practice: `hasControlMode` (on `smx#Vehicle`) and `hasAutonomyLevelCode` (on `C2SIM#Task`) both range over `AutonomyLevelCode` - so the OWL's four individuals are the vocabulary Control Mode now uses - and the Concept Mapping marks `NavigationAutonomy` "covered by control mode?". The three-way split is collapsing to one; what is left for Q-D is to say so explicitly and retire the two spreadsheet value lists (or map them). |
-| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. (ConceptMapping also has internal value disagreements - not in `SensorType`, whose two rows are identical duplicates, but in `Payload` (row 12 adds `SensorType` to the value list) and `VehicleType` (`DroneFixedWing, DroneHover` vs `Drone - Fixed Wing, Drone - Hover`).) **[deck]** v0.0.4 adds a `SensorTypeCode` code list (no individuals yet - the Concept Mapping says "Individuals have to be done" and still carries "***Check Robotics Standard for categories of sensor types") and `hasSensorCapability`, whose range is `MediaTypeCode`, not `SensorTypeCode` - so the three representations persist and the new property inherits the M5 conflation. The group has since decided the direction (P2 / section 10): sensors are being reworked on existing standards. |
+| D2 | HIGH | OPEN | Sensor modeled three incompatible ways | OWL `Sensor` class; ConceptMapping `SensorType` enum; `SensorCapability` equipment. (ConceptMapping also has internal value disagreements - not in `SensorType`, whose two rows are identical duplicates, but in `Payload` (row 12 adds `SensorType` to the value list) and `VehicleType` (`DroneFixedWing, DroneHover` vs `Drone - Fixed Wing, Drone - Hover`).) **[deck]** v0.0.4 adds a `SensorTypeCode` code list (no individuals yet - the Concept Mapping says "Individuals have to be done" and still carries "***Check Robotics Standard for categories of sensor types") and `hasSensorCapability`, whose range is `MediaTypeCode`, not `SensorTypeCode` - so the three representations persist and the new property inherits the M5 conflation. The group has since decided the direction (P2 / section 10): sensors are being reworked on existing standards. The two workbook-internal duplicates (the second `SensorType` row, the `VehicleType` spelling variant) are removed in PR #9 (`michael_d` copy of the workbook); the `Payload` row-12 disagreement stays, since whether a sensor is payload is a P2 question. |
 | D3 | HIGH | PARTIAL | Attribute layer not yet in the OWL | Payload, PayloadCapability, Mobility/Propulsion, VehicleType, PassengerCapability, AutonomousMissionFunction/Parameters, SwarmParameters are in ConceptMapping but not yet in the OWL (v0.0.1: 0 datatype / 1 object property; v0.0.3 adds a few, for the Video Detection Report only - see section 9). **[deck]** v0.0.4 (section 10) brings five Concept-Mapping attributes into the OWL - Control Mode, SensorCapability, AutonomousMissionFunction, Autonomous Parameters, PassengerCapability - plus `VehicleTypeCode` / `SensorTypeCode` / `AlgorithmTypeCode` as (still empty) code lists. Still absent: Payload, PayloadCapability, Payload Quantity, Mobility / Propulsion, AutonomousMission Parameters, Swarm Parameters (all marked `x` in the workbook's status column). |
-| D4 | MED | OPEN | Deck (June) proposes `Sensors subClassOf RobotPart`; OWL has `Sensor subClassOf ElectricDevice`, no RobotPart class | Slide 6 of 2026-06 status deck vs `CSIM_ASX.rdf`. Robotics-concept discussion not captured in model. |
-| D5 | LOW | OPEN | Deck frames robotics subclass axioms as an open question, but OWL already committed them | UAV/UGV subClassOf Robot etc. asked as "Do we want to add...?" in June yet present in Jan OWL. |
+| D4 | MED | RESOLVED | Deck (June) proposes `Sensors subClassOf RobotPart`; OWL has `Sensor subClassOf ElectricDevice`, no RobotPart class | Slide 6 of 2026-06 status deck vs `CSIM_ASX.rdf`. Robotics-concept discussion not captured in model. **Superseded (2026-10-27):** P1 retires the Robot tree, so `RobotPart` has no home (v0.0.4 has no such class), and P2 sends sensors to the standards-based rework. |
+| D5 | LOW | RESOLVED | Deck frames robotics subclass axioms as an open question, but OWL already committed them | UAV/UGV subClassOf Robot etc. asked as "Do we want to add...?" in June yet present in Jan OWL. **Superseded (2026-10-27):** answered by P1 (retire the Robot tree). The June deck stays as a historical record. |
 
 ## 3. OWL typos & naming (`CSIM_ASX.rdf`)
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| O1 | TYPO | OPEN | Class name misspelled `CollecticeRoboticSystem` (should be "Collective") | Line 44-45; `Swarm subClassOf` the misspelled class. Will propagate into instance data once messages exist. **[deck]** Still present in v0.0.4, and now also in the derived `ASX_Schema.xsd` (`CollecticeRoboticSystemType`). Natural moment to fix it: when the class is re-parented under `CollectiveEntity` (P7, decided). |
+| O1 | TYPO | FIXED IN PR | Class name misspelled `CollecticeRoboticSystem` (should be "Collective") | Line 44-45; `Swarm subClassOf` the misspelled class. Will propagate into instance data once messages exist. **[deck]** Still present in v0.0.4, and now also in the derived `ASX_Schema.xsd` (`CollecticeRoboticSystemType`). **Fixed in PR #9 (2026-10-27):** renamed `CollectiveRoboticSystem` in the ontology, the merge, and the XSD. Re-parenting it under `CollectiveEntity` (P7) is still to do. |
 | O2 | TYPO | RESOLVED | `versionInfo` says "Autonomous Systems Extrension" | Line 13. Gone in v0.0.4 - the `versionInfo` literal was replaced by a change note (the title line is no longer there at all). The new literal has its own problems: O5. |
-| O4 | TYPO | OPEN | Property IRI misspelled `hasAutonomusParameters` (should be "Autonomous") | New in v0.0.4; already propagated into the derived `ASX_Schema.xsd` as element `AutonomusParameters` (typed `xs:string`). Same shape as O1: cheap now, painful once instance data exists. |
-| O5 | TYPO | OPEN | v0.0.4 `versionInfo` mis-names two of the properties it announces | Says `hasAutonomousParameters` (the IRI is `hasAutonomusParameters`) and `hasAutonomousMissionFuction` (the IRI is `hasAutonomousMissionFunction`); it also omits `hasAutonomyLevelCode`, which is new in v0.0.4 too. Copied verbatim into the XSD header. |
-| O6 | TYPO | OPEN | `Operator` comment "teleoperation of semi,autonomous operations" | Present since v0.0.3 (noted in section 9 without an ID); unchanged in v0.0.4 and copied into the XSD. |
-| O3 | LOW | NARROWED | File named `CSIM_ASX.rdf` (missing the "2") | Inconsistent with every other C2SIM artifact; expected `C2SIM_ASX.rdf`. The live file is now correctly named (`Ontology/C2SIM_ASX-v004.rdf`; v0.0.3 moved to `Ontology/Archive/`); the residual is the stale v0.0.1 `CSIM_ASX.rdf` still sitting in `Subgroups/ASX/Proposed Extension/` with no pointer to the live version. |
+| O4 | TYPO | FIXED IN PR | Property IRI misspelled `hasAutonomusParameters` (should be "Autonomous") | New in v0.0.4; already propagated into the derived `ASX_Schema.xsd` as element `AutonomusParameters` (typed `xs:string`). Same shape as O1: cheap now, painful once instance data exists. **Fixed in PR #9:** `hasAutonomousParameters` / XSD `AutonomousParameters`. |
+| O5 | TYPO | FIXED IN PR | v0.0.4 `versionInfo` mis-names two of the properties it announces | Says `hasAutonomousParameters` (the IRI is `hasAutonomusParameters`) and `hasAutonomousMissionFuction` (the IRI is `hasAutonomousMissionFunction`); it also omits `hasAutonomyLevelCode`, which is new in v0.0.4 too. Copied verbatim into the XSD header. **Fixed in PR #9:** the literal now names the properties as declared, adds `hasAutonomyLevelCode`, and lists `hasPassengerCapability` as the data property it is (it had been announced among the "object properties"). |
+| O6 | TYPO | FIXED IN PR | `Operator` comment "teleoperation of semi,autonomous operations" | Present since v0.0.3 (noted in section 9 without an ID); unchanged in v0.0.4 and copied into the XSD. **Fixed in PR #9** ("semi-autonomous"). |
+| O3 | LOW | FIXED IN PR | File named `CSIM_ASX.rdf` (missing the "2") | Inconsistent with every other C2SIM artifact; expected `C2SIM_ASX.rdf`. The live file is now correctly named (`Ontology/C2SIM_ASX-v004.rdf`; v0.0.3 moved to `Ontology/Archive/`); the residual is the stale v0.0.1 `CSIM_ASX.rdf` still sitting in `Subgroups/ASX/Proposed Extension/` with no pointer to the live version. **PR #9** adds a README beside it marking it superseded and pointing to `Ontology/`. Left for Michael: the older derived `Derived products/Schema_C2SIM_smx_lox_asx.xml` (still carries O1 / O6) - delete or keep. |
 
 ## 4. Sample-message instantiation - open items
 
@@ -84,9 +86,9 @@ v0.0.4 (2026-08-13) predates or only begins them.
 | P3 | HIGH | PARTIAL | `hasAutonomousRoleCode` has no attachment point on the entity | Defined in OWL, but no Init field and not on EntityDescriptor. v0.0.4 attaches two autonomy properties - `hasControlMode` to `smx#Vehicle`, `hasAutonomyLevelCode` to `C2SIM#Task` - so an entity-level and a task-level autonomy value now have homes; `hasAutonomousRoleCode` itself is still unattached (range still generic `Code`). Four of the six new v0.0.4 properties have the same no-home shape (V2, section 10). |
 | P5 | HIGH | OPEN | Patrol route/area not modeled as an init object | Order references a route to change; nothing declares the baseline. Can host as MapGraphic. Gap on both Init and Order sides. Ties to M6. |
 | P6 | HIGH | NARROWED | Three competing autonomy vocabularies at init time | Same as D1, surfaced concretely when declaring an entity. Narrowed with D1: at init time the entity's `hasControlMode` now takes an `AutonomyLevelCode` individual. |
-| P7 | DECIDE-FIRST | DECIDED | Swarm not yet taskable as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity`, but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. (v0.0.3 removed the Swarm class; CollecticeRoboticSystem is still non-actor.) **[deck]** **Decided (group): derive the collective/Swarm from `CollectiveEntity`.** Not yet in v0.0.4 - `CollecticeRoboticSystem subClassOf RoboticSystem` (-> Device -> Artifact -> PhysicalEntity) is unchanged and there is still no `Swarm` class. Residual = implementation: re-parent (and re-spell, O1) the collective class under `CollectiveEntity`; then the Q-J residuals. |
+| P7 | DECIDE-FIRST | DECIDED | Swarm not yet taskable as modeled | `Swarm subClassOf CollecticeRoboticSystem -> ... -> PhysicalEntity`, but swarms receive orders and send reports (need ActorEntity). Base C2SIM has `CollectiveEntity subClassOf ActorEntity`. (v0.0.3 removed the Swarm class; CollecticeRoboticSystem is still non-actor.) **[deck]** **Decided (group): derive the collective/Swarm from `CollectiveEntity`.** Not yet in v0.0.4 - `CollecticeRoboticSystem subClassOf RoboticSystem` (-> Device -> Artifact -> PhysicalEntity) is unchanged and there is still no `Swarm` class. Residual = implementation: re-parent the collective class under `CollectiveEntity` (its re-spelling to `CollectiveRoboticSystem`, O1, is in PR #9); then the Q-J residuals. |
 | P8 | HIGH | NARROWED | Swarm membership + leader partially covered | `hasSubordinate`/`hasSuperior` (C2SIM) and `hasCommandRelation` (SMX) cover membership + command; residual gap is network params, leader-as-role, and dynamic handover. See section 6d. |
-| P9 | TYPO | OPEN | Misspelling O1 propagates into swarm instance data | Same root as O1. |
+| P9 | TYPO | FIXED IN PR | Misspelling O1 propagates into swarm instance data | Same root as O1; fixed with it in PR #9. |
 | P10 | MED | OPEN | Heterogeneous (mixed UAV+UGV) swarm membership unconfirmed | MUTT-style mixed swarms; confirm members of different platform types can share one collective. Simplified by P1 + P7 as decided: members are `Platform` subtypes and the collective is a `CollectiveEntity`, so mixed membership is just `hasSubordinate` over Platforms of different subtypes - the only thing left to confirm is that nothing in SMX restricts a CollectiveEntity's members to one type. |
 
 ## 6. Coverage gaps (scenario x message type)
@@ -781,7 +783,8 @@ AutonomousMission Function (range TaskActionCode), Passenger Capability
 `VehicleTypeCode` (individuals pending); *comment* - NavigationAutonomy "covered
 by control mode?"; *x* (not done) - AutonomousMission Parameters, Mobility,
 Mobility/Propulsion, Payload (both rows), Payload Quantity, PayloadCapability,
-Swarm Parameters, and the second SensorType / VehicleType rows.
+Swarm Parameters, and the second SensorType / VehicleType rows (both removed
+as duplicates in PR #9).
 
 ### 10b. Section-9 observations, re-checked against v0.0.4
 
@@ -800,7 +803,7 @@ Swarm Parameters, and the second SensorType / VehicleType rows.
 
 | ID | Sev | Status | Item | Evidence / note |
 |---|---|---|---|---|
-| V2 | HIGH | OPEN | Four of the six new properties have no attachment point | `hasSensorCapability`, `hasAutonomusParameters`, `hasPassengerCapability`, `hasAutonomousMissionFunction` have no domain and no class restriction uses them - the same shape as P3. Visible in the XSD: all four are declared as elements but **referenced by no complex type**, so no message can carry them yet (only `ControlMode` -> `VehicleGroup` and `AutonomyLevelCode` -> `Task` attach). The decided P1 answer says where they go: on the `Platform` subtree (Vehicle, or Platform). |
+| V2 | HIGH | OPEN | Four of the six new properties have no attachment point | `hasSensorCapability`, `hasAutonomousParameters` (O4; spelled `hasAutonomusParameters` in v0.0.4), `hasPassengerCapability`, `hasAutonomousMissionFunction` have no domain and no class restriction uses them - the same shape as P3. Visible in the XSD: all four are declared as elements but **referenced by no complex type**, so no message can carry them yet (only `ControlMode` -> `VehicleGroup` and `AutonomyLevelCode` -> `Task` attach). The decided P1 answer says where they go: on the `Platform` subtree (Vehicle, or Platform). |
 | V3 | MED | OPEN | `hasSensorCapability` ranges over `MediaTypeCode` rather than `SensorTypeCode` | A capability declared as a media format (M5's conflation moved onto the platform). `SensorTypeCode` exists in the same file, empty. Expected to be overtaken by the P2 standards rework; worth not building Init rows on it meanwhile. |
 | V4 | LOW | OPEN | `hasControlMode` is `subPropertyOf owl:topObjectProperty`, not `hasCode` | Its sibling `hasAutonomyLevelCode` (same range) is `subPropertyOf C2SIM#hasCode`, as are `hasMediaTypeCode` / `hasAutonomousRoleCode`. Inconsistent with the C2SIM code-property pattern; the XSD still emits it as an `AutonomyLevelCodeType` element, so harmless today. |
 | V5 | MED | OPEN | The derived XSD makes P1's dual typing concrete on the wire | `ActorEntityType` is a choice of `CollectiveEntity` / `Person` / `Platform` / **`Robot`**, and `VehicleType` is a choice of the four `Unmanned*Vehicle`s - two places to put the same drone in one schema. Retiring the Robot tree (P1, decided) removes the fourth choice. |
@@ -823,12 +826,12 @@ Swarm Parameters, and the second SensorType / VehicleType rows.
   W1/Q-K/Q-W, N1/Q-M, Q-E..Q-H) and the attribute layer still marked `x` in the
   workbook (Payload / Mobility / Swarm Parameters).
 - **Implementation order this suggests (replaces the deck's old "settle Q-A /
-  Q-B" next step):** (1) apply P7 - re-parent and re-spell the collective class
-  under `CollectiveEntity`; (2) apply P1 - retire the `Robot` / `UAV` / `UGV`
+  Q-B" next step):** (1) apply P7 - re-parent the collective class under
+  `CollectiveEntity` (its re-spelling is done - PR #9); (2) apply P1 - retire the `Robot` / `UAV` / `UGV`
   tree, decide Vehicle-vs-Platform for the facet, re-parent the maritime pair,
   and give the V2 properties their domain; (3) run the sensor standards survey
   (6l, steps 1-2) and re-point `hasSensorCapability` / fill `SensorTypeCode`
-  from it; (4) fix O1 / O4 / O5 / O6 while the classes are being touched;
+  from it; (4) fix O1 / O4 / O5 / O6 - done ahead of the rest (PR #9, 2026-10-27);
   (5) only then re-cut the Initialization tabs, whose `[!] P1 / P2 / P7` flags
   become `hasControlMode` / sensor-capability / `CollectiveEntity` rows.
 - **Workbook note:** the `.xml` instantiation tabs are left as walked; their
@@ -1073,3 +1076,17 @@ Swarm Parameters, and the second SensorType / VehicleType rows.
   expanded with the lineage and sources, G1/Q-O cross-referenced to the new
   handover residual, README updated. Deck not regenerated - G30 is a [deck]
   candidate for the next deck pass alongside G20/G23/G24.
+- 2026-10-27: **Typo fixes and track-alignment cleanup (issues #7, #8).** The
+  O1 / O3-O6 fixes are written on top of `michael_d` v0.0.4 in PR #9 (branch
+  `asx-ontology-typos`): `CollectiveRoboticSystem`, `hasAutonomousParameters`,
+  a corrected `versionInfo` (which also lists `hasPassengerCapability` as a data
+  property), "semi-autonomous", and a README marking the v0.0.1 `CSIM_ASX.rdf`
+  as superseded. The XSD was checked against a Saxon run of
+  `C2SIMOntologyToC2SIMSchema.xslt` on the fixed merge (identical apart from a
+  duplicate `APP6CSymbol` element the XSLT emits and the v0.0.4 XSD also
+  omits). The same PR removes the duplicate `SensorType` row and the
+  `VehicleType` spelling variant from the Concept Mapping. Statuses: O1 / O3-O6 /
+  P9 -> FIXED IN PR; D4 / D5 -> RESOLVED (superseded by P1 / P2); S2 ->
+  CLOSING; D2 note updated. Docs that name the live model now use the corrected
+  names (the walks keep the old names where they record the v0.0.1 / v0.0.4
+  state); the deck is regenerated (P7, refinements, and next-steps slides).

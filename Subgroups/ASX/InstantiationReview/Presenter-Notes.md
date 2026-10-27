@@ -115,8 +115,8 @@ The sub-group has decided all three (recorded 2026-10-14). Present each as
 - **P7 - a swarm wasn't taskable or able to report.** `Swarm` derived from
   `PhysicalEntity` (an inert object), but orders and reports need an
   `ActorEntity`. **Decided: derive the collective/Swarm from `CollectiveEntity`**
-  (already in the base standard). Not yet in v0.0.4 - `CollecticeRoboticSystem`
-  is still under PhysicalEntity, so this is the first thing to apply.
+  (already in the base standard). Not yet in v0.0.4 - the collective class
+  (re-spelled `CollectiveRoboticSystem` in PR #9) is still under PhysicalEntity, so this is the first thing to apply.
 - Key point: "all three were typing decisions - so Initialization, not Reports,
   is where the model gets pinned down; the Init tabs get re-cut once the three
   are applied in the OWL."

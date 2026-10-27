@@ -568,7 +568,7 @@
     <Cell><Data ss:Type="String">-</Data></Cell>
     <Cell><Data ss:Type="String">-</Data></Cell>
     <Cell><Data ss:Type="String">-</Data></Cell>
-    <Cell><Data ss:Type="String">[!] P9/O1: class is spelled CollecticeRoboticSystem in CSIM_ASX.rdf - typo will propagate into instance data</Data></Cell>
+    <Cell><Data ss:Type="String">[!] P9/O1: class is spelled CollecticeRoboticSystem in CSIM_ASX.rdf - typo will propagate into instance data. FIXED in PR #9 (renamed CollectiveRoboticSystem)</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
