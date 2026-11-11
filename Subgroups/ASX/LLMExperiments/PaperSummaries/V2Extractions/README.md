@@ -19,10 +19,10 @@ third party.
 | [CooperativeMCM_Ling2020.md](./CooperativeMCM_Ling2020.md) | Ling 2020, NPS thesis (DTIC AD1126497) | Undersea / maritime-surface mine countermeasures |
 | [Sustainment_MWI2026.md](./Sustainment_MWI2026.md) | Dibernardo 2026, Modern War Institute | Logistics / contested resupply (last tactical mile) |
 | [Explainability_Agrawal2021.md](./Explainability_Agrawal2021.md) | Agrawal, Cleland-Huang et al. 2021, arXiv:2109.02077 | Explainability / human-on-the-loop (validation hole #1) |
-| [CBRN_Muster2024.md](./CBRN_Muster2024.md) | Muster et al. 2024, UGV-CBRN, arXiv:2406.14385 | CBRN reconnaissance + manipulation (validation hole #2) |
+| [CBRN_Muster2024.md](./CBRN_Muster2024.md) | Schwaiger, Muster et al. 2024, UGV-CBRN, arXiv:2406.14385 | CBRN reconnaissance + manipulation (validation hole #2) |
 | [CounterUAS_CNAS2025.md](./CounterUAS_CNAS2025.md) | Pettyjohn & Campbell 2025, CNAS Countering the Swarm | Counter-UAS / swarm-vs-swarm (request #5) |
 | [MUMT_Remmersmann2015.md](./MUMT_Remmersmann2015.md) | Remmersmann et al. 2015, BML for Multi-Robot Systems | Human-machine teaming at C2/tasking level (request #6) |
-| [SAR_Kim2021.md](./SAR_Kim2021.md) | Kim et al. 2021, Sensors (PMC8537596) | Humanitarian SAR, non-combat (request #7) |
+| [SAR_Kim2021.md](./SAR_Kim2021.md) | Oh and Han 2021, Sensors (PMC8537596) | Humanitarian SAR, non-combat (request #7) |
 | [FormationConvoy_Hu2020.md](./FormationConvoy_Hu2020.md) | Hu 2020, DOT/arXiv:2104.06507 | Formation/convoy geometry (request #8; civilian domain) |
 | [Engineering_RCBC2018.md](./Engineering_RCBC2018.md) | U.S. Army RCBC / JWA 19 breach (multi-source) | Combat-engineering robotic breach (request #9) |
 | [PersistentWatch_MDARS.md](./PersistentWatch_MDARS.md) | MDARS overview, DTIC ADA422465 | Persistent surveillance / sentry (validation hole #4) |
@@ -33,6 +33,21 @@ third party.
 | [LIRC_MovementToContact_Morris2018.md](./LIRC_MovementToContact_Morris2018.md) | Morris 2018, Military Review | Company-scale manned-unmanned combined-arms movement to contact w/ LAWS, kill-box weapons-control (SME baseline) |
 | [LIRC_MovementToContact_Updated2024.md](./LIRC_MovementToContact_Updated2024.md) | Morris 2018 baseline + 4 Infantry Magazine sources (2023-2024) | Small-drone warfare update: FPV/loitering-munition/COTS threat, EW/GPS denial, organic counter-UAS (SME-directed enhancement) |
 | [OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md](./OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md) | Rosenberg 2024, Infantry (JPMRC-AK 24-02) | RED/OPFOR reconnaissance-strike: COTS sUAS cueing indirect fires vs HPTs; first red-perspective + first targeting-cycle record |
+
+### Reference availability (2026-11-11)
+
+The Agrawal, Schwaiger/Muster, and Oh/Han PDFs are in `../../References/` under
+CC BY 4.0. The Ling, MDARS (ADA422465), and Mears (ADA444985) PDFs are also
+there; each states that it is approved for public release with unlimited
+distribution. The individual records link to the files and their sources.
+
+Sources without a local copy:
+- [SubT paper](./SubT_Roucek2019.md) - publisher copyright; redistribution rights unverified. [Semantic Scholar](https://www.semanticscholar.org/paper/c2ebfc689a859d85a21b0a3b659dc51b1d4b8631).
+- [Formation report](./FormationConvoy_Hu2020.md) - arXiv distribution license; independent redistribution rights unverified. [Semantic Scholar](https://www.semanticscholar.org/paper/b02596e38f0ba9bc15d35e86fa3158a8f0955d1c).
+- [CNAS counter-UAS report](./CounterUAS_CNAS2025.md) - report says all rights reserved.
+- [Sustainment article](./Sustainment_MWI2026.md) - website article; redistribution rights unverified.
+- [Magers AFIT thesis](./ElectronicWarfare_EmitterGeoloc.md) - PDF download blocked during this check; release terms not verified.
+- [JWA 19 breach assessment](./Engineering_RCBC2018.md) - primary report not openly available; extraction uses other reporting.
 
 ### SME-directed baseline + update (Morris 2018 LIRC)
 

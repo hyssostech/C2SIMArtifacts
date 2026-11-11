@@ -2,8 +2,11 @@
 
 Roucek, T., et al. (2019). DARPA Subterranean Challenge: Multi-robotic
 Exploration of Underground Environments. Modelling and Simulation for Autonomous
-Systems (MESAS 2019). Source read in full from the web
-(comrob.fel.cvut.cz/papers/mesas19subt.pdf); no local copy in the repo.
+Systems (MESAS 2019, published 2020). Source read in full from the
+[authors' PDF](https://comrob.fel.cvut.cz/papers/mesas19subt.pdf); see also the
+[Semantic Scholar record](https://www.semanticscholar.org/paper/c2ebfc689a859d85a21b0a3b659dc51b1d4b8631)
+and [publisher's DOI](https://doi.org/10.1007/978-3-030-43890-6_22). No copy
+is stored in the repository; redistribution rights have not been verified.
 
 ### Scenario 1: Heterogeneous multi-robot subterranean artifact search
 

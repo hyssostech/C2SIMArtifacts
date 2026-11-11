@@ -2,7 +2,10 @@
 
 Overview of the Mobile Detection Assessment and Response System (MDARS). U.S. Army
 PM Physical Security Equipment / SPAWAR, DTIC ADA422465 (and related MDARS reports
-ADA449408, ADA305076). Source read in full (report PDF).
+ADA449408, ADA305076). Source read in full
+([local PDF](../../References/Inderieden-1995-MDARS-Overview-ADA422465.pdf);
+[archive](https://archive.org/details/DTIC_ADA422465)). Approved for public
+release; distribution is unlimited.
 
 Sourced against `InstantiationReview/Documents-Needed.md` request #4 (persistent
 surveillance / sentry / standing watch). Grounds N2 (standing/persistent task with

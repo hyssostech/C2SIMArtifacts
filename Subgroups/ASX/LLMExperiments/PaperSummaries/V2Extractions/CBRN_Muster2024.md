@@ -1,8 +1,10 @@
 # Scenario extracted from report (v2.2 prompt)
 
-Muster, L., et al. (2024). UGV-CBRN: An Unmanned Ground Vehicle for Chemical,
-Biological, Radiological, and Nuclear Disaster Response. arXiv:2406.14385. Source
-read in full (arXiv PDF).
+Schwaiger, S., Muster, L., et al. (2024). UGV-CBRN: An Unmanned Ground Vehicle
+for Chemical, Biological, Radiological, and Nuclear Disaster Response.
+arXiv:2406.14385. Source read in full
+([arXiv PDF](../../References/Schwaiger-Muster-2024-UGV-CBRN-arXiv2406.14385.pdf),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); [source](https://arxiv.org/abs/2406.14385)).
 
 Sourced to fill ASX validation hole #2 (CBRN reconnaissance) from
 `InstantiationReview/Documents-Needed.md`. Grounds Q-Q (Y3/Y5), Q-M (N1); also
