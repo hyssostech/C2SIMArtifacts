@@ -20,5 +20,5 @@ Development of prompts followed an iterative cycle where prompts were incrementa
 ## References
 
 Barthelmess, P. & Blais C.L. (2024). Exploring Large Language Models for Scenario Generation in Support of C2SIM Autonomous Systems Ontology Extension. Simulation Interoperability Workshop, SIW 2024.
-- [Paper](./References/2024-SIW-Presentation-16.pdf)
-- [Presentation](./References/2024-SIW-Presentation-16-ppt.pdf)
+- [Paper](./References/2024-SIW/2024-SIW-presentation-16.pdf)
+- [Presentation](./References/2024-SIW/2024-SIW-Presentation-16-ppt.pdf)
