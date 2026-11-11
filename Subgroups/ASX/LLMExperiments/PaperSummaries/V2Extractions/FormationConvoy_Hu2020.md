@@ -1,8 +1,10 @@
 # Scenario extracted from report (v2.2 prompt)
 
-Hu, X. (2020). Modeling and Development of Operation Guidelines for Leader-Follower
+Hu, X., and Tang, Q. (2020). Modeling and Development of Operation Guidelines for Leader-Follower
 Autonomous Truck-Mounted Attenuator Vehicles. University of Missouri / U.S. DOT
 technical report (arXiv:2104.06507). Source read in full (report PDF).
+[Semantic Scholar record](https://www.semanticscholar.org/paper/b02596e38f0ba9bc15d35e86fa3158a8f0955d1c);
+[arXiv record](https://arxiv.org/abs/2104.06507).
 
 Sourced against `InstantiationReview/Documents-Needed.md` request #8 (formation /
 convoy geometry). Grounds Q-U (formation/relative geometry), Q-L (escort/follow),

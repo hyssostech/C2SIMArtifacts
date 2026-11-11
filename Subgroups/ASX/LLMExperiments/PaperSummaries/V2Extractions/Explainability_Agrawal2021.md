@@ -2,7 +2,8 @@
 
 Agrawal, A., Cleland-Huang, J., et al. (2021). Explaining Autonomous Decisions in
 Swarms of Human-on-the-Loop Small Unmanned Aerial Systems. arXiv:2109.02077.
-Source read in full (arXiv PDF).
+Source read in full ([arXiv PDF](../../References/Agrawal-ClelandHuang-2021-Explainable-sUAS-arXiv2109.02077.pdf),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); [source](https://arxiv.org/abs/2109.02077)).
 
 Sourced to fill ASX validation hole #1 (explainability / human-on-the-loop) from
 `InstantiationReview/Documents-Needed.md`. Grounds decisions Q-H, Q-K (W1), Q-D.

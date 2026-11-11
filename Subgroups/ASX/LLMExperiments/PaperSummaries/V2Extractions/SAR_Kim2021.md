@@ -1,8 +1,9 @@
 # Scenario extracted from report (v2.2 prompt)
 
-Kim, et al. (2021). Smart Search System of Autonomous Flight UAVs for Disaster
-Rescue. Sensors (MDPI), PMC8537596. Source read in full (open-access article
-text).
+Oh, D., and Han, J. (2021). Smart Search System of Autonomous Flight UAVs for
+Disaster Rescue. Sensors (MDPI), PMC8537596, doi:10.3390/s21206810. Source read
+in full (open-access article text; [PDF](../../References/Oh-Han-2021-Smart-Search-Disaster-Rescue.pdf),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); [source](https://doi.org/10.3390/s21206810)).
 
 Sourced against `InstantiationReview/Documents-Needed.md` request #7 (humanitarian
 SAR, non-combat). Grounds G10 (no-adversary / neutral framing), R2 (survivor

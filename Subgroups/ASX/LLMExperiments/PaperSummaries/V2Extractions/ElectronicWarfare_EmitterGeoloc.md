@@ -1,9 +1,13 @@
 # Scenario extracted from report (v2.2 prompt)
 
 Primary: "Geolocation of RF Emitters Using a Low-Cost UAV-Based Approach", Air
-Force Institute of Technology (AFIT) thesis, DTIC AD1054177 (open access, read in
-full). Electronic-attack complement: Mears, "Cooperative Electronic Attack using
-Unmanned Air Vehicles", AFRL, DTIC ADA444985 (open access).
+Force Institute of Technology (AFIT) thesis by Michael A. Magers, DTIC AD1054177
+([AFIT record](https://scholar.afit.edu/etd/438/), read in full). Electronic-attack
+complement: Mears, "Cooperative Electronic Attack using
+Unmanned Air Vehicles", AFRL, DTIC ADA444985
+([local PDF](../../References/Mears-2006-Cooperative-Electronic-Attack-ADA444985.pdf);
+[archive](https://archive.org/details/DTIC_ADA444985)). The Mears report is
+approved for public release; distribution is unlimited.
 
 This replaces the earlier composed EW placeholder with a real extraction from a
 primary open-access experiment (the AD1054177 flight test), with the cooperative-
