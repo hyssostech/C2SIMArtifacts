@@ -128,8 +128,8 @@ Finding:
 | X4 | MED | partial | No obstacle/threat observation subtype for hazards that trigger replanning. |
 | X5 | LOW | mostly covered | Phased tasks/ETA likely map to base `PlanBody`/`PlanPhase`; ETA attribute is the open bit. |
 | X6 | LOW | question | Is CASEVAC a base `TaskActionCode` or a new ASX task; re-tasking mid-mission semantics. |
-| P1 | DECIDE-FIRST | gap | UGV double-typed (SMX Vehicle vs ASX UGV/Robot) - same as UAV. |
-| P2 | DECIDE-FIRST | gap | Scout sensor typing not yet settled. |
+| P1 | DECIDE-FIRST | **decided** (apply in OWL) | UGV double-typed (SMX Vehicle vs ASX UGV/Robot) - same as UAV. Decided: autonomy as a facet on the Platform subtree (log section 10). |
+| P2 | DECIDE-FIRST | **decided** (direction) | Scout sensor typing not yet settled. Decided: sensors reworked on existing standards (log section 10). |
 
 The two findings unique to CASEVAC and not seen in the UAV/Init walks are
 **X1 (robot-to-robot coordination)** and **X2 (explainability)**. Both are

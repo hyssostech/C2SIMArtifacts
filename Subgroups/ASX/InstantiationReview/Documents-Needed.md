@@ -166,3 +166,28 @@ Otherwise the sourcing effort is **essentially complete** - every proposed
 concept is now grounded in a real mission. The remaining work (the unbuilt
 OWL property/message layer and the ~22 open decisions Q-A..Q-V) is **not** a
 document problem; it is the modeling side's to resolve.
+
+## UPDATE (2026-10-14) - one standards request added (not a mission vignette)
+
+### 10. STANAG 4817 / CATL primary documents  (standards source - coordination content)
+- **Why:** the question "what can STANAG 4817 contribute?" was scoped as a
+  third proposed slice (`STANAG4817-CATL-Slice.md`, log 6n). Its gating step is
+  document access: the ratifying text is not public, and the only public
+  artifact in its lineage (CATL) was reachable in this session as abstracts
+  only. This is a **standards** request, an exception to the vignette criterion
+  above, made because the slice cannot proceed without it.
+- **Find:** (a) Furfaro et al. 2021, "A Task-Centric Messaging Model for
+  Federated Autonomous Collaboration", UComms 2021 - the CATL definition paper
+  (the four message types and their fields); (b) Van Riet et al. 2023,
+  "Experimental Demonstrations of CATL" (TNO record
+  https://resolver.tno.nl/uuid:7fa49df9-4744-488e-a267-865aa12eb365);
+  (c) the **AEP-4817 draft**, if any member of the sub-group has NATO document
+  access - this is the only route to the standard itself.
+- **Extract for:** control handover between stations (G30, new Q-O residual),
+  task allocation among candidates (G31, Q-V/Q-G/Q-P), state synchronization
+  (G32), and the round-trip mapping against C2SIM's `TaskRequestContent` /
+  `AcknowledgementBody` / `TaskStatus` (G33, Q-AA).
+
+| Request | Primary decisions it grounds |
+|---|---|
+| 10 STANAG 4817 / CATL documents | Q-AA (G30-G33), Q-O, Q-G/Q-P, Q-V |

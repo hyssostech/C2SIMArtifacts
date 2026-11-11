@@ -1017,7 +1017,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="Swarm Detection">
-  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="6" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="7" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s16" ss:DefaultColumnWidth="129.5"
    ss:DefaultRowHeight="14.5">
    <Row ss:Height="18.5" ss:StyleID="s18">
@@ -1028,6 +1028,9 @@
     <Cell><Data ss:Type="String">Type</Data></Cell>
     <Cell><Data ss:Type="String">Value</Data></Cell>
     <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STATUS (2026-10-27, review log section 10): P7 DECIDED (sub-group, 2026-10): the collective/Swarm derives from CollectiveEntity (an ActorEntity). Not yet applied in the OWL (v0.0.4), so the [!] P7 rows below still show the walked state; they are re-cut once it is applied.</Data></Cell>
    </Row>
    <Row>
     <Cell><Data ss:Type="String">C2SIM</Data></Cell>
@@ -1858,6 +1861,47 @@
     <Cell><Data ss:Type="String">BML WhoMeasuredType</Data></Cell>
     <Cell><Data ss:Type="String">value + UOM + phenomenon + sensor + time + place</Data></Cell>
     <Cell><Data ss:Type="String">[+] adopt the BML measurement structure (Remmersmann 2015)</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>
+ </Worksheet>
+ <Worksheet ss:Name="LIRC Strike BDA Report">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="4" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Row>
+    <Cell><Data ss:Type="String">Model</Data></Cell>
+    <Cell><Data ss:Type="String">C2SIM Object</Data></Cell>
+    <Cell><Data ss:Type="String">Parent Type</Data></Cell>
+    <Cell><Data ss:Type="String">Field</Data></Cell>
+    <Cell><Data ss:Type="String">Type</Data></Cell>
+    <Cell><Data ss:Type="String">Value</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">C2SIM</Data></Cell>
+    <Cell><Data ss:Type="String">ReportBody</Data></Cell>
+    <Cell><Data ss:Type="String">DomainMessageBody</Data></Cell>
+    <Cell><Data ss:Type="String">hasReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">(battle damage assessment)</Data></Cell>
+    <Cell><Data ss:Type="String">[+] W3: no effect-achieved / BDA ReportContent; TaskStatus says the task ran, not that the target was destroyed.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMX</Data></Cell>
+    <Cell><Data ss:Type="String">ObservationReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">ReportContent</Data></Cell>
+    <Cell><Data ss:Type="String">hasObservation</Data></Cell>
+    <Cell><Data ss:Type="String">Observation</Data></Cell>
+    <Cell><Data ss:Type="String">(post-strike: 1 ADA veh, 1 arty, 2 IFV destroyed; 12 casualties KB1)</Data></Cell>
+    <Cell><Data ss:Type="String">Partial - scene observable; effect-achieved has no home.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASX</Data></Cell>
+    <Cell><Data ss:Type="String">(own attrition)</Data></Cell>
+    <Cell><Data ss:Type="String">?</Data></Cell>
+    <Cell><Data ss:Type="String">systems lost to countermeasures</Data></Cell>
+    <Cell><Data ss:Type="String">???</Data></Cell>
+    <Cell><Data ss:Type="String">~50% of autonomous systems failed</Data></Cell>
+    <Cell><Data ss:Type="String">[+] G7: measure-of-effectiveness / attrition attribute (also ~7-day drone life, ~10% mission completion in the 2024 update).</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"/>

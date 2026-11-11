@@ -195,7 +195,7 @@ footer(s)
 
 # ---------------------------------------------------------------- 4 MATERIAL AT A GLANCE
 s = slide()
-header(s, "The material at a glance", "Two layers in two directories, plus the evidence base they cite")
+header(s, "The material at a glance", "Proposal and verification artifacts, plus the evidence base they cite")
 panel_text(s, 0.7, 1.6, 6.1, 3.6, "Layer 1 - the proposal", [
     ("Subgroups/ASX/Proposed Extension Working Materials/", ACCENT),
     "Plan-Semantics-Analysis.md - the argument (8 sections)",
@@ -206,13 +206,13 @@ panel_text(s, 0.7, 1.6, 6.1, 3.6, "Layer 1 - the proposal", [
     "PDG-Change-Proposals.md - six upstream items for the PDG",
 ], size=13)
 panel_text(s, 7.0, 1.6, 5.7, 3.6, "Layer 2 - independent verification", [
-    ("Subgroups/ASX/InstantiationReview/", ACCENT),
+    ("Subgroups/ASX/Proposed Extension Working Materials/", ACCENT),
     "PlanSemantics-Walk.md - what base C2SIM verifiably",
     "  provides vs. ten robotic/agent standards; the 19-row",
     "  capability matrix; findings PL1-PL11; 15 RDF-verified",
     "  claims; reconciliation with the module (sec 8)",
-    "Issues-And-Comments-Log.md - findings as log rows",
-    "  (sec 6k); decisions Q-W..Q-Z (sec 7)",
+    "PlanStandards-Findings-and-Decisions.md - findings",
+    "  PL1-PL11 and decisions Q-W..Q-Z",
 ], size=13)
 panel_text(s, 0.7, 5.4, 12.0, 1.0, "The evidence base both layers cite", [
     "Subgroups/ASX/LLMExperiments/ (sourced scenario corpus + reference papers) and Subgroups/ASX/ContributedScenarios/ (the group's CASEVAC). Both predate this track.",
@@ -238,7 +238,7 @@ table(s, [
      "Plan-Semantics-Analysis.md secs 1-4 (today's constructs, BT/BDI correlation, feasibility), skim sec 5 (the module); then PlanSemantics-Walk.md secs 3-4 (capability matrix + the answer)",
      "the reasoning in depth, and how ten robotic standards compare"],
     ["Full depth",
-     "The TTL side by side with analysis sec 5; the three walks in PlanSemanticsWalks/; log sec 6k; PDG-Change-Proposals.md; decisions in log sec 7",
+    "The TTL side by side with analysis sec 5; the three walks in PlanSemanticsWalks/; PlanStandards-Findings-and-Decisions.md; PDG-Change-Proposals.md",
      "reviewer-grade command of the module and its evidence trail"],
 ], top=1.65, col_w=[1.5, 7.3, 3.2], size=12, row_h=0.88)
 bullets(s, [
@@ -262,7 +262,7 @@ table(s, [
     ["What do the messages actually look like?",
      "ASX Sample Plan Messages.xlsx (one worksheet per message); worked example: briefing slide 15 / analysis sec 5.9"],
     ["What is the group being asked to decide?",
-     "Briefing final slide; decisions Q-W..Q-Z in log sec 7; PDG-Change-Proposals.md for the upstream asks"],
+    "Briefing final slide; decisions Q-W..Q-Z in PlanStandards-Findings-and-Decisions.md; PDG-Change-Proposals.md for the upstream asks"],
     ["What is still open or known-weak?",
      "Analysis sec 7 (limitations, kept deliberately visible); PlanSemantics-Walk.md sec 8 (PL5 residual); log sec 8"],
 ], top=1.65, col_w=[4.1, 7.9], size=12, row_h=0.62)
@@ -296,7 +296,7 @@ footer(s)
 
 # ---------------------------------------------------------------- 8 CATALOG: VERIFICATION LAYER
 s = slide()
-header(s, "Artifact catalog - the verification layer", "Subgroups/ASX/InstantiationReview/ - the independent check on the proposal")
+header(s, "Artifact catalog - the verification layer", "Subgroups/ASX/Proposed Extension Working Materials/ - the independent check")
 table(s, [
     ["Where", "What you find there"],
     ["PlanSemantics-Walk.md secs 1-2",
@@ -309,8 +309,8 @@ table(s, [
      "Verification notes: the 15 independently re-checked claims, including the negatives"],
     ["... sec 8",
      "Reconciliation: every PL finding against module v0.0.3 - ADDRESSED / PARTIAL / open"],
-    ["Issues-And-Comments-Log.md",
-     "Sec 6k: the same findings as tracked log rows. Sec 7: decisions Q-W (adopt the module as baseline), Q-X, Q-Y, Q-Z - drafted, pending review. Sec 8: why remaining gaps are unfilled"],
+    ["PlanStandards-Findings-and-Decisions.md",
+     "Findings PL1-PL11 and decisions Q-W (adopt the module as baseline), Q-X, Q-Y, Q-Z - drafted, pending review"],
 ], top=1.6, col_w=[3.0, 9.0], size=12, row_h=0.6)
 panel_text(s, 0.7, 6.1, 12.0, 0.8, "", [
     ("Two verified negatives worth remembering: IEEE 1872.2 defines no plan constructs at all, and the base EventCode cannot express task failure. Checked against sources, not assumed.", ORANGE),
@@ -323,8 +323,8 @@ header(s, "Decoder ring - every ID family you will meet", "Each ID resolves to e
 table(s, [
     ["ID family", "What it names", "Where it resolves"],
     ["R1 - R19", "the module's normative execution rules", "Analysis sec 5 + annotations in the TTL"],
-    ["PL1 - PL11", "standards-walk findings: gaps in base C2SIM", "Walk sec 5; live statuses in log sec 6k"],
-    ["Q-W .. Q-Z", "decisions this track puts to the sub-group", "Log sec 7 (Q-A..Q-V are the earlier instantiation-review decisions)"],
+    ["PL1 - PL11", "standards-walk findings: gaps in base C2SIM", "Walk sec 5; statuses in PlanStandards-Findings-and-Decisions.md"],
+    ["Q-W .. Q-Z", "decisions this track puts to the sub-group", "PlanStandards-Findings-and-Decisions.md (Q-A..Q-V are in the review log)"],
     ["X1 - X6", "CASEVAC findings from the earlier review, pre-module", "Log sec 6b; re-checked in CASEVAC-PlanWalk.md"],
     ["PC / PD / PM", "per-walk findings: CASEVAC / DroneResponse / MDARS", "Each walk doc; cross-walk table in PlanSemanticsWalks/README.md"],
     ["deltas 1 - 9", "cross-walk change proposals, applied in v0.0.3", "PlanSemanticsWalks/README.md"],

@@ -27,7 +27,7 @@ v0.0.3 additions, from two validation inputs: (a) the three validation walks in
 PlanSemanticsWalks/ (deviation vocabulary, repetition cadence, embarkation/endurance/mobility
 predicates, late-bound product rule, action-taken reference, object-reference filter semantics);
 (b) the standards-matrix verification pass in
-../InstantiationReview/PlanSemantics-Walk.md against JAUS AS6062, STANAG 4586, MAVLink,
+PlanSemantics-Walk.md against JAUS AS6062, STANAG 4586, MAVLink,
 IEEE 1872.1-2024, FlexBE, and 4D/RCS (plan identity and supersession, suspension state,
 task-disposition reporting, lost-link failsafe defaults with keep-in/keep-out predicate,
 structured waypoints). Rules R15-R19 state the added execution semantics.

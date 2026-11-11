@@ -30,8 +30,32 @@ third party.
 | [Brutzman_Fitzpatrick2020.md](./Brutzman_Fitzpatrick2020.md) | Brutzman & Fitzpatrick 2020, NPS-MV-20-001 | Village-defense MUM-T ISR (original library paper) |
 | [Biagini_Corona_Casar2017.md](./Biagini_Corona_Casar2017.md) | Biagini, Corona & Casar 2017, MESAS | Urban counter-UAxS, 2 variants (original library paper) |
 | [Langerwisch2013.md](./Langerwisch2013.md) | Langerwisch et al. 2013, SSRR | Heterogeneous MOVE/OBSERVE, 2 tasks (original library paper) |
+| [LIRC_MovementToContact_Morris2018.md](./LIRC_MovementToContact_Morris2018.md) | Morris 2018, Military Review | Company-scale manned-unmanned combined-arms movement to contact w/ LAWS, kill-box weapons-control (SME baseline) |
+| [LIRC_MovementToContact_Updated2024.md](./LIRC_MovementToContact_Updated2024.md) | Morris 2018 baseline + 4 Infantry Magazine sources (2023-2024) | Small-drone warfare update: FPV/loitering-munition/COTS threat, EW/GPS denial, organic counter-UAS (SME-directed enhancement) |
+| [OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md](./OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md) | Rosenberg 2024, Infantry (JPMRC-AK 24-02) | RED/OPFOR reconnaissance-strike: COTS sUAS cueing indirect fires vs HPTs; first red-perspective + first targeting-cycle record |
 
-The last three promote the original library papers (Brutzman, Biagini/Corona 2017,
+### SME-directed baseline + update (Morris 2018 LIRC)
+
+The last two rows are a matched pair added at an SME's request. Morris 2018 is a
+detailed notional company scenario the SME designated as the drone-warfare BASELINE;
+its threat and friendly concept predate the 2022 Russo-Ukrainian War.
+`LIRC_MovementToContact_Updated2024.md` is an analyst-updated derivative (not a fresh
+source extraction) that revises the baseline's threat and U.S. equipment/TTP against
+four SME-provided Infantry Magazine articles - Wilkins 2023 (Russo-Ukrainian unmanned
+platforms), Rosenberg 2024 (commercial sUAS targeting), Hamilton & Egan 2023 (SUAS for
+light infantry battalions), and Padalino 2024 (tactical drone warfare). Every
+real-world fact in the update is tagged to its source and every application to the
+notional vignette is tagged [inferred]; see that file's grounding contract. The two
+Infantry issues (source PDFs) are in [../../References/](../../References/).
+
+The Rosenberg JPMRC-AK 24-02 OPFOR COTS-targeting run is also extracted as its own
+standalone record,
+[OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md](./OPFOR_CommercialSUAS_Targeting_Rosenberg2024.md)
+- the library's first RED/OPFOR perspective and first reconnaissance-strike / targeting
+scenario. (The Wilkins "possible scenario" remains folded into the update as threat
+context; it could be minted separately if the group wants it.)
+
+The three rows above the pair promote the original library papers (Brutzman, Biagini/Corona 2017,
 Langerwisch) - whose v2 extractions previously lived only inside
 [V2-HeadToHead.md](../V2-HeadToHead.md) - into first-class standalone records, so
 the whole library now has uniform v2.2 coverage. Their content matches the

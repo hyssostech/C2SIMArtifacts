@@ -84,6 +84,20 @@ system structure - useful for anchoring ASX terms.
   messaging architectures. Relevant because ASX lives inside SISO C2SIM,
   so alignment with the military-standard interoperability vocabulary is
   a real design constraint.
+- **STANAG 4817 / CATL, in more detail (added 2026-10).** 4817 is NATO's
+  multi-domain C2 standard for unmanned systems (air / surface / underwater /
+  ground from one control architecture; successor to NIAG SG-157 / SG-202;
+  compatible with 4586; developed through CMRE under ACT sponsorship). The
+  ratifying text (AEP-4817) is not public and its status is disputed between
+  sources (nearing ratification vs stalled). Its publicly documented basis is
+  **CATL**, the Collaborative Autonomy Tasking Layer from NATO STO SCI-288 /
+  SCI-343: an application-layer, transport-independent message set (JSON and
+  DCCL encodings) for task allocation, status reporting, data synchronization,
+  and handover of control between stations, fielded at REPMUS / Dynamic
+  Messenger. For ASX it is a *coordination-content* source (robot-to-robot
+  tasking, handover, allocation by capability), not a taxonomy or an
+  authority model - scoped in
+  `InstantiationReview/STANAG4817-CATL-Slice.md` (log section 6n, Q-AA).
 
 ## Suggested priority for ASX
 
@@ -129,3 +143,12 @@ parent standard.
   https://publications.sto.nato.int/publications/STO%20Educational%20Notes/STO-EN-SCI-271/EN-SCI-271-02.pdf ;
   STANAG 4586 and JAUS comparison:
   https://novaresearch.unl.pt/en/publications/two-major-architectures-for-unmanned-systems-stanag-4586-and-jaus/
+- STANAG 4817 (secondary reporting; AEP not public): Janes,
+  https://www.janes.com/defence-intelligence-insights/defence-and-national-security-analysis/stanag4817-nato-maritime-unmanned-systems-jigsaw ;
+  Fraunhofer IOSB INTERACT survey,
+  https://www.iosb.fraunhofer.de/content/dam/iosb/iosbtest/documents/projekte/interact/Interoperability%20of%20Armed%20Forces%20Unmanned%20Systems_korr.pdf
+- CATL: Furfaro et al. 2021, "A Task-Centric Messaging Model for Federated
+  Autonomous Collaboration" (UComms),
+  https://www.researchgate.net/publication/356279927_A_Task-Centric_Messaging_Model_for_Federated_Autonomous_Collaboration ;
+  Van Riet et al. 2023, "Experimental Demonstrations of CATL",
+  https://resolver.tno.nl/uuid:7fa49df9-4744-488e-a267-865aa12eb365
